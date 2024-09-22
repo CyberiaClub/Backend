@@ -55,7 +55,4 @@ public class Empresa {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-s    
-    
-    
 }
