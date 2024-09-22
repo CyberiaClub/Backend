@@ -3,12 +3,10 @@ package pe.edu.pucp.cyberiastore.roles.model;
 import java.util.HashSet;
 import java.util.Set;
 
-
-
 public class Roles {
     private Integer idRol;
     private String nombre;
-    private final Set<String> permisos;
+    private Set<String> permisos;
 
     public Roles(Integer idRol, String nombre) {
         this.idRol = idRol;
