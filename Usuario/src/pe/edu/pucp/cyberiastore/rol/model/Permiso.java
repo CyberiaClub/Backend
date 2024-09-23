@@ -1,5 +1,5 @@
 
-package pe.edu.pucp.cyberiastore.roles.model;
+package pe.edu.pucp.cyberiastore.rol.model;
 
 
 
