@@ -1,9 +1,9 @@
 package pe.edu.pucp.cyberiastore.trabajador.model;
 
 import java.util.Date;
+
 import pe.edu.pucp.cyberiastore.usuario.model.TipoDocumento;
 import pe.edu.pucp.cyberiastore.usuario.model.Usuario;
-
 
 public class Administrador extends Usuario{
 
