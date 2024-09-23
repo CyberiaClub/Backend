@@ -1,7 +1,8 @@
-# Created by https://www.toptal.com/developers/gitignore/api/netbeans
-# Edit at https://www.toptal.com/developers/gitignore?templates=netbeans
+############################
+#  Git ignore para el Netbeans
+# De el siguiente repositorio: https://github.com/github/gitignore/blob/main/Global/NetBeans.gitignore
+############################
 
-### NetBeans ###
 **/nbproject/private/
 **/nbproject/Makefile-*.mk
 **/nbproject/Package-*.bash
@@ -10,6 +11,3 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
-
-# End of https://www.toptal.com/developers/gitignore/api/netbeans
-
