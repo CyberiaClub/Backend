@@ -1,5 +1,6 @@
 package pe.edu.pucp.cyberiastore.sede.bo;
 
+import java.util.ArrayList;
 import pe.edu.pucp.cyberiastore.sede.daoImpl.SedeDAOImpl;
 import pe.edu.pucp.cyberiastore.sede.dao.SedeDAO;
 import pe.edu.pucp.cyberiastore.sede.model.Sede;
@@ -24,5 +25,17 @@ public class SedeBO {
     public Integer eliminar(String direccion, String nombre){
         Sede sede = new Sede(direccion, nombre);
         return this.sedeDAO.eliminar(sede);
+    }
+    
+    public ArrayList<Sede> listarTodos(){
+        ArrayList<Sede> sedes = new ArrayList();
+        
+        return sedes;
+    }
+    
+    public Sede buscarPorId(Integer idSede){
+        Sede sede = this.sedeDAO.obtenerPorId(""+idSede);
+        
+        return sede;
     }
 }

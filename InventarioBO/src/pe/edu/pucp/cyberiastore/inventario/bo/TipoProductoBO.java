@@ -37,5 +37,6 @@ public class TipoProductoBO {
         TipoProducto tipoProducto = this.tipoProductoDAO.obtenerPorId(""+idTipoProducto);
         
         return tipoProducto;
+    }
     
 }

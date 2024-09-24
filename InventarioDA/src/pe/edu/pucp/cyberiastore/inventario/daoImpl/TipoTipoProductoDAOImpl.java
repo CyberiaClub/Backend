@@ -9,7 +9,7 @@ public class TipoTipoProductoDAOImpl extends DAOImpl implements TipoProductoDAO 
 
     private TipoProducto tipoProducto;
 
-    public TipoProductoDAOImpl(){
+    public TipoTipoProductoDAOImpl(){
         super("TIPOPRODUCTO");
         this.tipoProducto = null;
     }

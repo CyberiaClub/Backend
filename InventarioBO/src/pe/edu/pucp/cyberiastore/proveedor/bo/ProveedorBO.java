@@ -1,5 +1,6 @@
 package pe.edu.pucp.cyberiastore.proveedor.bo;
 
+import java.util.ArrayList;
 import java.util.Date;
 import pe.edu.pucp.cyberiastore.proveedor.daoImpl.ProveedorDAOImpl;
 import pe.edu.pucp.cyberiastore.proveedor.dao.ProveedorDAO;
@@ -25,6 +26,18 @@ public class ProveedorBO {
     public Integer eliminar(String ruc, String nombre, Date fechaRegistro){
         Proveedor proveedor = new Proveedor(ruc, nombre, fechaRegistro);
         return this.proveedorDAO.eliminar(proveedor);
+    }
+    
+    public ArrayList<Proveedor> listarTodos(){
+        ArrayList<Proveedor> proveedores = new ArrayList();
+        
+        return proveedores;
+    }
+    
+    public Proveedor buscarPorId(Integer idProveedor){
+        Proveedor proveedor = this.proveedorDAO.obtenerPorId(""+idProveedor);
+        
+        return proveedor;
     }
     
 }
