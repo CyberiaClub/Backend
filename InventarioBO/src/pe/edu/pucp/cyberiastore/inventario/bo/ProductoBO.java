@@ -26,4 +26,16 @@ public class ProductoBO {
         Producto producto = new Producto(sku, nombre, descripcion, precio, unidad, productoMiembro);
         return this.productoDAO.eliminar(producto);
     }
+    
+    public ArrayList<Producto> listarTodos(){
+        ArrayList<Producto> productos = new ArrayList();
+        
+        return productos;
+    }
+    
+    public Producto buscarPorId(Integer idProducto){
+        Producto producto = this.productoDAO.obtenerPorId(""+idProducto);
+        
+        return producto;
+    }
 }

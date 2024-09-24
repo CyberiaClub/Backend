@@ -1,5 +1,6 @@
 package pe.edu.pucp.cyberiastore.inventario.bo;
 
+import java.util.ArrayList;
 import pe.edu.pucp.cyberiastore.inventario.daoImpl.MarcaDAOImpl;
 import pe.edu.pucp.cyberiastore.inventario.dao.MarcaDAO;
 import pe.edu.pucp.cyberiastore.inventario.model.Marca;
@@ -25,4 +26,17 @@ public class MarcaBO {
         Marca marca = new Marca(nombre);
         return this.marcaDAO.eliminar(marca);
     }
+    
+    public ArrayList<Marca> listarTodos(){
+        ArrayList<Marca> marcas = new ArrayList();
+        
+        return marcas;
+    }
+    
+    public Marca buscarPorId(Integer idMarca){
+        Marca marca = this.marcaDAO.obtenerPorId(""+idMarca);
+        
+        return marca;
+    }
+    
 }

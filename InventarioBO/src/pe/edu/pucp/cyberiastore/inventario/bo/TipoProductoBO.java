@@ -26,4 +26,16 @@ public class TipoProductoBO {
         TipoProducto tipoProducto = new TipoProducto(tipo);
         return this.tipoProductoDAO.eliminar(tipoProducto);
     }
+    
+    public ArrayList<TipoProducto> listarTodos(){
+        ArrayList<TipoProducto> tiposProducto = new ArrayList();
+        
+        return tiposProducto;
+    }
+    
+    public TipoProducto buscarPorId(Integer idTipoProducto){
+        TipoProducto tipoProducto = this.tipoProductoDAO.obtenerPorId(""+idTipoProducto);
+        
+        return tipoProducto;
+    
 }
