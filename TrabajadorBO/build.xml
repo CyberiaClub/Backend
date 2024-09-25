@@ -7,6 +7,7 @@
 <!-- the Compile on Save feature is turned off for the project. -->
 <!-- You can turn off the Compile on Save (or Deploy on Save) setting -->
 <!-- in the project's Project Properties dialog box.-->
+<<<<<<< HEAD
 <<<<<<<< HEAD:TrabajadorBO/build.xml
 <project name="TrabajadorBO" default="default" basedir=".">
     <description>Builds, tests, and runs the project TrabajadorBO.</description>
@@ -14,6 +15,15 @@
 <project name="InventarioDA" default="default" basedir=".">
     <description>Builds, tests, and runs the project InventarioDA.</description>
 >>>>>>>> Inventario:InventarioDA/build.xml
+=======
+<<<<<<<< HEAD:InventarioDA/build.xml
+<project name="InventarioDA" default="default" basedir=".">
+    <description>Builds, tests, and runs the project InventarioDA.</description>
+========
+<project name="TrabajadorBO" default="default" basedir=".">
+    <description>Builds, tests, and runs the project TrabajadorBO.</description>
+>>>>>>>> Trabajadores:TrabajadorBO/build.xml
+>>>>>>> ModuloVentas
     <import file="nbproject/build-impl.xml"/>
     <!--
 
@@ -63,11 +73,19 @@
 
     An example of overriding the target for project execution could look like this:
 
+<<<<<<< HEAD
 <<<<<<<< HEAD:TrabajadorBO/build.xml
         <target name="run" depends="TrabajadorBO-impl.jar">
 ========
         <target name="run" depends="InventarioDA-impl.jar">
 >>>>>>>> Inventario:InventarioDA/build.xml
+=======
+<<<<<<<< HEAD:InventarioDA/build.xml
+        <target name="run" depends="InventarioDA-impl.jar">
+========
+        <target name="run" depends="TrabajadorBO-impl.jar">
+>>>>>>>> Trabajadores:TrabajadorBO/build.xml
+>>>>>>> ModuloVentas
             <exec dir="bin" executable="launcher.exe">
                 <arg file="${dist.jar}"/>
             </exec>
