@@ -13,24 +13,60 @@ public class MetodoDePagoDAOImpl extends DAOImpl implements MetodoDePagoDAO{
         super("METODO_PAGO");
         this.metodoDePago = null;
     }
+    public MetodoDePagoDAOImpl(String tabla){
+        super(tabla);
+        this.metodoDePago = null;
+    }
     @Override
     protected String obtenerListaAtributos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "FECHA_DATE, SUBTOTAL, IGV, TOTAL, DESCUENTO_APLICADO, ID_PEDIDO, ID_OFERTA";
     }
 
     @Override
     protected String obtenerListaValoresParaInsertar() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql = "";
+        sql = sql.concat("'" + metodoDePago.getFecha() + "'");
+        sql = sql.concat(", ");
+        sql = sql.concat("'" + metodoDePago.getSubtotal() + "'");
+        sql = sql.concat(", ");
+        sql = sql.concat("'" + metodoDePago.getIgv()+ "'");
+        sql = sql.concat(", ");
+        sql = sql.concat("'" + metodoDePago.getTotal()+ "'");
+        sql = sql.concat(", ");
+        sql = sql.concat("'" + metodoDePago.getDescuentoAplicado()+ "'");
+        sql = sql.concat(", ");
+        sql = sql.concat("'" + metodoDePago.getIdPedido()+ "'");
+        sql = sql.concat(", ");
+        sql = sql.concat("'" + metodoDePago.getIdOferta() + "'");
+        return sql;
     }
 
     @Override
     protected String obtenerListaValoresParaModificar() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql = "";
+        sql = sql.concat("FECHA_DATE = ");
+        sql = sql.concat("'" + metodoDePago.getFecha() + "'");
+        sql = sql.concat(",SUBTOTAL = ");
+        sql = sql.concat("'" + metodoDePago.getSubtotal()+ "'");
+        sql = sql.concat(",IGV = ");
+        sql = sql.concat("'" + metodoDePago.getIgv() + "'");
+        sql = sql.concat(",TOTAL = ");
+        sql = sql.concat("'" + metodoDePago.getTotal() + "'");
+        sql = sql.concat(",DESCUENTO_APLICADO = ");
+        sql = sql.concat("'" + metodoDePago.getDescuentoAplicado()+ "'");
+        sql = sql.concat(",ID_PEDIDO = ");
+        sql = sql.concat("'" + metodoDePago.getIdPedido()+ "'");
+        sql = sql.concat(",ID_OFERTA = ");
+        sql = sql.concat("'" + metodoDePago.getIdOferta() +  "'");
+        return sql;
     }
 
     @Override
     protected String obtenerCondicionPorId() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql = "";
+        sql = sql.concat("ID_METODO_PAGO = ");
+        sql = sql.concat("'" + metodoDePago.getIdMetodoDePago() + "'");
+        return sql;
     }
 
     @Override
@@ -53,12 +89,12 @@ public class MetodoDePagoDAOImpl extends DAOImpl implements MetodoDePagoDAO{
 
     @Override
     public ArrayList<MetodoDePago> listar(String sql) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return null;
     }
 
     @Override
     public ArrayList<MetodoDePago> listarTodos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return null;
     }
 
     @Override

@@ -4,15 +4,15 @@ import java.util.Date;
 
 
 public class MetodoDePago {
-    private static Integer idMetodoDePago = 0;
+    private Integer idMetodoDePago;
     private Date fecha;
     private Double subtotal;
     private Double total;
     private Double igv;
     private Double descuentoAplicado;
     // atributos necesarios para hacer las inserciones en la BD
-    private Integer id_pedido;
-    private Integer id_oferta;
+    private Integer idPedido;
+    private Integer idOferta;
 
     public MetodoDePago(Date fecha, Double subtotal, Double total, Double igv, Double descuentoAplicado) {
         this.fecha = fecha;
@@ -20,16 +20,16 @@ public class MetodoDePago {
         this.total = total;
         this.igv = igv;
         this.descuentoAplicado = descuentoAplicado;
-        this.id_pedido = null;
-        this.id_oferta = null;
+        this.idPedido = null;
+        this.idOferta = null;
     }
 
-    public static Integer getIdMetodoDePago() {
-        return idMetodoDePago;
+    public Integer getIdMetodoDePago() {
+        return this.idMetodoDePago;
     }
 
-    public static void setIdMetodoDePago(Integer idMetodoDePago) {
-        MetodoDePago.idMetodoDePago = idMetodoDePago;
+    public void setIdMetodoDePago(Integer idMetodoDePago) {
+        this.idMetodoDePago = idMetodoDePago;
     }
 
     public Date getFecha() {
@@ -73,20 +73,20 @@ public class MetodoDePago {
     }
 
     // Valores necesarios para la insercion de la tabla METODO_PAGO
-    public Integer getId_pedido() {
-        return id_pedido;
+    public Integer getIdPedido() {
+        return idPedido;
     }
 
-    public void setId_pedido(Integer id_pedido) {
-        this.id_pedido = id_pedido;
+    public void setIdPedido(Integer id_pedido) {
+        this.idPedido = id_pedido;
     }
 
-    public Integer getId_oferta() {
-        return id_oferta;
+    public Integer getIdOferta() {
+        return idOferta;
     }
 
-    public void setId_oferta(Integer id_oferta) {
-        this.id_oferta = id_oferta;
+    public void setIdOferta(Integer id_oferta) {
+        this.idOferta = id_oferta;
     }
     
 }

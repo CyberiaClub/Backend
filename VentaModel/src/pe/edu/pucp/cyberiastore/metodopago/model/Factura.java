@@ -4,7 +4,7 @@ import java.util.Date;
 
 
 public class Factura extends MetodoDePago {
-    private static Integer numeroDeFactura = 0;
+    private Integer numeroDeFactura;
     private String ruc;
     private String razonSocial;
     private String direccionDeFacturacion;
@@ -14,9 +14,8 @@ public class Factura extends MetodoDePago {
         this.ruc = ruc;
         this.razonSocial = razonSocial;
         this.direccionDeFacturacion = direccionDeFacturacion;
-        this.numeroDeFactura++;
     }
-
+    
     public String getRuc() {
         return ruc;
     }
@@ -39,6 +38,14 @@ public class Factura extends MetodoDePago {
 
     public void setDireccionDeFacturacion(String direccionDeFacturacion) {
         this.direccionDeFacturacion = direccionDeFacturacion;
+    }
+
+    public Integer getNumeroDeFactura() {
+        return numeroDeFactura;
+    }
+
+    public void setNumeroDeFactura(Integer numeroDeFactura) {
+        this.numeroDeFactura = numeroDeFactura;
     }
     
 }

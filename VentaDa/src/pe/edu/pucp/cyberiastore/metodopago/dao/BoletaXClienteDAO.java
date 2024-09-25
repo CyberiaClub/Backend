@@ -2,6 +2,6 @@ package pe.edu.pucp.cyberiastore.metodopago.dao;
 
 
 
-public class BoletaXClienteDAO {
+public interface BoletaXClienteDAO {
 
 }
