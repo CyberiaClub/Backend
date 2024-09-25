@@ -4,7 +4,7 @@ import java.util.Date;
 
 
 public class Oferta {
-    private static Integer idOferta = 0;
+    private Integer idOferta ;
     private Date fechaDeInicio;
     private Date fechaDeFin;
     private Integer porcentaje;
@@ -13,9 +13,16 @@ public class Oferta {
         this.fechaDeInicio = fechaDeInicio;
         this.fechaDeFin = fechaDeFin;
         this.porcentaje = porcentaje;
-        this.idOferta++;
     }
 
+    public Integer getIdOferta() {
+        return idOferta;
+    }
+
+    public void setIdOferta(Integer idOferta) {
+        this.idOferta = idOferta;
+    }
+    
     public Date getFechaDeInicio() {
         return fechaDeInicio;
     }

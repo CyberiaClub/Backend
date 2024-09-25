@@ -10,6 +10,9 @@ public class MetodoDePago {
     private Double total;
     private Double igv;
     private Double descuentoAplicado;
+    // atributos necesarios para hacer las inserciones en la BD
+    private Integer id_pedido;
+    private Integer id_oferta;
 
     public MetodoDePago(Date fecha, Double subtotal, Double total, Double igv, Double descuentoAplicado) {
         this.fecha = fecha;
@@ -17,6 +20,8 @@ public class MetodoDePago {
         this.total = total;
         this.igv = igv;
         this.descuentoAplicado = descuentoAplicado;
+        this.id_pedido = null;
+        this.id_oferta = null;
     }
 
     public static Integer getIdMetodoDePago() {
@@ -65,6 +70,23 @@ public class MetodoDePago {
 
     public void setDescuentoAplicado(Double descuentoAplicado) {
         this.descuentoAplicado = descuentoAplicado;
+    }
+
+    // Valores necesarios para la insercion de la tabla METODO_PAGO
+    public Integer getId_pedido() {
+        return id_pedido;
+    }
+
+    public void setId_pedido(Integer id_pedido) {
+        this.id_pedido = id_pedido;
+    }
+
+    public Integer getId_oferta() {
+        return id_oferta;
+    }
+
+    public void setId_oferta(Integer id_oferta) {
+        this.id_oferta = id_oferta;
     }
     
 }

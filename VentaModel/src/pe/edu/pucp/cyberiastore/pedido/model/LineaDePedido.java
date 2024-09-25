@@ -1,6 +1,7 @@
 package pe.edu.pucp.cyberiastore.pedido.model;
 
 import java.util.ArrayList;
+import pe.edu.pucp.cyberiastore.inventario.model.Producto;
 
 
 public class LineaDePedido {
@@ -10,6 +11,7 @@ public class LineaDePedido {
 
     public LineaDePedido(Integer cantidad) {
         this.cantidad = cantidad;
+        this.productos = new ArrayList<>();
     }
 
     public Integer getIdLineaPedido() {

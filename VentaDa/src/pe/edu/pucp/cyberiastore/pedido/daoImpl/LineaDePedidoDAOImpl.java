@@ -22,6 +22,7 @@ public class LineaDePedidoDAOImpl extends DAOImpl implements LineaDePedidoDAO{
 
     @Override
     protected String obtenerListaValoresParaInsertar() {
+//        Falta conseguir que regrese el ID del último Pedido insertado ya que van de la mano
         String sql = "";
         sql = sql.concat("'" + lineaDePedido.getCantidad() + "'");
         sql = sql.concat(", ");
