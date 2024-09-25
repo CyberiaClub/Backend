@@ -10,13 +10,13 @@ public class Producto {
     private String unidad;
     private ArrayList<Producto> productoMiembros;
     
-    public Producto(Integer sku, String nombre, String descripcion, Double precio, String unidad, ArrayList<Producto> productoMiembro) {
+    public Producto(Integer sku, String nombre, String descripcion, Double precio, String unidad) {
         this.sku = sku;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
         this.unidad = unidad;
-        this.productoMiembros = productoMiembro;
+        this.productoMiembros = null;
     }
 
     public Integer getSku() {

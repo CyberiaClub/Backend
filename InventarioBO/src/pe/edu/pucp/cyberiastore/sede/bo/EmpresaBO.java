@@ -28,7 +28,7 @@ public class EmpresaBO {
     }
     
     public ArrayList<Empresa> listarTodos(){
-        ArrayList<Empresa> empresas = new ArrayList();
+        ArrayList<Empresa> empresas = this.empresaDAO.listarTodos();
         
         return empresas;
     }

@@ -1,7 +1,7 @@
 package pe.edu.pucp.cyberiastore.inventario.bo;
 
 import java.util.ArrayList;
-import pe.edu.pucp.cyberiastore.inventario.daoImpl.TipoTipoProductoDAOImpl;
+import pe.edu.pucp.cyberiastore.inventario.daoImpl.TipoProductoDAOImpl;
 import pe.edu.pucp.cyberiastore.inventario.dao.TipoProductoDAO;
 import pe.edu.pucp.cyberiastore.inventario.model.TipoProducto;
 
@@ -9,7 +9,7 @@ public class TipoProductoBO {
     TipoProductoDAO tipoProductoDAO;
     
     public TipoProductoBO(){
-        this.tipoProductoDAO = new TipoTipoProductoDAOImpl();
+        this.tipoProductoDAO = new TipoProductoDAOImpl();
     }
     
     public Integer insertar(String tipo){

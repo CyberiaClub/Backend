@@ -11,7 +11,11 @@ public class Sede {
         this.nombre = nombre;
         this.idSede++;
     }
-
+    
+    public Integer getIdSede(){
+        return this.idSede;
+    }
+    
     public String getDireccion() {
         return direccion;
     }

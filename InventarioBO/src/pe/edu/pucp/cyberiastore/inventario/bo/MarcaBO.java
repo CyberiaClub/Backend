@@ -28,15 +28,12 @@ public class MarcaBO {
     }
     
     public ArrayList<Marca> listarTodos(){
-        ArrayList<Marca> marcas = new ArrayList();
-        
+        ArrayList<Marca> marcas = this.marcaDAO.listarTodos();
         return marcas;
     }
     
     public Marca buscarPorId(Integer idMarca){
         Marca marca = this.marcaDAO.obtenerPorId(""+idMarca);
-        
         return marca;
     }
-    
 }

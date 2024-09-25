@@ -13,22 +13,22 @@ public class ProductoBO {
     }
     
     public Integer insertar(Integer sku, String nombre, String descripcion, Double precio, String unidad, ArrayList<Producto> productoMiembro){
-        Producto producto = new Producto(sku, nombre, descripcion, precio, unidad, productoMiembro);
+        Producto producto = new Producto(sku, nombre, descripcion, precio, unidad);
         return this.productoDAO.insertar(producto);
     }
     
     public Integer modificar(Integer sku, String nombre, String descripcion, Double precio, String unidad, ArrayList<Producto> productoMiembro){
-        Producto producto = new Producto(sku, nombre, descripcion, precio, unidad, productoMiembro);
+        Producto producto = new Producto(sku, nombre, descripcion, precio, unidad);
         return this.productoDAO.modificar(producto);
     }
     
     public Integer eliminar(Integer sku, String nombre, String descripcion, Double precio, String unidad, ArrayList<Producto> productoMiembro){
-        Producto producto = new Producto(sku, nombre, descripcion, precio, unidad, productoMiembro);
+        Producto producto = new Producto(sku, nombre, descripcion, precio, unidad);
         return this.productoDAO.eliminar(producto);
     }
     
     public ArrayList<Producto> listarTodos(){
-        ArrayList<Producto> productos = new ArrayList();
+        ArrayList<Producto> productos = this.productoDAO.listarTodos();
         
         return productos;
     }

@@ -29,7 +29,7 @@ public class ProveedorBO {
     }
     
     public ArrayList<Proveedor> listarTodos(){
-        ArrayList<Proveedor> proveedores = new ArrayList();
+        ArrayList<Proveedor> proveedores = this.proveedorDAO.listarTodos();
         
         return proveedores;
     }

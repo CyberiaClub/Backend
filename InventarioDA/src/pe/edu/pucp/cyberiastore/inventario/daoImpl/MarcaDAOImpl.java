@@ -1,6 +1,9 @@
 package pe.edu.pucp.cyberiastore.inventario.daoImpl;
 
+import java.util.logging.Logger;
+import java.util.logging.Level;
 import java.util.ArrayList;
+import java.sql.SQLException;
 import pe.edu.pucp.cyberiastore.inventario.model.Marca;
 import pe.edu.pucp.cyberiastore.inventario.dao.MarcaDAO;
 import pe.edu.pucp.cyberiastore.db.DAOImpl;
@@ -34,7 +37,7 @@ public class MarcaDAOImpl extends DAOImpl implements MarcaDAO {
 
     @Override
     protected String obtenerListaAtributos() {
-        return "nombre";
+        return "NOMBRE";
     }
 
     @Override
@@ -64,15 +67,31 @@ public class MarcaDAOImpl extends DAOImpl implements MarcaDAO {
     }
 
     @Override
-    public ArrayList<Marca> listar(String sql) {
-        ArrayList<Marca> lista = new ArrayList();
-        return lista;
+    public ArrayList<Marca> listar(String listado) {
+        ArrayList<Marca> listaMarcas = new ArrayList();
+        try{
+            this.abrirConexion();
+            this.ejecutarConsultaEnBD(listado);
+            while(this.resultSet.next()){
+                Marca plantillaMarca = new Marca(this.resultSet.getString("NOMBRE"));
+                listaMarcas.add(plantillaMarca);
+            }
+        }catch(SQLException ex){
+            Logger.getLogger(MarcaDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            try{
+                this.cerrarConexion();
+            }catch(SQLException ex){
+                Logger.getLogger(MarcaDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return listaMarcas;
     }
 
     @Override
     public ArrayList<Marca> listarTodos() {
-        ArrayList<Marca> lista = new ArrayList();
-        return lista;
+        String listado = this.obtenerListaValoresParaSeleccionar();
+        return this.listar(listado);
     }
 
     @Override

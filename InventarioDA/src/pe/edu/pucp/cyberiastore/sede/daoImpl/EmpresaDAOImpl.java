@@ -33,12 +33,18 @@ public class EmpresaDAOImpl extends DAOImpl implements EmpresaDAO{
 
     @Override
     protected String obtenerListaAtributos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "RAZON_SOCIAL, DIRECCION";
     }
 
     @Override
     protected String obtenerListaValoresParaInsertar() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql = "";
+        sql = sql.concat("'" + empresa.getRUC()+ "'");
+        sql = sql.concat(", ");    
+        sql = sql.concat("'" + empresa.getRazonSoial()+ "'");
+        sql = sql.concat(", ");
+        sql = sql.concat("'" + empresa.getDireccion()+ "'");
+        return sql;
     }
 
     @Override
@@ -48,7 +54,10 @@ public class EmpresaDAOImpl extends DAOImpl implements EmpresaDAO{
 
     @Override
     protected String obtenerCondicionPorId() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql = "";
+        sql = sql.concat("RUC = ");
+        sql = sql.concat("'" + empresa.getRUC()+ "'");
+        return sql;    
     }
 
     @Override
@@ -58,7 +67,8 @@ public class EmpresaDAOImpl extends DAOImpl implements EmpresaDAO{
 
     @Override
     public ArrayList<Empresa> listarTodos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql = this.obtenerListaValoresParaSeleccionar();
+        return this.listar(sql);
     }
 
     @Override

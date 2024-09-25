@@ -28,7 +28,7 @@ public class SedeBO {
     }
     
     public ArrayList<Sede> listarTodos(){
-        ArrayList<Sede> sedes = new ArrayList();
+        ArrayList<Sede> sedes = this.sedeDAO.listarTodos();
         
         return sedes;
     }
