@@ -19,6 +19,11 @@ public class UsuarioDAOImpl extends DAOImpl implements UsuarioDAO {
         super("USUARIO");
         this.usuario = null;
     }
+    //constructor para el trbajador DAOImpl
+    public UsuarioDAOImpl(String nombre){
+        super(nombre);
+        this.usuario = null;
+    }
     
     @Override
     public Integer insertar(Usuario usuario){
@@ -125,6 +130,8 @@ public class UsuarioDAOImpl extends DAOImpl implements UsuarioDAO {
                         sdf.parse(this.resultSet.getString("FECHA_NACIMIENTO")),
                         this.resultSet.getString("CORREO"),
                         (this.resultSet.getInt("ACTIVO") == 1),
+                        //dice Jesus que la contraseña no se debe enlistar :) 
+                        
                         this.resultSet.getString("CONTRASEÑA"),
                         this.resultSet.getString("NACIONALIDAD"),
                         this.resultSet.getString("DIRECCION"),
