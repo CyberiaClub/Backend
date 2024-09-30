@@ -5,7 +5,9 @@ import pe.edu.pucp.cyberiastore.db.DAOImpl;
 import pe.edu.pucp.cyberiastore.inventario.model.Producto;
 import pe.edu.pucp.cyberiastore.proveedor.dao.ProductoXProveedorDAO;
 import pe.edu.pucp.cyberiastore.proveedor.model.Proveedor;
-public class ProductoXProveedorDAOImpl extends DAOImpl implements ProductoXProveedorDAO{
+
+public class ProductoXProveedorDAOImpl extends DAOImpl implements ProductoXProveedorDAO {
+
     private String sku;
     private String ruc;
 
@@ -15,12 +17,16 @@ public class ProductoXProveedorDAOImpl extends DAOImpl implements ProductoXProve
 
     @Override
     protected String obtenerListaAtributos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "SKU,RUC";
     }
 
     @Override
     protected String obtenerListaValoresParaInsertar() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql = "";
+        sql = sql.concat("'" + this.sku + "'");
+        sql = sql.concat(", ");
+        sql = sql.concat("'" + this.ruc + "'");
+        return sql;
     }
 
     @Override
@@ -35,7 +41,9 @@ public class ProductoXProveedorDAOImpl extends DAOImpl implements ProductoXProve
 
     @Override
     public Integer insertar(String sku, String ruc) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.sku = sku;
+        this.ruc = ruc;
+        return this.insertar();
     }
 
     @Override
@@ -62,6 +70,5 @@ public class ProductoXProveedorDAOImpl extends DAOImpl implements ProductoXProve
     public ArrayList<Producto> buscarProductoProRuc(String ruc) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
-    
+
 }

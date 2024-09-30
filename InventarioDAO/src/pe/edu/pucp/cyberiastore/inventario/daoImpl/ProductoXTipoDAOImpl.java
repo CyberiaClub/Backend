@@ -17,12 +17,16 @@ public class ProductoXTipoDAOImpl extends DAOImpl implements ProductoXTipoDAO {
 
     @Override
     protected String obtenerListaAtributos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "SKU,TIPO_PRODUCTO";
     }
 
     @Override
     protected String obtenerListaValoresParaInsertar() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql = "";
+        sql = sql.concat("'" + this.sku + "'");
+        sql = sql.concat(", ");
+        sql = sql.concat("'" + this.idTipoProducto + "'");
+        return sql;
     }
 
     @Override
@@ -37,7 +41,9 @@ public class ProductoXTipoDAOImpl extends DAOImpl implements ProductoXTipoDAO {
 
     @Override
     public Integer insertar(String sku, String idTipoProducto) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.idTipoProducto = idTipoProducto;
+        this.sku = sku;
+        return this.insertar();
     }
 
     @Override

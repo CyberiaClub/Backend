@@ -136,4 +136,14 @@ public abstract class DAOImpl {
         sql = sql.concat(this.nombre_tabla);
         return sql;
     }
+    
+    protected Integer retornarUltimoAutogenerado() throws SQLException{
+        Integer resultado = null;
+        String sql = "select @@last_insert_id as id";
+        this.ejecutarConsultaEnBD(sql);
+        if(this.resultSet.next()){
+            resultado = this.resultSet.getInt("id");
+        }
+        return resultado;
+    }
 }

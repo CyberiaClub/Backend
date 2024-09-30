@@ -15,12 +15,16 @@ public class ProductoXSedeDAOImpl extends DAOImpl implements ProductoXSedeDAO{
     
     @Override
     protected String obtenerListaAtributos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "SKU,ID_SEDE";
     }
 
     @Override
     protected String obtenerListaValoresParaInsertar() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql = "";
+        sql = sql.concat("'" + this.sku + "'");
+        sql = sql.concat(", ");
+        sql = sql.concat("'" + this.idSede + "'");
+        return sql;
     }
 
     @Override
@@ -35,7 +39,9 @@ public class ProductoXSedeDAOImpl extends DAOImpl implements ProductoXSedeDAO{
 
     @Override
     public Integer insertar(String sku, int idSede) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.sku = sku;
+        this.idSede = idSede;
+        return this.insertar();
     }
 
     @Override

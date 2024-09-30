@@ -12,7 +12,7 @@ public class ProductoBO {
         this.productoDAO = new ProductoDAOImpl();
     }
     
-    public Integer insertar(Integer sku, String nombre, String descripcion, Double precio, String unidad, ArrayList<Producto> productoMiembro){
+    public Integer insertar(Integer sku, String nombre, String descripcion, Double precio, String unidad){
         Producto producto = new Producto(sku, nombre, descripcion, precio, unidad);
         return this.productoDAO.insertar(producto);
     }
@@ -39,3 +39,4 @@ public class ProductoBO {
         return producto;
     }
 }
+    

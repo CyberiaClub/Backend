@@ -15,12 +15,16 @@ public class ProductoXMarcaDAOImpl extends DAOImpl implements ProductoXMarcaDAO{
 
     @Override
     protected String obtenerListaAtributos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "SKU,ID_MARCA";
     }
 
     @Override
     protected String obtenerListaValoresParaInsertar() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql = "";
+        sql = sql.concat("'" + this.sku + "'");
+        sql = sql.concat(", ");
+        sql = sql.concat("'" + this.idMarca + "'");
+        return sql;
     }
 
     @Override
@@ -35,7 +39,9 @@ public class ProductoXMarcaDAOImpl extends DAOImpl implements ProductoXMarcaDAO{
 
     @Override
     public Integer insertar(String sku, int idMarca) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.sku = sku;
+        this.idMarca = idMarca;
+        return this.insertar();
     }
 
     @Override
