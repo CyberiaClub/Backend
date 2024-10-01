@@ -2,9 +2,17 @@
 
 El siguiente repositorio se va a usar únicamente para la creación de la programación en JAVA y Mysql
 
-## Forma de organizar los archivo en JAVA
-
-![example controller JAVA](Img/javaControllerExample.png)
+```
+/CyberiaStoreDBManager # El padre que y nos proporciona el patron singleton
+/CyberiaStoreDBManagerTest # Proyecto realiza para las test generales de todos las clases y tablas
+/Img # Imagnes para el README
+/InventarioDAO # Carpeta con todo lo requerido para la conexion con Base de datos
+    |-> /DA
+    |-> /BO
+    |-> /DAOIMPL
+/InventarioModel # Clase de nuestro UML
+...
+```
 
 ## Imagen del UML
 
@@ -12,7 +20,7 @@ El siguiente repositorio se va a usar únicamente para la creación de la progra
 
 ## Imagen de la Base de Datos
 
-![base_de_datos_img](BaseDeDatos/Img/CyberiaStore.png)
+![cyberia store BD](Img/BD.png)
 
 ## Forma de organizar los script en la BD
 
@@ -29,4 +37,7 @@ Forma como vamos a trabajar los script de la base de datos.
     /scripts_de_respaldo        # Scripts o instrucciones para generar y restaurar backups de la base de datos.
 ```
 
-## 
+## Como conectar el proyecto con la base de datos local
+
+En los siguientes pasos les voy a enseñar como conectar el proyecto con MYSQL y una base de datos Local(propia para su computadora)
+
