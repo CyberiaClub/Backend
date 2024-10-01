@@ -30,26 +30,26 @@ public class TrabajadorDAOImpl extends UsuarioDAOImpl implements TrabajadorDAO{
     @Override
     public Integer insertar(Trabajador trabajador) {
        this.trabajador=trabajador;
-       return super.insertar();
+       Integer id = super.insertar();
+       trabajador.setIdTrabajador(id);
+       return id;
     }
     
     
     @Override
     protected String obtenerListaAtributos(){
-        return "SUELDO, FECHA_DE_INGRESO, FECHA_DE_SALIDA";
+        return "SUELDO, FECHA_INGRESO, ID_USUARIO";
     }
     @Override
     protected String obtenerListaValoresParaInsertar(){
-        
-        String sql =super.obtenerListaValoresParaInsertar();
-
+        String sql ="";
         sql = sql.concat("'" + trabajador.getSueldo()+ "'");
-        sql = sql.concat("STR_TO_DATE('" + trabajador.getFechaDeIngreso()+ "','%d-%m-%Y')");
-        sql = sql.concat("STR_TO_DATE('" + trabajador.getFechaDeSalida()+ "','%d-%m-%Y')");
+        sql = sql.concat(",");
+        sql = sql.concat("STR_TO_DATE('" + this.trabajador.fechaDeIngresoAsDDMMYYY()+ "','%d-%m-%Y')");
+        sql = sql.concat(",");
+        sql = sql.concat("'" + this.trabajador.getIdUsuario() + "'");
         return sql;
     }
-    
-    
 
     
     @Override
@@ -59,9 +59,9 @@ public class TrabajadorDAOImpl extends UsuarioDAOImpl implements TrabajadorDAO{
     }
 
     @Override
-    public Integer eliminar(Trabajador trabajador) {
-        this.trabajador = trabajador;
-        return super.eliminar();    
+    public Integer eliminar() {
+        this.trabajador.setActivo(false);
+        return super.eliminar();
     }
     
     /**
@@ -81,7 +81,7 @@ public class TrabajadorDAOImpl extends UsuarioDAOImpl implements TrabajadorDAO{
 //public Trabajador(Double sueldo, Date fechaDeIngreso, Date fechaDeSalida, String documento, String telefono, String nombre, String apellidoPaterno, String apelldioMaterno, Date fechaDeNacimiento, String correo, Boolean activo, String contrasena, String nacionalidad, String direccion, TipoDocumento tipoDeDocumento) {
                         this.resultSet.getDouble("SUELDO"),
                         sdf.parse(this.resultSet.getString("FECHA_DE_INGRESO")),
-                        sdf.parse(this.resultSet.getString("FECHA_DE_SALIDA")),
+//                        sdf.parse(this.resultSet.getString("FECHA_DE_SALIDA")),
 
                         this.resultSet.getString("DOCUMENTO"),
                         this.resultSet.getString("TELEFONO"),
@@ -134,7 +134,20 @@ public class TrabajadorDAOImpl extends UsuarioDAOImpl implements TrabajadorDAO{
 
     @Override
     protected String obtenerCondicionPorId() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql = "";
+        sql = sql.concat(" ID_TRABAJADOR = ");
+        sql = sql.concat("'" + this.trabajador.getIdTrabajador() + "';");
+        return sql;
+    }
+
+    @Override
+    public void insertarIdUsuario(Integer idUsuario) {
+        this.trabajador.setIdUsuario(idUsuario);
+    }
+
+    @Override
+    public void insertarIdTrabajador(Integer idtrabajador ) {
+        this.trabajador.setIdTrabajador(idtrabajador);
     }
     
 }

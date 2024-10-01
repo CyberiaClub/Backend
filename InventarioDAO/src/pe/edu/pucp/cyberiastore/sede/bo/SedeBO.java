@@ -38,7 +38,4 @@ public class SedeBO {
         Sede sede = this.sedeDAO.obtenerPorId(""+idSede);
         return sede;
     }
-    public void imprimirId(){
-        System.err.println(this.sedeDAO.imprimirId());
-    }
 }

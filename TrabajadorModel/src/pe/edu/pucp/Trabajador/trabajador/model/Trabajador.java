@@ -1,5 +1,6 @@
 package pe.edu.pucp.Trabajador.trabajador.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import pe.edu.pucp.cyberiastore.usuario.model.TipoDocumento;
 import pe.edu.pucp.cyberiastore.usuario.model.Usuario;
@@ -7,20 +8,33 @@ import pe.edu.pucp.cyberiastore.usuario.model.Usuario;
 //DEFINIR ESTRUCTURAS DE DATOS
 
 public class Trabajador extends Usuario {
-    private static Integer idTrabajador = 0;
+    private Integer idTrabajador;
     private Double sueldo;
     private Date fechaDeIngreso;
     private Date fechaDeSalida;
 
-    public Trabajador(Double sueldo, Date fechaDeIngreso, Date fechaDeSalida, String documento, String telefono, String nombre, String apellidoPaterno, String apelldioMaterno, Date fechaDeNacimiento, String correo, Boolean activo, String contrasena, String nacionalidad, String direccion, TipoDocumento tipoDeDocumento) {
+    public Trabajador(){
+        
+    }
+    
+    public Trabajador(Double sueldo, Date fechaDeIngreso, String documento, String telefono, String nombre, String apellidoPaterno, String apelldioMaterno, Date fechaDeNacimiento, String correo, Boolean activo, String contrasena, String nacionalidad, String direccion, TipoDocumento tipoDeDocumento) {
         super(documento, telefono, nombre, apellidoPaterno, apelldioMaterno, fechaDeNacimiento, correo, activo, contrasena, nacionalidad, direccion, tipoDeDocumento);
+        this.setActivo(true);
         this.sueldo = sueldo;
         this.fechaDeIngreso = fechaDeIngreso;
-        this.fechaDeSalida = fechaDeSalida;
-        this.idTrabajador++;
+        this.fechaDeSalida = null; // Siempre nace nulo
+        
     }
 
-     public Double getSueldo() {
+    public Integer getIdTrabajador() {
+        return idTrabajador;
+    }
+
+    public void setIdTrabajador(Integer idTrabajador) {
+        this.idTrabajador = idTrabajador;
+    }
+
+    public Double getSueldo() {
         return sueldo;
     }
 
@@ -36,7 +50,17 @@ public class Trabajador extends Usuario {
         this.fechaDeIngreso = fechaDeIngreso;
     }
 
+    public void setFechaDeSalida(Date fechaDeSalida) {
+        this.fechaDeSalida = fechaDeSalida;
+    }
+    
     public Date getFechaDeSalida() {
         return fechaDeSalida;
     }
+    
+    public String fechaDeIngresoAsDDMMYYY(){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        return sdf.format(this.fechaDeIngreso);
+    }
+    
 }

@@ -17,28 +17,29 @@ public class ClienteDAOImpl extends DAOImpl implements ClienteDAO {
     
     public ClienteDAOImpl(){
         super("CLIENTE");
+        this.retonarLlavePrimaria = true;
         this.cliente = null;
     }
     
     @Override
     public Integer insertar(Cliente cliente){
         this.cliente = cliente;
-        return this.insertar();
+        Integer id = this.insertar();
+        this.cliente.setIdCliente(id);
+        return id;
     }
     
     @Override
     protected String obtenerListaAtributos(){
-        return "ID_CLIENTE, VERIFICADO, ID_USUARIO";
+        return "VERIFICADO, ID_USUARIO";
     }
     
     @Override
     protected String obtenerListaValoresParaInsertar(){
         String sql = "";
-        sql = sql.concat("'" + cliente.getIdCliente() + "'");
-        sql = sql.concat(", ");
         sql = sql.concat("'" + cliente.getVerificadoAsInt() + "'");
         sql = sql.concat(", ");
-        sql = sql.concat("'" + cliente.getDocumento() + "'");
+        sql = sql.concat("'" + cliente.getIdUsuario() + "'");
         return sql;
     }
 
@@ -49,8 +50,8 @@ public class ClienteDAOImpl extends DAOImpl implements ClienteDAO {
     }
 
     @Override
-    public Integer eliminar(Cliente cliente) {
-        this.cliente = cliente;
+    public Integer eliminar(Boolean activo) {
+        this.cliente.setActivo(activo);
         return super.eliminar();
     }
     
@@ -63,7 +64,6 @@ public class ClienteDAOImpl extends DAOImpl implements ClienteDAO {
             this.ejecutarConsultaEnBD(sql);
             while(this.resultSet.next()){
                 Cliente clienteTemp = new Cliente(
-                        this.resultSet.getInt("ID_CLIENTE"),
                         (this.resultSet.getInt("VERIFICADO") == 1),
                         this.resultSet.getString("DOCUMENTO"),
                         this.resultSet.getString("TELEFONO"),

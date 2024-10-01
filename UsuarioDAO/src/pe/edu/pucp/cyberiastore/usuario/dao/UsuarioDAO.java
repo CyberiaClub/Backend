@@ -9,11 +9,13 @@ public interface UsuarioDAO {
     
     public Integer modificar(Usuario usuario);
     
-    public Integer eliminar(Usuario usuario);
+    public Integer eliminar(Integer idUsuario);
     
     public ArrayList<Usuario> listar(String sql);
     
     public ArrayList<Usuario> listarTodos();
     
-    public Usuario obtenerPorId(String idUsuario);
+    public Usuario obtenerPorId(Integer idUsuario);
+    
+    public Integer insertarUsuarioDesdeTrabajador();
 }

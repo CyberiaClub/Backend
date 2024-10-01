@@ -16,6 +16,4 @@ public interface SedeDAO {
     public Sede obtenerPorId(String idSede);
     
     public Integer obtenerId(Sede sede);
-    
-    public String imprimirId();
 }

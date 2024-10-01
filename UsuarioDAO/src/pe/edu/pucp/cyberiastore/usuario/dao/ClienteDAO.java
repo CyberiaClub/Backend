@@ -9,7 +9,7 @@ public interface ClienteDAO {
     
     public Integer modificar(Cliente cliente);
     
-    public Integer eliminar(Cliente cliente);
+    public Integer eliminar(Boolean activo);
     
     public ArrayList<Cliente> listar(String sql);
     

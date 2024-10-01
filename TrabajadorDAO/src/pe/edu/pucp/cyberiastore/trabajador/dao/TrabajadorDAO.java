@@ -9,9 +9,11 @@ public interface TrabajadorDAO {
     
     public Integer modificar(Trabajador trabajador);
     
-    public Integer eliminar(Trabajador trabajador); //no se elimina se desactiva
-    
     public ArrayList<Trabajador> listarTodosTrabajador();
     
     public Trabajador obtenerPorId(Integer trabajador);
+    //
+    public void insertarIdUsuario(Integer idUsuario);
+    
+    public void insertarIdTrabajador(Integer idTrabajador);
 }

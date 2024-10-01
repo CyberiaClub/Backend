@@ -147,10 +147,10 @@ public abstract class DAOImpl {
     }
 
     private String generarSQLParaEliminacion() {
-        String sql = "delete from ";
+        String sql = "update ";
         sql = sql.concat(this.nombre_tabla);
-        sql = sql.concat(" where");
-        sql = sql.concat(this.obtenerCondicionPorId());      
+        sql = sql.concat(" set ACTIVO = 0 where");
+        sql = sql.concat(this.obtenerCondicionPorId());
         return sql;
     }
     

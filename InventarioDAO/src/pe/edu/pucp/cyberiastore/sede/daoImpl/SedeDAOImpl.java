@@ -114,9 +114,4 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
         }
         return null;
     }
-    
-    @Override
-    public String imprimirId(){
-        return "" + this.sede.getIdSede();
-    }
 }

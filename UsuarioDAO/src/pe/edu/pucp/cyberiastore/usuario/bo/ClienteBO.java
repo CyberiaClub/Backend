@@ -32,8 +32,8 @@ public class ClienteBO {
         this.clienteDAO = new ClienteDAOImpl();
     }
     
-    public Integer insertar(int idCliente, Boolean verificado, String documento, String telefono, String nombre, String apellidoPaterno, String apelldioMaterno, Date fechaDeNacimiento, String correo, Boolean activo, String contrasena, String nacionalidad, String direccion, TipoDocumento tipoDeDocumento){
-        Cliente cliente = new Cliente(idCliente,verificado,documento,telefono,nombre,apellidoPaterno,apelldioMaterno,fechaDeNacimiento,correo,activo,contrasena,nacionalidad,direccion,tipoDeDocumento);
+    public Integer insertar(Integer idUsuario,String documento, String telefono, String nombre, String apellidoPaterno, String apelldioMaterno, Date fechaDeNacimiento, String correo, String contrasena, String nacionalidad, String direccion, TipoDocumento tipoDeDocumento){
+        Cliente cliente = new Cliente(idUsuario,documento,telefono,nombre,apellidoPaterno,apelldioMaterno,fechaDeNacimiento,correo,contrasena,nacionalidad,direccion,tipoDeDocumento);
         return this.clienteDAO.insertar(cliente);
     }
     
@@ -41,14 +41,13 @@ public class ClienteBO {
         return this.clienteDAO.insertar(cliente);
     }
     
-    public Integer modificar(int idCliente, Boolean verificado, String documento, String telefono, String nombre, String apellidoPaterno, String apelldioMaterno, Date fechaDeNacimiento, String correo, Boolean activo, String contrasena, String nacionalidad, String direccion, TipoDocumento tipoDeDocumento){
-        Cliente cliente = new Cliente(idCliente,verificado,documento,telefono,nombre,apellidoPaterno,apelldioMaterno,fechaDeNacimiento,correo,activo,contrasena,nacionalidad,direccion,tipoDeDocumento);
+    public Integer modificar( String documento, String telefono, String nombre, String apellidoPaterno, String apelldioMaterno, Date fechaDeNacimiento, String correo, String contrasena, String nacionalidad, String direccion, TipoDocumento tipoDeDocumento){
+        Cliente cliente = new Cliente(documento,telefono,nombre,apellidoPaterno,apelldioMaterno,fechaDeNacimiento,correo,contrasena,nacionalidad,direccion,tipoDeDocumento);
         return this.clienteDAO.insertar(cliente);
     }
     
-    public Integer eliminar(int idCliente, Boolean verificado, String documento, String telefono, String nombre, String apellidoPaterno, String apelldioMaterno, Date fechaDeNacimiento, String correo, Boolean activo, String contrasena, String nacionalidad, String direccion, TipoDocumento tipoDeDocumento){
-        Cliente cliente = new Cliente(idCliente,verificado,documento,telefono,nombre,apellidoPaterno,apelldioMaterno,fechaDeNacimiento,correo,activo,contrasena,nacionalidad,direccion,tipoDeDocumento);
-        return this.clienteDAO.insertar(cliente);
+    public Integer eliminar(Boolean activo){
+        return this.clienteDAO.eliminar(activo);
     }
     
     public ArrayList<Cliente> listarTodos(){

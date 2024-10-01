@@ -27,8 +27,8 @@ public class UsuarioBO {
         this.permisoXRolDAO = new PermisoXRolDAOImpl();
     }
     
-    public Integer insertar(String documento, String telefono, String nombre, String apellidoPaterno, String apelldioMaterno, Date fechaDeNacimiento, String correo, Boolean activo, String contrasena, String nacionalidad, String direccion, TipoDocumento tipoDeDocumento){
-        Usuario usuario = new Usuario(documento,telefono,nombre,apellidoPaterno,apelldioMaterno,fechaDeNacimiento,correo,activo,contrasena,nacionalidad,direccion,tipoDeDocumento);
+    public Integer insertar(String documento, String telefono, String nombre, String apellidoPaterno, String apelldioMaterno, Date fechaDeNacimiento, String correo, String contrasena, String nacionalidad, String direccion, TipoDocumento tipoDeDocumento){
+        Usuario usuario = new Usuario(documento,telefono,nombre,apellidoPaterno,apelldioMaterno,fechaDeNacimiento,correo,contrasena,nacionalidad,direccion,tipoDeDocumento);
         return this.usuarioDAO.insertar(usuario);
     }
     
@@ -37,14 +37,14 @@ public class UsuarioBO {
     }
     
     public Integer modificar(String documento, String telefono, String nombre, String apellidoPaterno, String apelldioMaterno, Date fechaDeNacimiento, String correo, Boolean activo, String contrasena, String nacionalidad, String direccion, TipoDocumento tipoDeDocumento){
-        Usuario usuario = new Usuario(documento,telefono,nombre,apellidoPaterno,apelldioMaterno,fechaDeNacimiento,correo,activo,contrasena,nacionalidad,direccion,tipoDeDocumento);
+        Usuario usuario = new Usuario(documento,telefono,nombre,apellidoPaterno,apelldioMaterno,fechaDeNacimiento,correo,contrasena,nacionalidad,direccion,tipoDeDocumento);
         return this.usuarioDAO.modificar(usuario);
     }
     
-    public Integer eliminar(String documento, String telefono, String nombre, String apellidoPaterno, String apelldioMaterno, Date fechaDeNacimiento, String correo, Boolean activo, String contrasena, String nacionalidad, String direccion, TipoDocumento tipoDeDocumento){
-        rolXUsuarioDAO.eliminarUsuario(documento);
-        Usuario usuario = new Usuario(documento,telefono,nombre,apellidoPaterno,apelldioMaterno,fechaDeNacimiento,correo,activo,contrasena,nacionalidad,direccion,tipoDeDocumento);
-        return this.usuarioDAO.eliminar(usuario);
+    public Integer eliminar(Integer idUsuario){
+//        rolXUsuarioDAO.eliminarUsuario(documento);
+//        Usuario usuario = new Usuario(documento,telefono,nombre,apellidoPaterno,apelldioMaterno,fechaDeNacimiento,correo,activo,contrasena,nacionalidad,direccion,tipoDeDocumento);
+        return this.usuarioDAO.eliminar(idUsuario);
     }
     
     public ArrayList<Usuario> listarTodos(){
@@ -62,7 +62,7 @@ public class UsuarioBO {
         return usuarios;
     }
     
-    public Usuario buscarPorId(String idUsuario){
+    public Usuario buscarPorId(Integer idUsuario){
         Usuario usuario = this.usuarioDAO.obtenerPorId(idUsuario);
         ArrayList<Rol> roles = rolXUsuarioDAO.buscarRolesPorIdUsuario(usuario.getDocumento());
         for(Rol rol : roles){
