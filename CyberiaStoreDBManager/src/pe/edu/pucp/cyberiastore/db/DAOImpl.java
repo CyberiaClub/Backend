@@ -146,4 +146,8 @@ public abstract class DAOImpl {
         }
         return resultado;
     }
+    /**/
+    protected String returnIdFromTable(){
+        
+    }
 }
