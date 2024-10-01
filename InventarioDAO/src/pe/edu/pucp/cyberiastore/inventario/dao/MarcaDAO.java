@@ -14,4 +14,8 @@ public interface MarcaDAO {
     public ArrayList<Marca> listarTodos();
     
     public Marca obtenerPorId(String idMarca);
+    
+    public Integer obtenerId(Marca marca);
+    
+    public String imprimirId();
 }

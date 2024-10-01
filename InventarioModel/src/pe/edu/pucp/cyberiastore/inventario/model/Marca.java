@@ -2,13 +2,20 @@
 
 public class Marca {
 
-    private static Integer idMarca = 0;
+    private Integer idMarca = 0;
     private String nombre;
-
+    private Boolean activo;
+    
     public Marca(String nombre) {  
         this.nombre = nombre;
-        this.idMarca++;
+        this.activo = true;
     }
+
+    public void setIdMarca(Integer idMarca) {
+        this.idMarca = idMarca;
+    }
+    
+    
     
     public Integer getIdMarca(){
         return idMarca;
@@ -20,6 +27,14 @@ public class Marca {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+    
+    public Boolean getActivo() {
+        return activo;
+    }
+
+    public void setActivo(Boolean activo) {
+        this.activo = activo;
     }
 
 }

@@ -1,4 +1,4 @@
-package pe.edu.pucp.cyberiastore.inventario.bo;
+    package pe.edu.pucp.cyberiastore.inventario.bo;
 
 import java.util.ArrayList;
 import pe.edu.pucp.cyberiastore.inventario.daoImpl.TipoProductoDAOImpl;

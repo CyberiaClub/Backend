@@ -1,4 +1,4 @@
-package pe.edu.pucp.cyberiastore.proveedor.dao;
+    package pe.edu.pucp.cyberiastore.proveedor.dao;
 
 import java.util.ArrayList;
 import pe.edu.pucp.cyberiastore.proveedor.model.Proveedor;
@@ -14,4 +14,8 @@ public interface ProveedorDAO {
     public ArrayList<Proveedor> listarTodos();
     
     public Proveedor obtenerPorId(String idProveedor);
+    
+    public Integer obtenerId(Proveedor proveedor);
+            
+    public String imprimirId();
 }

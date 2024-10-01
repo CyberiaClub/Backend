@@ -1,8 +1,8 @@
 package pe.edu.pucp.cyberiastore.inventario.daoImpl;
 
-import java.util.logging.Logger;
-import java.util.logging.Level;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.sql.SQLException;
 import pe.edu.pucp.cyberiastore.inventario.model.Marca;
 import pe.edu.pucp.cyberiastore.inventario.dao.MarcaDAO;
@@ -20,7 +20,9 @@ public class MarcaDAOImpl extends DAOImpl implements MarcaDAO {
     @Override
     public Integer insertar(Marca marca) {
         this.marca = marca;
-        return this.insertar();
+        Integer id = this.insertar();
+        this.marca.setIdMarca(id);
+        return id;
     }
 
     @Override
@@ -32,12 +34,12 @@ public class MarcaDAOImpl extends DAOImpl implements MarcaDAO {
     @Override
     public Integer eliminar(Marca marca) {
         this.marca = marca;
-        return this.modificar();
+        return this.eliminar();
     }
 
     @Override
     protected String obtenerListaAtributos() {
-        return "NOMBRE";
+        return "NOMBRE, ACTIVO";
     }
 
     @Override
@@ -45,7 +47,8 @@ public class MarcaDAOImpl extends DAOImpl implements MarcaDAO {
         String valores="";
         
         valores=valores.concat("'"+marca.getNombre()+"'");
-        
+        valores=valores.concat(", ");
+        valores=valores.concat("'"+marca.getActivo()+"'");
         return valores;
     }
 
@@ -99,5 +102,22 @@ public class MarcaDAOImpl extends DAOImpl implements MarcaDAO {
         String sql = this.obtenerListaValoresParaSeleccionar();
         sql = sql.concat(" and ID_MARCA = '" + idMarca + "'");
         return this.listar(sql).getFirst();
+    }
+    
+    @Override
+    public Integer obtenerId(Marca marca) {
+        this.marca = marca;
+        try {
+            Integer id = this.retornarUltimoAutogenerado();
+            this.marca.setIdMarca(id);
+        } catch (SQLException ex) {
+            Logger.getLogger(MarcaDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    @Override
+    public String imprimirId(){
+        return "" + this.marca.getIdMarca();
     }
 }

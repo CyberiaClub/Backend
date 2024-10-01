@@ -9,6 +9,8 @@ import java.text.SimpleDateFormat;
 import pe.edu.pucp.cyberiastore.proveedor.model.Proveedor;
 import pe.edu.pucp.cyberiastore.db.DAOImpl;
 import pe.edu.pucp.cyberiastore.proveedor.dao.ProveedorDAO;
+import pe.edu.pucp.cyberiastore.proveedor.daoImpl.ProveedorDAOImpl;
+import pe.edu.pucp.cyberiastore.proveedor.model.Proveedor;
 
 public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
 
@@ -17,12 +19,14 @@ public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
     public ProveedorDAOImpl() {
         super("PROVEEDOR");
         this.proveedor = null;
+        this.retonarLlavePrimaria = true;
     }
 
     @Override
     public Integer insertar(Proveedor proveedor) {
         this.proveedor = proveedor;
-        return this.insertar();
+        Integer id = this.insertar();
+        return id;
     }
 
     @Override
@@ -39,7 +43,7 @@ public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
 
     @Override
     protected String obtenerListaAtributos() {
-        return "RUC, NOMBRE, FECHA_REGISTRO";
+        return "RUC, NOMBRE, FECHA_REGISTRO, ACTIVO";
     }
 
     @Override
@@ -50,12 +54,23 @@ public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
         valores = valores.concat("'" + proveedor.getNombre() + "'");
         valores = valores.concat(", ");
         valores = valores.concat("'" + proveedor.getFechaRegistro() + "'");
+        valores = valores.concat(", ");
+        valores = valores.concat("'"+proveedor.getActivo()+"'");
         return valores;
     }
 
     @Override
     protected String obtenerListaValoresParaModificar() {
-        return "";
+        String valores = "";
+        valores = valores.concat("RUC: ");
+        valores = valores.concat("'" + proveedor.getRuc() + "'");
+        valores = valores.concat(", NOMBRE: ");
+        valores = valores.concat("'" + proveedor.getNombre() + "'");
+        valores = valores.concat(", FECHA_REGISTRO: ");
+        valores = valores.concat("'" + proveedor.getFechaRegistro() + "'");
+        valores = valores.concat(", ACTIVO: ");
+        valores = valores.concat("'"+proveedor.getActivo()+"'");
+        return valores;
     }
 
     @Override
@@ -106,5 +121,22 @@ public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
         String sql = this.obtenerListaValoresParaSeleccionar();
         sql = sql.concat(" and RUC = '" + ruc + "'");
         return this.listar(sql).getFirst();
+    }
+    
+    @Override
+    public Integer obtenerId(Proveedor proveedor) {
+        this.proveedor = proveedor;
+        try {
+            Integer id = this.retornarUltimoAutogenerado();
+            this.proveedor.setIdProveedor(id);
+        } catch (SQLException ex) {
+            Logger.getLogger(ProveedorDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    @Override
+    public String imprimirId(){
+        return "" + this.proveedor.getIdProveedor();
     }
 }

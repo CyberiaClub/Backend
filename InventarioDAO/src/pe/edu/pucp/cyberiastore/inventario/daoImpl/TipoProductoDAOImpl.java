@@ -20,7 +20,9 @@ public class TipoProductoDAOImpl extends DAOImpl implements TipoProductoDAO {
     @Override
     public Integer insertar(TipoProducto tipoProducto) {
         this.tipoProducto = tipoProducto;
-        return this.insertar();
+        Integer id = this.insertar();
+        this.tipoProducto.setIdTipoProducto(id);
+        return id;
     }
 
     @Override
@@ -32,18 +34,20 @@ public class TipoProductoDAOImpl extends DAOImpl implements TipoProductoDAO {
     @Override
     public Integer eliminar(TipoProducto tipoProducto) {
         this.tipoProducto = tipoProducto;
-        return this.modificar();
+        return this.eliminar();
     }
 
     @Override
     protected String obtenerListaAtributos() {
-        return "ID, NOMBRE";
+        return "ID, NOMBRE, ACTIVO";
     }
 
     @Override
     protected String obtenerListaValoresParaInsertar() {
         String valores = "";
         valores = valores.concat("'"+tipoProducto.getTipo()+"'");
+        valores = valores.concat(", ");
+        valores = valores.concat("'"+tipoProducto.getActivo()+"'");
         return valores;
     }
 
@@ -92,5 +96,22 @@ public class TipoProductoDAOImpl extends DAOImpl implements TipoProductoDAO {
         String valores = this.obtenerListaValoresParaSeleccionar();
         valores = valores.concat(" and ID_TIPO_PRODUCTO = '" + idTipoProducto + "'");
         return this.listar(valores).getFirst();
+    }
+    
+    @Override
+    public Integer obtenerId(TipoProducto tipoProducto) {
+        this.tipoProducto = tipoProducto;
+        try {
+            Integer id = this.retornarUltimoAutogenerado();
+            this.tipoProducto.setIdTipoProducto(id);
+        } catch (SQLException ex) {
+            Logger.getLogger(TipoProductoDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    @Override
+    public String imprimirId(){
+        return "" + this.tipoProducto.getIdTipoProducto();
     }
 }

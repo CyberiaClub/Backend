@@ -20,22 +20,22 @@ public class CyberiaStoreDBManagerTest {
 //        Connection conexion = dbmanager.getConnection();
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         
-//        ProveedorBO proveedorBO = new ProveedorBO();
-//        try {
-//            proveedorBO.insertar("RUC_PRUEBA1","PROVEEDOR_PRUEBA1",sdf.parse("01-01-202"));
-//        } catch (ParseException ex) {
-//            Logger.getLogger(CyberiaStoreDBManagerTest.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        ProveedorBO proveedorBO = new ProveedorBO();
+        try {
+            proveedorBO.insertar("RUC_PRUEBA1","PROVEEDOR_PRUEBA1",sdf.parse("01-01-202"));
+        } catch (ParseException ex) {
+            Logger.getLogger(CyberiaStoreDBManagerTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         SedeBO sedeBO = new SedeBO();
         sedeBO.insertar("hola como asfdasdf 123 ","ESTA ES UNA DESCRIPCION DE EJEMPLO GAAAAAAAAAA");
         sedeBO.imprimirId();
         
-//        MarcaBO marcaBO = new MarcaBO();
-//        marcaBO.insertar("MARCA_PRUEBA1");
-//        
-//        TipoProductoBO tipoProdBO = new TipoProductoBO();
-//        tipoProdBO.insertar("TIPO_PROD_PRUEBA1");
+        MarcaBO marcaBO = new MarcaBO();
+        marcaBO.insertar("MARCA_PRUEBA1");
+        
+        TipoProductoBO tipoProdBO = new TipoProductoBO();
+        tipoProdBO.insertar("TIPO_PROD_PRUEBA1");
 //        
 //        ProductoBO prodBO = new ProductoBO();
 //        prodBO.insertar(1,"PRODUCTO_PRUEBA1","DESCRIPCION PRUEBA 1",9.9,"UNIDADES");

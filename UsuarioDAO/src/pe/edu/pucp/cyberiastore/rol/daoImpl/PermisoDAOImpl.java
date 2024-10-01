@@ -25,17 +25,17 @@ public class PermisoDAOImpl extends DAOImpl implements PermisoDAO {
     
     @Override
     protected String obtenerListaAtributos(){
-        return "ID_PERMISO, NOMBRE, DESCRIPCION";
+        return "NOMBRE, DESCRIPCION, ACTIVO";
     }
     
     @Override
     protected String obtenerListaValoresParaInsertar(){
         String sql = "";
-        sql = sql.concat("'" + permiso.getIdPermiso() + "'");
-        sql = sql.concat(", ");
         sql = sql.concat("'" + permiso.getNombre() + "'");
         sql = sql.concat(", ");
         sql = sql.concat("'" + permiso.getDescripcion() + "'");
+        sql = sql.concat(", ");
+        sql = sql.concat("'" + permiso.getActivo()+ "'");
         return sql;
     }
 
@@ -106,5 +106,22 @@ public class PermisoDAOImpl extends DAOImpl implements PermisoDAO {
         sql = sql.concat("ID_PERMISO = ");
         sql = sql.concat("'" + permiso.getIdPermiso() + "'");
         return sql;
+    }
+    
+    @Override
+    public Integer obtenerId(Permiso permiso) {
+        this.permiso = permiso;
+        try {
+            Integer id = this.retornarUltimoAutogenerado();
+            this.permiso.setIdPermiso(id);
+        } catch (SQLException ex) {
+            Logger.getLogger(PermisoDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    @Override
+    public String imprimirId(){
+        return "" + this.permiso.getIdPermiso();
     }
 }
