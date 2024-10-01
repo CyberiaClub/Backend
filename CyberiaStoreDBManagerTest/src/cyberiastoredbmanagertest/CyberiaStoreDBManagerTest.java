@@ -16,10 +16,9 @@ public class CyberiaStoreDBManagerTest {
 
     
     public static void main(String[] args) {
-        DBManager dbmanager = DBManager.getInstance();
-        Connection conexion = dbmanager.getConnection();
+//        DBManager dbmanager = DBManager.getInstance();
+//        Connection conexion = dbmanager.getConnection();
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        
         
 //        ProveedorBO proveedorBO = new ProveedorBO();
 //        try {
@@ -29,7 +28,8 @@ public class CyberiaStoreDBManagerTest {
 //        }
         
         SedeBO sedeBO = new SedeBO();
-        sedeBO.insertar("DIRECCION_PRUEBA1","NOMBRE_PRRUEBA1");
+        sedeBO.insertar("hola como asfdasdf 123 ","ESTA ES UNA DESCRIPCION DE EJEMPLO GAAAAAAAAAA");
+        sedeBO.imprimirId();
         
 //        MarcaBO marcaBO = new MarcaBO();
 //        marcaBO.insertar("MARCA_PRUEBA1");

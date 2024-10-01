@@ -10,6 +10,7 @@ public class SedeBO {
     
     public SedeBO(){
         this.sedeDAO = new SedeDAOImpl();
+        
     }
     
     public Integer insertar(String nombre, String descripcion){
@@ -35,7 +36,9 @@ public class SedeBO {
     
     public Sede buscarPorId(Integer idSede){
         Sede sede = this.sedeDAO.obtenerPorId(""+idSede);
-        
         return sede;
+    }
+    public void imprimirId(){
+        System.err.println(this.sedeDAO.imprimirId());
     }
 }

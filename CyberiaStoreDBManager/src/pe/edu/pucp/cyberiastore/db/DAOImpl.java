@@ -13,10 +13,12 @@ public abstract class DAOImpl {
     protected String nombre_tabla;
     protected Connection conexion;
     protected Statement statement;
-    protected ResultSet resultSet;    
+    protected ResultSet resultSet;
+    protected Boolean retonarLlavePrimaria;
 
     public DAOImpl(String nombre_tabla){
         this.nombre_tabla = nombre_tabla;
+        this.retonarLlavePrimaria = false;
     }
     
     protected void abrirConexion() throws SQLException {
@@ -78,8 +80,31 @@ public abstract class DAOImpl {
     }
 
     protected Integer insertar(){
-        String sql = this.generarSQLParaInsercion();
-        return this.ejecutarTransaccionEnBD(sql);
+        Integer resultado = 0;
+        try{
+            this.iniciarTransaccion();
+            String sql = this.generarSQLParaInsercion();
+            resultado = this.ejecutarModificacionesEnBD(sql);
+            if(this.retonarLlavePrimaria){
+                Integer id = this.retornarUltimoAutogenerado();
+                resultado = id;
+            }
+            this.comitarTransaccion();
+        } catch (SQLException ex){
+            try {
+                this.rollbackTransaccion();
+                Logger.getLogger(DAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex1) {
+                Logger.getLogger(DAOImpl.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        }finally{
+            try {
+                this.cerrarConexion();
+            } catch (SQLException ex) {
+                Logger.getLogger(DAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return resultado;
     }
 
     protected String generarSQLParaInsercion() {
@@ -146,8 +171,8 @@ public abstract class DAOImpl {
         }
         return resultado;
     }
-    /**/
-    protected String returnIdFromTable(){
-        
-    }
+//    /**/
+//    protected String returnIdFromTable(){
+//        return "";
+//    }
 }

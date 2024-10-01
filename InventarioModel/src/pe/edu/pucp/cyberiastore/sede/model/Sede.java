@@ -10,9 +10,9 @@ public class Sede {
         
     }
     
-    public Sede(String descripcion, String nombre) {
-        this.descripcion = descripcion;
+    public Sede(String nombre, String descripcion) {
         this.nombre = nombre;
+        this.descripcion = descripcion;
     }
     
     public Integer getIdSede(){
