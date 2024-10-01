@@ -89,7 +89,7 @@ public abstract class DAOImpl {
         sql = sql.concat(this.obtenerListaAtributos());
         sql = sql.concat(" ) values (");
         sql = sql.concat(this.obtenerListaValoresParaInsertar());
-        sql = sql.concat(")");      
+        sql = sql.concat(");");
         return sql;
     }
 

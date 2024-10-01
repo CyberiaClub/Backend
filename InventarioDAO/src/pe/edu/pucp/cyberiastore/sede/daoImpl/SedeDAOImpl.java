@@ -9,7 +9,7 @@ import pe.edu.pucp.cyberiastore.db.DAOImpl;
 import pe.edu.pucp.cyberiastore.sede.dao.SedeDAO;
 
 public class SedeDAOImpl extends DAOImpl implements SedeDAO{
-    private Sede sede;
+    private  Sede sede;
 
     public SedeDAOImpl() {
         super("SEDE");
@@ -19,7 +19,16 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO{
     @Override
     public Integer insertar(Sede sede) {
         this.sede = sede;
-        return this.insertar();
+//        return this.insertar();
+        this.insertar();
+        try {
+            Integer id = this.retornarUltimoAutogenerado();
+            sede.setIdSede(id);
+        } catch (SQLException ex) {
+            Logger.getLogger(SedeDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+        return null;
     }
 
     @Override
@@ -36,15 +45,15 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO{
 
     @Override
     protected String obtenerListaAtributos() {
-        return "ID, DIRECCION, NOMBRE";
+        return "NOMBRE, DESCRIPCION";
     }
 
     @Override
     protected String obtenerListaValoresParaInsertar() {
         String valores = "";
-        valores = valores.concat("'" + sede.getNombre()+ "'");
+        valores = valores.concat( "'" + sede.getNombre() + "'");
         valores = valores.concat(", ");
-        valores = valores.concat("'" + sede.getDireccion()+ "'");
+        valores = valores.concat("'" + sede.getDescripcion() + "'");
         return valores;
     }
 
@@ -69,8 +78,8 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO{
             this.ejecutarConsultaEnBD(sql);
             while(this.resultSet.next()){
                 Sede plantillaSede = new Sede(
-                        this.resultSet.getString("DIRECCION"),
-                        this.resultSet.getString("NOMBRE")
+                        this.resultSet.getString("NOMBRE"),
+                        this.resultSet.getString("DESCRIPCION")
                 );
                 listaSede.add(plantillaSede);
             }

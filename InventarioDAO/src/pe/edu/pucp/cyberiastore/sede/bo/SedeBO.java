@@ -12,18 +12,18 @@ public class SedeBO {
         this.sedeDAO = new SedeDAOImpl();
     }
     
-    public Integer insertar(String direccion, String nombre){
-        Sede sede = new Sede(direccion, nombre);
+    public Integer insertar(String nombre, String descripcion){
+        Sede sede = new Sede(nombre,descripcion);
         return this.sedeDAO.insertar(sede);
     }
     
-    public Integer modificar(String direccion, String nombre){
-        Sede sede = new Sede(direccion, nombre);
+    public Integer modificar(String nombre, String descripcion){
+        Sede sede = new Sede(nombre, descripcion);
         return this.sedeDAO.modificar(sede);
     }
     
-    public Integer eliminar(String direccion, String nombre){
-        Sede sede = new Sede(direccion, nombre);
+    public Integer eliminar(String nombre, String descripcion){
+        Sede sede = new Sede(nombre, descripcion);
         return this.sedeDAO.eliminar(sede);
     }
     
