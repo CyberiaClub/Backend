@@ -5,15 +5,15 @@ import pe.edu.pucp.cyberiastore.inventario.model.Producto;
 import pe.edu.pucp.cyberiastore.inventario.model.TipoProducto;
 
 public interface ProductoXTipoDAO {
-    public Integer insertar(String sku, String idTipoProducto);
+    public Integer insertar(Integer idProducto, Integer idTipoProducto);
     
-    public Integer eliminar(String sku, String idTipoProducto);
+    public Integer eliminar(Integer idProducto, Integer idTipoProducto);
     
-    public Integer eliminarTipoProducto(String idTipoProducto);
+    public Integer eliminarTipoProducto(Integer idTipoProducto);
     
-    public Integer eliminarProducto(String sku);
+    public Integer eliminarProducto(Integer idProducto);
     
-    public ArrayList<Producto> buscarProductoPorTipo(String idTipoProducto);
+    public ArrayList<Producto> buscarProductoPorTipo(Integer idTipoProducto);
     
-    public ArrayList<TipoProducto> buscarTipoPorProducto(String sku);
+    public ArrayList<TipoProducto> buscarTipoPorProducto(Integer idProducto);
 }

@@ -8,8 +8,8 @@ import pe.edu.pucp.cyberiastore.inventario.model.TipoProducto;
 
 
 public class ProductoXTipoDAOImpl extends DAOImpl implements ProductoXTipoDAO {
-    private String sku;
-    private String idTipoProducto;
+    private Integer idProducto;
+    private Integer idTipoProducto;
     
     public ProductoXTipoDAOImpl() {
         super("PRODUCTO_X_TIPO");
@@ -17,13 +17,13 @@ public class ProductoXTipoDAOImpl extends DAOImpl implements ProductoXTipoDAO {
 
     @Override
     protected String obtenerListaAtributos() {
-        return "SKU,TIPO_PRODUCTO";
+        return "ID_PRODUCTO,ID_TIPO_PRODUCTO";
     }
 
     @Override
     protected String obtenerListaValoresParaInsertar() {
         String sql = "";
-        sql = sql.concat("'" + this.sku + "'");
+        sql = sql.concat("'" + this.idProducto + "'");
         sql = sql.concat(", ");
         sql = sql.concat("'" + this.idTipoProducto + "'");
         return sql;
@@ -40,34 +40,34 @@ public class ProductoXTipoDAOImpl extends DAOImpl implements ProductoXTipoDAO {
     }
 
     @Override
-    public Integer insertar(String sku, String idTipoProducto) {
+    public Integer insertar(Integer idProducto, Integer idTipoProducto) {
         this.idTipoProducto = idTipoProducto;
-        this.sku = sku;
+        this.idProducto = idProducto;
         return this.insertar();
     }
 
     @Override
-    public Integer eliminar(String sku, String idTipoProducto) {
+    public Integer eliminar(Integer idProducto, Integer idTipoProducto) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public Integer eliminarTipoProducto(String idTipoProducto) {
+    public Integer eliminarTipoProducto(Integer idTipoProducto) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public Integer eliminarProducto(String sku) {
+    public Integer eliminarProducto(Integer idProducto) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public ArrayList<Producto> buscarProductoPorTipo(String idTipoProducto) {
+    public ArrayList<Producto> buscarProductoPorTipo(Integer idTipoProducto) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public ArrayList<TipoProducto> buscarTipoPorProducto(String sku) {
+    public ArrayList<TipoProducto> buscarTipoPorProducto(Integer idProducto) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     

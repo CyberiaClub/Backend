@@ -19,4 +19,8 @@ public interface OfertaDAO {
     
     public Oferta obtenerPorId(String idOferta);
     
+    public Integer obtenerId(Oferta oferta);
+    
+    public String imprimirId();
+    
 }

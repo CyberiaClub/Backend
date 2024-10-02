@@ -12,15 +12,17 @@ public class TipoProductoDAOImpl extends DAOImpl implements TipoProductoDAO {
 
     private TipoProducto tipoProducto;
 
-    public TipoProductoDAOImpl(){
-        super("TIPOPRODUCTO");
+    public TipoProductoDAOImpl() {
+        super("TIPO_PRODUCTO");
         this.tipoProducto = null;
     }
 
     @Override
     public Integer insertar(TipoProducto tipoProducto) {
         this.tipoProducto = tipoProducto;
-        return this.insertar();
+        Integer id = this.insertar();
+        this.tipoProducto.setIdTipoProducto(id);
+        return id;
     }
 
     @Override
@@ -32,18 +34,20 @@ public class TipoProductoDAOImpl extends DAOImpl implements TipoProductoDAO {
     @Override
     public Integer eliminar(TipoProducto tipoProducto) {
         this.tipoProducto = tipoProducto;
-        return this.modificar();
+        return this.eliminar();
     }
 
     @Override
     protected String obtenerListaAtributos() {
-        return "ID, NOMBRE";
+        return "TIPO, ACTIVO";
     }
 
     @Override
     protected String obtenerListaValoresParaInsertar() {
         String valores = "";
-        valores = valores.concat("'"+tipoProducto.getTipo()+"'");
+        valores = valores.concat("'" + tipoProducto.getTipo() + "'");
+        valores = valores.concat(", ");
+        valores = valores.concat("'" + (tipoProducto.getActivo() ? 1 : 0) + "'");
         return valores;
     }
 
@@ -60,21 +64,21 @@ public class TipoProductoDAOImpl extends DAOImpl implements TipoProductoDAO {
     @Override
     public ArrayList<TipoProducto> listar(String listado) {
         ArrayList<TipoProducto> listadoTipoProducto = new ArrayList();
-        try{
+        try {
             this.abrirConexion();
             this.ejecutarConsultaEnBD(listado);
-            while(this.resultSet.next()){
+            while (this.resultSet.next()) {
                 TipoProducto PlantilaTipoProd = new TipoProducto(
-                this.resultSet.getString("TIPO")
+                        this.resultSet.getString("TIPO")
                 );
                 listadoTipoProducto.add(PlantilaTipoProd);
             }
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             Logger.getLogger(TipoProductoDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }finally{
-            try{
+        } finally {
+            try {
                 this.cerrarConexion();
-            }catch(SQLException ex){
+            } catch (SQLException ex) {
                 Logger.getLogger(TipoProductoDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -92,5 +96,34 @@ public class TipoProductoDAOImpl extends DAOImpl implements TipoProductoDAO {
         String valores = this.obtenerListaValoresParaSeleccionar();
         valores = valores.concat(" and ID_TIPO_PRODUCTO = '" + idTipoProducto + "'");
         return this.listar(valores).getFirst();
+    }
+
+    @Override
+    public Integer obtenerId(TipoProducto tipoProducto) {
+        this.tipoProducto = tipoProducto;
+        try {
+            Integer id = this.retornarUltimoAutogenerado();
+            this.tipoProducto.setIdTipoProducto(id);
+        } catch (SQLException ex) {
+            Logger.getLogger(TipoProductoDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    @Override
+    public Integer obtenerIdPorTipo(String tipo){
+        String sql = "select ID_TIPO_PRODUCTO as id from TIPO_PRODUCTO where TIPO = '"+tipo+"'";
+        try {
+            Integer id = this.retonarIdPorAtributo(sql);
+            return id;
+        } catch (SQLException ex) {
+            Logger.getLogger(TipoProductoDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    @Override
+    public String imprimirId() {
+        return "" + this.tipoProducto.getIdTipoProducto();
     }
 }

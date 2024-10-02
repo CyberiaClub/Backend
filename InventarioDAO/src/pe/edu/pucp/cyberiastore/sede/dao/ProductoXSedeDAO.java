@@ -4,15 +4,16 @@ import java.util.ArrayList;
 import pe.edu.pucp.cyberiastore.inventario.model.Producto;
 import pe.edu.pucp.cyberiastore.sede.model.Sede;
 public interface ProductoXSedeDAO {
-    public Integer insertar(String sku, int idSede);
     
-    public Integer eliminar(String sku, int idSede);
+    public Integer insertar(Integer idProducto, Integer idSede , Integer cantidad);
     
-    public Integer eliminarProducto(String sku);
+    public Integer eliminar(Integer idProducto, Integer idSede);
     
-    public Integer eliminarSede(String isSede);
+    public Integer eliminarProducto(Integer idProducto);
     
-    public ArrayList<Producto> buscarProcutosPorSede(int idSede);
+    public Integer eliminarSede(Integer idSede);
     
-    public ArrayList<Sede> buscarSedePorProducto(String sku);
+    public ArrayList<Producto> buscarProcutosPorSede(Integer idSede);
+    
+    public ArrayList<Sede> buscarSedePorProducto(Integer idProducto);
 }

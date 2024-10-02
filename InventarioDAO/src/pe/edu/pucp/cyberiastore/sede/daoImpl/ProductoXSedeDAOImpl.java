@@ -6,8 +6,9 @@ import pe.edu.pucp.cyberiastore.inventario.model.Producto;
 import pe.edu.pucp.cyberiastore.sede.dao.ProductoXSedeDAO;
 import pe.edu.pucp.cyberiastore.sede.model.Sede;
 public class ProductoXSedeDAOImpl extends DAOImpl implements ProductoXSedeDAO{
-    private String sku;
-    private int idSede;
+    private Integer idProducto;
+    private Integer idSede;
+    private Integer cantidadStock;
 
     public ProductoXSedeDAOImpl() {
         super("PRODUCTO_X_SEDE");
@@ -15,15 +16,17 @@ public class ProductoXSedeDAOImpl extends DAOImpl implements ProductoXSedeDAO{
     
     @Override
     protected String obtenerListaAtributos() {
-        return "SKU,ID_SEDE";
+        return "ID_PRODUCTO,ID_SEDE,STOCK_SEDE";
     }
 
     @Override
     protected String obtenerListaValoresParaInsertar() {
         String sql = "";
-        sql = sql.concat("'" + this.sku + "'");
+        sql = sql.concat("'" + this.idProducto + "'");
         sql = sql.concat(", ");
         sql = sql.concat("'" + this.idSede + "'");
+        sql = sql.concat(", ");
+        sql = sql.concat("'" + this.cantidadStock + "'");
         return sql;
     }
 
@@ -38,34 +41,35 @@ public class ProductoXSedeDAOImpl extends DAOImpl implements ProductoXSedeDAO{
     }
 
     @Override
-    public Integer insertar(String sku, int idSede) {
-        this.sku = sku;
+    public Integer insertar(Integer idProducto, Integer idSede, Integer cantidad) {
+        this.idProducto = idProducto;
         this.idSede = idSede;
+        this.cantidadStock = cantidad;
         return this.insertar();
     }
 
     @Override
-    public Integer eliminar(String sku, int idSede) {
+    public Integer eliminar(Integer idProducto, Integer idSede) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public Integer eliminarProducto(String sku) {
+    public Integer eliminarProducto(Integer idProducto) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public Integer eliminarSede(String isSede) {
+    public Integer eliminarSede(Integer isSede) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public ArrayList<Producto> buscarProcutosPorSede(int idSede) {
+    public ArrayList<Producto> buscarProcutosPorSede(Integer idSede) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public ArrayList<Sede> buscarSedePorProducto(String sku) {
+    public ArrayList<Sede> buscarSedePorProducto(Integer idProducto) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     

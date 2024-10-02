@@ -1,6 +1,9 @@
 package pe.edu.pucp.cyberiastore.oferta.daoImpl;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.sql.SQLException;
 import pe.edu.pucp.cyberiastore.db.DAOImpl;
 import pe.edu.pucp.cyberiastore.oferta.dao.OfertaDAO;
 import pe.edu.pucp.cyberiastore.oferta.model.Oferta;
@@ -26,6 +29,7 @@ public class OfertaDAOImpl extends DAOImpl implements OfertaDAO{
         sql = sql.concat(", ");
         sql = sql.concat("'" + oferta.getPorcentaje() + "'");
         return sql;
+        
     }
 
     @Override
@@ -83,6 +87,23 @@ public class OfertaDAOImpl extends DAOImpl implements OfertaDAO{
         String sql = this.obtenerListaValoresParaSeleccionar();
         sql = sql.concat(" and ID_PERMISO = '" + idOferta + "'");
         return this.listar(sql).getFirst();
+    }
+    
+    @Override
+    public Integer obtenerId(Oferta oferta) {
+        this.oferta = oferta;
+        try {
+            Integer id = this.retornarUltimoAutogenerado();
+            this.oferta.setIdOferta(id);
+        } catch (SQLException ex) {
+            Logger.getLogger(OfertaDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    @Override
+    public String imprimirId(){
+        return "" + this.oferta.getIdOferta();
     }
     
 }

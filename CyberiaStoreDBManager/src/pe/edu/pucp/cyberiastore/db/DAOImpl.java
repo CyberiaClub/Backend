@@ -147,11 +147,8 @@ public abstract class DAOImpl {
     }
 
     private String generarSQLParaEliminacion() {
-        String sql = "update ";
-        sql = sql.concat(this.nombre_tabla);
-        sql = sql.concat(" set ACTIVO = 0 where");
-        sql = sql.concat(this.obtenerCondicionPorId());
-        return sql;
+        String sql = "";
+        //Se actualiza el atributo activo a 0
     }
     
     protected String obtenerListaValoresParaSeleccionar() {
@@ -165,6 +162,16 @@ public abstract class DAOImpl {
     protected Integer retornarUltimoAutogenerado() throws SQLException{
         Integer resultado = null;
         String sql = "select @@last_insert_id as id";
+        this.ejecutarConsultaEnBD(sql);
+        if(this.resultSet.next()){
+            resultado = this.resultSet.getInt("id");
+        }
+        return resultado;
+    }
+    
+    protected Integer retonarIdPorAtributo(String sql) throws SQLException{
+        Integer resultado = null;
+        this.iniciarTransaccion();
         this.ejecutarConsultaEnBD(sql);
         if(this.resultSet.next()){
             resultado = this.resultSet.getInt("id");

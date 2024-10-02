@@ -14,4 +14,10 @@ public interface TipoProductoDAO {
     public ArrayList<TipoProducto> listarTodos();
     
     public TipoProducto obtenerPorId(String idTipoProducto);
+    
+    public Integer obtenerId(TipoProducto tipoProducto);
+    
+    public Integer obtenerIdPorTipo(String tipo);
+    
+    public String imprimirId();
 }

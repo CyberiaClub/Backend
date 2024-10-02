@@ -114,4 +114,21 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
         }
         return null;
     }
+    
+    @Override
+    public String imprimirId(){
+        return "" + this.sede.getIdSede();
+    }
+
+    @Override
+    public Integer obtenerIdPorNombre(String nombre) {
+        String sql = "select ID_SEDE as id from SEDE where NOMBRE = '"+nombre+"'";
+        try {
+            Integer id = this.retonarIdPorAtributo(sql);
+            return id;
+        } catch (SQLException ex) {
+            Logger.getLogger(SedeDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 }

@@ -16,4 +16,8 @@ public interface PermisoDAO {
     public ArrayList<Permiso> listarTodos();
     
     public Permiso obtenerPorId(String idPermiso);
+    
+    public Integer obtenerId(Permiso permiso);
+    
+    public String imprimirId();
 }
