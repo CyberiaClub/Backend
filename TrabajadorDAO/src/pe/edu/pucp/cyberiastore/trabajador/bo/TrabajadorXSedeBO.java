@@ -1,4 +1,4 @@
-package pe.edu.pucp.Trabajador.trabajador.bo;
+package pe.edu.pucp.cyberiastore.trabajador.bo;
 
 import pe.edu.pucp.cyberiastore.trabajador.dao.TrabajadorXSedeDAO;
 import pe.edu.pucp.cyberiastore.trabajador.daoImpl.TrabajadorXSedeDAOImpl;

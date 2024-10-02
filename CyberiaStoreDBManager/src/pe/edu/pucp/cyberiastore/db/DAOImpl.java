@@ -149,6 +149,7 @@ public abstract class DAOImpl {
     private String generarSQLParaEliminacion() {
         String sql = "";
         //Se actualiza el atributo activo a 0
+        return sql;
     }
     
     protected String obtenerListaValoresParaSeleccionar() {

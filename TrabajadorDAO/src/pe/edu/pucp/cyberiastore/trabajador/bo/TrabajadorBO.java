@@ -1,4 +1,4 @@
-package pe.edu.pucp.Trabajador.trabajador.bo;
+package pe.edu.pucp.cyberiastore.trabajador.bo;
 
 //LOGICA DEL NEGOCIO, INCLUYE REGLAS PARA CADA TIPO DE TRABAJADOR
 

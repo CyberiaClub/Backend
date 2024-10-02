@@ -1,4 +1,4 @@
-package pe.edu.pucp.Trabajador.trabajador.bo;
+package pe.edu.pucp.cyberiastore.trabajador.bo;
 
 import pe.edu.pucp.Trabajador.trabajador.model.Administrador;
 import pe.edu.pucp.Trabajador.trabajador.model.Trabajador;
