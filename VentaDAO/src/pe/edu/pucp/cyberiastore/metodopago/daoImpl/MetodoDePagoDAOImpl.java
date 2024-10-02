@@ -10,8 +10,9 @@ public class MetodoDePagoDAOImpl extends DAOImpl implements MetodoDePagoDAO{
     private MetodoDePago metodoDePago;
     
     public MetodoDePagoDAOImpl(){
-        super("METODO_PAGO");
+        super("COMPROBANTE_DE_PAGO");
         this.metodoDePago = null;
+        this.retonarLlavePrimaria = true;
     }
     public MetodoDePagoDAOImpl(String tabla){
         super(tabla);
@@ -19,13 +20,18 @@ public class MetodoDePagoDAOImpl extends DAOImpl implements MetodoDePagoDAO{
     }
     @Override
     protected String obtenerListaAtributos() {
-        return "FECHA_DATE, SUBTOTAL, IGV, TOTAL, DESCUENTO_APLICADO, ID_PEDIDO, ID_OFERTA";
+        String sql = "FECHA, SUBTOTAL, IGV, TOTAL, ID_PEDIDO, ACTIVO";
+        if(this.metodoDePago.getIdOferta() != null){
+            sql = sql.concat(",  DESCUENTO_APLICADO");
+            sql = sql.concat(", ID_OFERTA");
+        }
+        return sql;
     }
 
     @Override
     protected String obtenerListaValoresParaInsertar() {
         String sql = "";
-        sql = sql.concat("'" + metodoDePago.getFecha() + "'");
+        sql = sql.concat("STR_TO_DATE('" + this.metodoDePago.getFechaAsDDMMYYY() + "','%d-%m-%Y')");
         sql = sql.concat(", ");
         sql = sql.concat("'" + metodoDePago.getSubtotal() + "'");
         sql = sql.concat(", ");
@@ -33,11 +39,15 @@ public class MetodoDePagoDAOImpl extends DAOImpl implements MetodoDePagoDAO{
         sql = sql.concat(", ");
         sql = sql.concat("'" + metodoDePago.getTotal()+ "'");
         sql = sql.concat(", ");
-        sql = sql.concat("'" + metodoDePago.getDescuentoAplicado()+ "'");
-        sql = sql.concat(", ");
         sql = sql.concat("'" + metodoDePago.getIdPedido()+ "'");
         sql = sql.concat(", ");
-        sql = sql.concat("'" + metodoDePago.getIdOferta() + "'");
+        sql = sql.concat("'" + metodoDePago.getActivoInt() + "'");
+        if(this.metodoDePago.getIdOferta() != null){
+            sql = sql.concat(", ");
+            sql = sql.concat("'" + metodoDePago.getDescuentoAplicado()+ "'");
+            sql = sql.concat(", ");
+            sql = sql.concat("'" + metodoDePago.getIdOferta() + "'");
+        }
         return sql;
     }
 
@@ -72,7 +82,9 @@ public class MetodoDePagoDAOImpl extends DAOImpl implements MetodoDePagoDAO{
     @Override
     public Integer insertar(MetodoDePago metodoDePago) {
         this.metodoDePago = metodoDePago;
-        return this.insertar();
+        Integer id = this.insertar();
+        this.metodoDePago.setIdMetodoDePago(id);
+        return id;
     }
 
     @Override
@@ -103,4 +115,9 @@ public class MetodoDePagoDAOImpl extends DAOImpl implements MetodoDePagoDAO{
         sql = sql.concat(" and ID_METODO_PAGO = '" + idMetodoDePago + "'");
         return this.listar(sql).getFirst();
     }
+    
+//    @Override
+//    public void insertarIdMetodoDePago(Integer idMetodoDePago){
+//        this.metodoDePago.setIdMetodoDePago(idMetodoDePago);
+//    }
 }

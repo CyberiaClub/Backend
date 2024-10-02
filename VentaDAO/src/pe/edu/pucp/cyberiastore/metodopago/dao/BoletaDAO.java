@@ -15,4 +15,6 @@ public interface BoletaDAO {
     public ArrayList<Boleta> listarTodosBoleta();
     
     public Boleta obtenerPorId(String idBoleta);
+    
+    public void insertarIdBoleta(Integer idBoleta);
 }

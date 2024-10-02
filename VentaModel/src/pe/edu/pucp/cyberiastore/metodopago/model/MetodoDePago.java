@@ -1,5 +1,6 @@
 package pe.edu.pucp.cyberiastore.metodopago.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
@@ -13,13 +14,20 @@ public class MetodoDePago {
     // atributos necesarios para hacer las inserciones en la BD
     private Integer idPedido;
     private Integer idOferta;
-
+    private Boolean activo;
+    public MetodoDePago(){
+        this.igv = 18.0;
+        this.idOferta = null;
+        this.activo = true;
+    }
+    
     public MetodoDePago(Date fecha, Double subtotal, Double total, Double igv, Double descuentoAplicado) {
         this.fecha = fecha;
         this.subtotal = subtotal;
         this.total = total;
         this.igv = igv;
         this.descuentoAplicado = descuentoAplicado;
+        this.activo = true;
         this.idPedido = null;
         this.idOferta = null;
     }
@@ -88,5 +96,11 @@ public class MetodoDePago {
     public void setIdOferta(Integer id_oferta) {
         this.idOferta = id_oferta;
     }
-    
+    public String getFechaAsDDMMYYY(){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        return sdf.format(this.fecha);
+    }
+    public Integer getActivoInt(){
+        return this.activo ? 1 : 0;
+    }
 }

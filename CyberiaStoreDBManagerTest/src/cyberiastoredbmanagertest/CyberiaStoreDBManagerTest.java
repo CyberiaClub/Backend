@@ -17,6 +17,16 @@ import pe.edu.pucp.cyberiastore.config.DBManager;
 import pe.edu.pucp.cyberiastore.inventario.bo.ProductoBO;
 import pe.edu.pucp.cyberiastore.inventario.bo.MarcaBO;
 import pe.edu.pucp.cyberiastore.inventario.bo.TipoProductoBO;
+import pe.edu.pucp.cyberiastore.metodopago.bo.BoletaBO;
+import pe.edu.pucp.cyberiastore.metodopago.dao.MetodoDePagoDAO;
+import pe.edu.pucp.cyberiastore.metodopago.daoImpl.MetodoDePagoDAOImpl;
+import pe.edu.pucp.cyberiastore.metodopago.model.Boleta;
+import pe.edu.pucp.cyberiastore.metodopago.model.MetodoDePago;
+import pe.edu.pucp.cyberiastore.oferta.bo.OfertaBO;
+import pe.edu.pucp.cyberiastore.oferta.model.Oferta;
+import pe.edu.pucp.cyberiastore.pedido.bo.PedidoBO;
+import pe.edu.pucp.cyberiastore.pedido.model.EstadoPedido;
+import pe.edu.pucp.cyberiastore.pedido.model.Pedido;
 import pe.edu.pucp.cyberiastore.proveedor.bo.ProveedorBO;
 import pe.edu.pucp.cyberiastore.sede.bo.SedeBO;
 import pe.edu.pucp.cyberiastore.sede.model.Sede;
@@ -29,40 +39,78 @@ public class CyberiaStoreDBManagerTest {
 
     public static void main(String[] args) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-
-        Sede sede = new Sede();
-        sede.setNombre("SEDE01");
-        sede.setDescripcion("ESTA ES LA SEDE01 QUE QUEDA QUIEN SABE DONDE");
-        SedeBO sedebo = new SedeBO();
-        Integer idsede = sedebo.insertar(sede);
+        Pedido pedido = new Pedido();
         
-        Almacenero almacenero = new Almacenero();
-        almacenero.setDocumento("3");
-        almacenero.setTelefono("987654321");
-        almacenero.setNombre("Jesus");
-        almacenero.setApellidoPaterno("Huayhua");
-        almacenero.setApellidoMaterno("Flores");
+        PedidoBO pedidobo = new PedidoBO();
+        pedidobo.insertar(pedido);
+        
+        Oferta oferta = new Oferta();
+        oferta.setPorcentaje(20);
         try {
-            almacenero.setFechaDeNacimiento(sdf.parse("20-05-2001"));
+            oferta.setFechaDeInicio(sdf.parse("02-10-2024"));
         } catch (ParseException ex) {
             Logger.getLogger(CyberiaStoreDBManagerTest.class.getName()).log(Level.SEVERE, null, ex);
         }
-        almacenero.setCorreo("jmhuayhua@pucp.edu.pe");
-        almacenero.setDireccion("No tengo ayuda");
-        almacenero.setContrasena("contrasena");
-        almacenero.setNacionalidad("PERUANO");
-        almacenero.setTipoDeDocumento(TipoDocumento.DNI);
-        almacenero.setSueldo(900.00);
         try {
-            almacenero.setFechaDeIngreso(sdf.parse("20-05-2020"));
+            oferta.setFechaDeFin(sdf.parse("12-10-2024"));
         } catch (ParseException ex) {
             Logger.getLogger(CyberiaStoreDBManagerTest.class.getName()).log(Level.SEVERE, null, ex);
         }
-        almacenero.setIdSede(idsede);
         
-        AlmaceneroBO adminBO = new AlmaceneroBO();
-        Integer id = adminBO.insertar(almacenero);
-        System.out.println(id.toString());
+        OfertaBO ofertabo = new OfertaBO();
+        ofertabo.insertar(oferta);
+        
+        Boleta boleta = new Boleta();
+        try {
+            boleta.setFecha(sdf.parse("02-10-2024"));
+        } catch (ParseException ex) {
+            Logger.getLogger(CyberiaStoreDBManagerTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        boleta.setIdPedido(pedido.getIdPedido());
+        boleta.setTotal(500.00);
+        boleta.setSubtotal(90.00);
+        boleta.setDescuentoAplicado(10.00);
+        boleta.setNumeroDeBoleta("1231235");
+        
+        BoletaBO boletaBO = new BoletaBO();
+        boletaBO.insertar(boleta);
+        
+        
+        
+        
+//        Sede sede = new Sede();
+//        sede.setNombre("SEDE05");
+//        sede.setDescripcion("ESTA ES LA SEDE01 QUE QUEDA QUIEN SABE DONDE");
+//        SedeBO sedebo = new SedeBO();
+//        Integer idsede = sedebo.insertar(sede);
+//        
+//        Almacenero almacenero = new Almacenero();
+//        almacenero.setDocumento("6");
+//        almacenero.setTelefono("987654321");
+//        almacenero.setNombre("Jesus");
+//        almacenero.setApellidoPaterno("Huayhua");
+//        almacenero.setApellidoMaterno("Flores");
+//        try {
+//            almacenero.setFechaDeNacimiento(sdf.parse("20-05-2001"));
+//        } catch (ParseException ex) {
+//            Logger.getLogger(CyberiaStoreDBManagerTest.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        almacenero.setCorreo("jmhuayhua@pucp.edu.pe");
+//        almacenero.setDireccion("No tengo ayuda");
+//        almacenero.setContrasena("contrasena");
+//        almacenero.setNacionalidad("PERUANO");
+//        almacenero.setTipoDeDocumento(TipoDocumento.DNI);
+//        almacenero.setSueldo(900.00);
+//        try {
+//            almacenero.setFechaDeIngreso(sdf.parse("20-05-2020"));
+//        } catch (ParseException ex) {
+//            Logger.getLogger(CyberiaStoreDBManagerTest.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        almacenero.setIdSede(idsede);
+//        
+//        AlmaceneroBO adminBO = new AlmaceneroBO();
+//        Integer id = adminBO.insertar(almacenero);
+//        System.out.println(id.toString());
         
 //        Vendedor vendedor = new Vendedor();
 //        vendedor.setDocumento("1");

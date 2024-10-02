@@ -16,7 +16,7 @@ public class TrabajadorXSedeDAOImpl extends DAOImpl implements  TrabajadorXSedeD
     
     @Override
     protected String obtenerListaAtributos() {
-        return "ID_TRABAJOR, ID_SEDE";
+        return "ID_TRABAJADOR, ID_SEDE";
     }
 
     @Override

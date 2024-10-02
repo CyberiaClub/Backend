@@ -34,6 +34,8 @@ public class TrabajadorBO {
         trabajador.setIdUsuario(idUsuario);
         Integer idTrabajador = this.trabajadorDAO.insertar(trabajador);
         this.trabajadorDAO.insertarIdTrabajador(idTrabajador);
+        TrabajadorXSedeBO sedeTrabajador = new TrabajadorXSedeBO();
+        sedeTrabajador.insertar(idTrabajador, trabajador.getIdSede());
         return idTrabajador;
     }
     

@@ -20,9 +20,9 @@ public class OfertaDAOImpl extends DAOImpl implements OfertaDAO{
     @Override
     protected String obtenerListaValoresParaInsertar() {
         String sql = "";
-        sql = sql.concat("'" + oferta.getFechaDeInicio() + "'");
+        sql = sql.concat("STR_TO_DATE('" + this.oferta.getFechaDeInicioAsDDMMYYY()+ "','%d-%m-%Y')");
         sql = sql.concat(", ");
-        sql = sql.concat("'" + oferta.getFechaDeFin() + "'");
+        sql = sql.concat("STR_TO_DATE('" + this.oferta.getFechaDeFinAsDDMMYYY() + "','%d-%m-%Y')");
         sql = sql.concat(", ");
         sql = sql.concat("'" + oferta.getPorcentaje() + "'");
         return sql;
@@ -32,9 +32,9 @@ public class OfertaDAOImpl extends DAOImpl implements OfertaDAO{
     protected String obtenerListaValoresParaModificar() {
         String sql = "";
         sql = sql.concat("FECHA_INICIO = ");
-        sql = sql.concat("'" + oferta.getFechaDeInicio() + "'");
+        sql = sql.concat("'" + oferta.getFechaDeInicioAsDDMMYYY()+ "'");
         sql = sql.concat(",FECHA_FIN = ");
-        sql = sql.concat("'" + oferta.getFechaDeFin()+ "'");
+        sql = sql.concat("'" + oferta.getFechaDeFinAsDDMMYYY()+ "'");
         sql = sql.concat(",PORCENTAJE = ");
         sql = sql.concat("'" + oferta.getPorcentaje()+ "'");
         return sql;
@@ -51,7 +51,9 @@ public class OfertaDAOImpl extends DAOImpl implements OfertaDAO{
     @Override
     public Integer insertar(Oferta oferta) {
         this.oferta = oferta;
-        return this.insertar();
+        Integer id = this.insertar();
+        this.oferta.setIdOferta(id);
+        return id;
     }
 
     @Override

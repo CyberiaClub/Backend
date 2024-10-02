@@ -16,4 +16,6 @@ public interface MetodoDePagoDAO {
     public ArrayList<MetodoDePago> listarTodos();
     
     public MetodoDePago obtenerPorId(String idMetodoDePago);
+    
+//    public void insertarIdMetodoDePago(Integer idMetodoDePago);
 }

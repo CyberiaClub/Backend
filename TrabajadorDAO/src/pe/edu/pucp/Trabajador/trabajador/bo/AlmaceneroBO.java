@@ -13,18 +13,15 @@ public class AlmaceneroBO {
         this.almaceneroDAO = new AlmaceneroDAOImpl();
     }
     
-    public Integer insertar(Almacenero administrador){
+    public Integer insertar(Almacenero almacenero){
         TrabajadorBO trabajadorBO = new TrabajadorBO();
-        Integer idTrabajador = trabajadorBO.insertar((Trabajador)administrador);
+        Integer idTrabajador = trabajadorBO.insertar((Trabajador)almacenero);
         if(idTrabajador == null){
             return null;
         }
-        administrador.setIdTrabajador(idTrabajador);
-        Integer idAlmacenero = this.almaceneroDAO.insertar(administrador);
+        almacenero.setIdTrabajador(idTrabajador);
+        Integer idAlmacenero = this.almaceneroDAO.insertar(almacenero);
         this.almaceneroDAO.insertarIdAlmacenero(idAlmacenero);
-        
-        
-        
         return idAlmacenero;
     }
 }

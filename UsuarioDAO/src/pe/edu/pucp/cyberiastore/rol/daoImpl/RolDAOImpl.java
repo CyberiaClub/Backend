@@ -25,14 +25,12 @@ public class RolDAOImpl extends DAOImpl implements RolDAO {
     
     @Override
     protected String obtenerListaAtributos(){
-        return "ID_ROL, NOMBRE";
+        return "NOMBRE";
     }
     
     @Override
     protected String obtenerListaValoresParaInsertar(){
         String sql = "";
-        sql = sql.concat("'" + rol.getIdRol() + "'");
-        sql = sql.concat(", ");
         sql = sql.concat("'" + rol.getNombre() + "'");
         return sql;
     }

@@ -13,6 +13,7 @@ public class PedidoDAOImpl extends DAOImpl implements PedidoDAO{
     public PedidoDAOImpl(){
         super("PEDIDO");
         this.pedido = null;
+        this.retonarLlavePrimaria = true;
     }
 
     @Override
@@ -46,7 +47,9 @@ public class PedidoDAOImpl extends DAOImpl implements PedidoDAO{
     @Override
     public Integer insertar(Pedido pedido) {
         this.pedido = pedido;
-        return super.insertar();
+        Integer id = this.insertar();
+        this.pedido.setIdPedido(id);
+        return id;
     }
 
     @Override

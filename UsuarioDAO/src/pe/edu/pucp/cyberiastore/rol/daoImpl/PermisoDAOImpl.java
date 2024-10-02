@@ -25,14 +25,12 @@ public class PermisoDAOImpl extends DAOImpl implements PermisoDAO {
     
     @Override
     protected String obtenerListaAtributos(){
-        return "ID_PERMISO, NOMBRE, DESCRIPCION";
+        return "NOMBRE, DESCRIPCION";
     }
     
     @Override
     protected String obtenerListaValoresParaInsertar(){
         String sql = "";
-        sql = sql.concat("'" + permiso.getIdPermiso() + "'");
-        sql = sql.concat(", ");
         sql = sql.concat("'" + permiso.getNombre() + "'");
         sql = sql.concat(", ");
         sql = sql.concat("'" + permiso.getDescripcion() + "'");

@@ -1,5 +1,6 @@
 package pe.edu.pucp.cyberiastore.oferta.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
@@ -9,6 +10,10 @@ public class Oferta {
     private Date fechaDeFin;
     private Integer porcentaje;
 
+    public Oferta(){
+        
+    }
+    
     public Oferta(Date fechaDeInicio, Date fechaDeFin, Integer porcentaje) {
         this.fechaDeInicio = fechaDeInicio;
         this.fechaDeFin = fechaDeFin;
@@ -46,5 +51,13 @@ public class Oferta {
     public void setPorcentaje(Integer porcentaje) {
         this.porcentaje = porcentaje;
     }
+    public String getFechaDeInicioAsDDMMYYY(){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        return sdf.format(this.fechaDeInicio);
+    }
     
+    public String getFechaDeFinAsDDMMYYY(){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        return sdf.format(this.fechaDeFin);
+    }
 }
