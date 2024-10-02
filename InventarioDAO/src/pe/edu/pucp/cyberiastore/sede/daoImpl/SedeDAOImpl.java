@@ -122,7 +122,6 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
 
     @Override
     public Integer obtenerIdPorNombre(String nombre) {
-        this.sede = sede;
         String sql = "select ID_SEDE as id from SEDE where NOMBRE = '"+nombre+"'";
         try {
             Integer id = this.retonarIdPorAtributo(sql);

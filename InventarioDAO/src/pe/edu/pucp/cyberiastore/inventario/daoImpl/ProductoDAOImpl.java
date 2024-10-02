@@ -15,6 +15,7 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
     public ProductoDAOImpl() {
         super("PRODUCTO");
         this.producto = null;
+        this.retonarLlavePrimaria = true;
     }
 
     @Override
@@ -113,6 +114,7 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
         try {
             Integer id = this.retornarUltimoAutogenerado();
             this.producto.setIdProducto(id);
+            return id;
         } catch (SQLException ex) {
             Logger.getLogger(ProductoDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }

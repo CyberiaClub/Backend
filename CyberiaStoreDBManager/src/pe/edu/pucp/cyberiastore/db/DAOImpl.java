@@ -147,11 +147,8 @@ public abstract class DAOImpl {
     }
 
     private String generarSQLParaEliminacion() {
-        String sql = "delete from ";
-        sql = sql.concat(this.nombre_tabla);
-        sql = sql.concat(" where");
-        sql = sql.concat(this.obtenerCondicionPorId());      
-        return sql;
+        String sql = "";
+        //Se actualiza el atributo activo a 0
     }
     
     protected String obtenerListaValoresParaSeleccionar() {
