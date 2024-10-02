@@ -38,7 +38,15 @@ public class ClienteBO {
     }
     
     public Integer insertar(Cliente cliente){
-        return this.clienteDAO.insertar(cliente);
+        UsuarioBO  usuarioBO = new UsuarioBO();
+        Integer idUsuario = usuarioBO.insertar((Usuario)cliente);
+        if(idUsuario == null ){
+            return null;
+        }
+        cliente.setIdUsuario(idUsuario);
+        Integer idCliente = this.clienteDAO.insertar(cliente);
+        this.clienteDAO.insertarIdCliente(idCliente);
+        return idCliente;
     }
     
     public Integer modificar( String documento, String telefono, String nombre, String apellidoPaterno, String apelldioMaterno, Date fechaDeNacimiento, String correo, String contrasena, String nacionalidad, String direccion, TipoDocumento tipoDeDocumento){
@@ -51,7 +59,7 @@ public class ClienteBO {
     }
     
     public ArrayList<Cliente> listarTodos(){
-        ArrayList<Cliente> clientes = this.clienteDAO.listarTodos();
+        ArrayList<Cliente> clientes = this.clienteDAO.listarTodosCliente();
         for(Cliente cliente : clientes){
             ArrayList<Rol> roles = rolXUsuarioDAO.buscarRolesPorIdUsuario(cliente.getDocumento());
             for(Rol rol : roles){

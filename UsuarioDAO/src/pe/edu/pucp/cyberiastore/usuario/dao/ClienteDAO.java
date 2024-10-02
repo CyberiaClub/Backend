@@ -11,9 +11,11 @@ public interface ClienteDAO {
     
     public Integer eliminar(Boolean activo);
     
-    public ArrayList<Cliente> listar(String sql);
+    public ArrayList<Cliente> listarCliente(String sql);
     
-    public ArrayList<Cliente> listarTodos();
+    public ArrayList<Cliente> listarTodosCliente();
     
     public Cliente obtenerPorId(String idCliente);
+    
+    public void insertarIdCliente(Integer idCliente);
 }

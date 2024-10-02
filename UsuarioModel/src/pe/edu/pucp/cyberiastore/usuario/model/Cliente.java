@@ -7,9 +7,10 @@ public class Cliente extends Usuario {
     private Integer idCliente;
     private Boolean verificado;
     
-    
+    /*Constructor vacio*/
     public Cliente(){
-        
+        this.verificado = false;
+        this.setActivo(true);
     }
     
     /*

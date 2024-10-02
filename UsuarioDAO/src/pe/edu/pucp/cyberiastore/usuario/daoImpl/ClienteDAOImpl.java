@@ -6,12 +6,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import pe.edu.pucp.cyberiastore.db.DAOImpl;
 import pe.edu.pucp.cyberiastore.usuario.dao.ClienteDAO;
 import pe.edu.pucp.cyberiastore.usuario.model.Cliente;
 import pe.edu.pucp.cyberiastore.usuario.model.TipoDocumento;
 
-public class ClienteDAOImpl extends DAOImpl implements ClienteDAO {
+public class ClienteDAOImpl extends UsuarioDAOImpl implements ClienteDAO {
     
     private Cliente cliente;
     
@@ -56,7 +55,7 @@ public class ClienteDAOImpl extends DAOImpl implements ClienteDAO {
     }
     
     @Override
-    public ArrayList<Cliente> listar(String sql) {
+    public ArrayList<Cliente> listarCliente(String sql) {
         ArrayList<Cliente> listaCliente = new ArrayList();
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         try {
@@ -95,16 +94,16 @@ public class ClienteDAOImpl extends DAOImpl implements ClienteDAO {
     }
 
     @Override
-    public ArrayList<Cliente> listarTodos() {
+    public ArrayList<Cliente> listarTodosCliente() {
         String sql = this.obtenerListaValoresParaSeleccionar();
-        return this.listar(sql);
+        return this.listarCliente(sql);
     }
 
     @Override
     public Cliente obtenerPorId(String idCliente) {
         String sql = this.obtenerListaValoresParaSeleccionar();
         sql = sql.concat(" and ID_CLIENTE = '" + idCliente + "'");
-        return this.listar(sql).getFirst();
+        return this.listarCliente(sql).getFirst();
     }
 
     @Override
@@ -131,5 +130,10 @@ public class ClienteDAOImpl extends DAOImpl implements ClienteDAO {
         sql = sql.concat(this.nombre_tabla);
         sql = sql.concat(",usuario where ID_USUARIO = DOCUMENTO");
         return sql;
+    }
+    
+    @Override
+    public void insertarIdCliente(Integer idCliente){
+        this.cliente.setIdCliente(idCliente);
     }
 }

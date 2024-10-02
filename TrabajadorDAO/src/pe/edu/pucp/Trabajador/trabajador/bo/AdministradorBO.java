@@ -1,38 +1,29 @@
-
 package pe.edu.pucp.Trabajador.trabajador.bo;
 
-import java.util.ArrayList;
-import java.util.Date;
+import pe.edu.pucp.Trabajador.trabajador.model.Administrador;
 import pe.edu.pucp.Trabajador.trabajador.model.Trabajador;
-import pe.edu.pucp.cyberiastore.usuario.model.TipoDocumento;
+import pe.edu.pucp.cyberiastore.trabajador.dao.AdministradorDAO;
+import pe.edu.pucp.cyberiastore.trabajador.daoImpl.AdministradorDAOImpl;
 
 
-public class AdministradorBO extends TrabajadorBO{
-    @Override
-    public Integer insertar(Double sueldo, Date fechaDeIngreso,  String documento, String telefono, String nombre, String apellidoPaterno, String apelldioMaterno, Date fechaDeNacimiento, String correo, Boolean activo, String contrasena, String nacionalidad, String direccion, TipoDocumento tipoDeDocumento){
-        return super.insertar(sueldo, fechaDeIngreso, documento, telefono, nombre, apellidoPaterno, apelldioMaterno, fechaDeNacimiento, correo, activo, contrasena, nacionalidad, direccion, tipoDeDocumento);
-    }
 
-    @Override    
-    public Integer insertar(Trabajador trabajador){
-        return super.insertar(trabajador);
+public class AdministradorBO {
+    private AdministradorDAO administradorDAO;
+    
+    public AdministradorBO(){
+        this.administradorDAO = new AdministradorDAOImpl();
     }
     
-    @Override    
-    public Integer modificar(Double sueldo, Date fechaDeIngreso,String documento, String telefono, String nombre, String apellidoPaterno, String apelldioMaterno, Date fechaDeNacimiento, String correo, Boolean activo, String contrasena, String nacionalidad, String direccion, TipoDocumento tipoDeDocumento){
-        return super.modificar(sueldo, fechaDeIngreso,documento, telefono, nombre, apellidoPaterno, apelldioMaterno, fechaDeNacimiento, correo, activo, contrasena, nacionalidad, direccion, TipoDocumento.PASAPORTE);
-
+    public Integer insertar(Administrador administrador){
+        TrabajadorBO trabajadorBO = new TrabajadorBO();
+        Integer idTrabajador = trabajadorBO.insertar((Trabajador)administrador);
+        if(idTrabajador == null){
+            return null;
+        }
+        administrador.setIdTrabajador(idTrabajador);
+        Integer idAdministrador = this.administradorDAO.insertar(administrador);
+        this.administradorDAO.insertarIdAdministrador(idAdministrador);
+        return idAdministrador;
+                
     }
-
-    @Override         
-    public Integer eliminar(){
-        return super.eliminar();
-    }
-    
-    @Override
-    public ArrayList<Trabajador> listarTodos(){
-        return super.listarTodos();
-    }
-    
-    
 }

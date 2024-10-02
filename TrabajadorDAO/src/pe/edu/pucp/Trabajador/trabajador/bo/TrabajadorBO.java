@@ -24,6 +24,7 @@ public class TrabajadorBO {
         Trabajador trabajador=new Trabajador(sueldo, fechaDeIngreso, documento, telefono, nombre, apellidoPaterno, apelldioMaterno, fechaDeNacimiento, correo, activo, contrasena, nacionalidad, direccion, tipoDeDocumento);
         return trabajadorDAO.insertar(trabajador);
     }
+    
     public Integer insertar(Trabajador trabajador){
         UsuarioBO  usuarioBO = new UsuarioBO();
         Integer idUsuario = usuarioBO.insertar((Usuario)trabajador);

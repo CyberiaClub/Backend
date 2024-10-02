@@ -25,7 +25,7 @@ public class Usuario {
 
     /*El generico*/
     public Usuario(){
-        
+        this.activo = true;
     }
     
     /*Usuario general*/
