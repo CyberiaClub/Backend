@@ -44,7 +44,7 @@ public class TrabajadorDAOImpl extends UsuarioDAOImpl implements TrabajadorDAO {
     @Override
     protected String obtenerListaValoresParaInsertar() {
         String sql = "";
-        sql = sql.concat("'" + trabajador.getSueldo() + "'");
+        sql = sql.concat("'" + this.trabajador.getSueldo() + "'");
         sql = sql.concat(",");
         sql = sql.concat("STR_TO_DATE('" + this.trabajador.fechaDeIngresoAsDDMMYYY() + "','%d-%m-%Y')");
         sql = sql.concat(",");

@@ -38,8 +38,21 @@ public class VendedorDAOImpl extends TrabajadorDAOImpl implements VendedorDAO {
     }
 
     @Override
-    public void insertarIdAlmacenero(Integer idVendedor) {
+    public void insertarIdVendedor(Integer idVendedor) {
         this.vendedor.setIdVendor(idVendedor);
+    }
+    
+    //Funciones para la logica de BD
+    @Override
+    protected String obtenerListaAtributos(){
+        return "ID_TRABAJADOR";
+    }
+    
+    @Override
+    protected String obtenerListaValoresParaInsertar(){
+        String sql ="";
+        sql = sql.concat("'" + this.vendedor.getIdTrabajador() + "'");
+        return sql;
     }
 
 }

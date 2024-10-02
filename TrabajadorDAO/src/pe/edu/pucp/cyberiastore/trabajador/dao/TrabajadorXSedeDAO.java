@@ -7,10 +7,9 @@ import pe.edu.pucp.Trabajador.trabajador.model.Trabajador;
 
 public interface TrabajadorXSedeDAO {
    
-    public Integer insertar(Integer idTrabajador, Integer sede);
+    public Integer insertar(Integer idTrabajador, Integer idSede);
     
-    public Integer eliminar(Integer idTrabajador, Trabajador sede);
-    
+    public Integer eliminar(Integer idTrabajador, Trabajador trabajador);
     
     public Integer eliminarTrabajador(Integer idTrabajador);
     

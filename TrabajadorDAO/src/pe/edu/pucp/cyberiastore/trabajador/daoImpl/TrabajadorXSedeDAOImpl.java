@@ -11,7 +11,7 @@ public class TrabajadorXSedeDAOImpl extends DAOImpl implements  TrabajadorXSedeD
     private Integer idSede;
     
     public TrabajadorXSedeDAOImpl() {
-        super("TRABAJADOR_POR_SEDE");
+        super("TRABAJADOR_X_SEDE");
     }
     
     @Override
@@ -44,16 +44,16 @@ public class TrabajadorXSedeDAOImpl extends DAOImpl implements  TrabajadorXSedeD
     }
 
     @Override
-    public Integer insertar(Integer idTrabajador, Integer sede) {
+    public Integer insertar(Integer idTrabajador, Integer idSede) {
         this.idTrabajador = idTrabajador;
         this.idSede = idSede;
         return this.insertar();
     }
 
     @Override
-    public Integer eliminar(Integer idTrabajador, Trabajador sede) {
+    public Integer eliminar(Integer idTrabajador, Trabajador trabajador) {
         this.idTrabajador = idTrabajador;
-        this.idSede = idSede;
+//        this.idSede = idSede;
         return this.eliminar();
     }
 

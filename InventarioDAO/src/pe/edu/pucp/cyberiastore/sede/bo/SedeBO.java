@@ -18,6 +18,10 @@ public class SedeBO {
         return this.sedeDAO.insertar(sede);
     }
     
+    public Integer insertar(Sede sede){
+        return this.sedeDAO.insertar(sede);
+    }
+    
     public Integer modificar(String nombre, String descripcion){
         Sede sede = new Sede(nombre, descripcion);
         return this.sedeDAO.modificar(sede);

@@ -43,7 +43,7 @@ public class DBManager {
         try {
             Class.forName(this.driver);
 //            this.conexion = DriverManager.getConnection(getURL(), this.usuario, descifrarMD5(this.contraseña));
-              this.conexion = DriverManager.getConnection(getURL(), this.usuario, "err@ntMYSQL2001");
+              this.conexion = DriverManager.getConnection(getURL(), this.usuario, "errantSQL");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {        

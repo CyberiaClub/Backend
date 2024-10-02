@@ -18,5 +18,5 @@ public interface VendedorDAO {
     
     public void insertarIdTrabajador(Integer idTrabajador);
     
-    public void insertarIdAlmacenero(Integer idVendedor);
+    public void insertarIdVendedor(Integer idVendedor);
 }
