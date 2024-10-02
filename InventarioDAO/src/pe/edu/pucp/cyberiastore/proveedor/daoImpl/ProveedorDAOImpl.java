@@ -53,9 +53,9 @@ public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
         valores = valores.concat(", ");
         valores = valores.concat("'" + proveedor.getNombre() + "'");
         valores = valores.concat(", ");
-        valores = valores.concat("'" + proveedor.getFechaRegistro() + "'");
+        valores = valores.concat("STR_TO_DATE('" + this.proveedor.fechaRegistroComoDDMMYYY()+ "','%d-%m-%Y')");
         valores = valores.concat(", ");
-        valores = valores.concat("'"+proveedor.getActivo()+"'");
+        valores = valores.concat("'"+(proveedor.getActivo()?0:1)+"'");
         return valores;
     }
 
@@ -138,5 +138,17 @@ public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
     @Override
     public String imprimirId(){
         return "" + this.proveedor.getIdProveedor();
+    }
+
+    @Override
+    public Integer obtenerIdPorRuc(String ruc) {
+        String sql = "select ID_PROVEEDOR as id from PROVEEDOR where RUC = '"+ruc+"'";
+        try {
+            Integer id = this.retonarIdPorAtributo(sql);
+            return id;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProveedorDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }

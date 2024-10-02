@@ -171,6 +171,16 @@ public abstract class DAOImpl {
         }
         return resultado;
     }
+    
+    protected Integer retonarIdPorAtributo(String sql) throws SQLException{
+        Integer resultado = null;
+        this.iniciarTransaccion();
+        this.ejecutarConsultaEnBD(sql);
+        if(this.resultSet.next()){
+            resultado = this.resultSet.getInt("id");
+        }
+        return resultado;
+    }
 //    /**/
 //    protected String returnIdFromTable(){
 //        return "";

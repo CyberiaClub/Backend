@@ -16,6 +16,8 @@ public interface ProveedorDAO {
     public Proveedor obtenerPorId(String idProveedor);
     
     public Integer obtenerId(Proveedor proveedor);
+    
+    public Integer obtenerIdPorRuc(String ruc);
             
     public String imprimirId();
 }

@@ -3,14 +3,15 @@ package pe.edu.pucp.cyberiastore.inventario.model;
 import java.util.ArrayList;
 
 public class Producto {
-    private Integer sku;
+    private Integer idProducto;
+    private String sku;
     private String nombre;
     private String descripcion;
     private Double precio;
     private String unidad;
     private ArrayList<Producto> productoMiembros;
     
-    public Producto(Integer sku, String nombre, String descripcion, Double precio, String unidad) {
+    public Producto(String sku, String nombre, String descripcion, Double precio, String unidad) {
         this.sku = sku;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -18,12 +19,20 @@ public class Producto {
         this.unidad = unidad;
         this.productoMiembros = null;
     }
+    
+    public void setIdProducto(Integer idProducto) {
+        this.idProducto = idProducto;
+    }
 
-    public Integer getSku() {
+    public Integer getIdProducto() {
+        return idProducto;
+    }
+    
+    public String getSku() {
         return sku;
     }
 
-    public void setSku(Integer sku) {
+    public void setSku(String sku) {
         this.sku = sku;
     }
 

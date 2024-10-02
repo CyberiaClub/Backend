@@ -17,5 +17,7 @@ public interface TipoProductoDAO {
     
     public Integer obtenerId(TipoProducto tipoProducto);
     
+    public Integer obtenerIdPorTipo(String tipo);
+    
     public String imprimirId();
 }

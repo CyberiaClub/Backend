@@ -2,7 +2,7 @@
 
 public class Marca {
 
-    private Integer idMarca = 0;
+    private Integer idMarca;
     private String nombre;
     private Boolean activo;
     
@@ -14,8 +14,6 @@ public class Marca {
     public void setIdMarca(Integer idMarca) {
         this.idMarca = idMarca;
     }
-    
-    
     
     public Integer getIdMarca(){
         return idMarca;

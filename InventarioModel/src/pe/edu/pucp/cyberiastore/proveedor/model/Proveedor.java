@@ -1,5 +1,6 @@
 package pe.edu.pucp.cyberiastore.proveedor.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Proveedor {
@@ -7,20 +8,19 @@ public class Proveedor {
     private String ruc;
     private String nombre;
     private Date fechaRegistro;
-    private Integer activo;
+    private Boolean activo;
     
     public Proveedor(String ruc, String nombre, Date fechaRegistro) {
         this.ruc = ruc;
         this.nombre = nombre;
         this.fechaRegistro = fechaRegistro;
-        this.activo = 1;
+        this.activo = true;
     }
     
-    public Proveedor(String ruc, String nombre, Date fechaRegistro, Integer activo) {
+    public Proveedor(String ruc, String nombre, Date fechaRegistro, Boolean activo) {
         this.ruc = ruc;
         this.nombre = nombre;
         this.fechaRegistro = fechaRegistro;
-        this.activo = 1;
         this.activo = activo;
     }
 
@@ -32,11 +32,11 @@ public class Proveedor {
         return idProveedor;
     }
 
-    public Integer getActivo() {
+    public Boolean getActivo() {
         return activo;
     }
 
-    public void setActivo(Integer activo) {
+    public void setActivo(Boolean activo) {
         this.activo = activo;
     }
     
@@ -64,5 +64,9 @@ public class Proveedor {
         this.fechaRegistro = fechaRegistro;
     }
     
+    public String fechaRegistroComoDDMMYYY(){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        return sdf.format(this.fechaRegistro);
+    }
     
 }

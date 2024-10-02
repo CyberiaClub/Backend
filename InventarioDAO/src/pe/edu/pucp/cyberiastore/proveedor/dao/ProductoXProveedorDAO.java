@@ -5,16 +5,16 @@ import pe.edu.pucp.cyberiastore.inventario.model.Producto;
 import pe.edu.pucp.cyberiastore.proveedor.model.Proveedor;
 public interface ProductoXProveedorDAO {
     
-    public Integer insertar(String sku, String ruc);
+    public Integer insertar(Integer idProducto, Integer idProveedor, Double precioProveedor);
     
-    public Integer eliminar(String sku, String ruc);
+    public Integer eliminar(Integer idProducto, Integer idProveedor);
     
-    public Integer eliminarProveedor(String ruc);
+    public Integer eliminarProveedor(Integer idProveedor);
     
-    public Integer eliminarProducto(String sku);
+    public Integer eliminarProducto(Integer idProducto);
     
-    public ArrayList<Proveedor> buscarProveedoresPorSku(String sku);
+    public ArrayList<Proveedor> buscarProveedoresPorSku(Integer idProducto);
     
-    public ArrayList<Producto> buscarProductoProRuc(String ruc);
+    public ArrayList<Producto> buscarProductoProRuc(Integer idProveedor);
     
 }

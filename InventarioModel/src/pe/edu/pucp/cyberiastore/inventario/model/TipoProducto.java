@@ -8,6 +8,7 @@ public class TipoProducto {
 
     public TipoProducto(String tipo) {
         this.tipo = tipo;
+        this.activo = true;
     }
 
     public Integer getIdTipoProducto() {

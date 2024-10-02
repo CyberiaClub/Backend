@@ -15,7 +15,9 @@ public interface MarcaDAO {
     
     public Marca obtenerPorId(String idMarca);
     
-    public Integer obtenerId(Marca marca);
+    public Integer obtenerUltimoId(Marca marca);
+    
+    public Integer obtenerIdPorNombre(String nombre);
     
     public String imprimirId();
 }

@@ -15,6 +15,7 @@ public class MarcaDAOImpl extends DAOImpl implements MarcaDAO {
     public MarcaDAOImpl() {
         super("MARCA");
         this.marca = null;
+        this.retonarLlavePrimaria = true;
     }
 
     @Override
@@ -48,7 +49,7 @@ public class MarcaDAOImpl extends DAOImpl implements MarcaDAO {
         
         valores=valores.concat("'"+marca.getNombre()+"'");
         valores=valores.concat(", ");
-        valores=valores.concat("'"+marca.getActivo()+"'");
+        valores=valores.concat("'"+ (marca.getActivo() ? 1:0) + "'");
         return valores;
     }
 
@@ -105,11 +106,22 @@ public class MarcaDAOImpl extends DAOImpl implements MarcaDAO {
     }
     
     @Override
-    public Integer obtenerId(Marca marca) {
+    public Integer obtenerUltimoId(Marca marca) {
         this.marca = marca;
         try {
             Integer id = this.retornarUltimoAutogenerado();
             this.marca.setIdMarca(id);
+        } catch (SQLException ex) {
+            Logger.getLogger(MarcaDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public Integer obtenerIdPorNombre(String marca){
+        String sql = "select ID_MARCA as id from MARCA where NOMBRE = '"+marca+"'";
+        try {
+            Integer id = this.retonarIdPorAtributo(sql);
+            return id;
         } catch (SQLException ex) {
             Logger.getLogger(MarcaDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -20,7 +20,9 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
     @Override
     public Integer insertar(Producto producto) {
         this.producto = producto;
-        return this.insertar();
+        Integer id = this.insertar();
+        this.producto.setIdProducto(id);
+        return id;
     }
 
     @Override
@@ -37,7 +39,7 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
 
     @Override
     protected String obtenerListaAtributos() {
-        return "SKU, NOMBRE, DESCRIPCION, PRECIO, UNIDAD, PRODUCTOMIEMBRO";
+        return "SKU, NOMBRE, DESCRIPCION, PRECIO, UNIDAD";
     }
 
     @Override
@@ -74,7 +76,7 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
             while(this.resultSet.next()){
                 Producto plantillaProducto;
                 plantillaProducto = new Producto(
-                        this.resultSet.getInt("SKU"),
+                        this.resultSet.getString("SKU"),
                         this.resultSet.getString("NOMBRE"),
                         this.resultSet.getString("DESCRIPCION"),
                         this.resultSet.getDouble("PRECIO"),
@@ -103,5 +105,22 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
     @Override
     public Producto obtenerPorId(String idProducto) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    @Override
+    public Integer obtenerId(Producto producto) {
+        this.producto = producto;
+        try {
+            Integer id = this.retornarUltimoAutogenerado();
+            this.producto.setIdProducto(id);
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductoDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    @Override
+    public String imprimirId(){
+        return "" + this.producto.getIdProducto();
     }
 }
