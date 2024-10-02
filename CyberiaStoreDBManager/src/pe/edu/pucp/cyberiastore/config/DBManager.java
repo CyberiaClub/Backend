@@ -42,7 +42,8 @@ public class DBManager {
         leer_archivo_propiedades();
         try {
             Class.forName(this.driver);
-            this.conexion = DriverManager.getConnection(getURL(), this.usuario, descifrarMD5(this.contraseña));
+//            this.conexion = DriverManager.getConnection(getURL(), this.usuario, descifrarMD5(this.contraseña));
+              this.conexion = DriverManager.getConnection(getURL(), this.usuario, "errantSQL");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {        
@@ -69,10 +70,16 @@ public class DBManager {
             this.driver = properties.getProperty("driver");
             this.tipo_de_driver = properties.getProperty("tipo_de_driver");
             this.base_de_datos = properties.getProperty("base_de_datos");
-            this.nombre_de_host = properties.getProperty("nombre_de_host");
+//            Esto es para conexion con AWS
+//            this.nombre_de_host = properties.getProperty("nombre_del_host");
+//            Esto es para conexion local
+            this.nombre_de_host = properties.getProperty("nombre_del_host_local");
             this.puerto = properties.getProperty("puerto");
-            this.usuario = properties.getProperty("usuario");
-            this.contraseña = properties.getProperty("contrasenha");
+//            Esto es para conexcion con AWS  
+//            this.usuario = properties.getProperty("usuario_local");
+            //            Esto es para conexion local
+            this.usuario = properties.getProperty("usuario_local");
+            this.contraseña = properties.getProperty("contrasenha_local");
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {

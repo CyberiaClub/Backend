@@ -7,10 +7,6 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import org.apache.commons.codec.binary.Base64;
 
-/**
- *
- * Autor: andres
- */
 public class Cifrado {
 
     private static final String llave = "Programacion3PUCP";
