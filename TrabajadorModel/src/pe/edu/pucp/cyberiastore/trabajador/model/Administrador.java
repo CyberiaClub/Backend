@@ -1,5 +1,4 @@
-
-package pe.edu.pucp.Trabajador.trabajador.model;
+package pe.edu.pucp.cyberiastore.trabajador.model;
 
 import java.util.Date;
 import pe.edu.pucp.cyberiastore.usuario.model.TipoDocumento;

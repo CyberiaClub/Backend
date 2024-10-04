@@ -5,7 +5,7 @@ package pe.edu.pucp.cyberiastore.trabajador.bo;
 import java.util.ArrayList;
 import java.util.Date;
 import pe.edu.pucp.cyberiastore.trabajador.dao.TrabajadorDAO;
-import pe.edu.pucp.Trabajador.trabajador.model.Trabajador;
+import pe.edu.pucp.cyberiastore.trabajador.model.Trabajador;
 import pe.edu.pucp.cyberiastore.trabajador.daoImpl.TrabajadorDAOImpl;
 import pe.edu.pucp.cyberiastore.usuario.bo.UsuarioBO;
 import pe.edu.pucp.cyberiastore.usuario.daoImpl.UsuarioDAOImpl;

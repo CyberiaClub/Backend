@@ -1,7 +1,7 @@
 package pe.edu.pucp.cyberiastore.trabajador.dao;
 
 import java.util.ArrayList;
-import pe.edu.pucp.Trabajador.trabajador.model.Trabajador;
+import pe.edu.pucp.cyberiastore.trabajador.model.Trabajador;
 
 
 public interface TrabajadorDAO {
