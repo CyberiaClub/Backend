@@ -3,11 +3,12 @@ package pe.edu.pucp.cyberiastore.usuario.model;
 import java.util.Date;
 import java.util.ArrayList;
 import java.text.SimpleDateFormat;
+import pe.edu.pucp.cyberiastore.cifrado.Cifrado;
 
 import pe.edu.pucp.cyberiastore.rol.model.Rol;
 import pe.edu.pucp.cyberiastore.rol.model.Permiso;
-
 public class Usuario {
+    private Integer idUsuario;
     private String documento;
     private String telefono;
     private String nombre;
@@ -22,7 +23,28 @@ public class Usuario {
     private TipoDocumento tipoDeDocumento;
     private ArrayList<Rol> roles;
 
-    public Usuario(String documento, String telefono, String nombre, String apellidoPaterno, String apelldioMaterno, Date fechaDeNacimiento, String correo, Boolean activo, String contrasena, String nacionalidad, String direccion, TipoDocumento tipoDeDocumento) {
+    /*El generico*/
+    public Usuario(){
+        this.activo = true;
+    }
+    
+    /*Usuario general*/
+    public Usuario(String documento, String telefono, String nombre, String apellidoPaterno, String apellidoMaterno, Date fechaDeNacimiento, String correo, Boolean activo, String contrasena, String nacionalidad, String direccion, TipoDocumento tipoDeDocumento) {
+        this.documento = documento;
+        this.telefono = telefono;
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.fechaDeNacimiento = fechaDeNacimiento;
+        this.correo = correo;
+        this.activo = activo;
+        this.contrasena = Cifrado.cifrarMD5(contrasena);
+        this.nacionalidad = nacionalidad;
+        this.direccion = direccion;
+        this.tipoDeDocumento = tipoDeDocumento;
+    }
+
+    public Usuario(Integer idUsuario,String documento, String telefono, String nombre, String apellidoPaterno, String apelldioMaterno, Date fechaDeNacimiento, String correo, String contrasena, String nacionalidad, String direccion, TipoDocumento tipoDeDocumento) {
         this.documento = documento;
         this.telefono = telefono;
         this.nombre = nombre;
@@ -30,14 +52,42 @@ public class Usuario {
         this.apellidoMaterno = apelldioMaterno;
         this.fechaDeNacimiento = fechaDeNacimiento;
         this.correo = correo;
-        this.activo = activo;
-        this.contrasena = contrasena;
+        this.contrasena = Cifrado.cifrarMD5(contrasena);
         this.nacionalidad = nacionalidad;
         this.direccion = direccion;
         this.tipoDeDocumento = tipoDeDocumento;
         this.roles = new ArrayList<Rol>();
+        // Todo usuario nace activo
+        this.idUsuario = idUsuario;
+        this.activo = true;
+    }
+    
+    public Usuario(String documento, String telefono, String nombre, String apellidoPaterno, String apelldioMaterno, Date fechaDeNacimiento, String correo, String contrasena, String nacionalidad, String direccion, TipoDocumento tipoDeDocumento) {
+        this.documento = documento;
+        this.telefono = telefono;
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apelldioMaterno;
+        this.fechaDeNacimiento = fechaDeNacimiento;
+        this.correo = correo;
+        this.contrasena = Cifrado.cifrarMD5(contrasena);
+        this.nacionalidad = nacionalidad;
+        this.direccion = direccion;
+        this.tipoDeDocumento = tipoDeDocumento;
+        this.roles = new ArrayList<Rol>();
+        // Todo usuario nace activo
+        this.activo = true;
     }
 
+    public Integer getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+    
+    
     public String getDocumento() {
         return documento;
     }
@@ -107,7 +157,7 @@ public class Usuario {
     }
 
     public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
+        this.contrasena = Cifrado.cifrarMD5(contrasena);
     }
 
     public String getNacionalidad() {
