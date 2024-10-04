@@ -3,10 +3,10 @@ package pe.edu.pucp.cyberiastore.usuario.model;
 import java.util.Date;
 import java.util.ArrayList;
 import java.text.SimpleDateFormat;
+import pe.edu.pucp.cyberiastore.cifrado.Cifrado;
 
 import pe.edu.pucp.cyberiastore.rol.model.Rol;
 import pe.edu.pucp.cyberiastore.rol.model.Permiso;
-
 public class Usuario {
     private Integer idUsuario;
     private String documento;
@@ -38,7 +38,7 @@ public class Usuario {
         this.fechaDeNacimiento = fechaDeNacimiento;
         this.correo = correo;
         this.activo = activo;
-        this.contrasena = contrasena;
+        this.contrasena = Cifrado.cifrarMD5(contrasena);
         this.nacionalidad = nacionalidad;
         this.direccion = direccion;
         this.tipoDeDocumento = tipoDeDocumento;
@@ -52,7 +52,7 @@ public class Usuario {
         this.apellidoMaterno = apelldioMaterno;
         this.fechaDeNacimiento = fechaDeNacimiento;
         this.correo = correo;
-        this.contrasena = contrasena;
+        this.contrasena = Cifrado.cifrarMD5(contrasena);
         this.nacionalidad = nacionalidad;
         this.direccion = direccion;
         this.tipoDeDocumento = tipoDeDocumento;
@@ -70,7 +70,7 @@ public class Usuario {
         this.apellidoMaterno = apelldioMaterno;
         this.fechaDeNacimiento = fechaDeNacimiento;
         this.correo = correo;
-        this.contrasena = contrasena;
+        this.contrasena = Cifrado.cifrarMD5(contrasena);
         this.nacionalidad = nacionalidad;
         this.direccion = direccion;
         this.tipoDeDocumento = tipoDeDocumento;
@@ -157,7 +157,7 @@ public class Usuario {
     }
 
     public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
+        this.contrasena = Cifrado.cifrarMD5(contrasena);
     }
 
     public String getNacionalidad() {

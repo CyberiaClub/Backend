@@ -1,4 +1,4 @@
-package pe.edu.pucp.Trabajador.trabajador.model;
+package pe.edu.pucp.cyberiastore.trabajador.model;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

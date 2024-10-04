@@ -2,7 +2,7 @@
 package pe.edu.pucp.cyberiastore.trabajador.daoImpl;
 
 import java.util.ArrayList;
-import pe.edu.pucp.Trabajador.trabajador.model.Trabajador;
+import pe.edu.pucp.cyberiastore.trabajador.model.Trabajador;
 import pe.edu.pucp.cyberiastore.db.DAOImpl;
 import pe.edu.pucp.cyberiastore.trabajador.dao.TrabajadorXSedeDAO;
 

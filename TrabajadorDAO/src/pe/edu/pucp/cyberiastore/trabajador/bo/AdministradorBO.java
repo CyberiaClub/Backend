@@ -1,7 +1,7 @@
 package pe.edu.pucp.cyberiastore.trabajador.bo;
 
-import pe.edu.pucp.Trabajador.trabajador.model.Administrador;
-import pe.edu.pucp.Trabajador.trabajador.model.Trabajador;
+import pe.edu.pucp.cyberiastore.trabajador.model.Administrador;
+import pe.edu.pucp.cyberiastore.trabajador.model.Trabajador;
 import pe.edu.pucp.cyberiastore.trabajador.dao.AdministradorDAO;
 import pe.edu.pucp.cyberiastore.trabajador.daoImpl.AdministradorDAOImpl;
 

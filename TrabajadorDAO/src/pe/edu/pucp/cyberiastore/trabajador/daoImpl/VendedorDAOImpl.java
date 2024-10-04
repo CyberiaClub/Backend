@@ -1,7 +1,7 @@
 package pe.edu.pucp.cyberiastore.trabajador.daoImpl;
 
 import java.util.ArrayList;
-import pe.edu.pucp.Trabajador.trabajador.model.Vendedor;
+import pe.edu.pucp.cyberiastore.trabajador.model.Vendedor;
 import pe.edu.pucp.cyberiastore.trabajador.dao.VendedorDAO;
 
 public class VendedorDAOImpl extends TrabajadorDAOImpl implements VendedorDAO {

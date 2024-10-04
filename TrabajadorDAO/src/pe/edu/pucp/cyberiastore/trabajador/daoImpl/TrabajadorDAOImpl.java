@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 import java.util.ArrayList;
 
 import pe.edu.pucp.cyberiastore.trabajador.dao.TrabajadorDAO;
-import pe.edu.pucp.Trabajador.trabajador.model.Trabajador;
+import pe.edu.pucp.cyberiastore.trabajador.model.Trabajador;
 import pe.edu.pucp.cyberiastore.usuario.daoImpl.UsuarioDAOImpl;
 import pe.edu.pucp.cyberiastore.usuario.model.TipoDocumento;
 
