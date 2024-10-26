@@ -1,7 +1,7 @@
 package pe.edu.pucp.cyberiastore.pedido.daoImpl;
 
 import java.util.ArrayList;
-import pe.edu.pucp.cyberiastore.db.DAOImpl;
+import pe.edu.pucp.cyberiastore.config.DAOImpl;
 import pe.edu.pucp.cyberiastore.pedido.dao.PedidoDAO;
 import pe.edu.pucp.cyberiastore.pedido.model.Pedido;
 

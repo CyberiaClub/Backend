@@ -1,7 +1,7 @@
 package pe.edu.pucp.cyberiastore.metodopago.daoImpl;
 
 import java.util.ArrayList;
-import pe.edu.pucp.cyberiastore.db.DAOImpl;
+import pe.edu.pucp.cyberiastore.config.DAOImpl;
 import pe.edu.pucp.cyberiastore.metodopago.dao.FacturaDAO;
 import pe.edu.pucp.cyberiastore.metodopago.model.Factura;
 

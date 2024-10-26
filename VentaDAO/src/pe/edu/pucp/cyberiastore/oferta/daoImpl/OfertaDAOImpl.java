@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.SQLException;
-import pe.edu.pucp.cyberiastore.db.DAOImpl;
+import pe.edu.pucp.cyberiastore.config.DAOImpl;
 import pe.edu.pucp.cyberiastore.oferta.dao.OfertaDAO;
 import pe.edu.pucp.cyberiastore.oferta.model.Oferta;
 

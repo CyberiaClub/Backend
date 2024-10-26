@@ -1,11 +1,16 @@
 package pe.edu.pucp.cyberiastore.sede.daoImpl;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
-import pe.edu.pucp.cyberiastore.db.DAOImpl;
+import java.util.List;
+import pe.edu.pucp.cyberiastore.config.DAOImpl;
 import pe.edu.pucp.cyberiastore.inventario.model.Producto;
 import pe.edu.pucp.cyberiastore.sede.dao.ProductoXSedeDAO;
 import pe.edu.pucp.cyberiastore.sede.model.Sede;
-public class ProductoXSedeDAOImpl extends DAOImpl implements ProductoXSedeDAO{
+
+public class ProductoXSedeDAOImpl extends DAOImpl implements ProductoXSedeDAO {
+
     private Integer idProducto;
     private Integer idSede;
     private Integer cantidadStock;
@@ -13,39 +18,72 @@ public class ProductoXSedeDAOImpl extends DAOImpl implements ProductoXSedeDAO{
     public ProductoXSedeDAOImpl() {
         super("PRODUCTO_X_SEDE");
     }
-    
+
     @Override
-    protected String obtenerListaAtributos() {
+    protected String obtenerListaDeAtributosParaInsercion() {
         return "ID_PRODUCTO,ID_SEDE,STOCK_SEDE";
     }
 
     @Override
-    protected String obtenerListaValoresParaInsertar() {
-        String sql = "";
-        sql = sql.concat("'" + this.idProducto + "'");
-        sql = sql.concat(", ");
-        sql = sql.concat("'" + this.idSede + "'");
-        sql = sql.concat(", ");
-        sql = sql.concat("'" + this.cantidadStock + "'");
-        return sql;
+    protected String incluirListaDeParametrosParaInsercion() {
+        return "?,?,?";
     }
 
     @Override
-    protected String obtenerListaValoresParaModificar() {
+    protected void incluirValorDeParametrosParaInsercion() throws SQLException {
+        this.incluirParametroInt(1, this.idProducto);
+        this.incluirParametroInt(2, this.idSede);
+        this.incluirParametroInt(3, this.cantidadStock);
+    }
+
+    @Override
+    protected String obtenerListaDeValoresYAtributosParaModificacion() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    protected String obtenerCondicionPorId() {
+    protected String obtenerPredicadoParaLlavePrimaria() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    protected void incluirValorDeParametrosParaModificacion() throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    protected void incluirValorDeParametrosParaEliminacion() throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    protected String obtenerProyeccionParaSelect() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    protected void agregarObjetoALaLista(List lista, ResultSet resultSet) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    protected void incluirValorDeParametrosParaObtenerPorId() throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    protected void instanciarObjetoDelResultSet() throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    protected void limpiarObjetoDelResultSet() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public Integer insertar(Integer idProducto, Integer idSede, Integer cantidad) {
-        this.idProducto = idProducto;
-        this.idSede = idSede;
-        this.cantidadStock = cantidad;
-        return this.insertar();
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
@@ -59,7 +97,7 @@ public class ProductoXSedeDAOImpl extends DAOImpl implements ProductoXSedeDAO{
     }
 
     @Override
-    public Integer eliminarSede(Integer isSede) {
+    public Integer eliminarSede(Integer idSede) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -72,5 +110,63 @@ public class ProductoXSedeDAOImpl extends DAOImpl implements ProductoXSedeDAO{
     public ArrayList<Sede> buscarSedePorProducto(Integer idProducto) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
+//    @Override
+//    protected String obtenerListaAtributos() {
+//        
+//    }
+//
+//    @Override
+//    protected String obtenerListaValoresParaInsertar() {
+//        String sql = "";
+//        sql = sql.concat("'" + this.idProducto + "'");
+//        sql = sql.concat(", ");
+//        sql = sql.concat("'" + this.idSede + "'");
+//        sql = sql.concat(", ");
+//        sql = sql.concat("'" + this.cantidadStock + "'");
+//        return sql;
+//    }
+//
+//    @Override
+//    protected String obtenerListaValoresParaModificar() {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//    }
+//
+//    @Override
+//    protected String obtenerCondicionPorId() {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//    }
+//
+//    @Override
+//    public Integer insertar(Integer idProducto, Integer idSede, Integer cantidad) {
+//        this.idProducto = idProducto;
+//        this.idSede = idSede;
+//        this.cantidadStock = cantidad;
+//        return this.insertar();
+//    }
+//
+//    @Override
+//    public Integer eliminar(Integer idProducto, Integer idSede) {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//    }
+//
+//    @Override
+//    public Integer eliminarProducto(Integer idProducto) {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//    }
+//
+//    @Override
+//    public Integer eliminarSede(Integer isSede) {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//    }
+//
+//    @Override
+//    public ArrayList<Producto> buscarProcutosPorSede(Integer idSede) {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//    }
+//
+//    @Override
+//    public ArrayList<Sede> buscarSedePorProducto(Integer idProducto) {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//    }
 }
