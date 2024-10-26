@@ -36,10 +36,10 @@ public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
 
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
-        this.incluirParametroString(1,this.proveedor.getRuc());
-        this.incluirParametroString(2,this.proveedor.getRuc());
-        this.incluirParametroDate(3,this.proveedor.getFechaRegistro());
-        this.incluirParametroString(4,this.proveedor.getRuc());
+        this.incluirParametroString(1, this.proveedor.getRuc());
+        this.incluirParametroString(2, this.proveedor.getNombre());
+        this.incluirParametroDate(3, this.proveedor.getFechaRegistro());
+        this.incluirParametroBoolean(4, this.proveedor.getActivo());
     }
 
     @Override
@@ -103,32 +103,22 @@ public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
     }
 
     @Override
-    public ArrayList<Proveedor> listar(String sql) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
     public ArrayList<Proveedor> listarTodos() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public Proveedor obtenerPorId(String idProveedor) {
+    public Proveedor obtenerPorId(Integer idProveedor) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public Integer obtenerId(Proveedor proveedor) {
+    public Boolean existeProveedor(Proveedor proveedor) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public Integer obtenerIdPorRuc(String ruc) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public String imprimirId() {
+    public Boolean existeProveedor(Proveedor proveedor, Boolean abreConexion) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
