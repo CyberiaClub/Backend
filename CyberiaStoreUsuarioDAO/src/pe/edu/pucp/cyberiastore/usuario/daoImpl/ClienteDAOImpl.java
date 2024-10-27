@@ -118,7 +118,7 @@ public class ClienteDAOImpl extends DAOImpl implements ClienteDAO {
                 idCliente = this.resultSet.getInt("id_cliente");
             }
         } catch (SQLException ex) {
-            System.err.println("Error al consultar si existe cliente - " + ex);
+            System.err.println("Error al consultar si zexiste cliente - " + ex);
         } finally {
             try {
                 if (abreConexion) {

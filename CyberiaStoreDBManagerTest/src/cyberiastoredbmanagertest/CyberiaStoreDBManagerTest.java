@@ -9,7 +9,7 @@ import pe.edu.pucp.cyberiastore.util.Cifrado;
 public class CyberiaStoreDBManagerTest {
 
     public static void main(String[] args) {
-        String contrasenha = "errantSQL";
+        String contrasenha = "EKQ1Q2/R2335";
         Cifrado cifrado = new Cifrado();
         String c = cifrado.cifrarMD5(contrasenha);
         System.out.println(c);
