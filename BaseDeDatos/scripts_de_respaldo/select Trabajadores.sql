@@ -6,7 +6,9 @@ select * from sede;
 select * from trabajador_x_sede;
 
 SELECT 
-    AD.ID_ADMINISTRADOR, 
+    AD.ID_ADMINISTRADOR,
+    TR.ID_TRABAJADOR,
+    US.ID_USUARIO,
     US.NOMBRE,
     US.APELLIDO_PATERNO,
     US.APELLIDO_MATERNO,

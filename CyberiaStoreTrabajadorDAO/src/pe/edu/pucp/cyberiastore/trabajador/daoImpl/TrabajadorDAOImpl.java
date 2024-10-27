@@ -6,12 +6,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import pe.edu.pucp.cyberiastore.config.DAOImpl;
+import pe.edu.pucp.cyberiastore.config.Tipo_Operacion;
 
 import pe.edu.pucp.cyberiastore.trabajador.dao.TrabajadorDAO;
 import pe.edu.pucp.cyberiastore.trabajador.dao.TrabajadorXSedeDAO;
 import pe.edu.pucp.cyberiastore.trabajador.model.Trabajador;
 import pe.edu.pucp.cyberiastore.usuario.dao.UsuarioDAO;
 import pe.edu.pucp.cyberiastore.usuario.daoImpl.UsuarioDAOImpl;
+import pe.edu.pucp.cyberiastore.usuario.model.Usuario;
 
 public class TrabajadorDAOImpl extends DAOImpl implements TrabajadorDAO {
 
@@ -34,7 +36,7 @@ public class TrabajadorDAOImpl extends DAOImpl implements TrabajadorDAO {
     public Integer insertar(Trabajador Trabajador) {
         this.trabajador = trabajador;
         Integer idTrabajador = null;
-        Trabajador usuario = new Trabajador();
+        Usuario usuario = new Usuario();
 
         usuario.setDocumento(this.trabajador.getDocumento());
         usuario.setTelefono(this.trabajador.getTelefono());
@@ -71,7 +73,7 @@ public class TrabajadorDAOImpl extends DAOImpl implements TrabajadorDAO {
                 this.retornarLlavePrimaria = false;
                 // pasamos llamar a la clase TRABAJADORXSEDE
                 TrabajadorXSedeDAO trabajadorXSede = new TrabajadorXSedeDAOImpl();
-                trabajadorXSede.insertar(idTrabajador, this.trabajador.getIdSede(),this.usarTransaccion, this.conexion);
+                trabajadorXSede.insertar(idTrabajador, this.trabajador.getIdSede(), this.usarTransaccion, this.conexion);
             }
             this.comitarTransaccion();
         } catch (SQLException ex) {
@@ -91,7 +93,7 @@ public class TrabajadorDAOImpl extends DAOImpl implements TrabajadorDAO {
         this.usarTransaccion = true;
         return idTrabajador;
     }
-    
+
     /**
      * Este método se define en la clase DAO, y sirve para recibir los datos del
      * hijo
@@ -125,19 +127,86 @@ public class TrabajadorDAOImpl extends DAOImpl implements TrabajadorDAO {
         this.incluirParametroInt(3, this.trabajador.getIdUsuario());
     }
 
+    /*
+     * *************************************************************************
+     * MODIFICAR
+    *************************************************************************
+     */
     @Override
-    protected String obtenerListaDeValoresYAtributosParaModificacion() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Integer modificar(Trabajador trabajador) {
+        Integer retorno = 0;
+        this.trabajador = trabajador;
+        Usuario usuario = new Usuario();
+        usuario.setIdUsuario(this.trabajador.getIdUsuario());
+        usuario.setDocumento(this.trabajador.getDocumento());
+        usuario.setTelefono(this.trabajador.getTelefono());
+        usuario.setNombre(this.trabajador.getNombre());
+        usuario.setApellidoPaterno(this.trabajador.getApellidoPaterno());
+        usuario.setApellidoMaterno(this.trabajador.getApellidoMaterno());
+        usuario.setFechaDeNacimiento(this.trabajador.getFechaDeNacimiento());
+        usuario.setCorreo(this.trabajador.getCorreo());
+        usuario.setActivo(this.trabajador.getActivo());
+        usuario.setContrasena(this.trabajador.getContrasena());
+        usuario.setNacionalidad(this.trabajador.getNacionalidad());
+        usuario.setDireccion(this.trabajador.getDireccion());
+        usuario.setTipoDeDocumento(this.trabajador.getTipoDeDocumento());
+
+        UsuarioDAO usuarioDAO = new UsuarioDAOImpl();
+
+        this.usarTransaccion = false;
+        try {
+            this.iniciarTransaccion();
+            usuarioDAO.modificar(usuario, this.usarTransaccion, this.conexion);
+            retorno = super.modificar();
+            this.comitarTransaccion();
+        } catch (SQLException ex) {
+            System.err.println("Error al intentar modificar - " + ex);
+            try {
+                this.rollbackTransaccion();
+            } catch (SQLException ex1) {
+                System.err.println("Error al intentar hacer rollback - " + ex1);
+            }
+        } finally {
+            try {
+                this.cerrarConexion();
+            } catch (SQLException ex) {
+                System.err.println("Error al intentar cerrar la conexion - " + ex);
+            }
+        }
+        this.usarTransaccion = true;
+        return retorno;
+    }
+
+    @Override
+    public Integer modificar(Trabajador trabajador, Boolean usarTransaccion, Connection conexion) {
+        this.usarTransaccion = usarTransaccion;
+        this.conexion = conexion;
+        return this.modificar(trabajador);
     }
 
     @Override
     protected String obtenerPredicadoParaLlavePrimaria() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql = "";
+        if (this.tipo_Operacion == Tipo_Operacion.MODIFICAR || this.tipo_Operacion == Tipo_Operacion.ELIMINAR) {
+            sql = "id_trabajador=?";
+        } else {
+            sql = "tra.id_trabajador=?";
+        }
+        return sql;
+    }
+
+    @Override
+    protected String obtenerListaDeValoresYAtributosParaModificacion() {
+        return "sueldo=?, fecha_ingreso=?, id_usuario=?";
     }
 
     @Override
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.incluirParametroDouble(1, this.trabajador.getSueldo());
+        this.incluirParametroDate(2, this.trabajador.getFechaDeIngreso());
+        this.incluirParametroInt(3, this.trabajador.getIdUsuario());
+        // Este puede fallar porque esta relacionado al obtener por ID
+        this.incluirParametroInt(4, this.trabajador.getIdTrabajador());
     }
 
     @Override
@@ -167,16 +236,6 @@ public class TrabajadorDAOImpl extends DAOImpl implements TrabajadorDAO {
 
     @Override
     protected void limpiarObjetoDelResultSet() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public Integer modificar(Trabajador Trabajador) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public Integer modificar(Trabajador Trabajador, Boolean usarTransaccion, Connection conexion) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

@@ -25,7 +25,7 @@ public class AdministradorBOTest {
 //        testAdministradorBOInsertar();
         testAdministradorBOListarTodos();
         testAdministradorBOModificar();
-//        testArticuloBOListarTodos();
+        testAdministradorBOListarTodos();
 //        testArticuloBOObtenerPorId(listaId);
 //        testArticuloBOEliminar(listaId);
     }
@@ -62,14 +62,34 @@ public class AdministradorBOTest {
 
     private static void testAdministradorBOModificar() {
         System.out.println("\ntestAlumnoBOModificar");
-//        Date fechaModificacion = new Date();
-//        String usuarioModificacion = "fpaz";
-//        Especialidad especialidad = especialidadBO.obtenerPorId(1);
-//
-//        Integer resultado = alumnoBO.modificar(listaId.get(0), "MELGAR", "Sasieta", "Héctor Andrés", Genero.MASCULINO, fechaModificacion, usuarioModificacion, false, especialidad);
-//        resultado = alumnoBO.modificar(listaId.get(1), "PAZ", "Espinoza", "Fredy Alberto", Genero.MASCULINO, fechaModificacion, usuarioModificacion, false, especialidad);
-//        resultado = alumnoBO.modificar(listaId.get(2), "SANCHEZ", "Enriquez", "Heider Ysaias", Genero.MASCULINO, fechaModificacion, usuarioModificacion, false, especialidad);
-
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        Integer idTrabajador = 1;
+        Integer idUsuario = 1;
+        String documento = "99999999";
+        String telefono = "123456789";
+        String nombre = "Jesus";
+        String apellidoPaterno = "Huayhua";
+        String apellidoMaterno = "Flores";
+        Date fechaDeNacimiento = new Date();
+        try {
+            fechaDeNacimiento = sdf.parse("20-05-2001");
+        } catch (ParseException ex) {
+            Logger.getLogger(AdministradorBOTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String correo = "jmhuayhua@pucp.edu.pe";
+        String direccion = "Ya tengo nueva direccion";
+        String contrasena = "contrasena";
+        String nacionalidad = "PERUANO";
+        TipoDocumento tipoDeDocumento = TipoDocumento.DNI;
+        Double sueldo = 900.00;
+        Date fechaDeIngreso = new Date();
+        try {
+            fechaDeIngreso = sdf.parse("20-05-2020");
+        } catch (ParseException ex) {
+            Logger.getLogger(AdministradorBOTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Boolean activo = true;
+        administradorBO.modificar(idTrabajador, sueldo, fechaDeIngreso, idUsuario, documento, telefono, nombre, apellidoPaterno, apellidoMaterno, fechaDeNacimiento, correo, activo, contrasena, nacionalidad, direccion, tipoDeDocumento);
     }
 
     private static void testAdministradorBOListarTodos() {
@@ -77,6 +97,10 @@ public class AdministradorBOTest {
         listaAdministradores = administradorBO.listarTodos();
         for (Administrador administrador : listaAdministradores) {
             System.out.print(administrador.getIdAdministrador().toString());
+            System.out.print(", ");
+            System.out.print(administrador.getIdTrabajador().toString());
+            System.out.print(", ");
+            System.out.print(administrador.getIdTrabajador().toString());
             System.out.print(", ");
             System.out.print(administrador.getApellidoPaterno());
             System.out.print(", ");
