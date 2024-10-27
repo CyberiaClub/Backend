@@ -12,6 +12,7 @@ import java.util.List;
 import pe.edu.pucp.cyberiastore.config.DAOImpl;
 
 import pe.edu.pucp.cyberiastore.trabajador.dao.TrabajadorDAO;
+import pe.edu.pucp.cyberiastore.trabajador.dao.TrabajadorXSedeDAO;
 import pe.edu.pucp.cyberiastore.trabajador.model.Trabajador;
 import pe.edu.pucp.cyberiastore.usuario.dao.UsuarioDAO;
 import pe.edu.pucp.cyberiastore.usuario.daoImpl.UsuarioDAOImpl;
@@ -24,6 +25,7 @@ public class TrabajadorDAOImpl extends DAOImpl implements TrabajadorDAO {
     public TrabajadorDAOImpl() {
         super("Trabajador");
         this.trabajador = null;
+        this.retornarLlavePrimaria = true;
     }
 
     /**
@@ -68,7 +70,13 @@ public class TrabajadorDAOImpl extends DAOImpl implements TrabajadorDAO {
                 existeTrabajador = this.existeTrabajador(this.trabajador, abreConexion);
             }
             if (!existeTrabajador) {
-                super.insertar();
+                this.retornarLlavePrimaria = true;
+                idTrabajador = super.insertar();
+                this.trabajador.setIdTrabajador(idTrabajador);
+                this.retornarLlavePrimaria = false;
+                // pasamos llamar a la clase TRABAJADORXSEDE
+                TrabajadorXSedeDAO trabajadorXSede = new TrabajadorXSedeDAOImpl();
+                trabajadorXSede.insertar(idTrabajador, this.trabajador.getIdSede());
             }
             this.comitarTransaccion();
         } catch (SQLException ex) {

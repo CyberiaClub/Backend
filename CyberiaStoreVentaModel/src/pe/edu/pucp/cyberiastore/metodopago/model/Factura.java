@@ -3,7 +3,7 @@ package pe.edu.pucp.cyberiastore.metodopago.model;
 import java.util.Date;
 
 
-public class Factura extends MetodoDePago {
+public class Factura extends ComprobanteDePago {
     private Integer numeroDeFactura;
     private String ruc;
     private String razonSocial;

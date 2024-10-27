@@ -100,7 +100,7 @@ public class AlmaceneroDAOImpl extends DAOImpl implements AlmaceneroDAO {
         trabajador.setTipoDeDocumento(almacenero.getTipoDeDocumento());
         
         TrabajadorDAO trabajadorDAO = new TrabajadorDAOImpl();
-        
+        Integer idAlmacenero = null;
         Boolean existeTrabajador = trabajadorDAO.existeTrabajador(trabajador);
         Boolean existeAlmacenero = false;
         this.usarTransaccion = false;
@@ -116,7 +116,12 @@ public class AlmaceneroDAOImpl extends DAOImpl implements AlmaceneroDAO {
                 existeAlmacenero = this.existeAlmacenero(this.almacenero, abreConexion);
             }
             if (!existeAlmacenero) {
-                super.insertar();
+                this.retornarLlavePrimaria = true;
+                idAlmacenero = super.insertar();
+                this.almacenero.setIdAlmacenero(idAlmacenero);
+                this.almacenero.setIdTrabajador(trabajador.getIdTrabajador());
+                this.almacenero.setIdUsuario(trabajador.getIdUsuario());
+                this.retornarLlavePrimaria = false;
             }
             this.comitarTransaccion();
         } catch (SQLException ex) {

@@ -4,8 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
-public class MetodoDePago {
-    private Integer idMetodoDePago;
+public class ComprobanteDePago {
+    private Integer idComprobanteDePago;
     private Date fecha;
     private Double subtotal;
     private Double total;
@@ -15,13 +15,13 @@ public class MetodoDePago {
     private Integer idPedido;
     private Integer idOferta;
     private Boolean activo;
-    public MetodoDePago(){
+    public ComprobanteDePago(){
         this.igv = 18.0;
         this.idOferta = null;
         this.activo = true;
     }
     
-    public MetodoDePago(Date fecha, Double subtotal, Double total, Double igv, Double descuentoAplicado) {
+    public ComprobanteDePago(Date fecha, Double subtotal, Double total, Double igv, Double descuentoAplicado) {
         this.fecha = fecha;
         this.subtotal = subtotal;
         this.total = total;
@@ -32,12 +32,12 @@ public class MetodoDePago {
         this.idOferta = null;
     }
 
-    public Integer getIdMetodoDePago() {
-        return this.idMetodoDePago;
+    public Integer getIdComprobanteDePago() {
+        return this.idComprobanteDePago;
     }
 
-    public void setIdMetodoDePago(Integer idMetodoDePago) {
-        this.idMetodoDePago = idMetodoDePago;
+    public void setIdComprobanteDePago(Integer idComprobanteDePago) {
+        this.idComprobanteDePago = idComprobanteDePago;
     }
 
     public Date getFecha() {
@@ -96,11 +96,12 @@ public class MetodoDePago {
     public void setIdOferta(Integer id_oferta) {
         this.idOferta = id_oferta;
     }
-    public String getFechaAsDDMMYYY(){
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        return sdf.format(this.fecha);
+
+    public void setActivo(Boolean activo) {
+        this.activo = activo;
     }
-    public Integer getActivoInt(){
-        return this.activo ? 1 : 0;
+    
+    public Boolean getActivo(){
+        return this.activo;
     }
 }

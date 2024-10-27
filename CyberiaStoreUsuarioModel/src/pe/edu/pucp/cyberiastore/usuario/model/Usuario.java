@@ -7,7 +7,9 @@ import pe.edu.pucp.cyberiastore.cifrado.Cifrado;
 
 import pe.edu.pucp.cyberiastore.rol.model.Rol;
 import pe.edu.pucp.cyberiastore.rol.model.Permiso;
+
 public class Usuario {
+
     private Integer idUsuario;
     private String documento;
     private String telefono;
@@ -23,12 +25,12 @@ public class Usuario {
     private TipoDocumento tipoDeDocumento;
     private ArrayList<Rol> roles;
 
-    /*El generico*/
-    public Usuario(){
+    public Usuario() {
         this.activo = true;
     }
 
-    public Usuario( String documento, String telefono, String nombre, String apellidoPaterno, String apellidoMaterno, Date fechaDeNacimiento, String correo, String contrasena, String nacionalidad, String direccion, TipoDocumento tipoDeDocumento) {
+    public Usuario(String documento, String telefono, String nombre, String apellidoPaterno, String apellidoMaterno, Date fechaDeNacimiento, String correo,
+            String direccion, String contrasena, String nacionalidad, TipoDocumento tipoDeDocumento) {
         this.documento = documento;
         this.telefono = telefono;
         this.nombre = nombre;
@@ -36,13 +38,12 @@ public class Usuario {
         this.apellidoMaterno = apellidoMaterno;
         this.fechaDeNacimiento = fechaDeNacimiento;
         this.correo = correo;
-        this.contrasena = contrasena;
+        this.contrasena = Cifrado.cifrarMD5(contrasena);
         this.nacionalidad = nacionalidad;
         this.direccion = direccion;
         this.tipoDeDocumento = tipoDeDocumento;
         this.activo = true;
     }
-    
 
     public Integer getIdUsuario() {
         return idUsuario;
@@ -51,8 +52,7 @@ public class Usuario {
     public void setIdUsuario(Integer idUsuario) {
         this.idUsuario = idUsuario;
     }
-    
-    
+
     public String getDocumento() {
         return documento;
     }
@@ -136,11 +136,11 @@ public class Usuario {
     public TipoDocumento getTipoDeDocumento() {
         return tipoDeDocumento;
     }
-    
+
     public String getDireccion() {
         return direccion;
     }
-    
+
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
@@ -148,28 +148,25 @@ public class Usuario {
     public void setTipoDeDocumento(TipoDocumento tipoDeDocumento) {
         this.tipoDeDocumento = tipoDeDocumento;
     }
-    
-    public int getActivoAsInt(){
-        if(this.activo) return 1;
+
+    public int getActivoAsInt() {
+        if (this.activo) {
+            return 1;
+        }
         return 0;
     }
-    
-    public String getFechaNacimientoAsDDMMYYY(){
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        return sdf.format(this.fechaDeNacimiento);
-    }
-    
-    public void agregarRol(Rol rol){
+
+    public void agregarRol(Rol rol) {
         this.roles.add(rol);
     }
-    
-    public int getCantidadRoles(){
+
+    public int getCantidadRoles() {
         return this.roles.size();
     }
-    
-    public Rol getRol(int index){
-        Rol rol = new Rol(roles.get(index).getIdRol(),roles.get(index).getNombre());
-        for(int i = 0; i < roles.get(index).getCantidadPermisos(); i++){
+
+    public Rol getRol(int index) {
+        Rol rol = new Rol(roles.get(index).getIdRol(), roles.get(index).getNombre());
+        for (int i = 0; i < roles.get(index).getCantidadPermisos(); i++) {
             Permiso permiso = roles.get(index).getPermiso(i);
             rol.agregarPermiso(permiso);
         }

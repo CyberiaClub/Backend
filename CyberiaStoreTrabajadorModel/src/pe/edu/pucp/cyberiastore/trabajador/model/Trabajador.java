@@ -17,6 +17,15 @@ public class Trabajador extends Usuario {
     public Trabajador() {
         this.fechaDeSalida = null;// siempre es nulo
     }
+    
+    public Trabajador(String documento, String telefono, String nombre, String apellidoPaterno, String apellidoMaterno, Date fechaDeNacimiento, String correo,
+            String direccion, String contrasena, String nacionalidad, TipoDocumento tipoDeDocumento, Double sueldo, Date fechaDeIngreso, Integer idSede){
+        super(documento, telefono, nombre, apellidoPaterno, apellidoMaterno, fechaDeNacimiento, correo, direccion, contrasena, nacionalidad, tipoDeDocumento);
+        this.sueldo = sueldo;
+        this.fechaDeIngreso = fechaDeIngreso;
+        this.fechaDeSalida = null;// siempre es nulo
+        this.idSede = idSede;
+    }
 
     public Integer getIdTrabajador() {
         return idTrabajador;

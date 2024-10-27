@@ -1,41 +1,39 @@
-package pe.edu.pucp.cyberiastore.metodopago.daoImpl;
+package pe.edu.pucp.cyberiastore.comprobantedepago.daoImpl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import pe.edu.pucp.cyberiastore.config.DAOImpl;
-import pe.edu.pucp.cyberiastore.metodopago.dao.MetodoDePagoDAO;
-import pe.edu.pucp.cyberiastore.metodopago.model.MetodoDePago;
+import pe.edu.pucp.cyberiastore.metodopago.dao.FacturaDAO;
+import pe.edu.pucp.cyberiastore.metodopago.model.Factura;
 
-public class MetodoDePagoDAOImpl extends DAOImpl implements MetodoDePagoDAO {
+public class FacturaDAOImpl extends DAOImpl implements FacturaDAO {
 
-    private MetodoDePago metodoDePago;
+    private Factura factura;
 
-    public MetodoDePagoDAOImpl() {
-        super("COMPROBANTE_DE_PAGO");
-        this.metodoDePago = null;
-        this.retornarLlavePrimaria = true;
-    }
-
-    public MetodoDePagoDAOImpl(String tabla) {
-        super(tabla);
-        this.metodoDePago = null;
+    public FacturaDAOImpl() {
+        super("FACTURA");
+        this.factura = null;
     }
 
     @Override
     protected String obtenerListaDeAtributosParaInsercion() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "NUMERO_FACTURA, RUC, RAZON_SOCIAL,DIRECCION,ID_COMPROBANTE_DE_PAGO";
     }
 
     @Override
     protected String incluirListaDeParametrosParaInsercion() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "?,?,?,?,?";
     }
 
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.incluirParametroInt(1,this.factura.getNumeroDeFactura());
+        this.incluirParametroString(2,this.factura.getRuc());
+        this.incluirParametroString(3,this.factura.getRazonSocial());
+        this.incluirParametroString(4,this.factura.getDireccionDeFacturacion());
+        this.incluirParametroInt(5,this.factura.getIdComprobanteDePago());
     }
 
     @Override
@@ -84,134 +82,115 @@ public class MetodoDePagoDAOImpl extends DAOImpl implements MetodoDePagoDAO {
     }
 
     @Override
-    public Integer insertar(MetodoDePago metodoDePago) {
+    public Integer insertar(Factura factura) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public Integer modificar(MetodoDePago metodoDePago) {
+    public Integer modificar(Factura factura) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public Integer eliminar(MetodoDePago metodoDePago) {
+    public Integer eliminar(Factura factura) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public ArrayList<MetodoDePago> listar(String sql) {
+    public ArrayList<Factura> listarTodos() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public ArrayList<MetodoDePago> listarTodos() {
+    public Factura obtenerPorId(Integer idFactura) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public MetodoDePago obtenerPorId(String idMetodoDePago) {
+    public Boolean existeFactura(Factura factura) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Boolean existeFactura(Factura factura, Boolean abreConexion) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 //    @Override
 //    protected String obtenerListaAtributos() {
-//        String sql = "FECHA, SUBTOTAL, IGV, TOTAL, ID_PEDIDO, ACTIVO";
-//        if(this.metodoDePago.getIdOferta() != null){
-//            sql = sql.concat(",  DESCUENTO_APLICADO");
-//            sql = sql.concat(", ID_OFERTA");
-//        }
-//        return sql;
 //    }
 //
 //    @Override
 //    protected String obtenerListaValoresParaInsertar() {
 //        String sql = "";
-//        sql = sql.concat("STR_TO_DATE('" + this.metodoDePago.getFechaAsDDMMYYY() + "','%d-%m-%Y')");
+//        sql = super.obtenerListaValoresParaInsertar();
+//        sql = sql.concat("'" + factura.getNumeroDeFactura() + "'");
 //        sql = sql.concat(", ");
-//        sql = sql.concat("'" + metodoDePago.getSubtotal() + "'");
+//        sql = sql.concat("'" + factura.getRuc() + "'");
 //        sql = sql.concat(", ");
-//        sql = sql.concat("'" + metodoDePago.getIgv()+ "'");
+//        sql = sql.concat("'" + factura.getRazonSocial()+ "'");
 //        sql = sql.concat(", ");
-//        sql = sql.concat("'" + metodoDePago.getTotal()+ "'");
+//        sql = sql.concat("'" + factura.getDireccionDeFacturacion() + "'");
 //        sql = sql.concat(", ");
-//        sql = sql.concat("'" + metodoDePago.getIdPedido()+ "'");
-//        sql = sql.concat(", ");
-//        sql = sql.concat("'" + metodoDePago.getActivoInt() + "'");
-//        if(this.metodoDePago.getIdOferta() != null){
-//            sql = sql.concat(", ");
-//            sql = sql.concat("'" + metodoDePago.getDescuentoAplicado()+ "'");
-//            sql = sql.concat(", ");
-//            sql = sql.concat("'" + metodoDePago.getIdOferta() + "'");
-//        }
+//        sql = sql.concat("'" + factura.getIdMetodoDePago() + "'");
 //        return sql;
 //    }
 //
 //    @Override
 //    protected String obtenerListaValoresParaModificar() {
 //        String sql = "";
-//        sql = sql.concat("FECHA_DATE = ");
-//        sql = sql.concat("'" + metodoDePago.getFecha() + "'");
-//        sql = sql.concat(",SUBTOTAL = ");
-//        sql = sql.concat("'" + metodoDePago.getSubtotal()+ "'");
-//        sql = sql.concat(",IGV = ");
-//        sql = sql.concat("'" + metodoDePago.getIgv() + "'");
-//        sql = sql.concat(",TOTAL = ");
-//        sql = sql.concat("'" + metodoDePago.getTotal() + "'");
-//        sql = sql.concat(",DESCUENTO_APLICADO = ");
-//        sql = sql.concat("'" + metodoDePago.getDescuentoAplicado()+ "'");
-//        sql = sql.concat(",ID_PEDIDO = ");
-//        sql = sql.concat("'" + metodoDePago.getIdPedido()+ "'");
-//        sql = sql.concat(",ID_OFERTA = ");
-//        sql = sql.concat("'" + metodoDePago.getIdOferta() +  "'");
+//        sql = sql.concat("NUMERO_FACTURA = ");
+//        sql = sql.concat("'" + factura.getNumeroDeFactura()+ "'");
+//        sql = sql.concat("RUC = ");
+//        sql = sql.concat("'" + factura.getRuc()+ "'");
+//        sql = sql.concat("RAZON_SOCIAL = ");
+//        sql = sql.concat("'" + factura.getRazonSocial()+ "'");
+//        sql = sql.concat("DIRECCION = ");
+//        sql = sql.concat("'" + factura.getDireccionDeFacturacion()+ "'");
+//        sql = sql.concat("ID_METODO_PAGO = ");
+//        sql = sql.concat("'" + factura.getIdMetodoDePago() + "'");
 //        return sql;
 //    }
 //
 //    @Override
 //    protected String obtenerCondicionPorId() {
-//        String sql = "";
-//        sql = sql.concat("ID_METODO_PAGO = ");
-//        sql = sql.concat("'" + metodoDePago.getIdMetodoDePago() + "'");
-//        return sql;
+//        String sql = this.obtenerListaValoresParaSeleccionar();
+//        sql = sql.concat(" and NUMERO_FACTURA = '" + factura.getNumeroDeFactura() + "'");
+//        return this.listar(sql).getFirst().toString();// se agrego el toString() para que no de el error xD
 //    }
 //
 //    @Override
-//    public Integer insertar(MetodoDePago metodoDePago) {
-//        this.metodoDePago = metodoDePago;
-//        Integer id = this.insertar();
-//        this.metodoDePago.setIdMetodoDePago(id);
-//        return id;
+//    public Integer insertar(Factura factura) {
+//        this.factura = factura;
+//        return this.insertar();
 //    }
 //
 //    @Override
-//    public Integer modificar(MetodoDePago metodoDePago) {
-//        this.metodoDePago = metodoDePago;
+//    public Integer modificar(Factura factura) {
+//        this.factura = factura;
 //        return this.modificar();
 //    }
 //
 //    @Override
-//    public Integer eliminar(MetodoDePago metodoDePago) {
-//        this.metodoDePago = metodoDePago;
+//    public Integer eliminar(Factura factura) {
+//        this.factura = factura;
 //        return this.eliminar();
 //    }
 //
 //    @Override
-//    public ArrayList<MetodoDePago> listar(String sql) {
+//    public ArrayList<Factura> listarFactura(String sql) {
 //        return null;
 //    }
 //
 //    @Override
-//    public ArrayList<MetodoDePago> listarTodos() {
+//    public ArrayList<Factura> listarTodosFactura() {
 //        return null;
 //    }
 //
 //    @Override
-//    public MetodoDePago obtenerPorId(String idMetodoDePago) {
+//    public Factura obtenerPorId(String idFactura) {
 //        String sql = this.obtenerListaValoresParaSeleccionar();
-//        sql = sql.concat(" and ID_METODO_PAGO = '" + idMetodoDePago + "'");
-//        return this.listar(sql).getFirst();
-//    }
-//    @Override
-//    public void insertarIdMetodoDePago(Integer idMetodoDePago){
-//        this.metodoDePago.setIdMetodoDePago(idMetodoDePago);
+//        sql = sql.concat(" and NUMERO_FACTURA = '" + idFactura+ "'");
+//        return this.listarFactura(sql).getFirst();
 //    }
 }

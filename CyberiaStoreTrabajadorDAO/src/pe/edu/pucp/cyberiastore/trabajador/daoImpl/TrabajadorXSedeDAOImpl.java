@@ -80,22 +80,9 @@ public class TrabajadorXSedeDAOImpl extends DAOImpl implements TrabajadorXSedeDA
 
     @Override
     public Integer insertar(Integer idTrabajador, Integer idSede) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public Integer eliminar(Integer idTrabajador, Trabajador trabajador) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public Integer eliminarTrabajador(Integer idTrabajador) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public ArrayList<Trabajador> buscarTrabajadorPorSede(Integer idTrabajadoro) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.idSede = idSede;
+        this.idTrabajador = idTrabajador;
+        return super.insertar();
     }
 
 //    @Override

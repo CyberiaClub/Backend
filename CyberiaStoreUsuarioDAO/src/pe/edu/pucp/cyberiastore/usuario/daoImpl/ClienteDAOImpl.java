@@ -109,13 +109,13 @@ public class ClienteDAOImpl extends DAOImpl implements ClienteDAO {
             if (abreConexion) {
                 this.abrirConexion();
             }
-            String sql = "select idCliente from cliente where ";
-            sql = sql.concat("idCliente=? ");
+            String sql = "select id_cliente from cliente where ";
+            sql = sql.concat("id_cliente=? ");
             this.colocarSQLenStatement(sql);
             this.incluirParametroInt(1, this.cliente.getIdCliente());
             this.ejecutarConsultaEnBD(sql);
             if (this.resultSet.next()) {
-                idCliente = this.resultSet.getInt("idCliente");
+                idCliente = this.resultSet.getInt("id_cliente");
             }
         } catch (SQLException ex) {
             System.err.println("Error al consultar si existe cliente - " + ex);

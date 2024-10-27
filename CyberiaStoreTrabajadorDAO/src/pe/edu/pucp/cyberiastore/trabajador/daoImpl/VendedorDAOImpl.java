@@ -82,12 +82,25 @@ public class VendedorDAOImpl extends DAOImpl implements VendedorDAO {
     @Override
     public Integer insertar(Vendedor vendedor) {
         this.vendedor = vendedor;
-        Integer idTrabajador = null;// el ID de la clase que hereda
-        Trabajador trabajador = new Trabajador();// traemos la clase padre
+        Integer idTrabajador = null;
+        Trabajador trabajador = new Trabajador();
         trabajador.setSueldo(vendedor.getSueldo());
         trabajador.setFechaDeIngreso(vendedor.getFechaDeIngreso());
         trabajador.setIdSede(vendedor.getIdSede());
+        trabajador.setDocumento(vendedor.getDocumento());
+        trabajador.setTelefono(vendedor.getTelefono());
+        trabajador.setNombre(vendedor.getNombre());
+        trabajador.setApellidoPaterno(vendedor.getApellidoPaterno());
+        trabajador.setApellidoMaterno(vendedor.getApellidoMaterno());
+        trabajador.setFechaDeNacimiento(vendedor.getFechaDeNacimiento());
+        trabajador.setCorreo(vendedor.getCorreo());
+        trabajador.setContrasena(vendedor.getContrasena());
+        trabajador.setNacionalidad(vendedor.getNacionalidad());
+        trabajador.setDireccion(vendedor.getDireccion());
+        trabajador.setTipoDeDocumento(vendedor.getTipoDeDocumento());
+
         TrabajadorDAO trabajadorDAO = new TrabajadorDAOImpl();
+        Integer idVendedor = null;
         Boolean existeTrabajador = trabajadorDAO.existeTrabajador(trabajador);
         Boolean existeVendedor = false;
         this.usarTransaccion = false;
@@ -103,7 +116,12 @@ public class VendedorDAOImpl extends DAOImpl implements VendedorDAO {
                 existeVendedor = this.existeVendedor(this.vendedor, abreConexion);
             }
             if (!existeVendedor) {
-                super.insertar();
+                this.retornarLlavePrimaria = true;
+                idVendedor = super.insertar();
+                this.vendedor.setIdVendor(idVendedor);
+                this.vendedor.setIdTrabajador(trabajador.getIdTrabajador());
+                this.vendedor.setIdUsuario(trabajador.getIdUsuario());
+                this.retornarLlavePrimaria = false;
             }
             this.comitarTransaccion();
         } catch (SQLException ex) {
@@ -120,8 +138,9 @@ public class VendedorDAOImpl extends DAOImpl implements VendedorDAO {
                 System.err.println("Error al intentar cerrar la conexion - " + ex);
             }
         }
+
         this.usarTransaccion = true;
-        return idTrabajador;
+        return idVendedor;
     }
 
     @Override
@@ -146,7 +165,7 @@ public class VendedorDAOImpl extends DAOImpl implements VendedorDAO {
 
     @Override
     public Boolean existeVendedor(Vendedor vendedor) {
-         Boolean abreConexion = true;
+        Boolean abreConexion = true;
         return existeVendedor(vendedor, abreConexion);
     }
 

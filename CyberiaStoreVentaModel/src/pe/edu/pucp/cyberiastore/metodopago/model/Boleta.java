@@ -3,9 +3,9 @@ package pe.edu.pucp.cyberiastore.metodopago.model;
 import java.util.Date;
 
 
-public class Boleta extends MetodoDePago{
+public class Boleta extends ComprobanteDePago{
     private Integer idBoleta;
-    private String numeroDeBoleta;
+    private Integer numeroDeBoleta;
     private Boolean activo;
     
     public Boleta(){
@@ -24,11 +24,11 @@ public class Boleta extends MetodoDePago{
         this.idBoleta = idBoleta;
     }
 
-    public String getNumeroDeBoleta() {
+    public Integer getNumeroDeBoleta() {
         return numeroDeBoleta;
     }
 
-    public void setNumeroDeBoleta(String numeroDeBoleta) {
+    public void setNumeroDeBoleta(Integer numeroDeBoleta) {
         this.numeroDeBoleta = numeroDeBoleta;
     }
 

@@ -9,6 +9,7 @@ import pe.edu.pucp.cyberiastore.trabajador.model.Administrador;
 import pe.edu.pucp.cyberiastore.trabajador.dao.AdministradorDAO;
 import pe.edu.pucp.cyberiastore.trabajador.dao.TrabajadorDAO;
 import pe.edu.pucp.cyberiastore.trabajador.model.Trabajador;
+import pe.edu.pucp.cyberiastore.usuario.model.TipoDocumento;
 
 public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
 
@@ -56,12 +57,18 @@ public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
 
     @Override
     protected String obtenerProyeccionParaSelect() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql = "AD.id_trabajador,";
+        sql = sql.concat("US.nombre, US.apellido_paterno, US.apellido_materno,US.documento,US.fecha_nacimiento,");
+        sql = sql.concat("US.telefono, US.correo, US.nacionalidad,US.tipo_documento,");
+        sql = sql.concat("TR.sueldo,TR.fecha_ingreso,");
+        sql = sql.concat("S.nombre");
+        return sql;
     }
 
     @Override
     protected void agregarObjetoALaLista(List lista, ResultSet resultSet) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        instanciarObjetoDelResultSet();
+        lista.add(this.administrador);
     }
 
     @Override
@@ -71,12 +78,29 @@ public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
 
     @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.administrador = new Administrador();
+        this.administrador.setIdAdministrador(this.resultSet.getInt("id_administrativo"));
+        this.administrador.setNombre(this.resultSet.getString("nombre"));
+        this.administrador.setApellidoPaterno(this.resultSet.getString("APELLIDO_PATERNO"));
+        this.administrador.setApellidoMaterno(this.resultSet.getString("APELLIDO_MATERNO"));
+        this.administrador.setDocumento(this.resultSet.getString("DOCUMENTO"));
+        this.administrador.setFechaDeNacimiento(this.resultSet.getTimestamp("FECHA_NACIMIENTO"));
+        this.administrador.setTelefono(this.resultSet.getString("TELEFONO"));
+        this.administrador.setCorreo(this.resultSet.getString("CORREO"));
+        this.administrador.setNacionalidad(this.resultSet.getString("NACIONALIDAD"));
+
+        String tipoDocumentoStr = this.resultSet.getString("TIPO_DOCUMENTO");
+        TipoDocumento tipoDocumento = TipoDocumento.valueOf(tipoDocumentoStr);
+        this.administrador.setTipoDeDocumento(tipoDocumento);
+
+        this.administrador.setFechaDeIngreso(this.resultSet.getTimestamp("FECHA_INGRESO"));
+        this.administrador.setSueldo(this.resultSet.getDouble("SUELDO"));
+        this.administrador.setNombreSede(this.resultSet.getString("SEDE_NOMBRE"));
     }
 
     @Override
     protected void limpiarObjetoDelResultSet() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.administrador = null;
     }
 
     @Override
@@ -87,7 +111,22 @@ public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
         trabajador.setSueldo(administrador.getSueldo());
         trabajador.setFechaDeIngreso(administrador.getFechaDeIngreso());
         trabajador.setIdSede(administrador.getIdSede());
+        trabajador.setDocumento(administrador.getDocumento());
+        trabajador.setTelefono(administrador.getTelefono());
+        trabajador.setNombre(administrador.getNombre());
+        trabajador.setApellidoPaterno(administrador.getApellidoPaterno());
+        trabajador.setApellidoMaterno(administrador.getApellidoMaterno());
+        trabajador.setFechaDeNacimiento(administrador.getFechaDeNacimiento());
+        trabajador.setCorreo(administrador.getCorreo());
+        trabajador.setContrasena(administrador.getContrasena());
+        trabajador.setNacionalidad(administrador.getNacionalidad());
+        trabajador.setDireccion(administrador.getDireccion());
+        trabajador.setTipoDeDocumento(administrador.getTipoDeDocumento());
+
         TrabajadorDAO trabajadorDAO = new TrabajadorDAOImpl();
+
+        Integer idAdministrador = null;
+
         Boolean existeTrabajador = trabajadorDAO.existeTrabajador(trabajador);
         Boolean existeAdministrador = false;
         this.usarTransaccion = false;
@@ -103,11 +142,16 @@ public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
                 existeAdministrador = this.existeAdministrador(this.administrador, abreConexion);
             }
             if (!existeAdministrador) {
-                super.insertar();
+                this.retornarLlavePrimaria = true;
+                idAdministrador = super.insertar();
+                this.administrador.setIdAdministrador(idAdministrador);
+                this.administrador.setIdTrabajador(trabajador.getIdTrabajador());
+                this.administrador.setIdUsuario(trabajador.getIdUsuario());
+                this.retornarLlavePrimaria = false;
             }
             this.comitarTransaccion();
         } catch (SQLException ex) {
-            System.err.println("Error al intentar insertar - " + ex);
+            System.err.println("Error al intentar insertar Administrador " + ex);
             try {
                 this.rollbackTransaccion();
             } catch (SQLException ex1) {
@@ -136,14 +180,30 @@ public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
 
     @Override
     public ArrayList<Administrador> listarTodos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return (ArrayList<Administrador>) super.listarTodos(null);
+    }
+
+    @Override
+    protected String generarSQLParaListarTodos(Integer limite) {
+        String sql = "select ";
+        sql = sql.concat(obtenerProyeccionParaSelect());
+        sql = sql.concat(" from ").concat(this.nombre_tabla).concat(" AD, ");
+        sql = sql.concat("trabajador TR, usuario US, trabajador_x_sede TRXS, sede S ");
+        sql = sql.concat("where Ad.id_trabajador = TR.ID_TRABAJADOR ");
+        sql = sql.concat("and TR.id_usuario = US.id_usuario ");
+        sql = sql.concat("and TR.ID_TRABAJADOR = TRXS.ID_TRABAJADOR ");
+        sql = sql.concat("and TRXS.id_sede = S.ID_SEDE ");
+        if (limite != null && limite > 0) {
+            sql = sql.concat(" limit ").concat(limite.toString());
+        }
+        return sql;
     }
 
     @Override
     public Administrador obtenerPorId(Integer idAdministrador) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     @Override
     public Boolean existeAdministrador(Administrador administrador) {
         Boolean abreConexion = true;
@@ -158,13 +218,13 @@ public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
             if (abreConexion) {
                 this.abrirConexion();
             }
-            String sql = "select idAdministrador from administrador where ";
-            sql = sql.concat("idPersona=? ");
+            String sql = "select id_administrador from administrador where ";
+            sql = sql.concat("id_trabajador=? ");
             this.colocarSQLenStatement(sql);
-            this.incluirParametroInt(1, this.administrador.getIdAdministrador());
+            this.incluirParametroInt(1, this.administrador.getIdTrabajador());
             this.ejecutarConsultaEnBD(sql);
             if (this.resultSet.next()) {
-                idAdministrador = this.resultSet.getInt("idAdministrador");
+                idAdministrador = this.resultSet.getInt("id_administrador");
             }
         } catch (SQLException ex) {
             System.err.println("Error al consultar si existe alumno - " + ex);
