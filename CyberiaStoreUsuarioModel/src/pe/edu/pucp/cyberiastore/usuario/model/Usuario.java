@@ -45,6 +45,39 @@ public class Usuario {
         this.activo = true;
     }
 
+    /**
+     * Este constructor sirve para el modificar
+     *
+     * @param idUsuario
+     * @param documento
+     * @param telefono
+     * @param nombre
+     * @param apellidoPaterno
+     * @param apellidoMaterno
+     * @param fechaDeNacimiento
+     * @param correo
+     * @param activo
+     * @param contrasena
+     * @param nacionalidad
+     * @param direccion
+     * @param tipoDeDocumento
+     */
+    public Usuario(Integer idUsuario, String documento, String telefono, String nombre, String apellidoPaterno, String apellidoMaterno, Date fechaDeNacimiento, String correo, Boolean activo, String contrasena, String nacionalidad, String direccion, TipoDocumento tipoDeDocumento) {
+        this.idUsuario = idUsuario;
+        this.documento = documento;
+        this.telefono = telefono;
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.fechaDeNacimiento = fechaDeNacimiento;
+        this.correo = correo;
+        this.activo = activo;
+        this.contrasena = contrasena;
+        this.nacionalidad = nacionalidad;
+        this.direccion = direccion;
+        this.tipoDeDocumento = tipoDeDocumento;
+    }
+
     public Integer getIdUsuario() {
         return idUsuario;
     }

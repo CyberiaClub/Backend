@@ -21,8 +21,13 @@ public class AdministradorBO {
         Administrador administrador = new Administrador(documento, telefono, nombre, apellidoPaterno, apellidoMaterno, fechaDeNacimiento, correo, direccion, contrasena, nacionalidad, tipoDeDocumento, sueldo, fechaDeIngreso, idSede);
         return this.administradorDAO.insertar(administrador);
     }
-    
-    public ArrayList<Administrador> listarTodos(){
+
+    public Integer modificar(Integer idTrabajador, Double sueldo, Date fechaDeIngreso, Integer idUsuario, String documento, String telefono, String nombre, String apellidoPaterno, String apellidoMaterno, Date fechaDeNacimiento, String correo, Boolean activo, String contrasena, String nacionalidad, String direccion, TipoDocumento tipoDeDocumento) {
+        Administrador administrador = new Administrador(idTrabajador, sueldo, fechaDeIngreso, idUsuario, documento, telefono, nombre, apellidoPaterno, apellidoMaterno, fechaDeNacimiento, correo, activo, contrasena, nacionalidad, direccion, tipoDeDocumento);
+        return this.administradorDAO.modificar(administrador);
+    }
+
+    public ArrayList<Administrador> listarTodos() {
         return this.administradorDAO.listarTodos();
     }
 }

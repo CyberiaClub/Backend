@@ -77,6 +77,11 @@ public class UsuarioDAOImpl extends DAOImpl implements UsuarioDAO {
         this.incluirParametroString(12, this.usuario.getTipoDeDocumento().toString());
     }
 
+    /*
+     * **************************************************************************
+     * MODIFICAR
+     * *************************************************************************
+     */
     @Override
     public Integer modificar(Usuario usuario) {
         this.usuario = usuario;
@@ -94,17 +99,26 @@ public class UsuarioDAOImpl extends DAOImpl implements UsuarioDAO {
     protected String obtenerPredicadoParaLlavePrimaria() {
         return "id_usuario=?";
     }
-    
+
     @Override
     protected String obtenerListaDeValoresYAtributosParaModificacion() {
-        return "DOCUMENTO, TELEFONO, NOMBRE,APELLIDO_PATERNO, APELLIDO_MATERNO , FECHA_NACIMIENTO, CORREO, DIRECCION, ACTIVO, CONTRASEÑA, NACIONALIDAD, TIPO_DOCUMENTO";
+        return "DOCUMENTO=?, TELEFONO=?, NOMBRE=?,APELLIDO_PATERNO=?, APELLIDO_MATERNO =?, FECHA_NACIMIENTO=?, CORREO=?, DIRECCION=?, ACTIVO=?, CONTRASEÑA=?, NACIONALIDAD=?, TIPO_DOCUMENTO=?";
     }
-
-    
 
     @Override
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.incluirParametroString(1, this.usuario.getDocumento());
+        this.incluirParametroString(2, this.usuario.getTelefono());
+        this.incluirParametroString(3, this.usuario.getNombre());
+        this.incluirParametroString(4, this.usuario.getApellidoPaterno());
+        this.incluirParametroString(5, this.usuario.getApellidoMaterno());
+        this.incluirParametroDate(6, this.usuario.getFechaDeNacimiento());
+        this.incluirParametroString(7, this.usuario.getCorreo());
+        this.incluirParametroString(8, this.usuario.getDireccion());
+        this.incluirParametroBoolean(9, this.usuario.getActivo());
+        this.incluirParametroString(10, this.usuario.getContrasena());
+        this.incluirParametroString(11, this.usuario.getNacionalidad());
+        this.incluirParametroString(12, this.usuario.getTipoDeDocumento().toString());
     }
 
     @Override
