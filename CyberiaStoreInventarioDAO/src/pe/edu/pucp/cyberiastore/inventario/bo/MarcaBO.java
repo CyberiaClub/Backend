@@ -33,7 +33,7 @@ public class MarcaBO {
     }
     
     public Marca buscarPorId(Integer idMarca){
-        Marca marca = this.marcaDAO.obtenerPorId(""+idMarca);
+        Marca marca = this.marcaDAO.obtenerPorId(idMarca);
         return marca;
     }
 }
