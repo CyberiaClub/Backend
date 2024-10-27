@@ -1,5 +1,6 @@
 package pe.edu.pucp.cyberiastore.trabajador.daoImpl;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -85,6 +86,12 @@ public class TrabajadorXSedeDAOImpl extends DAOImpl implements TrabajadorXSedeDA
         return super.insertar();
     }
 
+    @Override
+    public Integer insertar(Integer idTrabajador, Integer idSede, Boolean usarTransaccion, Connection conexion) {
+        this.usarTransaccion = usarTransaccion;
+        this.conexion = conexion;
+        return this.insertar(idTrabajador,idSede);
+    }
 //    @Override
 //    protected String obtenerListaAtributos() {
 //    }
@@ -140,4 +147,5 @@ public class TrabajadorXSedeDAOImpl extends DAOImpl implements TrabajadorXSedeDA
 //        String sql = "select R.ID_TRABAJADOR, R.NOMBRE from TRABAJADOR R, TRABAJADOR_POR_SEDE RXU where RXU.ID_USUARIO = '" + idTrabajador + "'";
 //        return trabajadorDAOImpl.listarTrabajador(sql);
 //    }
+
 }

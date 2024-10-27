@@ -2,28 +2,26 @@ use cyberiastore;
 select * from administrador;
 select * from trabajador;
 select * from usuario;
+select * from sede;
+select * from trabajador_x_sede;
 
-select 
-AD.ID_TRABAJADOR, 
-US.NOMBRE,
-US.APELLIDO_PATERNO,
-US.APELLIDO_MATERNO,
-US.DOCUMENTO,
-US.FECHA_NACIMIENTO,
-US.TELEFONO,
-US.CORREO,
-US.NACIONALIDAD,
-US.TIPO_DOCUMENTO,
-TR.SUELDO,
-TR.FECHA_INGRESO,
-S.NOMBRE as SEDE_NOMBRE
-from
-administrador AD,
-trabajador TR,
-usuario US,
-trabajador_x_sede TRXS,
-sede S
-where Ad.id_trabajador = TR.ID_TRABAJADOR
-and TR.id_usuario = US.id_usuario
-and TR.ID_TRABAJADOR = TRXS.ID_TRABAJADOR
-and TRXS.id_sede = S.ID_SEDE ;
+SELECT 
+    AD.ID_ADMINISTRADOR, 
+    US.NOMBRE,
+    US.APELLIDO_PATERNO,
+    US.APELLIDO_MATERNO,
+    US.DOCUMENTO,
+    US.FECHA_NACIMIENTO,
+    US.TELEFONO,
+    US.CORREO,
+    US.NACIONALIDAD,
+    US.TIPO_DOCUMENTO,
+    TR.SUELDO,
+    TR.FECHA_INGRESO,
+    S.NOMBRE AS SEDE_NOMBRE
+FROM 
+    administrador AD
+JOIN trabajador TR ON AD.ID_TRABAJADOR = TR.ID_TRABAJADOR
+JOIN usuario US ON TR.ID_USUARIO = US.ID_USUARIO
+JOIN trabajador_x_sede TRXS ON TR.ID_TRABAJADOR = TRXS.ID_TRABAJADOR
+JOIN sede S ON TRXS.ID_SEDE = S.ID_SEDE;

@@ -3,10 +3,6 @@ package pe.edu.pucp.cyberiastore.trabajador.daoImpl;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.ArrayList;
 import java.util.List;
 import pe.edu.pucp.cyberiastore.config.DAOImpl;
@@ -16,7 +12,6 @@ import pe.edu.pucp.cyberiastore.trabajador.dao.TrabajadorXSedeDAO;
 import pe.edu.pucp.cyberiastore.trabajador.model.Trabajador;
 import pe.edu.pucp.cyberiastore.usuario.dao.UsuarioDAO;
 import pe.edu.pucp.cyberiastore.usuario.daoImpl.UsuarioDAOImpl;
-import pe.edu.pucp.cyberiastore.usuario.model.TipoDocumento;
 
 public class TrabajadorDAOImpl extends DAOImpl implements TrabajadorDAO {
 
@@ -76,7 +71,7 @@ public class TrabajadorDAOImpl extends DAOImpl implements TrabajadorDAO {
                 this.retornarLlavePrimaria = false;
                 // pasamos llamar a la clase TRABAJADORXSEDE
                 TrabajadorXSedeDAO trabajadorXSede = new TrabajadorXSedeDAOImpl();
-                trabajadorXSede.insertar(idTrabajador, this.trabajador.getIdSede());
+                trabajadorXSede.insertar(idTrabajador, this.trabajador.getIdSede(),this.usarTransaccion, this.conexion);
             }
             this.comitarTransaccion();
         } catch (SQLException ex) {
@@ -96,7 +91,7 @@ public class TrabajadorDAOImpl extends DAOImpl implements TrabajadorDAO {
         this.usarTransaccion = true;
         return idTrabajador;
     }
-
+    
     /**
      * Este método se define en la clase DAO, y sirve para recibir los datos del
      * hijo

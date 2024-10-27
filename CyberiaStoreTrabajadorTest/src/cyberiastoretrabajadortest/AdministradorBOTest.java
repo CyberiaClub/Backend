@@ -22,9 +22,9 @@ public class AdministradorBOTest {
         System.out.println("\ntestPublicacionBO");
         administradorBO = new AdministradorBO();
 //        listaId = new ArrayList<>();
-        testAdministradorBOInsertar();
+//        testAdministradorBOInsertar();
         testAdministradorBOListarTodos();
-//        testArticuloBOModificar(listaId);
+        testAdministradorBOModificar();
 //        testArticuloBOListarTodos();
 //        testArticuloBOObtenerPorId(listaId);
 //        testArticuloBOEliminar(listaId);
@@ -32,7 +32,7 @@ public class AdministradorBOTest {
 
     private static void testAdministradorBOInsertar() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        String documento = "1214";
+        String documento = "99999999";
         String telefono = "987654321";
         String nombre = "Jesus";
         String apellidoPaterno = "Huayhua";
@@ -55,16 +55,28 @@ public class AdministradorBOTest {
         } catch (ParseException ex) {
             Logger.getLogger(AdministradorBOTest.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Integer idSede = 500;
+        Integer idSede = 1;
         int resultado = administradorBO.insertar(documento, telefono, nombre, apellidoPaterno, apellidoMaterno, fechaDeNacimiento, correo, direccion, contrasena, nacionalidad, tipoDeDocumento, sueldo, fechaDeIngreso, idSede);
         System.out.println("Llave primaria insertada: " + resultado);
+    }
+
+    private static void testAdministradorBOModificar() {
+        System.out.println("\ntestAlumnoBOModificar");
+//        Date fechaModificacion = new Date();
+//        String usuarioModificacion = "fpaz";
+//        Especialidad especialidad = especialidadBO.obtenerPorId(1);
+//
+//        Integer resultado = alumnoBO.modificar(listaId.get(0), "MELGAR", "Sasieta", "Héctor Andrés", Genero.MASCULINO, fechaModificacion, usuarioModificacion, false, especialidad);
+//        resultado = alumnoBO.modificar(listaId.get(1), "PAZ", "Espinoza", "Fredy Alberto", Genero.MASCULINO, fechaModificacion, usuarioModificacion, false, especialidad);
+//        resultado = alumnoBO.modificar(listaId.get(2), "SANCHEZ", "Enriquez", "Heider Ysaias", Genero.MASCULINO, fechaModificacion, usuarioModificacion, false, especialidad);
+
     }
 
     private static void testAdministradorBOListarTodos() {
         System.out.println("\ntestAlumnoBOListarTodos");
         listaAdministradores = administradorBO.listarTodos();
         for (Administrador administrador : listaAdministradores) {
-            System.out.print(administrador.getIdTrabajador().toString());
+            System.out.print(administrador.getIdAdministrador().toString());
             System.out.print(", ");
             System.out.print(administrador.getApellidoPaterno());
             System.out.print(", ");
@@ -88,7 +100,7 @@ public class AdministradorBOTest {
             System.out.print(", ");
             System.out.print(administrador.getSueldo().toString());
             System.out.print(", ");
-            System.out.print(administrador.getNombreSede());
+            System.out.println(administrador.getNombreSede());
         }
     }
 }

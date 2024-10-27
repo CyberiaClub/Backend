@@ -57,11 +57,11 @@ public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
 
     @Override
     protected String obtenerProyeccionParaSelect() {
-        String sql = "AD.id_trabajador,";
-        sql = sql.concat("US.nombre, US.apellido_paterno, US.apellido_materno,US.documento,US.fecha_nacimiento,");
-        sql = sql.concat("US.telefono, US.correo, US.nacionalidad,US.tipo_documento,");
-        sql = sql.concat("TR.sueldo,TR.fecha_ingreso,");
-        sql = sql.concat("S.nombre");
+        String sql = "AD.ID_ADMINISTRADOR,";
+        sql = sql.concat("US.NOMBRE, US.APELLIDO_PATERNO, US.APELLIDO_MATERNO,US.DOCUMENTO,US.FECHA_NACIMIENTO,");
+        sql = sql.concat("US.TELEFONO, US.CORREO, US.NACIONALIDAD,US.TIPO_DOCUMENTO,");
+        sql = sql.concat("TR.SUELDO,TR.FECHA_INGRESO,");
+        sql = sql.concat("S.NOMBRE as SEDE_NOMBRE");
         return sql;
     }
 
@@ -79,7 +79,7 @@ public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
     @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.administrador = new Administrador();
-        this.administrador.setIdAdministrador(this.resultSet.getInt("id_administrativo"));
+        this.administrador.setIdAdministrador(this.resultSet.getInt("id_administrador"));
         this.administrador.setNombre(this.resultSet.getString("nombre"));
         this.administrador.setApellidoPaterno(this.resultSet.getString("APELLIDO_PATERNO"));
         this.administrador.setApellidoMaterno(this.resultSet.getString("APELLIDO_MATERNO"));
@@ -187,12 +187,11 @@ public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
     protected String generarSQLParaListarTodos(Integer limite) {
         String sql = "select ";
         sql = sql.concat(obtenerProyeccionParaSelect());
-        sql = sql.concat(" from ").concat(this.nombre_tabla).concat(" AD, ");
-        sql = sql.concat("trabajador TR, usuario US, trabajador_x_sede TRXS, sede S ");
-        sql = sql.concat("where Ad.id_trabajador = TR.ID_TRABAJADOR ");
-        sql = sql.concat("and TR.id_usuario = US.id_usuario ");
-        sql = sql.concat("and TR.ID_TRABAJADOR = TRXS.ID_TRABAJADOR ");
-        sql = sql.concat("and TRXS.id_sede = S.ID_SEDE ");
+        sql = sql.concat(" from ").concat(this.nombre_tabla).concat(" AD ");
+        sql = sql.concat("JOIN trabajador TR ON AD.ID_TRABAJADOR = TR.ID_TRABAJADOR ");
+        sql = sql.concat("JOIN usuario US ON TR.ID_USUARIO = US.ID_USUARIO ");
+        sql = sql.concat("JOIN trabajador_x_sede TRXS ON TR.ID_TRABAJADOR = TRXS.ID_TRABAJADOR ");
+        sql = sql.concat("JOIN sede S ON TRXS.ID_SEDE = S.ID_SEDE ");
         if (limite != null && limite > 0) {
             sql = sql.concat(" limit ").concat(limite.toString());
         }
@@ -239,45 +238,4 @@ public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
         }
         return idAdministrador != null;
     }
-
-//    @Override
-//    public Integer insertar(Administrador administrador) {
-//        this.administrador = administrador;
-//        Integer id = super.insertar();
-//        this.administrador.setIdAdministrador(id);
-//        return id;
-//    }
-//
-//    @Override
-//    public Integer modificar(Administrador administrador) {
-//        this.administrador = administrador;
-//        return super.modificar();
-//    }
-//
-//    @Override
-//    public ArrayList<Administrador> listarTodosAdministradores() {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
-//
-//    @Override
-//    public Administrador obtenerPorId(Integer idAdministrador) {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
-//
-//    @Override
-//    public void insertarIdAdministrador(Integer idAdministrador) {
-//        this.administrador.setIdAdministrador(idAdministrador); 
-//    }
-//    
-//    //Funciones para la logica de BD
-//    @Override
-//    protected String obtenerListaAtributos(){
-//    }
-//    
-//    @Override
-//    protected String obtenerListaValoresParaInsertar(){
-//        String sql ="";
-//        sql = sql.concat("'" + administrador.getIdTrabajador() + "'");
-//        return sql;
-//    }
 }
