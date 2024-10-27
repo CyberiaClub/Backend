@@ -12,32 +12,4 @@ public class ProveedorBO {
     public ProveedorBO(){
         this.proveedorDAO = new ProveedorDAOImpl();
     }
-    
-    public Integer insertar(String ruc, String nombre, Date fechaRegistro){
-        Proveedor proveedor = new Proveedor(ruc, nombre, fechaRegistro);
-        return this.proveedorDAO.insertar(proveedor);
-    }
-    
-    public Integer modificar(String ruc, String nombre, Date fechaRegistro){
-        Proveedor proveedor = new Proveedor(ruc, nombre, fechaRegistro);
-        return this.proveedorDAO.modificar(proveedor);
-    }
-    
-    public Integer eliminar(String ruc, String nombre, Date fechaRegistro){
-        Proveedor proveedor = new Proveedor(ruc, nombre, fechaRegistro);
-        return this.proveedorDAO.eliminar(proveedor);
-    }
-    
-    public ArrayList<Proveedor> listarTodos(){
-        ArrayList<Proveedor> proveedores = this.proveedorDAO.listarTodos();
-        
-        return proveedores;
-    }
-    
-    public Proveedor buscarPorId(Integer idProveedor){
-        Proveedor proveedor = this.proveedorDAO.obtenerPorId(""+idProveedor);
-        
-        return proveedor;
-    }
-    
 }

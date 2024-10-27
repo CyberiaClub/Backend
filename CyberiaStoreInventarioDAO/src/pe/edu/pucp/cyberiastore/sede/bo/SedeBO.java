@@ -10,36 +10,5 @@ public class SedeBO {
     
     public SedeBO(){
         this.sedeDAO = new SedeDAOImpl();
-        
-    }
-    
-    public Integer insertar(String nombre, String descripcion){
-        Sede sede = new Sede(nombre,descripcion);
-        return this.sedeDAO.insertar(sede);
-    }
-    
-    public Integer insertar(Sede sede){
-        return this.sedeDAO.insertar(sede);
-    }
-    
-    public Integer modificar(String nombre, String descripcion){
-        Sede sede = new Sede(nombre, descripcion);
-        return this.sedeDAO.modificar(sede);
-    }
-    
-    public Integer eliminar(String nombre, String descripcion){
-        Sede sede = new Sede(nombre, descripcion);
-        return this.sedeDAO.eliminar(sede);
-    }
-    
-    public ArrayList<Sede> listarTodos(){
-        ArrayList<Sede> sedes = this.sedeDAO.listarTodos();
-        
-        return sedes;
-    }
-    
-    public Sede buscarPorId(Integer idSede){
-        Sede sede = this.sedeDAO.obtenerPorId(""+idSede);
-        return sede;
     }
 }
