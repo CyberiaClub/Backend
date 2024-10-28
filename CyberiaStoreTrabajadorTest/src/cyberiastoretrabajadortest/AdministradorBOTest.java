@@ -7,8 +7,6 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import pe.edu.pucp.cyberiastore.trabajador.bo.AdministradorBO;
-import pe.edu.pucp.cyberiastore.trabajador.dao.AdministradorDAO;
-import pe.edu.pucp.cyberiastore.trabajador.daoImpl.AdministradorDAOImpl;
 import pe.edu.pucp.cyberiastore.trabajador.model.Administrador;
 import pe.edu.pucp.cyberiastore.usuario.model.TipoDocumento;
 import pe.edu.pucp.cyberiastore.util.MuestraFecha;
@@ -17,22 +15,20 @@ public class AdministradorBOTest {
 
     private static AdministradorBO administradorBO;
     private static ArrayList<Administrador> listaAdministradores;
-
     static void testAdministradorBO() {
-        System.out.println("\ntestPublicacionBO");
+        System.out.println("\ntestAdministradorBO");
         administradorBO = new AdministradorBO();
-//        listaId = new ArrayList<>();
-//        testAdministradorBOInsertar();
+        testAdministradorBOInsertar();SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         testAdministradorBOListarTodos();
         testAdministradorBOModificar();
         testAdministradorBOListarTodos();
-//        testArticuloBOObtenerPorId(listaId);
-//        testArticuloBOEliminar(listaId);
+        testAdministradorBOObtenerPorId();
     }
 
     private static void testAdministradorBOInsertar() {
+        System.out.println("\ntestAdministradorBOInsertar");
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        String documento = "99999999";
+        String documento = "909090";
         String telefono = "987654321";
         String nombre = "Jesus";
         String apellidoPaterno = "Huayhua";
@@ -61,11 +57,12 @@ public class AdministradorBOTest {
     }
 
     private static void testAdministradorBOModificar() {
-        System.out.println("\ntestAlumnoBOModificar");
+        System.out.println("\ntestAdministradorBOModificar");
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        Integer idAdministrador = 1;
         Integer idTrabajador = 1;
         Integer idUsuario = 1;
-        String documento = "99999999";
+        String documento = "090909";
         String telefono = "123456789";
         String nombre = "Jesus";
         String apellidoPaterno = "Huayhua";
@@ -89,18 +86,20 @@ public class AdministradorBOTest {
             Logger.getLogger(AdministradorBOTest.class.getName()).log(Level.SEVERE, null, ex);
         }
         Boolean activo = true;
-        administradorBO.modificar(idTrabajador, sueldo, fechaDeIngreso, idUsuario, documento, telefono, nombre, apellidoPaterno, apellidoMaterno, fechaDeNacimiento, correo, activo, contrasena, nacionalidad, direccion, tipoDeDocumento);
+        administradorBO.modificar(idAdministrador, idTrabajador, sueldo, fechaDeIngreso, idUsuario, documento, telefono, nombre, apellidoPaterno, apellidoMaterno, fechaDeNacimiento, correo, activo, contrasena, nacionalidad, direccion, tipoDeDocumento);
     }
 
     private static void testAdministradorBOListarTodos() {
-        System.out.println("\ntestAlumnoBOListarTodos");
+        System.out.println("\ntestAdministradorBOListarTodos");
         listaAdministradores = administradorBO.listarTodos();
+        System.out.println("Tamaño de listaAdministradores: " + listaAdministradores.size());
+
         for (Administrador administrador : listaAdministradores) {
             System.out.print(administrador.getIdAdministrador().toString());
             System.out.print(", ");
             System.out.print(administrador.getIdTrabajador().toString());
             System.out.print(", ");
-            System.out.print(administrador.getIdTrabajador().toString());
+            System.out.print(administrador.getIdUsuario().toString());
             System.out.print(", ");
             System.out.print(administrador.getApellidoPaterno());
             System.out.print(", ");
@@ -126,5 +125,39 @@ public class AdministradorBOTest {
             System.out.print(", ");
             System.out.println(administrador.getNombreSede());
         }
+    }
+
+    private static void testAdministradorBOObtenerPorId() {
+        System.out.println("\ntestAdministradorBOObtenerPorId");
+        Administrador administrador = administradorBO.obtenerPorId(1);
+        System.out.print(administrador.getIdAdministrador().toString());
+        System.out.print(", ");
+        System.out.print(administrador.getIdTrabajador().toString());
+        System.out.print(", ");
+        System.out.print(administrador.getIdUsuario().toString());
+        System.out.print(", ");
+        System.out.print(administrador.getApellidoPaterno());
+        System.out.print(", ");
+        System.out.print(administrador.getApellidoMaterno());
+        System.out.print(", ");
+        System.out.print(administrador.getNombre());
+        System.out.print(", ");
+        System.out.print(administrador.getTipoDeDocumento().toString());
+        System.out.print(", ");
+        System.out.print(administrador.getDocumento());
+        System.out.print(", ");
+        System.out.print(MuestraFecha.toString(administrador.getFechaDeNacimiento()));
+        System.out.print(", ");
+        System.out.print(administrador.getTelefono());
+        System.out.print(", ");
+        System.out.print(administrador.getCorreo());
+        System.out.print(", ");
+        System.out.print(administrador.getNacionalidad());
+        System.out.print(", ");
+        System.out.print(MuestraFecha.toString(administrador.getFechaDeIngreso()));
+        System.out.print(", ");
+        System.out.print(administrador.getSueldo().toString());
+        System.out.print(", ");
+        System.out.println(administrador.getNombreSede());
     }
 }

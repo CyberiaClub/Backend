@@ -18,6 +18,11 @@ public class UsuarioDAOImpl extends DAOImpl implements UsuarioDAO {
         this.usuario = null;
     }
 
+    /*
+     * ************************************************************************
+     * Insertar
+     * ************************************************************************
+     */
     /**
      * Funcion que viene de UsuarioDAO.
      *
@@ -119,11 +124,45 @@ public class UsuarioDAOImpl extends DAOImpl implements UsuarioDAO {
         this.incluirParametroString(10, this.usuario.getContrasena());
         this.incluirParametroString(11, this.usuario.getNacionalidad());
         this.incluirParametroString(12, this.usuario.getTipoDeDocumento().toString());
+        // este es para la comparacion de id_usuario = ?
+        this.incluirParametroInt(13, this.usuario.getIdUsuario());
+    }
+
+    /*
+     * **************************************************************************
+     * ELIMINIAR
+     * *************************************************************************
+     */
+    @Override
+    public Integer eliminar(Usuario usuario) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Integer eliminar(Usuario usuario, Boolean usarTransaccion, Connection conexion) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     protected void incluirValorDeParametrosParaEliminacion() throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    protected void instanciarObjetoDelResultSet() throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+
+    /*
+     * **************************************************************************
+     * LISTAR TODOS
+     * *************************************************************************
+     */
+    @Override
+    public ArrayList<Usuario> listarTodos() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//        return (ArrayList<Usuario>) super.listarTodos(null);
     }
 
     @Override
@@ -137,40 +176,31 @@ public class UsuarioDAOImpl extends DAOImpl implements UsuarioDAO {
     }
 
     @Override
-    protected void incluirValorDeParametrosParaObtenerPorId() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    protected void instanciarObjetoDelResultSet() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
     protected void limpiarObjetoDelResultSet() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    @Override
-    public Integer eliminar(Usuario usuario) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public Integer eliminar(Usuario usuario, Boolean usarTransaccion, Connection conexion) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public ArrayList<Usuario> listarTodos() {
-        return (ArrayList<Usuario>) super.listarTodos(null);
-    }
-
+    /*
+     * **************************************************************************
+     * OBTENER POR ID
+     * *************************************************************************
+     */
     @Override
     public Usuario obtenerPorId(Integer idUsuario) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    @Override
+    protected void incluirValorDeParametrosParaObtenerPorId() throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    /*
+     * **************************************************************************
+     * EXISTE USUARIO
+     * y funciones adicionales
+     * *************************************************************************
+     */
     @Override
     public Boolean existeUsuario(Usuario usuario) {
         this.usuario = usuario;

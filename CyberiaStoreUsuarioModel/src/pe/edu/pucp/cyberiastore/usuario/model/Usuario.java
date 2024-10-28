@@ -23,6 +23,7 @@ public class Usuario {
     private String nacionalidad;
     private String direccion;
     private TipoDocumento tipoDeDocumento;
+//    Byte foto[];
     private ArrayList<Rol> roles;
 
     public Usuario() {

@@ -36,6 +36,7 @@ public class TrabajadorDAOImpl extends DAOImpl implements TrabajadorDAO {
     public Integer insertar(Trabajador Trabajador) {
         this.trabajador = trabajador;
         Integer idTrabajador = null;
+        Integer idUsuario = null;
         Usuario usuario = new Usuario();
 
         usuario.setDocumento(this.trabajador.getDocumento());
@@ -58,11 +59,11 @@ public class TrabajadorDAOImpl extends DAOImpl implements TrabajadorDAO {
         try {
             this.iniciarTransaccion();
             if (!existeUsuario) {
-                idTrabajador = usuarioDAO.insertar(usuario, this.usarTransaccion, this.conexion);
-                this.trabajador.setIdUsuario(idTrabajador);
+                idUsuario = usuarioDAO.insertar(usuario, this.usarTransaccion, this.conexion);
+                this.trabajador.setIdUsuario(idUsuario);
             } else {
-                idTrabajador = usuario.getIdUsuario();
-                this.trabajador.setIdUsuario(idTrabajador);
+                idUsuario = usuario.getIdUsuario();
+                this.trabajador.setIdUsuario(idUsuario);
                 Boolean abreConexion = false;
                 existeTrabajador = this.existeTrabajador(this.trabajador, abreConexion);
             }
@@ -197,16 +198,16 @@ public class TrabajadorDAOImpl extends DAOImpl implements TrabajadorDAO {
 
     @Override
     protected String obtenerListaDeValoresYAtributosParaModificacion() {
-        return "sueldo=?, fecha_ingreso=?, id_usuario=?";
+        return "sueldo=?, fecha_ingreso=?";
     }
 
     @Override
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
         this.incluirParametroDouble(1, this.trabajador.getSueldo());
         this.incluirParametroDate(2, this.trabajador.getFechaDeIngreso());
-        this.incluirParametroInt(3, this.trabajador.getIdUsuario());
         // Este puede fallar porque esta relacionado al obtener por ID
-        this.incluirParametroInt(4, this.trabajador.getIdTrabajador());
+        // este es para la comparacion de id_trabajador= ?
+        this.incluirParametroInt(3, this.trabajador.getIdTrabajador());
     }
 
     @Override
@@ -295,123 +296,4 @@ public class TrabajadorDAOImpl extends DAOImpl implements TrabajadorDAO {
         }
         return idTrabajador != null;
     }
-
-//
-//    @Override
-//    public Integer insertar(Trabajador trabajador) {
-//        this.trabajador = trabajador;
-//        Integer id = super.insertar();
-//        trabajador.setIdTrabajador(id);
-//        return id;
-//    }
-//
-//    @Override
-//    protected String obtenerListaAtributos() {
-//    }
-//
-//    @Override
-//    protected String obtenerListaValoresParaInsertar() {
-//        String sql = "";
-//        sql = sql.concat("'" + this.trabajador.getSueldo() + "'");
-//        sql = sql.concat(",");
-//        sql = sql.concat("STR_TO_DATE('" + this.trabajador.fechaDeIngresoAsDDMMYYY() + "','%d-%m-%Y')");
-//        sql = sql.concat(",");
-//        sql = sql.concat("'" + this.trabajador.getIdUsuario() + "'");
-//        return sql;
-//    }
-//
-//    @Override
-//    public Integer modificar(Trabajador trabajador) {
-//        this.trabajador = trabajador;
-//        return super.modificar();
-//    }
-//
-//    @Override
-//    public Integer eliminar() {
-//        this.trabajador.setActivo(false);
-//        return super.eliminar();
-//    }
-//
-//    /**
-//     *
-//     * @param sql
-//     * @return
-//     */
-//    public ArrayList<Trabajador> listarTrabajador(String sql) {
-//        ArrayList<Trabajador> listaTrabajador = new ArrayList();
-//        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-//        try {
-//            this.abrirConexion();
-//            this.ejecutarConsultaEnBD(sql);
-//            while (this.resultSet.next()) {
-//                Trabajador trabajadorTemp = new Trabajador(
-//                        //public Trabajador(Double sueldo, Date fechaDeIngreso, Date fechaDeSalida, String documento, String telefono, String nombre, String apellidoPaterno, String apelldioMaterno, Date fechaDeNacimiento, String correo, Boolean activo, String contrasena, String nacionalidad, String direccion, TipoDocumento tipoDeDocumento) {
-//                        this.resultSet.getDouble("SUELDO"),
-//                        sdf.parse(this.resultSet.getString("FECHA_DE_INGRESO")),
-//                        //                        sdf.parse(this.resultSet.getString("FECHA_DE_SALIDA")),
-//
-//                        this.resultSet.getString("DOCUMENTO"),
-//                        this.resultSet.getString("TELEFONO"),
-//                        this.resultSet.getString("NOMBRE"),
-//                        this.resultSet.getString("APELLIDO_MATERNO"),
-//                        this.resultSet.getString("APELLIDO_PATERNO"),
-//                        sdf.parse(this.resultSet.getString("FECHA_NACIMIENTO")),
-//                        this.resultSet.getString("CORREO"),
-//                        (this.resultSet.getInt("ACTIVO") == 1),
-//                        this.resultSet.getString("CONTRASEÑA"),
-//                        this.resultSet.getString("NACIONALIDAD"),
-//                        this.resultSet.getString("DIRECCION"),
-//                        TipoDocumento.valueOf(this.resultSet.getString("idEspecialidad"))
-//                );
-//                listaTrabajador.add(trabajadorTemp);
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(TrabajadorDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (ParseException ex) {
-//            Logger.getLogger(TrabajadorDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-//        } finally {
-//            try {
-//                this.cerrarConexion();
-//            } catch (SQLException ex) {
-//                Logger.getLogger(TrabajadorDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        }
-//        return listaTrabajador;
-//    }
-//
-//    @Override
-//    public ArrayList<Trabajador> listarTodosTrabajador() {
-//        String sql = this.obtenerListaValoresParaSeleccionar();
-//        return this.listarTrabajador(sql);
-//    }
-//
-//    @Override
-//    public Trabajador obtenerPorId(Integer idTrabajador) {
-//        String sql = this.obtenerListaValoresParaSeleccionar();
-//        sql = sql.concat("where DOCUMENTO = '" + idTrabajador + "'");
-//        return listarTrabajador(sql).getFirst();
-//    }
-//
-//    @Override
-//    protected String obtenerListaValoresParaModificar() {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
-//
-//    @Override
-//    protected String obtenerCondicionPorId() {
-//        String sql = "";
-//        sql = sql.concat(" ID_TRABAJADOR = ");
-//        sql = sql.concat("'" + this.trabajador.getIdTrabajador() + "';");
-//        return sql;
-//    }
-//
-//    @Override
-//    public void insertarIdUsuario(Integer idUsuario) {
-//        this.trabajador.setIdUsuario(idUsuario);
-//    }
-//
-//    @Override
-//    public void insertarIdTrabajador(Integer idtrabajador) {
-//        this.trabajador.setIdTrabajador(idtrabajador);
-//    }
 }

@@ -106,7 +106,7 @@ public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
         this.incluirParametroInt(1, this.administrador.getIdTrabajador());
     }
 
-    /**
+    /*
      * ************************************************************************
      * MODIFICAR
      * ************************************************************************
@@ -139,7 +139,8 @@ public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
         try {
             this.iniciarTransaccion();
             trabajadorDAO.modificar(trabajador, this.usarTransaccion, this.conexion);
-            retorno = super.modificar();
+            // Este no se modifica a si mismo, porque solo almacena el ID del trabajador el cual no varia
+//            retorno = super.modificar();
             this.comitarTransaccion();
         } catch (SQLException ex) {
             System.err.println("Error al intentar modificar - " + ex);
@@ -170,7 +171,7 @@ public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
         if (this.tipo_Operacion == Tipo_Operacion.MODIFICAR || this.tipo_Operacion == Tipo_Operacion.ELIMINAR) {
             sql = "id_administrador=?";
         } else {
-            sql = "admin.id_administrador=?";
+            sql = "AND AD.id_administrador=?";
         }
         return sql;
     }
@@ -181,26 +182,59 @@ public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
         this.incluirParametroInt(2, this.administrador.getIdTrabajador());
     }
 
-    @Override
-    protected void incluirValorDeParametrosParaEliminacion() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    protected void incluirValorDeParametrosParaObtenerPorId() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
+    /*
+     * ************************************************************************
+     * ELIMINAR
+     * Los trabajadadores vendieron su alma al diablo xD
+     * ************************************************************************
+     */
     @Override
     public Integer eliminar(Administrador administrador) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public Administrador obtenerPorId(Integer idAdministrador) {
+    protected void incluirValorDeParametrosParaEliminacion() throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    /*
+     * ************************************************************************
+     * OBTENER POR ID
+     * ************************************************************************
+     */
+    @Override
+    public Administrador obtenerPorId(Integer idAdministrador) {
+        this.administrador = new Administrador();
+        this.administrador.setIdAdministrador(idAdministrador);
+        super.obtenerPorId();
+        return this.administrador;
+    }
+
+    @Override
+    protected String generarSQLParaListarPorId() {
+        String sql = "select ";
+        sql = sql.concat(obtenerProyeccionParaSelect());
+        sql = sql.concat(" from ").concat(this.nombre_tabla).concat(" AD ");
+        sql = sql.concat("JOIN trabajador TR ON AD.ID_TRABAJADOR = TR.ID_TRABAJADOR ");
+        sql = sql.concat("JOIN usuario US ON TR.ID_USUARIO = US.ID_USUARIO ");
+        sql = sql.concat("JOIN trabajador_x_sede TRXS ON TR.ID_TRABAJADOR = TRXS.ID_TRABAJADOR ");
+        sql = sql.concat("JOIN sede S ON TRXS.ID_SEDE = S.ID_SEDE ");
+        sql = sql.concat(" where US.activo = 1 ");
+        sql = sql.concat(this.obtenerPredicadoParaLlavePrimaria());
+        return sql;
+    }
+
+    @Override
+    protected void incluirValorDeParametrosParaObtenerPorId() throws SQLException {
+        this.incluirParametroInt(1, this.administrador.getIdAdministrador());
+    }
+
+    /*
+     * ************************************************************************
+     * LISTAR TODOS
+     * ************************************************************************
+     */
     @Override
     public ArrayList<Administrador> listarTodos() {
         return (ArrayList<Administrador>) super.listarTodos(null);
@@ -215,6 +249,7 @@ public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
         sql = sql.concat("JOIN usuario US ON TR.ID_USUARIO = US.ID_USUARIO ");
         sql = sql.concat("JOIN trabajador_x_sede TRXS ON TR.ID_TRABAJADOR = TRXS.ID_TRABAJADOR ");
         sql = sql.concat("JOIN sede S ON TRXS.ID_SEDE = S.ID_SEDE ");
+        sql = sql.concat("WHERE US.activo = 1 ");
         if (limite != null && limite > 0) {
             sql = sql.concat(" limit ").concat(limite.toString());
         }
@@ -266,9 +301,10 @@ public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
         this.administrador = null;
     }
 
-    /**
+    /*
      * *************************************************************************
      * EXISTE ADMINISTRADOR
+     * Funciones adicionales
      * *************************************************************************
      */
     @Override

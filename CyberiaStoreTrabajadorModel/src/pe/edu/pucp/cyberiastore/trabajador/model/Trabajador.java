@@ -13,13 +13,15 @@ public class Trabajador extends Usuario {
     private Date fechaDeIngreso;
     private Date fechaDeSalida;
     private Integer idSede;
+    private String nombreSede;//variable utilizada para el listar todos jejej
 
     public Trabajador() {
         this.fechaDeSalida = null;// siempre es nulo
     }
-    
+
     /**
      * Este constructor sirve para insertar
+     *
      * @param documento
      * @param telefono
      * @param nombre
@@ -33,7 +35,7 @@ public class Trabajador extends Usuario {
      * @param tipoDeDocumento
      * @param sueldo
      * @param fechaDeIngreso
-     * @param idSede 
+     * @param idSede
      */
     public Trabajador(String documento, String telefono, String nombre, String apellidoPaterno, String apellidoMaterno, Date fechaDeNacimiento, String correo,
             String direccion, String contrasena, String nacionalidad, TipoDocumento tipoDeDocumento, Double sueldo, Date fechaDeIngreso, Integer idSede) {
@@ -46,6 +48,7 @@ public class Trabajador extends Usuario {
 
     /**
      * Este constructor sirve para modificar
+     *
      * @param idTrabajador
      * @param sueldo
      * @param fechaDeIngreso
@@ -60,10 +63,10 @@ public class Trabajador extends Usuario {
      * @param contrasena
      * @param nacionalidad
      * @param direccion
-     * @param tipoDeDocumento 
+     * @param tipoDeDocumento
      */
-    public Trabajador(Integer idTrabajador, Double sueldo, Date fechaDeIngreso, Integer idUsuario,String documento, String telefono, String nombre, String apellidoPaterno, String apellidoMaterno, Date fechaDeNacimiento, String correo, Boolean activo, String contrasena, String nacionalidad, String direccion, TipoDocumento tipoDeDocumento) {
-        super(idUsuario,documento, telefono, nombre, apellidoPaterno, apellidoMaterno, fechaDeNacimiento, correo, activo, contrasena, nacionalidad, direccion, tipoDeDocumento);
+    public Trabajador(Integer idTrabajador, Double sueldo, Date fechaDeIngreso, Integer idUsuario, String documento, String telefono, String nombre, String apellidoPaterno, String apellidoMaterno, Date fechaDeNacimiento, String correo, Boolean activo, String contrasena, String nacionalidad, String direccion, TipoDocumento tipoDeDocumento) {
+        super(idUsuario, documento, telefono, nombre, apellidoPaterno, apellidoMaterno, fechaDeNacimiento, correo, activo, contrasena, nacionalidad, direccion, tipoDeDocumento);
         this.idTrabajador = idTrabajador;
         this.sueldo = sueldo;
         this.fechaDeIngreso = fechaDeIngreso;
@@ -107,6 +110,14 @@ public class Trabajador extends Usuario {
 
     public void setIdSede(Integer idSede) {
         this.idSede = idSede;
+    }
+
+    public String getNombreSede() {
+        return nombreSede;
+    }
+
+    public void setNombreSede(String nombreSede) {
+        this.nombreSede = nombreSede;
     }
 
 }

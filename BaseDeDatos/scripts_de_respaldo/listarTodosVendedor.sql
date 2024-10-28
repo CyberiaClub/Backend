@@ -1,9 +1,9 @@
 use cyberiastore;
 /*
-Sentencias SQL para poder listar todos los administradores y listarlos por su ID
+Sentencias SQL para poder listar todos los vendedores y listarlos por su ID
 */
 SELECT 
-    AD.ID_ADMINISTRADOR,
+    VEN.ID_VENDEDOR,
     TR.ID_TRABAJADOR,
     US.ID_USUARIO,
     US.NOMBRE,
@@ -19,15 +19,15 @@ SELECT
     TR.FECHA_INGRESO,
     S.NOMBRE AS SEDE_NOMBRE
 FROM 
-    administrador AD
-JOIN trabajador TR ON AD.ID_TRABAJADOR = TR.ID_TRABAJADOR
+    vendedor VEN
+JOIN trabajador TR ON VEN.ID_TRABAJADOR = TR.ID_TRABAJADOR
 JOIN usuario US ON TR.ID_USUARIO = US.ID_USUARIO
 JOIN trabajador_x_sede TRXS ON TR.ID_TRABAJADOR = TRXS.ID_TRABAJADOR
 JOIN sede S ON TRXS.ID_SEDE = S.ID_SEDE
 WHERE US.ACTIVO = 1;
 
 SELECT 
-    AD.ID_ADMINISTRADOR,
+    VEN.ID_VENDEDOR,
     TR.ID_TRABAJADOR,
     US.ID_USUARIO,
     US.NOMBRE,
@@ -43,10 +43,10 @@ SELECT
     TR.FECHA_INGRESO,
     S.NOMBRE AS SEDE_NOMBRE
 FROM 
-    administrador AD
-JOIN trabajador TR ON AD.ID_TRABAJADOR = TR.ID_TRABAJADOR
+    vendedor VEN
+JOIN trabajador TR ON VEN.ID_TRABAJADOR = TR.ID_TRABAJADOR
 JOIN usuario US ON TR.ID_USUARIO = US.ID_USUARIO
 JOIN trabajador_x_sede TRXS ON TR.ID_TRABAJADOR = TRXS.ID_TRABAJADOR
 JOIN sede S ON TRXS.ID_SEDE = S.ID_SEDE
 where US.ACTIVO = 1
-AND AD.ID_ADMINISTRADOR = 1; /*El 1 se debe de cambiar por ? en JAVA, para listar por cualquier ID*/
+AND VEN.ID_VENDEDOR= 1; /*El 1 se debe de cambiar por ? en JAVA, para listar por cualquier ID*/

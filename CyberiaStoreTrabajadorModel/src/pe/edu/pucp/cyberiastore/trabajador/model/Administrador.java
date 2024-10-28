@@ -6,7 +6,6 @@ import pe.edu.pucp.cyberiastore.usuario.model.TipoDocumento;
 public class Administrador extends Trabajador {
 
     private Integer idAdministrador;
-    private String nombreSede;//variable utilizada para el listar todos jejej
 
     public Administrador() {
 
@@ -20,8 +19,11 @@ public class Administrador extends Trabajador {
     /**
      * Este constructor usarlo unicamente para las modificaciones
      *
+     * @param idAdministrador
+     * @param idTrabajador
      * @param sueldo
      * @param fechaDeIngreso
+     * @param idUsuario
      * @param documento
      * @param telefono
      * @param nombre
@@ -35,8 +37,9 @@ public class Administrador extends Trabajador {
      * @param direccion
      * @param tipoDeDocumento
      */
-    public Administrador(Integer idTrabajador, Double sueldo, Date fechaDeIngreso, Integer idUsuario, String documento, String telefono, String nombre, String apellidoPaterno, String apellidoMaterno, Date fechaDeNacimiento, String correo, Boolean activo, String contrasena, String nacionalidad, String direccion, TipoDocumento tipoDeDocumento) {
+    public Administrador(Integer idAdministrador, Integer idTrabajador, Double sueldo, Date fechaDeIngreso, Integer idUsuario, String documento, String telefono, String nombre, String apellidoPaterno, String apellidoMaterno, Date fechaDeNacimiento, String correo, Boolean activo, String contrasena, String nacionalidad, String direccion, TipoDocumento tipoDeDocumento) {
         super(idTrabajador, sueldo, fechaDeIngreso, idUsuario, documento, telefono, nombre, apellidoPaterno, apellidoMaterno, fechaDeNacimiento, correo, activo, contrasena, nacionalidad, direccion, tipoDeDocumento);
+        this.idAdministrador = idAdministrador;
     }
 
     public Integer getIdAdministrador() {
@@ -46,13 +49,4 @@ public class Administrador extends Trabajador {
     public void setIdAdministrador(Integer idAdministrador) {
         this.idAdministrador = idAdministrador;
     }
-
-    public String getNombreSede() {
-        return nombreSede;
-    }
-
-    public void setNombreSede(String nombreSede) {
-        this.nombreSede = nombreSede;
-    }
-
 }
