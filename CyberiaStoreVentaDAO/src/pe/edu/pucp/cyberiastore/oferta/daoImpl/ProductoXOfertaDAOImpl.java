@@ -1,38 +1,38 @@
-package pe.edu.pucp.cyberiastore.comprobantedepago.daoImpl;
+package pe.edu.pucp.cyberiastore.oferta.daoImpl;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import pe.edu.pucp.cyberiastore.config.DAOImpl;
-import pe.edu.pucp.cyberiastore.comprobantedepago.dao.FacturaXClienteDAO;
+import pe.edu.pucp.cyberiastore.oferta.dao.ProductoXOfertaDAO;
 
-public class FacturaXClienteDAOImpl extends DAOImpl implements FacturaXClienteDAO{
+public class ProductoXOfertaDAOImpl extends DAOImpl implements ProductoXOfertaDAO{
     
-    private Integer idFactura;
-    private Integer idCliente;
+    private Integer idProducto;
+    private Integer idOferta;
     
-    public FacturaXClienteDAOImpl(){
-        super("FACTURA_X_CLIENTE");
+    public ProductoXOfertaDAOImpl(){
+        super("PRODUCTO_X_OFERTA");
     }
     
     @Override
-    public Integer insertar(Integer idFactura, Integer idCliente) {
-        this.idCliente = idCliente;
-        this.idFactura = idFactura;
+    public Integer insertar(Integer idProducto, Integer idOferta) {
+        this.idProducto = idProducto;
+        this.idOferta = idOferta;
         return super.insertar();
     }
 
     @Override
-    public Integer insertar(Integer idFactura, Integer idCliente, Boolean usarTransaccion, Connection conexion) {
+    public Integer insertar(Integer idProducto, Integer idOferta, Boolean usarTransaccion, Connection conexion) {
         this.usarTransaccion = usarTransaccion;
         this.conexion = conexion;
-        return this.insertar(idFactura,idCliente);
+        return this.insertar(idProducto, idOferta);
     }
     
     @Override
     protected String obtenerListaDeAtributosParaInsercion() {
-        return "id_factura,id_cliente";
+        return "id_producto, id_oferta";
     }
 
     @Override
@@ -42,8 +42,8 @@ public class FacturaXClienteDAOImpl extends DAOImpl implements FacturaXClienteDA
 
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
-        this.incluirParametroInt(1,this.idFactura);
-        this.incluirParametroInt(2,this.idCliente);
+        this.incluirParametroInt(1,this.idProducto);
+        this.incluirParametroInt(2,this.idOferta);
     }
 
     @Override

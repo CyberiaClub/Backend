@@ -19,7 +19,7 @@ public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
 
     private Proveedor proveedor;
 
-    public ProveedorDAOImpl(String nombre_tabla) {
+    public ProveedorDAOImpl() {
         super("PROVEEDOR");
         this.proveedor = null;
     }
@@ -114,7 +114,7 @@ public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
 
     @Override
     protected String obtenerListaDeValoresYAtributosParaModificacion() {
-        return "ruc=?,razon_social=?, nombre_del_contacto=?, correo=?, telefono=?, direccion=?, descripcion=?, activo=?";
+        return "ruc=?,razon_social=?, nombre_del_contacto=?, correo=?, telefono=?, direccion=?, descripcion=?";
     }
 
     @Override
@@ -135,10 +135,9 @@ public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
         this.incluirParametroString(3, this.proveedor.getNombreContacto());
         this.incluirParametroString(4, this.proveedor.getCorreo());
         this.incluirParametroString(5, this.proveedor.getTelefono());
-        this.incluirParametroString(6, this.proveedor.getTelefono());
-        this.incluirParametroString(7, this.proveedor.getDireccion());
-        this.incluirParametroString(8, this.proveedor.getDescripcion());
-        this.incluirParametroInt(9, this.proveedor.getIdProveedor());
+        this.incluirParametroString(6, this.proveedor.getDireccion());
+        this.incluirParametroString(7, this.proveedor.getDescripcion());
+        this.incluirParametroInt(8, this.proveedor.getIdProveedor());
     }
 
     @Override
@@ -181,7 +180,7 @@ public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
 
     @Override
     protected String obtenerProyeccionParaSelect() {
-        String sql = "id_proveedor, razon_social";
+        String sql = "id_proveedor, ruc, razon_social, nombre_del_contacto, correo, telefono, direccion, descripcion, activo";
         return sql;
     }
 
@@ -194,13 +193,28 @@ public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
     @Override
     protected void incluirValorDeParametrosParaObtenerPorId() throws SQLException {
         this.incluirParametroInt(1, this.proveedor.getIdProveedor());
+        this.incluirParametroString(2, this.proveedor.getRuc());
+        this.incluirParametroString(3, this.proveedor.getRazonSocial());
+        this.incluirParametroString(4, this.proveedor.getNombreContacto());
+        this.incluirParametroString(5, this.proveedor.getCorreo());
+        this.incluirParametroString(6, this.proveedor.getTelefono());
+        this.incluirParametroString(7, this.proveedor.getDireccion());
+        this.incluirParametroString(8, this.proveedor.getDescripcion());
+        this.incluirParametroBoolean(9, this.proveedor.getActivo());
     }
 
     @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.proveedor = new Proveedor();
         this.proveedor.setIdProveedor(this.resultSet.getInt("id_proveedor"));
+        this.proveedor.setRuc(this.resultSet.getString("ruc"));
         this.proveedor.setRazonSocial(this.resultSet.getString("razon_social"));
+        this.proveedor.setNombreContacto(this.resultSet.getString("nombre_del_contacto"));
+        this.proveedor.setCorreo(this.resultSet.getString("correo"));
+        this.proveedor.setTelefono(this.resultSet.getString("telefono"));
+        this.proveedor.setDireccion(this.resultSet.getString("direccion"));
+        this.proveedor.setDescripcion(this.resultSet.getString("descripcion"));
+        this.proveedor.setActivo(this.resultSet.getBoolean("activo"));
     }
 
     @Override

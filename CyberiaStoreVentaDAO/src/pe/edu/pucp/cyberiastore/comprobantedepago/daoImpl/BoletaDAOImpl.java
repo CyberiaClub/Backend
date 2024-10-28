@@ -1,4 +1,3 @@
-
 package pe.edu.pucp.cyberiastore.comprobantedepago.daoImpl;
 
 import java.sql.ResultSet;
@@ -7,15 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 import pe.edu.pucp.cyberiastore.config.DAOImpl;
 import pe.edu.pucp.cyberiastore.config.Tipo_Operacion;
-import pe.edu.pucp.cyberiastore.metodopago.dao.BoletaDAO;
-import pe.edu.pucp.cyberiastore.metodopago.dao.ComprobanteDePagoDAO;
-import pe.edu.pucp.cyberiastore.metodopago.model.Boleta;
-import pe.edu.pucp.cyberiastore.metodopago.model.ComprobanteDePago;
-import pe.edu.pucp.cyberiastore.metodopago.dao.BoletaXClienteDAO;
+import pe.edu.pucp.cyberiastore.comprobantedepago.dao.BoletaDAO;
+import pe.edu.pucp.cyberiastore.comprobantedepago.dao.ComprobanteDePagoDAO;
+import pe.edu.pucp.cyberiastore.comprobantedepago.model.Boleta;
+import pe.edu.pucp.cyberiastore.comprobantedepago.model.ComprobanteDePago;
+import pe.edu.pucp.cyberiastore.comprobantedepago.dao.BoletaXClienteDAO;
 import pe.edu.pucp.cyberiastore.usuario.model.Usuario;
 import pe.edu.pucp.cyberiastore.usuario.model.Cliente;
 import pe.edu.pucp.cyberiastore.comprobantedepago.daoImpl.BoletaXClienteDAOImpl;
-
 
 public class BoletaDAOImpl extends DAOImpl implements BoletaDAO {
 
@@ -32,7 +30,7 @@ public class BoletaDAOImpl extends DAOImpl implements BoletaDAO {
         this.boleta = boleta;
         Integer idComprobanteDePago = null;// el ID de la clase que hereda
         ComprobanteDePago comprobanteDePago = new ComprobanteDePago();// traemos la clase padre
-        
+
         comprobanteDePago.setFecha(boleta.getFecha());
         comprobanteDePago.setSubtotal(boleta.getSubtotal());
         comprobanteDePago.setTotal(boleta.getTotal());
@@ -43,32 +41,26 @@ public class BoletaDAOImpl extends DAOImpl implements BoletaDAO {
         comprobanteDePago.setIdPedido(boleta.getIdPedido());
 
         ComprobanteDePagoDAO comprobanteDePagoDAO = new ComprobanteDePagoDAOImpl();
-
         Integer idBoleta = null;
 
-        Boolean existeComprobanteDePago = comprobanteDePagoDAO.existeComprobanteDePago(comprobanteDePago);
         Boolean existeBoleta = false;
         this.usarTransaccion = false;
         try {
             this.iniciarTransaccion();
-            if (!existeComprobanteDePago) {
-                idComprobanteDePago = comprobanteDePagoDAO.insertar(comprobanteDePago, this.usarTransaccion, this.conexion);
-                this.boleta.setIdComprobanteDePago(idComprobanteDePago);
-            } else {
-                idComprobanteDePago = comprobanteDePago.getIdComprobanteDePago();
-                this.boleta.setIdComprobanteDePago(idComprobanteDePago);
-                Boolean abreConexion = false;
-                existeBoleta = this.existeBoleta(this.boleta, abreConexion);
-            }
+            idComprobanteDePago = comprobanteDePagoDAO.insertar(comprobanteDePago, this.usarTransaccion, this.conexion);
+            this.boleta.setIdComprobanteDePago(idComprobanteDePago);
+            Boolean abreConexion = false;
+            existeBoleta = this.existeBoleta(this.boleta, abreConexion);
+            
             if (!existeBoleta) {
                 this.retornarLlavePrimaria = true;
                 idBoleta = super.insertar();
                 this.boleta.setIdBoleta(idBoleta);
                 this.boleta.setIdComprobanteDePago(comprobanteDePago.getIdComprobanteDePago());
                 this.retornarLlavePrimaria = false;
-                 // pasamos llamar a la clase BOLETAXCLIENTE
+                // pasamos llamar a la clase BOLETAXCLIENTE
                 BoletaXClienteDAO boletaXCliente = new BoletaXClienteDAOImpl();
-                boletaXCliente.insertar(idBoleta,boleta.getCliente().getIdUsuario(), this.usarTransaccion, this.conexion);
+                boletaXCliente.insertar(idBoleta, boleta.getCliente().getIdUsuario(), this.usarTransaccion, this.conexion);
             }
             this.comitarTransaccion();
         } catch (SQLException ex) {
@@ -91,17 +83,19 @@ public class BoletaDAOImpl extends DAOImpl implements BoletaDAO {
 
     @Override
     protected String obtenerListaDeAtributosParaInsercion() {
-        return "NUMERO_BOLETA";
+        return "NUMERO_BOLETA, ACTIVO, ID_COMPROBANTE_DE_PAGO";
     }
 
     @Override
     protected String incluirListaDeParametrosParaInsercion() {
-        return "?";
+        return "?,?,?";
     }
 
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
         this.incluirParametroInt(1, this.boleta.getNumeroDeBoleta());
+        this.incluirParametroBoolean(2, this.boleta.getActivo());
+        this.incluirParametroInt(3, this.boleta.getIdComprobanteDePago());
     }
 
     /**
@@ -109,7 +103,6 @@ public class BoletaDAOImpl extends DAOImpl implements BoletaDAO {
      * MODIFICAR
      * ************************************************************************
      */
-    
     @Override
     public Integer modificar(Boleta boleta) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -126,7 +119,7 @@ public class BoletaDAOImpl extends DAOImpl implements BoletaDAO {
         if (this.tipo_Operacion == Tipo_Operacion.MODIFICAR || this.tipo_Operacion == Tipo_Operacion.ELIMINAR) {
             sql = "id_boleta=?";
         } else {
-            sql = "admin.id_boleta=?";
+            sql = "b.id_boleta=?";
         }
         return sql;
     }
@@ -138,21 +131,15 @@ public class BoletaDAOImpl extends DAOImpl implements BoletaDAO {
     }
 
     @Override
-    protected void incluirValorDeParametrosParaEliminacion() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
     protected void incluirValorDeParametrosParaObtenerPorId() throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     /**
      * ************************************************************************
      * ELIMINAR
      * ************************************************************************
      */
-
     @Override
     public Integer eliminar(Boleta boleta) {
         Integer retorno = 0;
@@ -180,18 +167,22 @@ public class BoletaDAOImpl extends DAOImpl implements BoletaDAO {
         this.usarTransaccion = true;
         return retorno;
     }
+    
+    @Override
+    protected void incluirValorDeParametrosParaEliminacion() throws SQLException {
+        this.incluirParametroInt(1, this.boleta.getIdBoleta());
+    }
 
     @Override
     public Boleta obtenerPorId(Integer idBoleta) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     /**
      * ************************************************************************
      * LISTAR TODOS
      * ************************************************************************
      */
-
     @Override
     public ArrayList<Boleta> listarTodos() {
         return (ArrayList<Boleta>) super.listarTodos(null);
@@ -202,23 +193,23 @@ public class BoletaDAOImpl extends DAOImpl implements BoletaDAO {
         String sql = "select ";
         sql = sql.concat(obtenerProyeccionParaSelect());
         sql = sql.concat(" from ").concat(this.nombre_tabla).concat(" B ");
-        sql = sql.concat("JOIN comprobante_de_pago CP ON B.ID_COMPROBANTE_DE_PAGO = CP.ID_COMPROBANTE_DE_PAGO");
-        sql = sql.concat("JOIN boleta_x_cliente BXC ON B.ID_BOLETA = BXC.ID_BOLETA");
-        sql = sql.concat("JOIN cliente C ON BXC.ID_CLIENTE = C.ID_CLIENTE");
-        sql = sql.concat("JOIN usuario U ON C.ID_CLIENTE = U.ID_CLIENTE");
+        sql = sql.concat("JOIN comprobante_de_pago CP ON B.ID_COMPROBANTE_DE_PAGO = CP.ID_COMPROBANTE_DE_PAGO ");
+        sql = sql.concat("JOIN boleta_x_cliente BXC ON B.ID_BOLETA = BXC.ID_BOLETA ");
+        sql = sql.concat("JOIN cliente C ON BXC.ID_CLIENTE = C.ID_CLIENTE ");
+        sql = sql.concat("JOIN usuario U ON C.ID_CLIENTE = U.ID_CLIENTE ");
 //        sql = sql.concat("JOIN pedido p ON CP.ID_PEDIDO = P.ID_PEDIDO");
         if (limite != null && limite > 0) {
             sql = sql.concat(" limit ").concat(limite.toString());
-        }   
+        }
         return sql;
     }
 
     @Override
     protected String obtenerProyeccionParaSelect() {
         String sql = "B.ID_BOLETA, CP.ID_COMPROBANTE_DE_PAGO,";
-        sql = sql.concat("CP.FECHA,CP.SUBTOTAL,CP.IGV,CP.TOTAL,CP.DESCUENTO_APLICADO");
-        sql = sql.concat("B.NUMERO_BOLETA");
-        sql = sql.concat("U.DOCUMENTO, U.NOMBRE, U.APELLIDO_PATERNO, U.APELLIDO_MATERNO");
+        sql = sql.concat("CP.FECHA,CP.SUBTOTAL,CP.IGV,CP.TOTAL,CP.DESCUENTO_APLICADO, ");
+        sql = sql.concat("B.NUMERO_BOLETA, ");
+        sql = sql.concat("U.DOCUMENTO, U.NOMBRE, U.APELLIDO_PATERNO, U.APELLIDO_MATERNO, ");
         return sql;
     }
 
@@ -231,7 +222,7 @@ public class BoletaDAOImpl extends DAOImpl implements BoletaDAO {
     @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.boleta = new Boleta();
-        
+
         this.boleta.setIdBoleta(this.resultSet.getInt("id_boleta"));
         this.boleta.setIdComprobanteDePago(this.resultSet.getInt("id_comprobanteDePago"));
         this.boleta.setFecha(this.resultSet.getDate("fecha"));
@@ -240,12 +231,12 @@ public class BoletaDAOImpl extends DAOImpl implements BoletaDAO {
         this.boleta.setTotal(this.resultSet.getDouble("total"));
         this.boleta.setDescuentoAplicado(this.resultSet.getDouble("descuento_aplicado"));
         this.boleta.setNumeroDeBoleta(this.resultSet.getInt("numero_boleta"));
-        
+
         this.boleta.getCliente().setDocumento(this.resultSet.getString("documento"));
         this.boleta.getCliente().setNombre(this.resultSet.getString("nombre"));
         this.boleta.getCliente().setApellidoPaterno(this.resultSet.getString("apellido_paterno"));
         this.boleta.getCliente().setApellidoMaterno(this.resultSet.getString("apellido_materno"));
-        
+
     }
 
     @Override
@@ -273,7 +264,7 @@ public class BoletaDAOImpl extends DAOImpl implements BoletaDAO {
                 this.abrirConexion();
             }
             String sql = "select id_boleta from boleta where ";
-            sql = sql.concat("id_comprobanteDePago=? ");
+            sql = sql.concat("id_comprobante_de_pago=? ");
             this.colocarSQLenStatement(sql);
             this.incluirParametroInt(1, this.boleta.getIdComprobanteDePago());
             this.ejecutarConsultaEnBD(sql);

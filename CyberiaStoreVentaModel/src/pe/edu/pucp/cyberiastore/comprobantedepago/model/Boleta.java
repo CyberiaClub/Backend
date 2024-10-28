@@ -1,4 +1,4 @@
-package pe.edu.pucp.cyberiastore.metodopago.model;
+package pe.edu.pucp.cyberiastore.comprobantedepago.model;
 
 import java.util.Date;
 

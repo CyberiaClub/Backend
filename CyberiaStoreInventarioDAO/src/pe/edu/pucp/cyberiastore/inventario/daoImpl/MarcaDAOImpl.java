@@ -183,7 +183,7 @@ public class MarcaDAOImpl extends DAOImpl implements MarcaDAO {
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.marca = new Marca();
         this.marca.setIdMarca(this.resultSet.getInt("id_marca"));
-        this.marca.setNombre(this.resultSet.getString("razon_social"));
+        this.marca.setNombre(this.resultSet.getString("nombre"));
     }
 
     @Override

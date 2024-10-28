@@ -178,7 +178,7 @@ public abstract class DAOImpl {
     private String generarSQLParaEliminacion() {
         String sql = "update ";
         sql = sql.concat(this.nombre_tabla);
-        sql = sql.concat(" set activo = 0 where");
+        sql = sql.concat(" set activo = 0 where ");
         sql = sql.concat(this.obtenerPredicadoParaLlavePrimaria());
         return sql;
     }

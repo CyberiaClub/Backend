@@ -1,8 +1,8 @@
-package pe.edu.pucp.cyberiastore.metodopago.bo;
+package pe.edu.pucp.cyberiastore.comprobantedepago.bo;
 
 import pe.edu.pucp.cyberiastore.comprobantedepago.daoImpl.ComprobanteDePagoDAOImpl;
-import pe.edu.pucp.cyberiastore.metodopago.model.ComprobanteDePago;
-import pe.edu.pucp.cyberiastore.metodopago.dao.ComprobanteDePagoDAO;
+import pe.edu.pucp.cyberiastore.comprobantedepago.model.ComprobanteDePago;
+import pe.edu.pucp.cyberiastore.comprobantedepago.dao.ComprobanteDePagoDAO;
 
 
 public class ComprobanteDePagoBO {

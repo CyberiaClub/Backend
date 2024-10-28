@@ -1,7 +1,7 @@
-package pe.edu.pucp.cyberiastore.metodopago.model;
+package pe.edu.pucp.cyberiastore.comprobantedepago.model;
 
 import java.text.SimpleDateFormat;
-import pe.edu.pucp.cyberiastore.usuario.model.Usuario;
+import pe.edu.pucp.cyberiastore.usuario.model.Cliente;
 import java.util.Date;
 
 
@@ -16,12 +16,13 @@ public class ComprobanteDePago {
     private Integer idPedido;
     private Integer idOferta;
     private Boolean activo;
-    private Usuario cliente; //Para insertar en tabla intermedia
+    private Cliente cliente; //Para insertar en tabla intermedia
     
     public ComprobanteDePago(){
         this.igv = 18.0;
         this.idOferta = null;
         this.activo = true;
+        this.cliente = new Cliente();
     }
     
     public ComprobanteDePago(Date fecha, Double subtotal, Double total, Double igv, Double descuentoAplicado) {
@@ -111,14 +112,14 @@ public class ComprobanteDePago {
     /**
      * @return the cliente
      */
-    public Usuario getCliente() {
+    public Cliente getCliente() {
         return cliente;
     }
 
     /**
      * @param cliente the cliente to set
      */
-    public void setCliente(Usuario cliente) {
+    public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
 }

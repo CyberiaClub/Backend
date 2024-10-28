@@ -6,8 +6,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import pe.edu.pucp.cyberiastore.config.DAOImpl;
-import pe.edu.pucp.cyberiastore.metodopago.model.ComprobanteDePago;
-import pe.edu.pucp.cyberiastore.metodopago.dao.ComprobanteDePagoDAO;
+import pe.edu.pucp.cyberiastore.comprobantedepago.model.ComprobanteDePago;
+import pe.edu.pucp.cyberiastore.comprobantedepago.dao.ComprobanteDePagoDAO;
 
 public class ComprobanteDePagoDAOImpl extends DAOImpl implements ComprobanteDePagoDAO {
 
@@ -45,7 +45,7 @@ public class ComprobanteDePagoDAOImpl extends DAOImpl implements ComprobanteDePa
 
     @Override
     protected String obtenerListaDeAtributosParaInsercion() {
-        return "FECHA, SUBTOTAL, TOTAL, IGV, DESCUENTO_APLICADO, ACTIVO, ID_PEDIDO, ID_OFERTA, ID_CLIENTE";
+        return "FECHA, SUBTOTAL, TOTAL, IGV, DESCUENTO_APLICADO, ACTIVO, ID_PEDIDO, ID_OFERTA";
     }
 
     @Override

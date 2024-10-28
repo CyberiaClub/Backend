@@ -64,7 +64,7 @@ public class TipoProductoDAOImpl extends DAOImpl implements TipoProductoDAO {
 
     @Override
     protected String incluirListaDeParametrosParaInsercion() {
-        return "?,?,?,?,?,?,?,?";
+        return "?,?";
     }
 
     @Override
@@ -103,16 +103,16 @@ public class TipoProductoDAOImpl extends DAOImpl implements TipoProductoDAO {
 
     @Override
     protected String obtenerListaDeValoresYAtributosParaModificacion() {
-        return "tipo=?,activo=?";
+        return "tipo=?";
     }
 
     @Override
     protected String obtenerPredicadoParaLlavePrimaria() {
         String sql = "";
         if (this.tipo_Operacion == Tipo_Operacion.MODIFICAR || this.tipo_Operacion == Tipo_Operacion.ELIMINAR) {
-            sql = "id_tipoProducto=?";
+            sql = "id_tipo_producto=?";
         } else {
-            sql = "id_tipoProducto=?";
+            sql = "id_tipo_producto=?";
         }
         return sql;
     }
@@ -120,8 +120,7 @@ public class TipoProductoDAOImpl extends DAOImpl implements TipoProductoDAO {
     @Override
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
         this.incluirParametroString(1, this.tipoProducto.getTipo());
-        this.incluirParametroBoolean(2, this.tipoProducto.getActivo());
-        this.incluirParametroInt(3, this.tipoProducto.getIdTipoProducto());
+        this.incluirParametroInt(2, this.tipoProducto.getIdTipoProducto());
     }
 
     @Override
@@ -164,7 +163,7 @@ public class TipoProductoDAOImpl extends DAOImpl implements TipoProductoDAO {
 
     @Override
     protected String obtenerProyeccionParaSelect() {
-        String sql = "id_tipoProducto, tipo";
+        String sql = "id_tipo_producto, tipo";
         return sql;
     }
 
@@ -182,7 +181,7 @@ public class TipoProductoDAOImpl extends DAOImpl implements TipoProductoDAO {
     @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.tipoProducto = new TipoProducto();
-        this.tipoProducto.setIdTipoProducto(this.resultSet.getInt("id_tipoProducto"));
+        this.tipoProducto.setIdTipoProducto(this.resultSet.getInt("id_tipo_producto"));
         this.tipoProducto.setTipo(this.resultSet.getString("tipo"));
     }
 
@@ -213,13 +212,13 @@ public class TipoProductoDAOImpl extends DAOImpl implements TipoProductoDAO {
             if (abreConexion) {
                 this.abrirConexion();
             }
-            String sql = "select id_TipoProducto from tipoProducto where ";
+            String sql = "select id_tipo_producto from tipo_producto where ";
             sql = sql.concat("tipo=? ");
             this.colocarSQLenStatement(sql);
             this.incluirParametroString(1, this.tipoProducto.getTipo());
             this.ejecutarConsultaEnBD(sql);
             if (this.resultSet.next()) {
-                idTipoProducto = this.resultSet.getInt("id_TipoProducto");
+                idTipoProducto = this.resultSet.getInt("id_tipo_producto");
             }
         } catch (SQLException ex) {
             System.err.println("Error al consultar si existe tipoProducto - " + ex);
