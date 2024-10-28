@@ -5,6 +5,10 @@ public class TipoProducto {
     private Integer idTipoProducto;
     private String tipo;
     private Boolean activo;
+    
+    public TipoProducto(){
+        this.activo = true;
+    }
 
     public TipoProducto(String tipo) {
         this.tipo = tipo;
@@ -34,7 +38,4 @@ public class TipoProducto {
     public void setActivo(Boolean activo) {
         this.activo = activo;
     }
-    
-    
-
 }

@@ -85,7 +85,7 @@ public class TrabajadorXSedeDAOImpl extends DAOImpl implements TrabajadorXSedeDA
         this.idTrabajador = idTrabajador;
         return super.insertar();
     }
-
+ 
     @Override
     public Integer insertar(Integer idTrabajador, Integer idSede, Boolean usarTransaccion, Connection conexion) {
         this.usarTransaccion = usarTransaccion;

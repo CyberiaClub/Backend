@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import pe.edu.pucp.cyberiastore.proveedor.model.Proveedor;
 import pe.edu.pucp.cyberiastore.config.DAOImpl;
+import pe.edu.pucp.cyberiastore.config.Tipo_Operacion;
 import pe.edu.pucp.cyberiastore.proveedor.dao.ProveedorDAO;
 import pe.edu.pucp.cyberiastore.proveedor.daoImpl.ProveedorDAOImpl;
 import pe.edu.pucp.cyberiastore.proveedor.model.Proveedor;
@@ -18,236 +19,236 @@ public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
 
     private Proveedor proveedor;
 
-    public ProveedorDAOImpl() {
+    public ProveedorDAOImpl(String nombre_tabla) {
         super("PROVEEDOR");
         this.proveedor = null;
-        this.retornarLlavePrimaria = true;
+    }
+    
+    @Override
+    public Integer insertar(Proveedor proveedor) {
+        this.proveedor = proveedor;
+        Integer idProveedor = null;
+
+        Boolean existeProveedor = this.existeProveedor(proveedor);
+        this.usarTransaccion = false;
+        try {
+            this.iniciarTransaccion();
+            if (!existeProveedor) {
+                this.retornarLlavePrimaria = true;
+                idProveedor = super.insertar();
+                this.retornarLlavePrimaria = false;
+
+            } else {
+                idProveedor = proveedor.getIdProveedor();
+            }
+            this.comitarTransaccion();
+        } catch (SQLException ex) {
+            System.err.println("Error al intentar insertar - " + ex);
+            try {
+                this.rollbackTransaccion();
+            } catch (SQLException ex1) {
+                System.err.println("Error al intentar hacer rollback - " + ex1);
+            }
+        } finally {
+            try {
+                this.cerrarConexion();
+            } catch (SQLException ex) {
+                System.err.println("Error al intentar cerrar la conexion - " + ex);
+            }
+        }
+        this.usarTransaccion = true;
+        return idProveedor;
     }
 
     @Override
     protected String obtenerListaDeAtributosParaInsercion() {
-        return "RUC, NOMBRE, FECHA_REGISTRO, ACTIVO";
+        return "RUC,RAZON_SOCIAL, NOMBRE_DEL_CONTACTO, CORREO, TELEFONO, DIRECCION, DESCRIPCION, ACTIVO";
+
     }
 
     @Override
     protected String incluirListaDeParametrosParaInsercion() {
-        return "?,?,?,?";
+        return "?,?,?,?,?,?,?,?";
     }
 
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
         this.incluirParametroString(1, this.proveedor.getRuc());
-        this.incluirParametroString(2, this.proveedor.getNombre());
-        this.incluirParametroDate(3, this.proveedor.getFechaRegistro());
-        this.incluirParametroBoolean(4, this.proveedor.getActivo());
-    }
 
-    @Override
-    protected String obtenerListaDeValoresYAtributosParaModificacion() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    protected String obtenerPredicadoParaLlavePrimaria() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    protected void incluirValorDeParametrosParaModificacion() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    protected void incluirValorDeParametrosParaEliminacion() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    protected String obtenerProyeccionParaSelect() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    protected void agregarObjetoALaLista(List lista, ResultSet resultSet) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    protected void incluirValorDeParametrosParaObtenerPorId() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    protected void instanciarObjetoDelResultSet() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    protected void limpiarObjetoDelResultSet() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public Integer insertar(Proveedor proveedor) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.incluirParametroString(2, this.proveedor.getRazonSocial());
+        this.incluirParametroString(3, this.proveedor.getNombreContacto());
+        this.incluirParametroString(4, this.proveedor.getCorreo());
+        this.incluirParametroString(5, this.proveedor.getTelefono());
+        this.incluirParametroString(6, this.proveedor.getDireccion());
+        this.incluirParametroString(7, this.proveedor.getDescripcion());
+        this.incluirParametroBoolean(8, this.proveedor.getActivo());
     }
 
     @Override
     public Integer modificar(Proveedor proveedor) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Integer retorno = 0;
+        this.proveedor = proveedor;
+        this.usarTransaccion = false;
+
+        try {
+            this.iniciarTransaccion();
+            retorno = super.modificar();
+            this.comitarTransaccion();
+        } catch (SQLException ex) {
+            System.err.println("Error al intentar modificar - " + ex);
+            try {
+                this.rollbackTransaccion();
+            } catch (SQLException ex1) {
+                System.err.println("Error al intentar hacer rollback - " + ex1);
+            }
+        } finally {
+            try {
+                this.cerrarConexion();
+            } catch (SQLException ex) {
+                System.err.println("Error al intentar cerrar la conexion - " + ex);
+            }
+        }
+        this.usarTransaccion = true;
+        return retorno;
+    }
+
+    @Override
+    protected String obtenerListaDeValoresYAtributosParaModificacion() {
+        return "ruc=?,razon_social=?, nombre_del_contacto=?, correo=?, telefono=?, direccion=?, descripcion=?, activo=?";
+    }
+
+    @Override
+    protected String obtenerPredicadoParaLlavePrimaria() {
+        String sql = "";
+        if (this.tipo_Operacion == Tipo_Operacion.MODIFICAR || this.tipo_Operacion == Tipo_Operacion.ELIMINAR) {
+            sql = "id_proveedor=?";
+        } else {
+            sql = "id_proveedor=?";
+        }
+        return sql;
+    }
+
+    @Override
+    protected void incluirValorDeParametrosParaModificacion() throws SQLException {
+        this.incluirParametroString(1, this.proveedor.getRuc());
+        this.incluirParametroString(2, this.proveedor.getRazonSocial());
+        this.incluirParametroString(3, this.proveedor.getNombreContacto());
+        this.incluirParametroString(4, this.proveedor.getCorreo());
+        this.incluirParametroString(5, this.proveedor.getTelefono());
+        this.incluirParametroString(6, this.proveedor.getTelefono());
+        this.incluirParametroString(7, this.proveedor.getDireccion());
+        this.incluirParametroString(8, this.proveedor.getDescripcion());
+        this.incluirParametroInt(9, this.proveedor.getIdProveedor());
     }
 
     @Override
     public Integer eliminar(Proveedor proveedor) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Integer retorno = 0;
+        this.proveedor = proveedor;
+
+        this.usarTransaccion = false;
+        try {
+            this.iniciarTransaccion();
+            retorno = super.eliminar();
+            this.comitarTransaccion();
+        } catch (SQLException ex) {
+            System.err.println("Error al intentar eliminar - " + ex);
+            try {
+                this.rollbackTransaccion();
+            } catch (SQLException ex1) {
+                System.err.println("Error al intentar hacer rollback - " + ex1);
+            }
+        } finally {
+            try {
+                this.cerrarConexion();
+            } catch (SQLException ex) {
+                System.err.println("Error al intentar cerrar la conexion - " + ex);
+            }
+        }
+        this.usarTransaccion = true;
+        return retorno;
+    }
+
+    @Override
+    protected void incluirValorDeParametrosParaEliminacion() throws SQLException {
+        this.incluirParametroInt(1, this.proveedor.getIdProveedor());
     }
 
     @Override
     public ArrayList<Proveedor> listarTodos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return (ArrayList<Proveedor>) super.listarTodos(null);
+    }
+
+    @Override
+    protected String obtenerProyeccionParaSelect() {
+        String sql = "id_proveedor, razon_social";
+        return sql;
+    }
+
+    @Override
+    protected void agregarObjetoALaLista(List lista, ResultSet resultSet) throws SQLException {
+        instanciarObjetoDelResultSet();
+        lista.add(this.proveedor);
+    }
+
+    @Override
+    protected void incluirValorDeParametrosParaObtenerPorId() throws SQLException {
+        this.incluirParametroInt(1, this.proveedor.getIdProveedor());
+    }
+
+    @Override
+    protected void instanciarObjetoDelResultSet() throws SQLException {
+        this.proveedor = new Proveedor();
+        this.proveedor.setIdProveedor(this.resultSet.getInt("id_proveedor"));
+        this.proveedor.setRazonSocial(this.resultSet.getString("razon_social"));
+    }
+
+    @Override
+    protected void limpiarObjetoDelResultSet() {
+        this.proveedor = null;
     }
 
     @Override
     public Proveedor obtenerPorId(Integer idProveedor) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.proveedor = new Proveedor();
+        this.proveedor.setIdProveedor(idProveedor);
+        super.obtenerPorId();
+        return this.proveedor;
     }
 
     @Override
     public Boolean existeProveedor(Proveedor proveedor) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Boolean abreConexion = true;
+        return existeProveedor(proveedor, abreConexion);
     }
 
     @Override
     public Boolean existeProveedor(Proveedor proveedor, Boolean abreConexion) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.proveedor = proveedor;
+        Integer idProveedor = null;
+        try {
+            if (abreConexion) {
+                this.abrirConexion();
+            }
+            String sql = "select id_Proveedor from proveedor where ";
+            sql = sql.concat("ruc=? ");
+            this.colocarSQLenStatement(sql);
+            this.incluirParametroString(1, this.proveedor.getRuc());
+            this.ejecutarConsultaEnBD(sql);
+            if (this.resultSet.next()) {
+                idProveedor = this.resultSet.getInt("id_Proveedor");
+            }
+        } catch (SQLException ex) {
+            System.err.println("Error al consultar si existe proveedor - " + ex);
+        } finally {
+            try {
+                if (abreConexion) {
+                    this.cerrarConexion();
+                }
+            } catch (SQLException ex) {
+                System.err.println("Error al cerrar la conexión - " + ex);
+            }
+        }
+        return idProveedor != null;
     }
-
-//    @Override
-//    public Integer insertar(Proveedor proveedor) {
-//        this.proveedor = proveedor;
-//        Integer id = this.insertar();
-//        return id;
-//    }
-//
-//    @Override
-//    public Integer modificar(Proveedor proveedor) {
-//        this.proveedor = proveedor;
-//        return this.modificar();
-//    }
-//
-//    @Override
-//    public Integer eliminar(Proveedor proveedor) {
-//        this.proveedor = proveedor;
-//        return this.modificar();
-//    }
-//
-//    @Override
-//    protected String obtenerListaAtributos() {
-//    }
-//
-//    @Override
-//    protected String obtenerListaValoresParaInsertar() {
-//        String valores = "";
-//        valores = valores.concat("'" + proveedor.getRuc() + "'");
-//        valores = valores.concat(", ");
-//        valores = valores.concat("'" + proveedor.getNombre() + "'");
-//        valores = valores.concat(", ");
-//        valores = valores.concat("STR_TO_DATE('" + this.proveedor.fechaRegistroComoDDMMYYY()+ "','%d-%m-%Y')");
-//        valores = valores.concat(", ");
-//        valores = valores.concat("'"+(proveedor.getActivo()?0:1)+"'");
-//        return valores;
-//    }
-//
-//    @Override
-//    protected String obtenerListaValoresParaModificar() {
-//        String valores = "";
-//        valores = valores.concat("RUC: ");
-//        valores = valores.concat("'" + proveedor.getRuc() + "'");
-//        valores = valores.concat(", NOMBRE: ");
-//        valores = valores.concat("'" + proveedor.getNombre() + "'");
-//        valores = valores.concat(", FECHA_REGISTRO: ");
-//        valores = valores.concat("'" + proveedor.getFechaRegistro() + "'");
-//        valores = valores.concat(", ACTIVO: ");
-//        valores = valores.concat("'"+proveedor.getActivo()+"'");
-//        return valores;
-//    }
-//
-//    @Override
-//    protected String obtenerCondicionPorId() {
-//        String sql = "";
-//        sql = sql.concat("RUC = ");
-//        sql = sql.concat("'" + proveedor.getRuc() + "'");
-//        return sql;
-//    }
-//
-//    @Override
-//    public ArrayList<Proveedor> listar(String listado) {
-//        ArrayList<Proveedor> listadoProveedores = new ArrayList();
-//        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-//        try {
-//            this.abrirConexion();
-//            this.ejecutarConsultaEnBD(listado);
-//            while (this.resultSet.next()) {
-//                Proveedor plantillaProveedor = new Proveedor(
-//                        this.resultSet.getString("RUC"),
-//                        this.resultSet.getString("NOMBRE"),
-//                        sdf.parse(this.resultSet.getString("FECHA_REGISTRO"))
-//                );
-//                listadoProveedores.add(plantillaProveedor);
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(ProveedorDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (ParseException ex) {
-//            Logger.getLogger(ProveedorDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-//        } finally {
-//            try {
-//                this.cerrarConexion();
-//            } catch (SQLException ex) {
-//                Logger.getLogger(ProveedorDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        }
-//        return listadoProveedores;
-//    }
-//
-//    @Override
-//    public ArrayList<Proveedor> listarTodos() {
-//        String sql = this.obtenerListaValoresParaSeleccionar();
-//        return this.listar(sql);
-//    }
-//
-//    @Override
-//    public Proveedor obtenerPorId(String ruc) {
-//        String sql = this.obtenerListaValoresParaSeleccionar();
-//        sql = sql.concat(" and RUC = '" + ruc + "'");
-//        return this.listar(sql).getFirst();
-//    }
-//    
-//    @Override
-//    public Integer obtenerId(Proveedor proveedor) {
-//        this.proveedor = proveedor;
-//        try {
-//            Integer id = this.retornarUltimoAutogenerado();
-//            this.proveedor.setIdProveedor(id);
-//        } catch (SQLException ex) {
-//            Logger.getLogger(ProveedorDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        return null;
-//    }
-//    
-//    @Override
-//    public String imprimirId(){
-//        return "" + this.proveedor.getIdProveedor();
-//    }
-//
-//    @Override
-//    public Integer obtenerIdPorRuc(String ruc) {
-//        String sql = "select ID_PROVEEDOR as id from PROVEEDOR where RUC = '"+ruc+"'";
-//        try {
-//            Integer id = this.retonarIdPorAtributo(sql);
-//            return id;
-//        } catch (SQLException ex) {
-//            Logger.getLogger(ProveedorDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        return null;
-//    }
 }

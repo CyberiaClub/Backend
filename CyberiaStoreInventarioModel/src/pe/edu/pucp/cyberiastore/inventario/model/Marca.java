@@ -1,12 +1,16 @@
-    package pe.edu.pucp.cyberiastore.inventario.model;
+package pe.edu.pucp.cyberiastore.inventario.model;
 
 public class Marca {
 
     private Integer idMarca;
     private String nombre;
     private Boolean activo;
-    
-    public Marca(String nombre) {  
+
+    public Marca() {
+        this.activo = true;
+    }
+
+    public Marca(String nombre) {
         this.nombre = nombre;
         this.activo = true;
     }
@@ -14,8 +18,8 @@ public class Marca {
     public void setIdMarca(Integer idMarca) {
         this.idMarca = idMarca;
     }
-    
-    public Integer getIdMarca(){
+
+    public Integer getIdMarca() {
         return idMarca;
     }
 
@@ -26,7 +30,7 @@ public class Marca {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
+
     public Boolean getActivo() {
         return activo;
     }

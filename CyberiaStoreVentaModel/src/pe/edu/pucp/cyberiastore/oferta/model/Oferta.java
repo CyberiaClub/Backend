@@ -9,6 +9,7 @@ public class Oferta {
     private Date fechaDeInicio;
     private Date fechaDeFin;
     private Integer porcentaje;
+    private Integer idProducto; //Para la tabla intermedia
 
     public Oferta(){
         
@@ -59,5 +60,19 @@ public class Oferta {
     public String getFechaDeFinAsDDMMYYY(){
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         return sdf.format(this.fechaDeFin);
+    }
+
+    /**
+     * @return the idProducto
+     */
+    public Integer getIdProducto() {
+        return idProducto;
+    }
+
+    /**
+     * @param idProducto the idProducto to set
+     */
+    public void setIdProducto(Integer idProducto) {
+        this.idProducto = idProducto;
     }
 }

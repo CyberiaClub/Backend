@@ -47,5 +47,5 @@ public class Factura extends ComprobanteDePago {
     public void setNumeroDeFactura(Integer numeroDeFactura) {
         this.numeroDeFactura = numeroDeFactura;
     }
-    
+
 }
