@@ -34,7 +34,7 @@ public class TipoProductoBO {
     }
     
     public TipoProducto buscarPorId(Integer idTipoProducto){
-        TipoProducto tipoProducto = this.tipoProductoDAO.obtenerPorId(""+idTipoProducto);
+        TipoProducto tipoProducto = this.tipoProductoDAO.obtenerPorId(idTipoProducto);
         
         return tipoProducto;
     }

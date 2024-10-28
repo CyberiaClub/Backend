@@ -3,21 +3,17 @@ package pe.edu.pucp.cyberiastore.inventario.dao;
 import java.util.ArrayList;
 import pe.edu.pucp.cyberiastore.inventario.model.TipoProducto;
 public interface TipoProductoDAO {
-    public Integer insertar (TipoProducto tipoProducto);
-    
-    public Integer modificar (TipoProducto tipoProducto);
-    
+    public Integer insertar(TipoProducto tipoProducto);
+
+    public Integer modificar(TipoProducto tipoProducto);
+
     public Integer eliminar(TipoProducto tipoProducto);
-    
-    public ArrayList<TipoProducto> listar(String sql);
-    
+
     public ArrayList<TipoProducto> listarTodos();
-    
-    public TipoProducto obtenerPorId(String idTipoProducto);
-    
-    public Integer obtenerId(TipoProducto tipoProducto);
-    
-    public Integer obtenerIdPorTipo(String tipo);
-    
-    public String imprimirId();
+
+    public TipoProducto obtenerPorId(Integer idTipoProducto);
+
+    public Boolean existeTipoProducto(TipoProducto tipoProducto);
+
+    public Boolean existeTipoProducto(TipoProducto tipoProducto, Boolean abreConexion);
 }

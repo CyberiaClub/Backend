@@ -6,67 +6,167 @@ import java.util.Date;
 public class Proveedor {
     private Integer idProveedor;
     private String ruc;
-    private String nombre;
-    private Date fechaRegistro;
+    private String nombreContacto;
+    private String razonSocial;
+    private String correo;
+    private String telefono;
+    private String direccion;
+    private String descripcion;
     private Boolean activo;
     
-    public Proveedor(String ruc, String nombre, Date fechaRegistro) {
-        this.ruc = ruc;
-        this.nombre = nombre;
-        this.fechaRegistro = fechaRegistro;
+    public Proveedor(){
         this.activo = true;
     }
-    
-    public Proveedor(String ruc, String nombre, Date fechaRegistro, Boolean activo) {
+
+    public Proveedor(String ruc, String nombre, String razonSocial, String correo, String telefono, String direccion, String descripcion) {
         this.ruc = ruc;
-        this.nombre = nombre;
-        this.fechaRegistro = fechaRegistro;
-        this.activo = activo;
+        this.nombreContacto = nombre;
+        this.razonSocial = razonSocial;
+        this.correo = correo;
+        this.telefono = telefono;
+        this.direccion = direccion;
+        this.descripcion = descripcion;
+        this.activo = true;
     }
 
-    public void setIdProveedor(Integer idProveedor) {
-        this.idProveedor = idProveedor;
+    public Proveedor(String ruc, String nombre, String razonSocial, String correo, String telefono, String direccion, String descripcion, Boolean activo) {
+        this.ruc = ruc;
+        this.nombreContacto = nombre;
+        this.razonSocial = razonSocial;
+        this.correo = correo;
+        this.telefono = telefono;
+        this.direccion = direccion;
+        this.descripcion = descripcion;
+        this.activo = activo;
     }
     
+    /**
+     * @return the idProveedor
+     */
     public Integer getIdProveedor() {
         return idProveedor;
     }
 
-    public Boolean getActivo() {
-        return activo;
+    /**
+     * @param idProveedor the idProveedor to set
+     */
+    public void setIdProveedor(Integer idProveedor) {
+        this.idProveedor = idProveedor;
     }
 
-    public void setActivo(Boolean activo) {
-        this.activo = activo;
-    }
-    
+    /**
+     * @return the ruc
+     */
     public String getRuc() {
         return ruc;
     }
 
+    /**
+     * @param ruc the ruc to set
+     */
     public void setRuc(String ruc) {
         this.ruc = ruc;
     }
 
-    public String getNombre() {
-        return nombre;
+    /**
+     * @return the nombreContacto
+     */
+    public String getNombreContacto() {
+        return nombreContacto;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    /**
+     * @param nombreContacto the nombreContacto to set
+     */
+    public void setNombreContacto(String nombreContacto) {
+        this.nombreContacto = nombreContacto;
     }
 
-    public Date getFechaRegistro() {
-        return fechaRegistro;
+    /**
+     * @return the razonSocial
+     */
+    public String getRazonSocial() {
+        return razonSocial;
     }
 
-    public void setFechaRegistro(Date fechaRegistro) {
-        this.fechaRegistro = fechaRegistro;
+    /**
+     * @param razonSocial the razonSocial to set
+     */
+    public void setRazonSocial(String razonSocial) {
+        this.razonSocial = razonSocial;
+    }
+
+    /**
+     * @return the correo
+     */
+    public String getCorreo() {
+        return correo;
+    }
+
+    /**
+     * @param correo the correo to set
+     */
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    /**
+     * @return the telefono
+     */
+    public String getTelefono() {
+        return telefono;
+    }
+
+    /**
+     * @param telefono the telefono to set
+     */
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    /**
+     * @return the direccion
+     */
+    public String getDireccion() {
+        return direccion;
+    }
+
+    /**
+     * @param direccion the direccion to set
+     */
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    /**
+     * @return the descripcion
+     */
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    /**
+     * @param descripcion the descripcion to set
+     */
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    /**
+     * @return the activo
+     */
+    public Boolean getActivo() {
+        return activo;
+    }
+
+    /**
+     * @param activo the activo to set
+     */
+    public void setActivo(Boolean activo) {
+        this.activo = activo;
     }
     
-    public String fechaRegistroComoDDMMYYY(){
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        return sdf.format(this.fechaRegistro);
-    }
+
+    
     
 }

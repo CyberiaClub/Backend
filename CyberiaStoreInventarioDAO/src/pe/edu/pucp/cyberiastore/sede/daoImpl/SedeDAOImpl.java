@@ -102,7 +102,7 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
 
     @Override
     protected String obtenerListaDeValoresYAtributosParaModificacion() {
-        return "id_sede=?, nombre=?, descripcion=?";
+        return "nombre=?, descripcion=?";
     }
 
     @Override
@@ -118,10 +118,9 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
 
     @Override
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
-        this.incluirParametroInt(1, this.sede.getIdSede());
-        this.incluirParametroString(2, this.sede.getNombre());
-        this.incluirParametroString(3, this.sede.getDescripcion());
-        this.incluirParametroInt(4, this.sede.getIdSede());
+        this.incluirParametroString(1, this.sede.getNombre());
+        this.incluirParametroString(2, this.sede.getDescripcion());
+        this.incluirParametroInt(3, this.sede.getIdSede());
 
     }
 

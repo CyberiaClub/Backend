@@ -139,7 +139,7 @@ public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
         try {
             this.iniciarTransaccion();
             trabajadorDAO.modificar(trabajador, this.usarTransaccion, this.conexion);
-            // Este no se modifica a si mismo, porque solo almacena el ID del trabajador el cual no varia
+            // Este no se modifica a si mismo, porque solo almacena el ID del trabajador el cual no puede variar
 //            retorno = super.modificar();
             this.comitarTransaccion();
         } catch (SQLException ex) {
@@ -162,24 +162,27 @@ public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
 
     @Override
     protected String obtenerListaDeValoresYAtributosParaModificacion() {
-        return "ID_TRABAJADOR=?";
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//        return "ID_TRABAJADOR=?";
     }
 
     @Override
     protected String obtenerPredicadoParaLlavePrimaria() {
-        String sql = "";
-        if (this.tipo_Operacion == Tipo_Operacion.MODIFICAR || this.tipo_Operacion == Tipo_Operacion.ELIMINAR) {
-            sql = "id_administrador=?";
-        } else {
-            sql = "AND AD.id_administrador=?";
-        }
-        return sql;
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//        String sql = "";
+//        if (this.tipo_Operacion == Tipo_Operacion.MODIFICAR || this.tipo_Operacion == Tipo_Operacion.ELIMINAR) {
+//            sql = "id_administrador=?";
+//        } else {
+//            sql = "AND AD.id_administrador=?";
+//        }
+//        return sql;
     }
 
     @Override
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
-        this.incluirParametroInt(1, this.administrador.getIdAdministrador());
-        this.incluirParametroInt(2, this.administrador.getIdTrabajador());
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//        this.incluirParametroInt(1, this.administrador.getIdAdministrador());
+//        this.incluirParametroInt(2, this.administrador.getIdTrabajador());
     }
 
     /*

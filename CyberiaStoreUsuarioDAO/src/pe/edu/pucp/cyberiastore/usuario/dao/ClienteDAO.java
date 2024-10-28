@@ -13,7 +13,7 @@ public interface ClienteDAO {
 
     public ArrayList<Cliente> listarTodos();
 
-    public Cliente obtenerPorId(Integer idUsuario);
+    public Cliente obtenerPorId(Integer idCliente);
 
     public Boolean existeCliente(Cliente cliente);
 

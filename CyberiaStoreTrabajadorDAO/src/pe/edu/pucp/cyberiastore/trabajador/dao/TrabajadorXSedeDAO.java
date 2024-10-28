@@ -5,8 +5,8 @@ import pe.edu.pucp.cyberiastore.trabajador.model.Trabajador;
 
 public interface TrabajadorXSedeDAO {
 
-    public Integer insertar(Integer idTrabajador, Integer idSede);
+    public Integer insertar(Integer idBoleta, Integer idCliente);
 
-    public Integer insertar(Integer idTrabajador, Integer idSede, Boolean usarTransaccion, Connection conexion);
+    public Integer insertar(Integer idBoleta, Integer idCliente, Boolean usarTransaccion, Connection conexion);
 
 }
