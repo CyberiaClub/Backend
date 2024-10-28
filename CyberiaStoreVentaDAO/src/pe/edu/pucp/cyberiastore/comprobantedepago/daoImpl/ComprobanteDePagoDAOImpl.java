@@ -19,53 +19,98 @@ public class ComprobanteDePagoDAOImpl extends DAOImpl implements ComprobanteDePa
     }
 
     @Override
+    public Integer insertar(ComprobanteDePago comprobanteDePago) {
+        this.comprobanteDePago = comprobanteDePago;
+        this.retornarLlavePrimaria = true;
+        Integer id = super.insertar();
+        this.retornarLlavePrimaria = false;
+        return id;
+    }
+
+    /**
+     * Funcion definida en ComprobanteDePagoDAO Usada para la insersión de datos
+     * por medio de herencia.
+     *
+     * @param comprobanteDePago
+     * @param usarTransaccion
+     * @param conexion
+     * @return
+     */
+    @Override
+    public Integer insertar(ComprobanteDePago comprobanteDePago, Boolean usarTransaccion, Connection conexion) {
+        this.usarTransaccion = usarTransaccion;
+        this.conexion = conexion;
+        return this.insertar(comprobanteDePago);
+    }
+
+    @Override
     protected String obtenerListaDeAtributosParaInsercion() {
-        String sql = "FECHA, SUBTOTAL, IGV, TOTAL, ID_PEDIDO, ACTIVO";
-        if (this.comprobanteDePago.getIdOferta() != null) {
-            sql = sql.concat(",  DESCUENTO_APLICADO");
-            sql = sql.concat(", ID_OFERTA");
-        }
-        return sql;
+        return "FECHA, SUBTOTAL, TOTAL, IGV, DESCUENTO_APLICADO, ACTIVO, ID_PEDIDO, ID_OFERTA, ID_CLIENTE";
     }
 
     @Override
     protected String incluirListaDeParametrosParaInsercion() {
-        String sql = "?,?,?,?,?,?";
-        if (this.comprobanteDePago.getIdOferta() != null) {
-            sql = sql.concat("?,?");
-        }
-        return sql;
+        return "?,?,?,?,?,?,?,?";
     }
 
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
         this.incluirParametroDate(1, this.comprobanteDePago.getFecha());
         this.incluirParametroDouble(2, this.comprobanteDePago.getSubtotal());
-        this.incluirParametroDouble(3, this.comprobanteDePago.getIgv());
-        this.incluirParametroDouble(4, this.comprobanteDePago.getTotal());
-        this.incluirParametroInt(5, this.comprobanteDePago.getIdPedido());
+        this.incluirParametroDouble(3, this.comprobanteDePago.getTotal());
+        this.incluirParametroDouble(4, this.comprobanteDePago.getIgv());
+        this.incluirParametroDouble(5, this.comprobanteDePago.getDescuentoAplicado());
         this.incluirParametroBoolean(6, this.comprobanteDePago.getActivo());
-        if (this.comprobanteDePago.getIdOferta() != null) {
-            this.incluirParametroDouble(7, this.comprobanteDePago.getDescuentoAplicado());
-            this.incluirParametroInt(8, this.comprobanteDePago.getIdOferta());
-        }
+        this.incluirParametroInt(7, this.comprobanteDePago.getIdPedido());
+        this.incluirParametroInt(8, this.comprobanteDePago.getIdOferta());
+    }
+
+    /*
+     * **************************************************************************
+     * MODIFICAR
+     * *************************************************************************
+     */
+    @Override
+    public Integer modificar(ComprobanteDePago comprobanteDePago) {
+        this.comprobanteDePago = comprobanteDePago;
+        return super.modificar();
     }
 
     @Override
-    protected String obtenerListaDeValoresYAtributosParaModificacion() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Integer modificar(ComprobanteDePago comprobanteDePago, Boolean usarTransaccion, Connection conexion) {
+        this.usarTransaccion = usarTransaccion;
+        this.conexion = conexion;
+        return this.modificar(comprobanteDePago);
     }
 
     @Override
     protected String obtenerPredicadoParaLlavePrimaria() {
+        return "id_comprobanteDePago=?";
+    }
+
+    protected String obtenerListaDeValoresYAtributosParaModificacion() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    @Override
+//    @Override
+//    protected String obtenerListaDeValoresYAtributosParaModificacion() {
+//        return "FECHA=?, SUBTOTAL=?, TOTAL=?, IGV=?, DESCUENTO_APLICADO=?, ACTIVO=?, ID_PEDIDO=?, ID_OFERTA=?";
+//    }
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+//    @Override
+//    protected void incluirValorDeParametrosParaModificacion() throws SQLException {
+//        this.incluirParametroDate(1, this.comprobanteDePago.getFecha());
+//        this.incluirParametroDouble(1, this.comprobanteDePago.getSubtotal());
+//        this.incluirParametroDouble(1, this.comprobanteDePago.getTotal());
+//        this.incluirParametroDouble(1, this.comprobanteDePago.getIgv());
+//        this.incluirParametroDouble(1, this.comprobanteDePago.getDescuentoAplicado());
+//        this.incluirParametroBoolean(1, this.comprobanteDePago.getActivo());
+//        this.incluirParametroInt(1, this.comprobanteDePago.getIdPedido());
+//        this.incluirParametroInt(1, this.comprobanteDePago.getIdOferta());
+//    }
     @Override
     protected void incluirValorDeParametrosParaEliminacion() throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -97,32 +142,6 @@ public class ComprobanteDePagoDAOImpl extends DAOImpl implements ComprobanteDePa
     }
 
     @Override
-    public Integer insertar(ComprobanteDePago comprobanteDePago) {
-        this.comprobanteDePago = comprobanteDePago;
-        this.retornarLlavePrimaria = true;
-        Integer id = super.insertar();
-        this.retornarLlavePrimaria = false;
-        return id;
-    }
-
-    @Override
-    public Integer insertar(ComprobanteDePago comprobanteDePago, Boolean usarTransaccion, Connection conexion) {
-        this.usarTransaccion = usarTransaccion;
-        this.conexion = conexion;
-        return this.insertar(comprobanteDePago);
-    }
-
-    @Override
-    public Integer modificar(ComprobanteDePago comprobanteDePago) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public Integer modificar(ComprobanteDePago comprobanteDePago, Boolean usarTransaccion, Connection conexion) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
     public Integer eliminar(ComprobanteDePago comprobanteDePago) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
@@ -134,7 +153,7 @@ public class ComprobanteDePagoDAOImpl extends DAOImpl implements ComprobanteDePa
 
     @Override
     public ArrayList<ComprobanteDePago> listarTodos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return (ArrayList<ComprobanteDePago>) super.listarTodos(null);
     }
 
     @Override
@@ -144,30 +163,7 @@ public class ComprobanteDePagoDAOImpl extends DAOImpl implements ComprobanteDePa
 
     @Override
     public Boolean existeComprobanteDePago(ComprobanteDePago comprobanteDePago) {
-        this.comprobanteDePago = comprobanteDePago;
-        Integer idComprobanteDePago = null;
-        try {
-            this.abrirConexion();
-            String sql = "select id_comprobante_de_pago from COMPROBANTE_DE_PAGO where ";
-            sql = sql.concat("fecha=? ");
-            sql = sql.concat("and id_pedido=? ");
-            this.colocarSQLenStatement(sql);
-            this.incluirParametroDate(1, this.comprobanteDePago.getFecha());
-            this.incluirParametroInt(2, this.comprobanteDePago.getIdPedido());
-            this.ejecutarConsultaEnBD(sql);
-            if (this.resultSet.next()) {
-                idComprobanteDePago = this.resultSet.getInt("id_comprobanteDePago");
-            }
-        } catch (SQLException ex) {
-            System.err.println("Error al consultar si existe comprobanteDePago - " + ex);
-        } finally {
-            try {
-                this.cerrarConexion();
-            } catch (SQLException ex) {
-                System.err.println("Error al cerrar la conexión - " + ex);
-            }
-        }
-        this.comprobanteDePago.setIdComprobanteDePago(idComprobanteDePago);
-        return idComprobanteDePago != null;
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
     }
 }
