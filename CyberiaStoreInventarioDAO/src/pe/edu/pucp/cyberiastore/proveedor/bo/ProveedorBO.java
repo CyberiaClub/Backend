@@ -10,6 +10,6 @@ public class ProveedorBO {
     ProveedorDAO proveedorDAO;
     
     public ProveedorBO(){
-        this.proveedorDAO = new ProveedorDAOImpl("PROVEEDOR");
+        this.proveedorDAO = new ProveedorDAOImpl();
     }
 }

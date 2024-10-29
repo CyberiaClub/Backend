@@ -10,6 +10,8 @@ import pe.edu.pucp.cyberiastore.config.DAOImpl;
 import pe.edu.pucp.cyberiastore.config.Tipo_Operacion;
 import pe.edu.pucp.cyberiastore.oferta.dao.OfertaDAO;
 import pe.edu.pucp.cyberiastore.oferta.model.Oferta;
+import pe.edu.pucp.cyberiastore.oferta.daoImpl.ProductoXOfertaDAOImpl;
+import pe.edu.pucp.cyberiastore.oferta.dao.ProductoXOfertaDAO;
 
 public class OfertaDAOImpl extends DAOImpl implements OfertaDAO {
 
@@ -32,8 +34,9 @@ public class OfertaDAOImpl extends DAOImpl implements OfertaDAO {
             if (!existeOferta) {
                 this.retornarLlavePrimaria = true;
                 idOferta = super.insertar();
-                this.retornarLlavePrimaria = false;
-
+                this.retornarLlavePrimaria = false; 
+                ProductoXOfertaDAO productoXOferta = new ProductoXOfertaDAOImpl();
+                productoXOferta.insertar(oferta.getIdProducto(), oferta.getIdProducto() ,this.usarTransaccion, this.conexion);
             } else {
                 idOferta = oferta.getIdOferta();
             }
@@ -122,7 +125,7 @@ public class OfertaDAOImpl extends DAOImpl implements OfertaDAO {
         this.incluirParametroDate(1, this.oferta.getFechaDeInicio());
         this.incluirParametroDate(2, this.oferta.getFechaDeFin());
         this.incluirParametroInt(3, this.oferta.getPorcentaje());
-        this.incluirParametroInt(5, this.oferta.getIdOferta());
+        this.incluirParametroInt(4, this.oferta.getIdOferta());
 
     }
 
@@ -144,7 +147,7 @@ public class OfertaDAOImpl extends DAOImpl implements OfertaDAO {
 
     @Override
     protected String obtenerProyeccionParaSelect() {
-        String sql = "id_oferta, nombre, descripcion";
+        String sql = "id_oferta, fecha_inicio, fecha_fin, porcentaje";
         return sql;
     }
 

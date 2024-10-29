@@ -1,7 +1,7 @@
-package pe.edu.pucp.cyberiastore.metodopago.dao;
+package pe.edu.pucp.cyberiastore.comprobantedepago.dao;
 
 import java.util.ArrayList;
-import pe.edu.pucp.cyberiastore.metodopago.model.Boleta;
+import pe.edu.pucp.cyberiastore.comprobantedepago.model.Boleta;
 
 public interface BoletaDAO {
 

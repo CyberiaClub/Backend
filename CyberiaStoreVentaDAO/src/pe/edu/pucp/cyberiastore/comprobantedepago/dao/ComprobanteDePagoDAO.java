@@ -1,8 +1,8 @@
-package pe.edu.pucp.cyberiastore.metodopago.dao;
+package pe.edu.pucp.cyberiastore.comprobantedepago.dao;
 
 import java.sql.Connection;
 import java.util.ArrayList;
-import pe.edu.pucp.cyberiastore.metodopago.model.ComprobanteDePago;
+import pe.edu.pucp.cyberiastore.comprobantedepago.model.ComprobanteDePago;
 
 public interface ComprobanteDePagoDAO {
 

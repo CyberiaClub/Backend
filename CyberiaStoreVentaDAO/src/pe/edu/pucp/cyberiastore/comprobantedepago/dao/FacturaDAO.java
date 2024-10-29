@@ -1,7 +1,7 @@
-package pe.edu.pucp.cyberiastore.metodopago.dao;
+package pe.edu.pucp.cyberiastore.comprobantedepago.dao;
 
 import java.util.ArrayList;
-import pe.edu.pucp.cyberiastore.metodopago.model.Factura;
+import pe.edu.pucp.cyberiastore.comprobantedepago.model.Factura;
 
 public interface FacturaDAO {
 

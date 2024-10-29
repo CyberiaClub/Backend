@@ -1,5 +1,6 @@
 package pe.edu.pucp.cyberiastore.proveedor.daoImpl;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -18,22 +19,35 @@ public class ProductoXProveedorDAOImpl extends DAOImpl implements ProductoXProve
     public ProductoXProveedorDAOImpl() {
         super("PRODUCTO_X_PROVEEDOR");
     }
+    
+    @Override
+    public Integer insertar(Integer idProducto, Integer idProveedor) {
+        this.idProducto = idProducto;
+        this.idProveedor = idProveedor;
+        return super.insertar();
+    }
 
     @Override
+    public Integer insertar(Integer idProducto, Integer idProveedor, Boolean usarTransaccion, Connection conexion) {
+        this.usarTransaccion = usarTransaccion;
+        this.conexion = conexion;
+        return this.insertar(idProveedor, idProducto);
+    }
+    
+    @Override
     protected String obtenerListaDeAtributosParaInsercion() {
-        return "ID_PRODUCTO,ID_PROVEEDOR,PRECIO_PROVEEDOR";
+        return "id_producto, id_proveedor";
     }
 
     @Override
     protected String incluirListaDeParametrosParaInsercion() {
-        return "?,?,?";
+        return "?,?";
     }
 
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
-        this.incluirParametroInt(1, this.idProducto);
-        this.incluirParametroInt(2, this.idProveedor);
-        this.incluirParametroDouble(3, this.precioProveedor);
+        this.incluirParametroInt(1, idProducto);
+        this.incluirParametroInt(2, idProveedor);
     }
 
     @Override
@@ -80,92 +94,4 @@ public class ProductoXProveedorDAOImpl extends DAOImpl implements ProductoXProve
     protected void limpiarObjetoDelResultSet() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
-    @Override
-    public Integer insertar(Integer idProducto, Integer idProveedor, Double precioProveedor) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public Integer eliminar(Integer idProducto, Integer idProveedor) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public Integer eliminarProveedor(Integer idProveedor) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public Integer eliminarProducto(Integer idProducto) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public ArrayList<Proveedor> buscarProveedoresPorSku(Integer idProducto) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public ArrayList<Producto> buscarProductoProRuc(Integer idProveedor) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-//    @Override
-//    protected String obtenerListaAtributos() {
-//    }
-//
-//    @Override
-//    protected String obtenerListaValoresParaInsertar() {
-//        String sql = "";
-//        sql = sql.concat("'" + this.idProducto + "'");
-//        sql = sql.concat(", ");
-//        sql = sql.concat("'" + this.idProveedor + "'");
-//        sql = sql.concat(", ");
-//        sql = sql.concat("'" + this.precioProveedor + "'");
-//        return sql;
-//    }
-//
-//    @Override
-//    protected String obtenerListaValoresParaModificar() {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
-//
-//    @Override
-//    protected String obtenerCondicionPorId() {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
-//
-//    @Override
-//    public Integer insertar(Integer idProducto, Integer idProveedor, Double precioProveedor) {
-//        this.idProducto = idProducto;
-//        this.idProveedor = idProveedor;
-//        this.precioProveedor = precioProveedor;
-//        return this.insertar();
-//    }
-//
-//    @Override
-//    public Integer eliminar(Integer idProducto, Integer idProveedor) {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
-//
-//    @Override
-//    public Integer eliminarProveedor(Integer idProveedor) {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
-//
-//    @Override
-//    public Integer eliminarProducto(Integer idProducto) {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
-//
-//    @Override
-//    public ArrayList<Proveedor> buscarProveedoresPorSku(Integer idProducto) {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
-//
-//    @Override
-//    public ArrayList<Producto> buscarProductoProRuc(Integer idProveedor) {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
 }

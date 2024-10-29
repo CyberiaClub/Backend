@@ -1,5 +1,6 @@
 package pe.edu.pucp.cyberiastore.inventario.daoImpl;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -19,8 +20,22 @@ public class ProductoXMarcaDAOImpl extends DAOImpl implements ProductoXMarcaDAO 
     }
 
     @Override
+    public Integer insertar(Integer idProducto, Integer idMarca) {
+        this.idProducto = idProducto;
+        this.idMarca = idMarca;
+        return super.insertar();
+    }
+
+    @Override
+    public Integer insertar(Integer idProducto, Integer idMarca, Boolean usarTransaccion, Connection conexion) {
+        this.usarTransaccion = usarTransaccion;
+        this.conexion = conexion;
+        return this.insertar(idMarca, idProducto);
+    }
+
+    @Override
     protected String obtenerListaDeAtributosParaInsercion() {
-        return "ID_PRODUCTO,ID_MARCA";
+        return "id_producto, id_marca";
     }
 
     @Override
@@ -78,97 +93,4 @@ public class ProductoXMarcaDAOImpl extends DAOImpl implements ProductoXMarcaDAO 
     protected void limpiarObjetoDelResultSet() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
-    @Override
-    public Integer insertar(Integer idProducto, Integer idMarca) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public Integer eliminar(Integer idProducto, Integer idMarca) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public Integer eliminarMarca(Integer idMarca) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public Integer eliminarProducto(Integer idProducto) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public ArrayList<Marca> buscarMarcasPorSku(Integer idProducto) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public ArrayList<Producto> buscarProductosPorIdMarca(Integer idMarca) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-//    private Integer idProducto;
-//    private Integer idMarca;
-//    
-//    public ProductoXMarcaDAOImpl() {
-//        super("PRODUCTO_X_MARCA");
-//    }
-//
-//    @Override
-//    protected String obtenerListaAtributos() {
-//        return "ID_PRODUCTO,ID_MARCA";
-//    }
-//
-//    @Override
-//    protected String obtenerListaValoresParaInsertar() {
-//        String sql = "";
-//        sql = sql.concat("'" + this.idProducto + "'");
-//        sql = sql.concat(", ");
-//        sql = sql.concat("'" + this.idMarca + "'");
-//        return sql;
-//    }
-//
-//    @Override
-//    protected String obtenerListaValoresParaModificar() {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
-//
-//    @Override
-//    protected String obtenerCondicionPorId() {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
-//
-//    @Override
-//    public Integer insertar(Integer idProducto, Integer idMarca) {
-//        this.idProducto = idProducto;
-//        this.idMarca = idMarca;
-//        return this.insertar();
-//    }
-//
-//    @Override
-//    public Integer eliminar(Integer idProducto, Integer idMarca) {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
-//
-//    @Override
-//    public Integer eliminarMarca(Integer idMarca) {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
-//
-//    @Override
-//    public Integer eliminarProducto(Integer idProducto) {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
-//
-//    @Override
-//    public ArrayList<Marca> buscarMarcasPorSku(Integer idProducto) {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
-//
-//    @Override
-//    public ArrayList<Producto> buscarProductosPorIdMarca(Integer idMarca) {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
 }
