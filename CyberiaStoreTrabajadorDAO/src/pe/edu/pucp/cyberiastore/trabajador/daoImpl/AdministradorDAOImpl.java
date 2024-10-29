@@ -88,7 +88,7 @@ public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
             }
         }
         this.usarTransaccion = true;
-        return idTrabajador;
+        return idAdministrador;
     }
 
     @Override
@@ -162,27 +162,24 @@ public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
 
     @Override
     protected String obtenerListaDeValoresYAtributosParaModificacion() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//        return "ID_TRABAJADOR=?";
+        return "ID_TRABAJADOR=?";
     }
 
     @Override
     protected String obtenerPredicadoParaLlavePrimaria() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//        String sql = "";
-//        if (this.tipo_Operacion == Tipo_Operacion.MODIFICAR || this.tipo_Operacion == Tipo_Operacion.ELIMINAR) {
-//            sql = "id_administrador=?";
-//        } else {
-//            sql = "AND AD.id_administrador=?";
-//        }
-//        return sql;
+        String sql = "";
+        if (this.tipo_Operacion == Tipo_Operacion.MODIFICAR || this.tipo_Operacion == Tipo_Operacion.ELIMINAR) {
+            sql = "id_administrador=?";
+        } else {
+            sql = "AND AD.id_administrador=?";
+        }
+        return sql;
     }
 
     @Override
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//        this.incluirParametroInt(1, this.administrador.getIdAdministrador());
-//        this.incluirParametroInt(2, this.administrador.getIdTrabajador());
+        this.incluirParametroInt(1, this.administrador.getIdAdministrador());
+        this.incluirParametroInt(2, this.administrador.getIdTrabajador());
     }
 
     /*

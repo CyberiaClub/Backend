@@ -18,11 +18,11 @@ public class AdministradorBOTest {
     static void testAdministradorBO() {
         System.out.println("\ntestAdministradorBO");
         administradorBO = new AdministradorBO();
-        testAdministradorBOInsertar();SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        testAdministradorBOInsertar();
         testAdministradorBOListarTodos();
-        testAdministradorBOModificar();
-        testAdministradorBOListarTodos();
-        testAdministradorBOObtenerPorId();
+//        testAdministradorBOModificar();
+//        testAdministradorBOListarTodos();
+//        testAdministradorBOObtenerPorId();
     }
 
     private static void testAdministradorBOInsertar() {

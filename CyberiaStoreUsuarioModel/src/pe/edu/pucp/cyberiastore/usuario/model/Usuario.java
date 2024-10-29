@@ -63,7 +63,8 @@ public class Usuario {
      * @param direccion
      * @param tipoDeDocumento
      */
-    public Usuario(Integer idUsuario, String documento, String telefono, String nombre, String apellidoPaterno, String apellidoMaterno, Date fechaDeNacimiento, String correo, Boolean activo, String contrasena, String nacionalidad, String direccion, TipoDocumento tipoDeDocumento) {
+    public Usuario(Integer idUsuario, String documento, String telefono, String nombre, String apellidoPaterno, String apellidoMaterno,
+            Date fechaDeNacimiento, String correo, Boolean activo, String contrasena, String nacionalidad, String direccion, TipoDocumento tipoDeDocumento) {
         this.idUsuario = idUsuario;
         this.documento = documento;
         this.telefono = telefono;

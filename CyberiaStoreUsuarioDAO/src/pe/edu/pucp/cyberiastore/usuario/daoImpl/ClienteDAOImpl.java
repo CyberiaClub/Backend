@@ -152,9 +152,9 @@ public class ClienteDAOImpl extends DAOImpl implements ClienteDAO {
     protected String obtenerPredicadoParaLlavePrimaria() {
         String sql = "";
         if (this.tipo_Operacion == Tipo_Operacion.MODIFICAR || this.tipo_Operacion == Tipo_Operacion.ELIMINAR) {
-            sql = "id_cliente=?";
+            sql = "ID_CLIENTE=?";
         } else {
-            sql = "cli.id_cliente=?";
+            sql = "cli.ID_CLIENTE=?";
         }
         return sql;
     }
@@ -260,7 +260,7 @@ public class ClienteDAOImpl extends DAOImpl implements ClienteDAO {
 
     @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
-        this.cliente.setIdCliente(this.resultSet.getInt("id_cliente"));
+        this.cliente.setIdCliente(this.resultSet.getInt("ID_CLIENTE"));
         this.cliente.setVerificado(this.resultSet.getBoolean("VERIFICADO"));
         this.cliente.setIdUsuario(this.resultSet.getInt("ID_USUARIO"));
         this.cliente.setDocumento(this.resultSet.getString("DOCUMENTO"));
