@@ -1,39 +1,48 @@
 package pe.edu.pucp.cyberiastore.inventario.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Producto {
+
     private Integer idProducto;
     private String sku;
     private String nombre;
     private String descripcion;
     private Double precio;
-    private String unidad;
-    private HashMap<Producto,Integer> productoMiembros;
-    
+    // Estos 2 ultimos atributos son para el insertar
+    private Integer cantidad;
+    private ArrayList<Producto> productosMiembros;
+
     public Producto() {
-        this.productoMiembros = null;
+        this.productosMiembros = null;
     }
-    
-    public Producto(String sku, String nombre, String descripcion, Double precio, String unidad) {
+
+    public Producto(String sku, String nombre, String descripcion, Double precio) {
         this.sku = sku;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
-        this.unidad = unidad;
-        this.productoMiembros = null;
+        this.productosMiembros = null;
     }
-    
-    public Producto(Integer idProducto, String sku, String nombre, String descripcion, Double precio, String unidad, HashMap<Producto,Integer> productoMiembros) {
+
+    public Producto(String sku, String nombre, String descripcion, Double precio, ArrayList<Producto> productosMiembros) {
+        this.sku = sku;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.productosMiembros = productosMiembros;
+    }
+
+    public Producto(Integer idProducto, String sku, String nombre, String descripcion, Double precio, ArrayList<Producto> productoMiembros) {
         this.idProducto = idProducto;
         this.sku = sku;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
-        this.unidad = unidad;
-        this.productoMiembros = productoMiembros;
+        this.productosMiembros = productoMiembros;
     }
-    
+
     public void setIdProducto(Integer idProducto) {
         this.idProducto = idProducto;
     }
@@ -41,7 +50,7 @@ public class Producto {
     public Integer getIdProducto() {
         return idProducto;
     }
-    
+
     public String getSku() {
         return sku;
     }
@@ -74,41 +83,20 @@ public class Producto {
         this.precio = precio;
     }
 
-    public String getUnidad() {
-        return unidad;
+    public Integer getCantidad() {
+        return cantidad;
     }
 
-    public void setUnidad(String unidad) {
-        this.unidad = unidad;
+    public void setCantidad(Integer cantidad) {
+        this.cantidad = cantidad;
     }
 
-    public HashMap<Producto,Integer> getMiembros(){
-        HashMap<Producto,Integer> copia = (HashMap)this.productoMiembros.clone();
-        return copia;
+    public ArrayList<Producto> getProductosMiembros() {
+        return productosMiembros;
     }
 
-    public void setMiembros(HashMap<Producto,Integer> miembros){
-        this.productoMiembros = (HashMap)miembros.clone();
+    public void setProductosMiembros(ArrayList<Producto> productosMiembros) {
+        this.productosMiembros = productosMiembros;
     }
 
-    public Producto getMiembro(int index){
-        Producto referencia = (Producto)this.productoMiembros.keySet().toArray()[index];
-        return new Producto(
-            referencia.idProducto,
-            referencia.sku,
-            referencia.nombre,
-            referencia.descripcion,
-            referencia.precio,
-            referencia.unidad,
-            referencia.getMiembros()
-        );
-    }
-
-    public Integer getMiembroCantidad(int index){
-        return (Integer)this.productoMiembros.values().toArray()[index];
-    }
-
-    public void setMiembro(Producto producto,Integer cantidad){
-        this.productoMiembros.put(producto,cantidad);
-    }
 }

@@ -24,56 +24,51 @@ import pe.edu.pucp.cyberiastore.inventario.dao.ProductoXProductoDAO;
 import pe.edu.pucp.cyberiastore.inventario.daoImpl.ProductoXProductoDAOImpl;
 
 public class ProductoBO {
+
     ProductoDAO productoDAO;
-    ProductoXProductoDAO productoXProductoDAO;
-    
-    
-    public ProductoBO(){
+
+    public ProductoBO() {
         this.productoDAO = new ProductoDAOImpl();
-        this.productoXProductoDAO = new ProductoXProductoDAOImpl();
     }
-    
-    public Integer insertar(String sku, String nombre, String descripcion, Double precio, String unidad){
-        Producto producto = new Producto(sku,nombre,descripcion,precio,unidad);
+
+    public Integer insertar(String sku, String nombre, String descripcion, Double precio, ArrayList<Producto> productoMiembros) {
+        Producto producto = new Producto(sku, nombre, descripcion, precio, productoMiembros);
         return this.productoDAO.insertar(producto);
     }
-    
-    public Integer insertar(Producto producto){
+
+    public Integer insertar(Producto producto) {
         Integer response = this.productoDAO.insertar(producto);
-        for(Producto miembro : producto.getMiembros().keySet()){
-            this.productoXProductoDAO.insertar(producto.getIdProducto(),miembro.getIdProducto(),producto.getMiembros().get(miembro));
-        }
+
         return response;
     }
-    
-    public Integer modificar(String sku, String nombre, String descripcion, Double precio, String unidad){
-        Producto producto = new Producto(sku,nombre,descripcion,precio,unidad);
+
+    public Integer modificar(String sku, String nombre, String descripcion, Double precio) {
+        Producto producto = new Producto(sku, nombre, descripcion, precio);
         return this.productoDAO.modificar(producto);
     }
-    
-    public Integer modificar(Producto producto){
+
+    public Integer modificar(Producto producto) {
         Integer response = this.productoDAO.modificar(producto);
         return response;
     }
-    
-    public Integer eliminar(String sku, String nombre, String descripcion, Double precio, String unidad){
-        Producto producto = new Producto(sku,nombre,descripcion,precio,unidad);
+
+    public Integer eliminar(String sku, String nombre, String descripcion, Double precio) {
+        Producto producto = new Producto(sku, nombre, descripcion, precio);
         return this.productoDAO.eliminar(producto);
     }
-    
-    public Integer eliminar(Producto producto){
+
+    public Integer eliminar(Producto producto) {
         Integer response = this.productoDAO.eliminar(producto);
         return response;
     }
-    
-    public ArrayList<Producto> listarTodos(){
+
+    public ArrayList<Producto> listarTodos() {
         ArrayList<Producto> productos = this.productoDAO.listarTodos();
         return productos;
     }
-    
-    public Producto buscarPorId(String idProducto){
+
+    public Producto buscarPorId(String idProducto) {
         Producto producto = this.productoDAO.obtenerPorId(idProducto);
         return producto;
     }
 }
-    

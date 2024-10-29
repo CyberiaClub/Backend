@@ -1,16 +1,16 @@
 package pe.edu.pucp.cyberiastore.inventario.daoImpl;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import pe.edu.pucp.cyberiastore.config.DAOImpl;
 import pe.edu.pucp.cyberiastore.inventario.dao.ProductoXProductoDAO;
 
 public class ProductoXProductoDAOImpl extends DAOImpl implements ProductoXProductoDAO {
-    
-    private Integer idContenedor;
-    private Integer idMiembro;
+
+    private Integer idPadre;
+    private Integer idHijo;
     private Integer cantidad;
 
     public ProductoXProductoDAOImpl() {
@@ -18,18 +18,45 @@ public class ProductoXProductoDAOImpl extends DAOImpl implements ProductoXProduc
     }
 
     @Override
+    public Integer insertar(Integer idPadre, Integer idHijo, Integer cantidad) {
+        this.idPadre = idPadre;
+        this.idHijo = idHijo;
+        this.cantidad = cantidad;
+        return super.insertar();
+    }
+
+    /**
+     * Esta funcion es utilizada cuando es llamada del propio producto
+     *
+     * @param idPadre
+     * @param idHijo
+     * @param cantidad
+     * @param usarTransaccion
+     * @param conexion
+     * @return
+     */
+    @Override
+    public Integer insertar(Integer idPadre, Integer idHijo, Integer cantidad, Boolean usarTransaccion, Connection conexion) {
+        this.usarTransaccion = usarTransaccion;
+        this.conexion = conexion;
+        return this.insertar(idPadre, idHijo, cantidad);
+    }
+
+    @Override
     protected String obtenerListaDeAtributosParaInsercion() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "ID_PRODUCTO_PADRE,ID_PRODUCTO,CANTIDAD";
     }
 
     @Override
     protected String incluirListaDeParametrosParaInsercion() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "?,?,?";
     }
 
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.incluirParametroInt(1, this.idPadre);
+        this.incluirParametroInt(2, this.idHijo);
+        this.incluirParametroInt(3, this.cantidad);
     }
 
     @Override
@@ -77,9 +104,4 @@ public class ProductoXProductoDAOImpl extends DAOImpl implements ProductoXProduc
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    @Override
-    public Integer insertar(Integer idContenedor, Integer idMiembro, Integer cantidad) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    
 }

@@ -10,6 +10,7 @@ import pe.edu.pucp.cyberiastore.inventario.model.Producto;
 import pe.edu.pucp.cyberiastore.inventario.dao.ProductoDAO;
 import pe.edu.pucp.cyberiastore.config.DAOImpl;
 import pe.edu.pucp.cyberiastore.config.Tipo_Operacion;
+import pe.edu.pucp.cyberiastore.inventario.dao.ProductoXProductoDAO;
 
 public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
 
@@ -21,91 +22,11 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
         this.retornarLlavePrimaria = true;
     }
 
-    @Override
-    protected String obtenerListaDeAtributosParaInsercion() {
-        return "SKU, NOMBRE, DESCRIPCION, PRECIO, UNIDAD";
-    }
-
-    @Override
-    protected String incluirListaDeParametrosParaInsercion() {
-        return "?,?,?,?,?";
-    }
-
-    @Override
-    protected void incluirValorDeParametrosParaInsercion() throws SQLException {
-        this.incluirParametroString(1,this.producto.getSku());
-        this.incluirParametroString(2,this.producto.getNombre());
-        this.incluirParametroString(3,this.producto.getDescripcion());
-        this.incluirParametroDouble(4,this.producto.getPrecio());
-        this.incluirParametroString(5,this.producto.getUnidad());
-    }
-
-    @Override
-    protected String obtenerListaDeValoresYAtributosParaModificacion() {
-        return "SKU=?, NOMBRE=?, DESCRIPCION=?, PRECIO=?, UNIDAD=?";
-    }
-
-    @Override
-    protected String obtenerPredicadoParaLlavePrimaria() {
-        String sql = "";
-        if (this.tipo_Operacion == Tipo_Operacion.MODIFICAR || this.tipo_Operacion == Tipo_Operacion.ELIMINAR) {
-            sql = "id_producto=?";
-        } else {
-            sql = "id_producto=?";
-        }
-        return sql;
-    }
-
-    @Override
-    protected void incluirValorDeParametrosParaModificacion() throws SQLException {
-        this.incluirParametroString(1,this.producto.getSku());
-        this.incluirParametroString(2,this.producto.getNombre());
-        this.incluirParametroString(3,this.producto.getDescripcion());
-        this.incluirParametroDouble(4,this.producto.getPrecio());
-        this.incluirParametroString(5,this.producto.getUnidad());
-        this.incluirParametroInt(6,this.producto.getIdProducto());
-    }
-
-    @Override
-    protected void incluirValorDeParametrosParaEliminacion() throws SQLException {
-        this.incluirParametroInt(1,this.producto.getIdProducto());
-    }
-
-    @Override
-    protected String obtenerProyeccionParaSelect() {
-        String sql = "id_Producto, sku, nombre, descripcion, precio, unidad";
-        return sql;
-    }
-
-    @Override
-    protected void agregarObjetoALaLista(List lista, ResultSet resultSet) throws SQLException {
-        instanciarObjetoDelResultSet();
-        lista.add(this.producto);
-    }
-
-    @Override
-    protected void incluirValorDeParametrosParaObtenerPorId() throws SQLException {
-        this.incluirParametroInt(1,this.producto.getIdProducto());
-    }
-
-    @Override
-    protected void instanciarObjetoDelResultSet() throws SQLException {
-        this.producto = new Producto(
-            this.resultSet.getInt("id_producto"),
-            this.resultSet.getString("sku"),
-            this.resultSet.getString("nombre"),
-            this.resultSet.getString("descripcion"),
-            this.resultSet.getDouble("precio"),
-            this.resultSet.getString("unidad"),
-            null
-        );
-    }
-
-    @Override
-    protected void limpiarObjetoDelResultSet() {
-        this.producto = null;
-    }
-
+    /*
+     * ************************************************************************
+     * INSERTAR
+     * ************************************************************************
+     */
     @Override
     public Integer insertar(Producto producto) {
         this.producto = producto;
@@ -118,6 +39,14 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
                 this.retornarLlavePrimaria = true;
                 idProducto = super.insertar();
                 this.retornarLlavePrimaria = false;
+                ArrayList<Producto> productosMiembros = this.producto.getProductosMiembros();
+                if (productosMiembros != null) {
+                    ProductoXProductoDAO productoXProducto = new ProductoXProductoDAOImpl();
+                    for (Producto productoMiembro : productosMiembros) {
+                        // idProducto es el padre, productoMiembro del hijo, cantidad
+                        productoXProducto.insertar(idProducto, productoMiembro.getIdProducto(), productoMiembro.getCantidad(), this.usarTransaccion, this.conexion);
+                    }
+                }
 
             } else {
                 idProducto = producto.getIdProducto();
@@ -142,44 +71,28 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
     }
 
     @Override
-    public Boolean existeProducto(Producto producto) {
-        Boolean abreConexion = true;
-        return existeProducto(producto, abreConexion);
+    protected String obtenerListaDeAtributosParaInsercion() {
+        return "SKU, NOMBRE, DESCRIPCION, PRECIO";
     }
 
     @Override
-    public Boolean existeProducto(Producto producto, Boolean abreConexion) {
-        this.producto = producto;
-        Integer idProducto = null;
-        try {
-            if (abreConexion) {
-                this.abrirConexion();
-            }
-            String sql = "select id_Producto from producto where ";
-            sql = sql.concat("sku=? ");
-            this.colocarSQLenStatement(sql);
-            this.incluirParametroString(1, this.producto.getSku());
-            sql = sql.concat("or nombre=? ");
-            this.colocarSQLenStatement(sql);
-            this.incluirParametroString(1, this.producto.getNombre());
-            this.ejecutarConsultaEnBD(sql);
-            if (this.resultSet.next()) {
-                idProducto = this.resultSet.getInt("id_Producto");
-            }
-        } catch (SQLException ex) {
-            System.err.println("Error al consultar si existe producto - " + ex);
-        } finally {
-            try {
-                if (abreConexion) {
-                    this.cerrarConexion();
-                }
-            } catch (SQLException ex) {
-                System.err.println("Error al cerrar la conexión - " + ex);
-            }
-        }
-        return idProducto != null;
+    protected String incluirListaDeParametrosParaInsercion() {
+        return "?,?,?,?";
     }
 
+    @Override
+    protected void incluirValorDeParametrosParaInsercion() throws SQLException {
+        this.incluirParametroString(1, this.producto.getSku());
+        this.incluirParametroString(2, this.producto.getNombre());
+        this.incluirParametroString(3, this.producto.getDescripcion());
+        this.incluirParametroDouble(4, this.producto.getPrecio());
+    }
+
+    /*
+     * ************************************************************************
+     * MODIFICAR
+     * ************************************************************************
+     */
     @Override
     public Integer modificar(Producto producto) {
         Integer retorno = 0;
@@ -190,7 +103,7 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
             retorno = super.modificar();
             this.comitarTransaccion();
         } catch (SQLException ex) {
-            System.err.println("Error al intentar modificar - " + ex);
+            System.err.println("Error al intentar modificar PRODUCTO " + ex);
             try {
                 this.rollbackTransaccion();
             } catch (SQLException ex1) {
@@ -207,6 +120,36 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
         return retorno;
     }
 
+    @Override
+    protected String obtenerPredicadoParaLlavePrimaria() {
+        String sql = "";
+        if (this.tipo_Operacion == Tipo_Operacion.MODIFICAR || this.tipo_Operacion == Tipo_Operacion.ELIMINAR) {
+            sql = "id_producto=?";
+        } else {
+            sql = "id_producto=?";
+        }
+        return sql;
+    }
+
+    @Override
+    protected String obtenerListaDeValoresYAtributosParaModificacion() {
+        return "SKU=?, NOMBRE=?, DESCRIPCION=?, PRECIO=?";
+    }
+
+    @Override
+    protected void incluirValorDeParametrosParaModificacion() throws SQLException {
+        this.incluirParametroString(1, this.producto.getSku());
+        this.incluirParametroString(2, this.producto.getNombre());
+        this.incluirParametroString(3, this.producto.getDescripcion());
+        this.incluirParametroDouble(4, this.producto.getPrecio());
+        this.incluirParametroInt(5, this.producto.getIdProducto());
+    }
+
+    /*
+     * ************************************************************************
+     * ELIMINAR
+     * ************************************************************************
+     */
     @Override
     public Integer eliminar(Producto producto) {
         Integer retorno = 0;
@@ -236,10 +179,15 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
     }
 
     @Override
-    public ArrayList<Producto> listarTodos() {
-        return (ArrayList<Producto>) super.listarTodos(null);
+    protected void incluirValorDeParametrosParaEliminacion() throws SQLException {
+        this.incluirParametroInt(1, this.producto.getIdProducto());
     }
 
+    /*
+     * ************************************************************************
+     * OBTENER POR ID
+     * ************************************************************************
+     */
     @Override
     public Producto obtenerPorId(String idProducto) {
         this.producto = new Producto();
@@ -247,107 +195,94 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
         super.obtenerPorId();
         return this.producto;
     }
-    //    @Override
-//    public Integer insertar(Producto producto) {
-//        this.producto = producto;
-//        Integer id = this.insertar();
-//        this.producto.setIdProducto(id);
-//        return id;
-//    }
-//
-//    @Override
-//    public Integer modificar(Producto producto) {
-//        this.producto = producto;
-//        return this.modificar();
-//    }
-//
-//    @Override
-//    public Integer eliminar(Producto producto) {
-//        this.producto = producto;
-//        return this.modificar();
-//    }
-//
-//
-//    @Override
-//    protected String obtenerListaValoresParaInsertar() {
-//        String valores = "";
-//        valores = valores.concat("'"+producto.getSku()+"'");
-//        valores = valores.concat(", ");
-//        valores = valores.concat("'"+producto.getNombre()+"'");
-//        valores = valores.concat(", ");
-//        valores = valores.concat("'"+producto.getDescripcion()+"'");
-//        valores = valores.concat(", ");
-//        valores = valores.concat("'"+producto.getPrecio()+"'");
-//        valores = valores.concat(", ");
-//        valores = valores.concat("'"+producto.getUnidad()+"'");
-//        return valores;
-//    }
-//
-//    @Override
-//    protected String obtenerListaValoresParaModificar() {
-//        return "";
-//    }
-//
-//    @Override
-//    protected String obtenerCondicionPorId() {
-//        return "";
-//    }
-//
-//    @Override
-//    public ArrayList<Producto> listar(String listado) {
-//        ArrayList<Producto> listadoProductos = new ArrayList();
-//        try{
-//            this.abrirConexion();
-//            this.ejecutarConsultaEnBD(listado);
-//            while(this.resultSet.next()){
-//                Producto plantillaProducto;
-//                plantillaProducto = new Producto(
-//                        this.resultSet.getString("SKU"),
-//                        this.resultSet.getString("NOMBRE"),
-//                        this.resultSet.getString("DESCRIPCION"),
-//                        this.resultSet.getDouble("PRECIO"),
-//                        this.resultSet.getString("UNIDAD")
-//                );
-//                listadoProductos.add(plantillaProducto);
-//            }
-//        }catch(SQLException ex){
-//            Logger.getLogger(ProductoDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-//        }finally{
-//            try{
-//                this.cerrarConexion();
-//            }catch(SQLException ex){
-//                Logger.getLogger(ProductoDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        }
-//        return listadoProductos;
-//    }
-//
-//    @Override
-//    public ArrayList<Producto> listarTodos() {
-//        String listado = this.obtenerListaValoresParaSeleccionar();
-//        return this.listar(listado);
-//    }
-//
-//    @Override
-//    public Producto obtenerPorId(String idProducto) {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
-//    
-//    @Override
-//    public Integer obtenerId(Producto producto) {
-//        this.producto = producto;
-//        try {
-//            Integer id = this.retornarUltimoAutogenerado();
-//            this.producto.setIdProducto(id);
-//            return id;
-//        } catch (SQLException ex) {
-//            Logger.getLogger(ProductoDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        return null;
-//    }
-//    
-//    @Override
-//    public String imprimirId(){
-//        return "" + this.producto.getIdProducto();
-//    }
+
+    @Override
+    protected void incluirValorDeParametrosParaObtenerPorId() throws SQLException {
+        this.incluirParametroInt(1, this.producto.getIdProducto());
+    }
+
+    /*
+     * ************************************************************************
+     * LISTAR TODOS
+     * ************************************************************************
+     */
+    @Override
+    public ArrayList<Producto> listarTodos() {
+        return (ArrayList<Producto>) super.listarTodos(null);
+    }
+
+    @Override
+    protected String obtenerProyeccionParaSelect() {
+        String sql = "id_Producto, sku, nombre, descripcion, precio";
+        return sql;
+    }
+
+    @Override
+    protected void agregarObjetoALaLista(List lista, ResultSet resultSet) throws SQLException {
+        instanciarObjetoDelResultSet();
+        lista.add(this.producto);
+    }
+
+    @Override
+    protected void instanciarObjetoDelResultSet() throws SQLException {
+        this.producto = new Producto(
+                this.resultSet.getInt("id_producto"),
+                this.resultSet.getString("sku"),
+                this.resultSet.getString("nombre"),
+                this.resultSet.getString("descripcion"),
+                this.resultSet.getDouble("precio"),
+                null
+        );
+    }
+
+    @Override
+    protected void limpiarObjetoDelResultSet() {
+        this.producto = null;
+    }
+
+    /*
+     * *************************************************************************
+     * EXISTE PRODUCTO
+     * Funciones adicionales
+     * *************************************************************************
+     */
+    @Override
+    public Boolean existeProducto(Producto producto) {
+        Boolean abreConexion = true;
+        return existeProducto(producto, abreConexion);
+    }
+
+    @Override
+    public Boolean existeProducto(Producto producto, Boolean abreConexion) {
+        this.producto = producto;
+        Integer idProducto = null;
+        try {
+            if (abreConexion) {
+                this.abrirConexion();
+            }
+            String sql = "select ID_PRODUCTO from PRODUCTO where ";
+            sql = sql.concat("sku=? ");
+            this.colocarSQLenStatement(sql);
+            sql = sql.concat("or nombre=? ");
+            this.colocarSQLenStatement(sql);
+            this.incluirParametroString(1, this.producto.getSku());
+            this.incluirParametroString(2, this.producto.getNombre());
+            this.ejecutarConsultaEnBD(sql);
+            if (this.resultSet.next()) {
+                idProducto = this.resultSet.getInt("id_Producto");
+            }
+        } catch (SQLException ex) {
+            System.err.println("Error al consultar si existe producto - " + ex);
+        } finally {
+            try {
+                if (abreConexion) {
+                    this.cerrarConexion();
+                }
+            } catch (SQLException ex) {
+                System.err.println("Error al cerrar la conexión - " + ex);
+            }
+        }
+        return idProducto != null;
+    }
+
 }
