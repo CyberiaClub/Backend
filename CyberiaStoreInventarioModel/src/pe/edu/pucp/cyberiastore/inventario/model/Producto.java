@@ -1,6 +1,6 @@
 package pe.edu.pucp.cyberiastore.inventario.model;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Producto {
     private Integer idProducto;
@@ -9,7 +9,11 @@ public class Producto {
     private String descripcion;
     private Double precio;
     private String unidad;
-    private ArrayList<Producto> productoMiembros;
+    private HashMap<Producto,Integer> productoMiembros;
+    
+    public Producto() {
+        this.productoMiembros = null;
+    }
     
     public Producto(String sku, String nombre, String descripcion, Double precio, String unidad) {
         this.sku = sku;
@@ -18,6 +22,16 @@ public class Producto {
         this.precio = precio;
         this.unidad = unidad;
         this.productoMiembros = null;
+    }
+    
+    public Producto(Integer idProducto, String sku, String nombre, String descripcion, Double precio, String unidad, HashMap<Producto,Integer> productoMiembros) {
+        this.idProducto = idProducto;
+        this.sku = sku;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.unidad = unidad;
+        this.productoMiembros = productoMiembros;
     }
     
     public void setIdProducto(Integer idProducto) {
@@ -68,4 +82,33 @@ public class Producto {
         this.unidad = unidad;
     }
 
+    public HashMap<Producto,Integer> getMiembros(){
+        HashMap<Producto,Integer> copia = (HashMap)this.productoMiembros.clone();
+        return copia;
+    }
+
+    public void setMiembros(HashMap<Producto,Integer> miembros){
+        this.productoMiembros = (HashMap)miembros.clone();
+    }
+
+    public Producto getMiembro(int index){
+        Producto referencia = (Producto)this.productoMiembros.keySet().toArray()[index];
+        return new Producto(
+            referencia.idProducto,
+            referencia.sku,
+            referencia.nombre,
+            referencia.descripcion,
+            referencia.precio,
+            referencia.unidad,
+            referencia.getMiembros()
+        );
+    }
+
+    public Integer getMiembroCantidad(int index){
+        return (Integer)this.productoMiembros.values().toArray()[index];
+    }
+
+    public void setMiembro(Producto producto,Integer cantidad){
+        this.productoMiembros.put(producto,cantidad);
+    }
 }

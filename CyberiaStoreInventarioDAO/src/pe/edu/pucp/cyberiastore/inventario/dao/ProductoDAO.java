@@ -10,13 +10,11 @@ public interface ProductoDAO {
     
     public Integer eliminar(Producto producto);
     
-    public ArrayList<Producto> listar(String sql);
-    
     public ArrayList<Producto> listarTodos();
     
     public Producto obtenerPorId(String idProducto);
-    
-    public Integer obtenerId(Producto producto);
-    
-    public String imprimirId();
+
+    public Boolean existeProducto(Producto producto);
+
+    public Boolean existeProducto(Producto producto, Boolean abreConexion);
 }
