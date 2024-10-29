@@ -33,6 +33,7 @@ public class MarcaDAOImpl extends DAOImpl implements MarcaDAO {
             if (!existeMarca) {
                 this.retornarLlavePrimaria = true;
                 idMarca = super.insertar();
+                
                 this.retornarLlavePrimaria = false;
 
             } else {
