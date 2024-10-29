@@ -15,11 +15,6 @@ public class ClienteBOTest {
     private static ClienteBO clienteBO;
     private static ArrayList<Cliente> listaClientes;
 
-//        testAdministradorBOInsertar();
-//        testAdministradorBOListarTodos();
-//        testAdministradorBOModificar();
-//        testAdministradorBOListarTodos();
-//        testAdministradorBOObtenerPorId();
     static void testClienteBO() {
         System.out.println("\ntestClienteBO");
         clienteBO = new ClienteBO();

@@ -133,6 +133,7 @@ public class RolDAOImpl extends DAOImpl implements RolDAO {
 
     @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
+        this.rol = new Rol();
         this.rol.setIdRol(this.resultSet.getInt("ID_ROL"));
         this.rol.setNombre(this.resultSet.getString("NOMBRE"));
     }

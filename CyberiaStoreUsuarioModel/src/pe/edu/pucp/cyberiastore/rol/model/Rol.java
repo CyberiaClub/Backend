@@ -7,6 +7,10 @@ public class Rol {
     private String nombre;
     private ArrayList<Permiso> permisos;
 
+    public Rol(){
+        
+    }
+    
     public Rol(Integer idRol, String nombre) {
         this.idRol = idRol;
         this.nombre = nombre;
