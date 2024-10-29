@@ -148,12 +148,6 @@ public class UsuarioDAOImpl extends DAOImpl implements UsuarioDAO {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    @Override
-    protected void instanciarObjetoDelResultSet() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-
     /*
      * **************************************************************************
      * LISTAR TODOS
@@ -172,6 +166,11 @@ public class UsuarioDAOImpl extends DAOImpl implements UsuarioDAO {
 
     @Override
     protected void agregarObjetoALaLista(List lista, ResultSet resultSet) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    protected void instanciarObjetoDelResultSet() throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

@@ -88,7 +88,7 @@ public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
             }
         }
         this.usarTransaccion = true;
-        return idTrabajador;
+        return idAdministrador;
     }
 
     @Override
@@ -139,7 +139,7 @@ public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
         try {
             this.iniciarTransaccion();
             trabajadorDAO.modificar(trabajador, this.usarTransaccion, this.conexion);
-            // Este no se modifica a si mismo, porque solo almacena el ID del trabajador el cual no varia
+            // Este no se modifica a si mismo, porque solo almacena el ID del trabajador el cual no puede variar
 //            retorno = super.modificar();
             this.comitarTransaccion();
         } catch (SQLException ex) {

@@ -3,7 +3,6 @@ package pe.edu.pucp.cyberiastore.trabajador.bo;
 import java.util.ArrayList;
 import java.util.Date;
 import pe.edu.pucp.cyberiastore.trabajador.model.Administrador;
-import pe.edu.pucp.cyberiastore.trabajador.model.Trabajador;
 import pe.edu.pucp.cyberiastore.trabajador.dao.AdministradorDAO;
 import pe.edu.pucp.cyberiastore.trabajador.daoImpl.AdministradorDAOImpl;
 import pe.edu.pucp.cyberiastore.usuario.model.TipoDocumento;
@@ -27,8 +26,8 @@ public class AdministradorBO {
         return this.administradorDAO.modificar(administrador);
     }
 
-    public Administrador obtenerPorId(Integer idAdministraodr) {
-        return this.administradorDAO.obtenerPorId(idAdministraodr);
+    public Administrador obtenerPorId(Integer idAdministrador) {
+        return this.administradorDAO.obtenerPorId(idAdministrador);
     }
 
     public ArrayList<Administrador> listarTodos() {

@@ -1,5 +1,6 @@
 package pe.edu.pucp.cyberiastore.rol.daoImpl;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -19,23 +20,49 @@ public class RolDAOImpl extends DAOImpl implements RolDAO {
         this.rol = null;
     }
 
+    /*
+     * ************************************************************************
+     * Insertar
+     * ************************************************************************
+     */
+    @Override
+    public Integer insertar(Rol rol) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+    }
+
+    @Override
+    public Integer insertar(Rol rol, Boolean usarTransaccion, Connection conexion) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     @Override
     protected String obtenerListaDeAtributosParaInsercion() {
-        return "NOMBRE";
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     protected String incluirListaDeParametrosParaInsercion() {
-        return "?";
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
-        this.incluirParametroString(1, this.rol.getNombre());
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    /*
+     * **************************************************************************
+     * MODIFICAR
+     * *************************************************************************
+     */
+    @Override
+    public Integer modificar(Rol rol) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    protected String obtenerListaDeValoresYAtributosParaModificacion() {
+    public Integer modificar(Rol rol, Boolean usarTransaccion, Connection conexion) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -45,7 +72,27 @@ public class RolDAOImpl extends DAOImpl implements RolDAO {
     }
 
     @Override
+    protected String obtenerListaDeValoresYAtributosParaModificacion() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    /*
+     * **************************************************************************
+     * ELIMINIAR
+     * *************************************************************************
+     */
+    @Override
+    public Integer eliminar(Rol rol) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Integer eliminar(Rol rol, Boolean usarTransaccion, Connection conexion) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -54,13 +101,56 @@ public class RolDAOImpl extends DAOImpl implements RolDAO {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    /*
+     * **************************************************************************
+     * LISTAR TODOS
+     * *************************************************************************
+     */
+    @Override
+    public ArrayList<Rol> listarTodos() {
+        return (ArrayList<Rol>) super.listarTodos(null);
+    }
+
+    @Override
+    protected String generarSQLParaListarTodos(Integer limite) {
+        String sql = "select ";
+        sql = sql.concat(obtenerProyeccionParaSelect());
+        sql = sql.concat(" from ").concat(this.nombre_tabla);
+        return sql;
+    }
+
     @Override
     protected String obtenerProyeccionParaSelect() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql = "ID_ROL, NOMBRE";
+        return sql;
     }
 
     @Override
     protected void agregarObjetoALaLista(List lista, ResultSet resultSet) throws SQLException {
+        instanciarObjetoDelResultSet();
+        lista.add(this.rol);
+    }
+
+    @Override
+    protected void instanciarObjetoDelResultSet() throws SQLException {
+        this.rol = new Rol();
+        this.rol.setIdRol(this.resultSet.getInt("ID_ROL"));
+        this.rol.setNombre(this.resultSet.getString("NOMBRE"));
+    }
+
+    @Override
+    protected void limpiarObjetoDelResultSet() {
+        this.rol = null;
+    }
+
+
+    /*
+     * **************************************************************************
+     * OBTENER POR ID
+     * *************************************************************************
+     */
+    @Override
+    public Rol obtenerPorId(Integer idRol) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -69,126 +159,14 @@ public class RolDAOImpl extends DAOImpl implements RolDAO {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    /*
+     * **************************************************************************
+     * EXISTE ROL
+     * y funciones adicionales
+     * *************************************************************************
+     */
     @Override
-    protected void instanciarObjetoDelResultSet() throws SQLException {
+    public Boolean existeRol(Rol rol) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
-    @Override
-    protected void limpiarObjetoDelResultSet() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public Integer insertar(Rol rol) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public Integer modificar(Rol rol) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public Integer eliminar(Rol rol) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public ArrayList<Rol> listar(String sql) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public ArrayList<Rol> listarTodos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public Rol obtenerPorId(String idRol) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-//    @Override
-//    public Integer insertar(Rol rol){
-//        this.rol = rol;
-//        return this.insertar();
-//    }
-//    
-//    @Override
-//    protected String obtenerListaAtributos(){
-//    }
-//    
-//    @Override
-//    protected String obtenerListaValoresParaInsertar(){
-//        String sql = "";
-//        sql = sql.concat("'" + rol.getNombre() + "'");
-//        return sql;
-//    }
-//
-//    @Override
-//    public Integer modificar(Rol rol) {
-//        this.rol = rol;
-//        return this.modificar();
-//    }
-//
-//    @Override
-//    public Integer eliminar(Rol rol) {
-//        this.rol = rol;
-//        return this.eliminar();
-//    }
-//    
-//    @Override
-//    public ArrayList<Rol> listar(String sql) {
-//        ArrayList<Rol> listaRol = new ArrayList();
-//        try {
-//            this.abrirConexion();
-//            this.ejecutarConsultaEnBD(sql);
-//            while(this.resultSet.next()){
-//                Rol rolTemp = new Rol(
-//                        this.resultSet.getInt("ID_ROL"),
-//                        this.resultSet.getString("NOMBRE")
-//                );
-//                listaRol.add(rolTemp);
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(RolDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-//        } finally {
-//            try {
-//                this.cerrarConexion();
-//            } catch (SQLException ex) {
-//                Logger.getLogger(RolDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        }
-//        return listaRol;
-//    }
-//
-//    @Override
-//    public ArrayList<Rol> listarTodos() {
-//        String sql = this.obtenerListaValoresParaSeleccionar();
-//        return this.listar(sql);
-//    }
-//
-//    @Override
-//    public Rol obtenerPorId(String idRol) {
-//        String sql = this.obtenerListaValoresParaSeleccionar();
-//        sql = sql.concat(" and ID_ROL = '" + idRol + "'");
-//        return this.listar(sql).getFirst();
-//    }
-//
-//    @Override
-//    protected String obtenerListaValoresParaModificar() {
-//        String sql = "";
-//        sql = sql.concat("NOMBRE = ");
-//        sql = sql.concat("'" + rol.getNombre() + "'");
-//        return sql;
-//    }
-//
-//    @Override
-//    protected String obtenerCondicionPorId() {
-//        String sql = "";
-//        sql = sql.concat("ID_ROL = ");
-//        sql = sql.concat("'" + rol.getIdRol() + "'");
-//        return sql;
-//    }
 }
