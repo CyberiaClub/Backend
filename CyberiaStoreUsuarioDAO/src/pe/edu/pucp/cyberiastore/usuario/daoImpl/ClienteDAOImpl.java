@@ -152,9 +152,9 @@ public class ClienteDAOImpl extends DAOImpl implements ClienteDAO {
     protected String obtenerPredicadoParaLlavePrimaria() {
         String sql = "";
         if (this.tipo_Operacion == Tipo_Operacion.MODIFICAR || this.tipo_Operacion == Tipo_Operacion.ELIMINAR) {
-            sql = "ID_CLIENTE=?";
+            sql = " ID_CLIENTE=? ";
         } else {
-            sql = "cli.ID_CLIENTE=?";
+            sql = " AND CLI.ID_CLIENTE=? ";
         }
         return sql;
     }
@@ -244,7 +244,7 @@ public class ClienteDAOImpl extends DAOImpl implements ClienteDAO {
 
     @Override
     protected String obtenerProyeccionParaSelect() {
-        String sql = "CLI.ID_CLIENTE,CLI.VERIFICADO";
+        String sql = "CLI.ID_CLIENTE,CLI.VERIFICADO,";
         sql = sql.concat("US.ID_USUARIO,US.DOCUMENTO,US.TELEFONO,");
         sql = sql.concat("US.NOMBRE,US.APELLIDO_PATERNO,US.APELLIDO_MATERNO,");
         sql = sql.concat("US.FECHA_NACIMIENTO,US.CORREO,US.DIRECCION,");
@@ -260,6 +260,7 @@ public class ClienteDAOImpl extends DAOImpl implements ClienteDAO {
 
     @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
+        this.cliente = new Cliente();
         this.cliente.setIdCliente(this.resultSet.getInt("ID_CLIENTE"));
         this.cliente.setVerificado(this.resultSet.getBoolean("VERIFICADO"));
         this.cliente.setIdUsuario(this.resultSet.getInt("ID_USUARIO"));
