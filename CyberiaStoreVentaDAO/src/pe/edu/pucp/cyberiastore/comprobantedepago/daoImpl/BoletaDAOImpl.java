@@ -196,7 +196,7 @@ public class BoletaDAOImpl extends DAOImpl implements BoletaDAO {
         sql = sql.concat("JOIN comprobante_de_pago CP ON B.ID_COMPROBANTE_DE_PAGO = CP.ID_COMPROBANTE_DE_PAGO ");
         sql = sql.concat("JOIN boleta_x_cliente BXC ON B.ID_BOLETA = BXC.ID_BOLETA ");
         sql = sql.concat("JOIN cliente C ON BXC.ID_CLIENTE = C.ID_CLIENTE ");
-        sql = sql.concat("JOIN usuario U ON C.ID_CLIENTE = U.ID_CLIENTE ");
+        sql = sql.concat("JOIN usuario U ON C.ID_CLIENTE = U.ID_USUARIO ");
 //        sql = sql.concat("JOIN pedido p ON CP.ID_PEDIDO = P.ID_PEDIDO");
         if (limite != null && limite > 0) {
             sql = sql.concat(" limit ").concat(limite.toString());
@@ -209,7 +209,7 @@ public class BoletaDAOImpl extends DAOImpl implements BoletaDAO {
         String sql = "B.ID_BOLETA, CP.ID_COMPROBANTE_DE_PAGO,";
         sql = sql.concat("CP.FECHA,CP.SUBTOTAL,CP.IGV,CP.TOTAL,CP.DESCUENTO_APLICADO, ");
         sql = sql.concat("B.NUMERO_BOLETA, ");
-        sql = sql.concat("U.DOCUMENTO, U.NOMBRE, U.APELLIDO_PATERNO, U.APELLIDO_MATERNO, ");
+        sql = sql.concat("U.DOCUMENTO, U.NOMBRE, U.APELLIDO_PATERNO, U.APELLIDO_MATERNO ");
         return sql;
     }
 
@@ -224,7 +224,7 @@ public class BoletaDAOImpl extends DAOImpl implements BoletaDAO {
         this.boleta = new Boleta();
 
         this.boleta.setIdBoleta(this.resultSet.getInt("id_boleta"));
-        this.boleta.setIdComprobanteDePago(this.resultSet.getInt("id_comprobanteDePago"));
+        this.boleta.setIdComprobanteDePago(this.resultSet.getInt("id_comprobante_de_pago"));
         this.boleta.setFecha(this.resultSet.getDate("fecha"));
         this.boleta.setSubtotal(this.resultSet.getDouble("subtotal"));
         this.boleta.setIgv(this.resultSet.getDouble("igv"));

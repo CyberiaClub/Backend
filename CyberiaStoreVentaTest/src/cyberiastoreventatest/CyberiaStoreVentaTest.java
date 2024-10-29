@@ -65,6 +65,8 @@ public class CyberiaStoreVentaTest {
         
         facturaDAO.eliminar(factura);
         
+        ArrayList<Factura> facturas = facturaDAO.listarTodos();
+        
         boleta.setFecha(fechaBoleta);
         boleta.setSubtotal(1000.0);
         boleta.setTotal(1000.0);
@@ -82,6 +84,8 @@ public class CyberiaStoreVentaTest {
         boletaDAO.insertar(boleta);
         
         boletaDAO.eliminar(boleta);
+        
+        ArrayList<Boleta> boletas = boletaDAO.listarTodos();
 
 
 

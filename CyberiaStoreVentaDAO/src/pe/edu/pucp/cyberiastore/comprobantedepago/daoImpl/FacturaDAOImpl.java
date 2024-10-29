@@ -195,9 +195,9 @@ public class FacturaDAOImpl extends DAOImpl implements FacturaDAO {
         sql = sql.concat(obtenerProyeccionParaSelect());
         sql = sql.concat(" from ").concat(this.nombre_tabla).concat(" F ");
         sql = sql.concat("JOIN comprobante_de_pago CP ON F.ID_COMPROBANTE_DE_PAGO = CP.ID_COMPROBANTE_DE_PAGO ");
-        sql = sql.concat("JOIN factura_x_cliente BXC ON F.ID_FACTURA = BXC.ID_FACTURA ");
-        sql = sql.concat("JOIN cliente C ON BXC.ID_CLIENTE = C.ID_CLIENTE ");
-        sql = sql.concat("JOIN usuario U ON C.ID_CLIENTE = U.ID_CLIENTE ");
+        sql = sql.concat("JOIN factura_x_cliente FXC ON F.ID_FACTURA = FXC.ID_FACTURA ");
+        sql = sql.concat("JOIN cliente C ON FXC.ID_CLIENTE = C.ID_CLIENTE ");
+        sql = sql.concat("JOIN usuario U ON C.ID_CLIENTE = U.ID_USUARIO ");
 //        sql = sql.concat("JOIN pedido p ON CP.ID_PEDIDO = P.ID_PEDIDO");
         if (limite != null && limite > 0) {
             sql = sql.concat(" limit ").concat(limite.toString());
@@ -210,7 +210,7 @@ public class FacturaDAOImpl extends DAOImpl implements FacturaDAO {
         String sql = "F.ID_FACTURA, CP.ID_COMPROBANTE_DE_PAGO,";
         sql = sql.concat("CP.FECHA,CP.SUBTOTAL,CP.IGV,CP.TOTAL,CP.DESCUENTO_APLICADO, ");
         sql = sql.concat("F.NUMERO_FACTURA, F.RUC, F.RAZON_SOCIAL, F.DIRECCION, ");
-        sql = sql.concat("U.DOCUMENTO, U.NOMBRE, U.APELLIDO_PATERNO, U.APELLIDO_MATERNO, ");
+        sql = sql.concat("U.DOCUMENTO, U.NOMBRE, U.APELLIDO_PATERNO, U.APELLIDO_MATERNO ");
         return sql;
     }
 
@@ -225,13 +225,16 @@ public class FacturaDAOImpl extends DAOImpl implements FacturaDAO {
         this.factura = new Factura();
 
         this.factura.setIdFactura(this.resultSet.getInt("id_factura"));
-        this.factura.setIdComprobanteDePago(this.resultSet.getInt("id_comprobanteDePago"));
+        this.factura.setIdComprobanteDePago(this.resultSet.getInt("id_comprobante_de_pago"));
         this.factura.setFecha(this.resultSet.getDate("fecha"));
         this.factura.setSubtotal(this.resultSet.getDouble("subtotal"));
         this.factura.setIgv(this.resultSet.getDouble("igv"));
         this.factura.setTotal(this.resultSet.getDouble("total"));
         this.factura.setDescuentoAplicado(this.resultSet.getDouble("descuento_aplicado"));
         this.factura.setNumeroDeFactura(this.resultSet.getInt("numero_factura"));
+        this.factura.setRuc(this.resultSet.getString("ruc"));
+        this.factura.setRazonSocial(this.resultSet.getString("razon_social"));
+        this.factura.setDireccionDeFacturacion(this.resultSet.getString("direccion"));
 
         this.factura.getCliente().setDocumento(this.resultSet.getString("documento"));
         this.factura.getCliente().setNombre(this.resultSet.getString("nombre"));
