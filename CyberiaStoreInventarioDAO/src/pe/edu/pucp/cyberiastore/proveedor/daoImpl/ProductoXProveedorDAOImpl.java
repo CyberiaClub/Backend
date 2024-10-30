@@ -21,22 +21,23 @@ public class ProductoXProveedorDAOImpl extends DAOImpl implements ProductoXProve
     }
     
     @Override
-    public Integer insertar(Integer idProducto, Integer idProveedor) {
+    public Integer insertar(Integer idProducto, Integer idProveedor, Double precioProveedor) {
         this.idProducto = idProducto;
         this.idProveedor = idProveedor;
+        this.precioProveedor = precioProveedor;
         return super.insertar();
     }
 
     @Override
-    public Integer insertar(Integer idProducto, Integer idProveedor, Boolean usarTransaccion, Connection conexion) {
+    public Integer insertar(Integer idProducto, Integer idProveedor, Double precioProveedor, Boolean usarTransaccion, Connection conexion) {
         this.usarTransaccion = usarTransaccion;
         this.conexion = conexion;
-        return this.insertar(idProveedor, idProducto);
+        return this.insertar(idProveedor, idProducto, precioProveedor);
     }
     
     @Override
     protected String obtenerListaDeAtributosParaInsercion() {
-        return "id_producto, id_proveedor";
+        return "ID_PRODUCTO, ID_PROVEEDOR";
     }
 
     @Override

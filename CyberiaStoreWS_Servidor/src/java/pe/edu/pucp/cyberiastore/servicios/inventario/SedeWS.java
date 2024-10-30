@@ -35,4 +35,10 @@ public class SedeWS {
     public ArrayList<Sede> sede_listar() {
         return sedeDAO.listarTodos();
     }
+    
+    @WebMethod(operationName = "sede_buscarIdPorNombre")
+    public Integer sede_buscarIdPorNombre(@WebParam(name = "Sede") Sede sede, @WebParam(name = "abreConexion") Boolean abreConexion) {
+        this.sede = sede;
+        return sedeDAO.buscarIdPorNombre(this.sede, abreConexion);
+    }
 }

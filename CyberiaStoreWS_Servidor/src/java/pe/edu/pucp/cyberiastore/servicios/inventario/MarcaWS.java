@@ -42,4 +42,10 @@ public class MarcaWS {
         this.marca.setIdMarca(idMarca);
         marcaDAO.eliminar(this.marca);
     }
+    
+    @WebMethod(operationName = "marca_buscarIdPorNombre")
+    public Integer marca_buscarIdPorNombre(@WebParam(name = "Marca") Marca marca, @WebParam(name = "abreConexion") Boolean abreConexion) {
+        this.marca = marca;
+        return marcaDAO.buscarIdPorNombre(this.marca, abreConexion);
+    }
 }

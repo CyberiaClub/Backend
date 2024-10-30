@@ -16,4 +16,6 @@ public interface TipoProductoDAO {
     public Boolean existeTipoProducto(TipoProducto tipoProducto);
 
     public Boolean existeTipoProducto(TipoProducto tipoProducto, Boolean abreConexion);
+    
+    public Integer buscarIdPorTipo(TipoProducto tipoProducto, Boolean abreConexion);
 }

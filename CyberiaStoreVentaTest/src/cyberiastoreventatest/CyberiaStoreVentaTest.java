@@ -87,8 +87,6 @@ public class CyberiaStoreVentaTest {
         
         ArrayList<Boleta> boletas = boletaDAO.listarTodos();
 
-
-
         oferta.setFechaDeInicio(fechaInicio);
         oferta.setFechaDeFin(fechaFin);
         oferta.setPorcentaje(20);

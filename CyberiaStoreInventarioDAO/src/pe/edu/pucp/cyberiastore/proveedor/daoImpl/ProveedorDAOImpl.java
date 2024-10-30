@@ -37,7 +37,7 @@ public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
                 this.retornarLlavePrimaria = true;
                 idProveedor = super.insertar();
                 this.retornarLlavePrimaria = false;
-
+                
             } else {
                 idProveedor = proveedor.getIdProveedor();
             }
@@ -244,13 +244,13 @@ public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
             if (abreConexion) {
                 this.abrirConexion();
             }
-            String sql = "select id_Proveedor from proveedor where ";
-            sql = sql.concat("ruc=? ");
+            String sql = "select ID_PROVEEDOR from PROVEEDOR where ";
+            sql = sql.concat("RUC=? ");
             this.colocarSQLenStatement(sql);
             this.incluirParametroString(1, this.proveedor.getRuc());
             this.ejecutarConsultaEnBD(sql);
             if (this.resultSet.next()) {
-                idProveedor = this.resultSet.getInt("id_Proveedor");
+                idProveedor = this.resultSet.getInt("ID_PROVEEDOR");
             }
         } catch (SQLException ex) {
             System.err.println("Error al consultar si existe proveedor - " + ex);
@@ -264,5 +264,35 @@ public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
             }
         }
         return idProveedor != null;
+    }
+    
+    @Override
+    public Integer buscarIdPorNombre(Proveedor proveedor, Boolean abreConexion) {
+        this.proveedor = proveedor;
+        Integer idProveedor = null;
+        try {
+            if (abreConexion) {
+                this.abrirConexion();
+            }
+            String sql = "select ID_PROVEEDOR from PROVEEDOR where ";
+            sql = sql.concat("RAZON_SOCIAL=? ");
+            this.colocarSQLenStatement(sql);
+            this.incluirParametroString(1, this.proveedor.getRazonSocial());
+            this.ejecutarConsultaEnBD(sql);
+            if (this.resultSet.next()) {
+                idProveedor = this.resultSet.getInt("ID_PROVEEDOR");
+            }
+        } catch (SQLException ex) {
+            System.err.println("Error al consultar si existe proveedor - " + ex);
+        } finally {
+            try {
+                if (abreConexion) {
+                    this.cerrarConexion();
+                }
+            } catch (SQLException ex) {
+                System.err.println("Error al cerrar la conexión - " + ex);
+            }
+        }
+        return idProveedor;
     }
 }

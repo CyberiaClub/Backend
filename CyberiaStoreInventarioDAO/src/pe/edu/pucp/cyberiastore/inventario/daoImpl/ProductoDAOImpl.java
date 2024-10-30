@@ -10,6 +10,12 @@ import pe.edu.pucp.cyberiastore.inventario.model.Producto;
 import pe.edu.pucp.cyberiastore.inventario.dao.ProductoDAO;
 import pe.edu.pucp.cyberiastore.config.DAOImpl;
 import pe.edu.pucp.cyberiastore.config.Tipo_Operacion;
+import pe.edu.pucp.cyberiastore.inventario.dao.ProductoXMarcaDAO;
+import pe.edu.pucp.cyberiastore.inventario.dao.ProductoXTipoDAO;
+import pe.edu.pucp.cyberiastore.proveedor.dao.ProductoXProveedorDAO;
+import pe.edu.pucp.cyberiastore.proveedor.daoImpl.ProductoXProveedorDAOImpl;
+import pe.edu.pucp.cyberiastore.sede.dao.ProductoXSedeDAO;
+import pe.edu.pucp.cyberiastore.sede.daoImpl.ProductoXSedeDAOImpl;
 
 public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
 
@@ -118,7 +124,18 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
                 this.retornarLlavePrimaria = true;
                 idProducto = super.insertar();
                 this.retornarLlavePrimaria = false;
-
+//                Insertar producto x marca
+                ProductoXMarcaDAO productoxmarca = new ProductoXMarcaDAOImpl();
+                productoxmarca.insertar(idProducto, this.producto.getIdMarca(), usarTransaccion, conexion);
+                //Insertar  producto x sede
+                ProductoXSedeDAO productoxsede = new ProductoXSedeDAOImpl();
+                productoxsede.insertar(idProducto, this.producto.getIdSede(), usarTransaccion, conexion);
+                // insertar producto x tipo
+                ProductoXTipoDAO productoxtipo = new ProductoXTipoDAOImpl();
+                productoxtipo.insertar(idProducto, this.producto.getIdTipoProducto(), usarTransaccion, conexion);
+                //insertar producto x proveedor
+                ProductoXProveedorDAO productoxproveedor = new ProductoXProveedorDAOImpl();
+                productoxproveedor.insertar(idProducto, this.producto.getIdProveedor(), this.producto.getPrecioProveedor(), usarTransaccion, conexion);
             } else {
                 idProducto = producto.getIdProducto();
             }

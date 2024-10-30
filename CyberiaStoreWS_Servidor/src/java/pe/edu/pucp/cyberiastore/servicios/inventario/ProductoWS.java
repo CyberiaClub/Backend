@@ -20,9 +20,17 @@ public class ProductoWS {
     }
     
     @WebMethod(operationName = "producto_insertar")
-    public Integer producto_insertar(@WebParam(name = "sku") String sku, @WebParam(name = "nombre") String nombre, @WebParam(name = "descripcion") String descripcion, @WebParam(name = "precio") Double precio, @WebParam(name = "unidad") String unidad) {
+    public Integer producto_insertar(@WebParam(name = "sku") String sku, @WebParam(name = "nombre") String nombre, @WebParam(name = "descripcion") String descripcion, 
+                                     @WebParam(name = "precio") Double precio, @WebParam(name = "unidad") String unidad,@WebParam(name = "idSede") Integer idSede,
+                                     @WebParam(name = "idMarca") Integer idMarca,@WebParam(name = "idProveedor") Integer idProveedor,
+                                     @WebParam(name = "idTipoProducto") Integer idTipoProducto, @WebParam(name = "precioProveedor") Double precioProveedor) {
         this.producto = new Producto(sku,nombre,descripcion,precio,unidad);
-        return productoDAO.insertar(this.producto);
+        this.producto.setIdMarca(idMarca);
+        this.producto.setIdSede(idSede);
+        this.producto.setIdProveedor(idProveedor);
+        this.producto.setIdTipoProducto(idTipoProducto);
+        this.producto.setPrecioProveedor(precioProveedor);
+        return productoDAO.insertar(this.producto); 
     }
     
     @WebMethod(operationName = "producto_modificar")

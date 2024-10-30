@@ -42,4 +42,10 @@ public class TipoProductoWS {
         this.tipoProducto.setIdTipoProducto(idTipoProducto);
         tipoProductoDAO.eliminar(this.tipoProducto);
     }
+    
+    @WebMethod(operationName = "tipoProducto_buscarIdPorNombre")
+    public Integer tipoProducto_buscarIdPorNombre(@WebParam(name = "TipoProducto") TipoProducto tipoProducto, @WebParam(name = "abreConexion") Boolean abreConexion) {
+        this.tipoProducto = tipoProducto;
+        return tipoProductoDAO.buscarIdPorTipo(this.tipoProducto, abreConexion);
+    }
 }

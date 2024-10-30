@@ -233,4 +233,34 @@ public class TipoProductoDAOImpl extends DAOImpl implements TipoProductoDAO {
         }
         return idTipoProducto != null;
     }
+    
+    @Override
+    public Integer buscarIdPorTipo(TipoProducto tipoProducto, Boolean abreConexion) {
+        this.tipoProducto = tipoProducto;
+        Integer idTipoProducto = null;
+        try {
+            if (abreConexion) {
+                this.abrirConexion();
+            }
+            String sql = "select ID_TIPO_PRODUCTO from TIPO_PRODUCTO where ";
+            sql = sql.concat("TIPO=? ");
+            this.colocarSQLenStatement(sql);
+            this.incluirParametroString(1, this.tipoProducto.getTipo());
+            this.ejecutarConsultaEnBD(sql);
+            if (this.resultSet.next()) {
+                idTipoProducto = this.resultSet.getInt("ID_TIPO_PRODUCTO");
+            }
+        } catch (SQLException ex) {
+            System.err.println("Error al consultar si existe tipoProducto - " + ex);
+        } finally {
+            try {
+                if (abreConexion) {
+                    this.cerrarConexion();
+                }
+            } catch (SQLException ex) {
+                System.err.println("Error al cerrar la conexión - " + ex);
+            }
+        }
+        return idTipoProducto;
+    }
 }

@@ -46,4 +46,10 @@ public class ProveedorWS {
         this.proveedor.setIdProveedor(idProveedor);
         proveedorDAO.eliminar(this.proveedor);
     }
+    
+    @WebMethod(operationName = "proveedor_buscarIdPorNombre")
+    public Integer proveedor_buscarIdPorNombre(@WebParam(name = "Proveedor") Proveedor proveedor, @WebParam(name = "abreConexion") Boolean abreConexion) {
+        this.proveedor = proveedor;
+        return proveedorDAO.buscarIdPorNombre(this.proveedor, abreConexion);
+    }
 }

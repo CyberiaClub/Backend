@@ -18,4 +18,6 @@ public interface SedeDAO {
     public Boolean existeSede(Sede sede);
 
     public Boolean existeSede(Sede sede, Boolean abreConexion);
+
+    public Integer buscarIdPorNombre(Sede sede, Boolean abreConexion);
 }

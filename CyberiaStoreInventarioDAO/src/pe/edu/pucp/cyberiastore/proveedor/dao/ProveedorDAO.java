@@ -16,4 +16,6 @@ public interface ProveedorDAO {
     public Boolean existeProveedor(Proveedor proveedor);
 
     public Boolean existeProveedor(Proveedor proveedor, Boolean abreConexion);
+    
+    public Integer buscarIdPorNombre(Proveedor proveedor, Boolean abreConexion);
 }
