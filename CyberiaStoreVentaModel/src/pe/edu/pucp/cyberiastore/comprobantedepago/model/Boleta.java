@@ -12,9 +12,9 @@ public class Boleta extends ComprobanteDePago {
         this.activo = true;
     }
 
-    public Boleta(Date fecha, Double subtotal, Double total, Double igv, Double descuentoAplicado) {
+    public Boleta(String numeroBoleta, Date fecha, Double subtotal, Double total, Double igv, Double descuentoAplicado) {
         super(fecha, subtotal, total, igv, descuentoAplicado);
-
+        this.numeroDeBoleta = numeroDeBoleta;
     }
 
     public Integer getIdBoleta() {

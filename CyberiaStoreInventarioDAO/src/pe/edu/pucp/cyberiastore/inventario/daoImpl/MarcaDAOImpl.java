@@ -233,4 +233,34 @@ public class MarcaDAOImpl extends DAOImpl implements MarcaDAO {
         }
         return idMarca != null;
     }
+    
+    @Override
+    public Integer buscarIdPorNombre(Marca marca, Boolean abreConexion) {
+        this.marca = marca;
+        Integer idMarca = null;
+        try {
+            if (abreConexion) {
+                this.abrirConexion();
+            }
+            String sql = "select ID_MARCA from MARCA where ";
+            sql = sql.concat("NOMBRE=? ");
+            this.colocarSQLenStatement(sql);
+            this.incluirParametroString(1, this.marca.getNombre());
+            this.ejecutarConsultaEnBD(sql);
+            if (this.resultSet.next()) {
+                idMarca = this.resultSet.getInt("ID_MARCA");
+            }
+        } catch (SQLException ex) {
+            System.err.println("Error al consultar si existe marca - " + ex);
+        } finally {
+            try {
+                if (abreConexion) {
+                    this.cerrarConexion();
+                }
+            } catch (SQLException ex) {
+                System.err.println("Error al cerrar la conexión - " + ex);
+            }
+        }
+        return idMarca;
+    }
 }

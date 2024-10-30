@@ -35,8 +35,10 @@ public class PedidoDAOImpl extends DAOImpl implements PedidoDAO {
             idPedido = super.insertar();
             this.retornarLlavePrimaria = false;
             ProductoXPedidoDAO productoXPedidoDAO = new ProductoXPedidoDAOImpl();
-            for (Map.Entry<Producto, Integer> par : this.pedido.getProductosCantidad()) {
-                productoXPedidoDAO.insertar(par.getKey().getIdProducto(), this.pedido.getIdPedido(), par.getValue(), usarTransaccion, conexion);
+            for (int i = 0; i < this.pedido.getProductos().size(); i++) {
+                productoXPedidoDAO.insertar(this.pedido.getProductos().get(i).getIdProducto(),
+                                            this.pedido.getIdPedido(), this.pedido.getCantidades().get(i), 
+                                            this.usarTransaccion, this.conexion);
             }
             this.comitarTransaccion();
         } catch (SQLException ex) {
