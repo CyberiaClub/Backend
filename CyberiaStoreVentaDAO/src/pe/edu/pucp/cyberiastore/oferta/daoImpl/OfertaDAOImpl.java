@@ -2,15 +2,12 @@ package pe.edu.pucp.cyberiastore.oferta.daoImpl;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.sql.SQLException;
 import java.util.List;
 import pe.edu.pucp.cyberiastore.config.DAOImpl;
 import pe.edu.pucp.cyberiastore.config.Tipo_Operacion;
 import pe.edu.pucp.cyberiastore.oferta.dao.OfertaDAO;
 import pe.edu.pucp.cyberiastore.oferta.model.Oferta;
-import pe.edu.pucp.cyberiastore.oferta.daoImpl.ProductoXOfertaDAOImpl;
 import pe.edu.pucp.cyberiastore.oferta.dao.ProductoXOfertaDAO;
 
 public class OfertaDAOImpl extends DAOImpl implements OfertaDAO {

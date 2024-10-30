@@ -4,8 +4,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import pe.edu.pucp.cyberiastore.inventario.model.Producto;
 import pe.edu.pucp.cyberiastore.inventario.dao.ProductoDAO;
 import pe.edu.pucp.cyberiastore.config.DAOImpl;
@@ -54,18 +52,18 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
                         productoXProducto.insertar(idProducto, productoMiembro.getIdProducto(), productoMiembro.getCantidad(), this.usarTransaccion, this.conexion);
                     }
                 }
-                // Insertar  producto x marca
-//                ProductoXMarcaDAO productoxmarca = new ProductoXMarcaDAOImpl();
-//                productoxmarca.insertar(idProducto, this.producto.getIdMarca(), usarTransaccion, conexion);
-//                //Insertar  producto x sede
-//                ProductoXSedeDAO productoxsede = new ProductoXSedeDAOImpl();
-//                productoxsede.insertar(idProducto, this.producto.getIdSede(), usarTransaccion, conexion);
-//                // insertar producto x tipo
-//                ProductoXTipoDAO productoxtipo = new ProductoXTipoDAOImpl();
-//                productoxtipo.insertar(idProducto, this.producto.getIdTipo(), usarTransaccion, conexion);
-//                //insertar producto x proveedor
-//                ProductoXProveedorDAO productoxproveedor = new ProductoXProveedorDAOImpl();
-//                productoxproveedor.insertar(idProducto, this.producto.getIdProveedor(), this.producto.getPrecioProveedor(), usarTransaccion, conexion);
+//                Insertar producto x marca
+                ProductoXMarcaDAO productoxmarca = new ProductoXMarcaDAOImpl();
+                productoxmarca.insertar(idProducto, this.producto.getIdMarca(), usarTransaccion, conexion);
+                //Insertar  producto x sede
+                ProductoXSedeDAO productoxsede = new ProductoXSedeDAOImpl();
+                productoxsede.insertar(idProducto, this.producto.getIdSede(), usarTransaccion, conexion);
+                // insertar producto x tipo
+                ProductoXTipoDAO productoxtipo = new ProductoXTipoDAOImpl();
+                productoxtipo.insertar(idProducto, this.producto.getIdTipo(), usarTransaccion, conexion);
+                //insertar producto x proveedor
+                ProductoXProveedorDAO productoxproveedor = new ProductoXProveedorDAOImpl();
+                productoxproveedor.insertar(idProducto, this.producto.getIdProveedor(), this.producto.getPrecioProveedor(), usarTransaccion, conexion);
             } else {
                 idProducto = producto.getIdProducto();
             }

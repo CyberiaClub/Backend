@@ -3,12 +3,9 @@ package pe.edu.pucp.cyberiastore.inventario.daoImpl;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import pe.edu.pucp.cyberiastore.config.DAOImpl;
 import pe.edu.pucp.cyberiastore.inventario.dao.ProductoXTipoDAO;
-import pe.edu.pucp.cyberiastore.inventario.model.Producto;
-import pe.edu.pucp.cyberiastore.inventario.model.TipoProducto;
 
 public class ProductoXTipoDAOImpl extends DAOImpl implements ProductoXTipoDAO {
 

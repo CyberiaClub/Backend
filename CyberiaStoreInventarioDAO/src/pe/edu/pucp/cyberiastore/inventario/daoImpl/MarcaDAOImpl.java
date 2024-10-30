@@ -2,8 +2,6 @@ package pe.edu.pucp.cyberiastore.inventario.daoImpl;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.sql.SQLException;
 import java.util.List;
 import pe.edu.pucp.cyberiastore.inventario.model.Marca;

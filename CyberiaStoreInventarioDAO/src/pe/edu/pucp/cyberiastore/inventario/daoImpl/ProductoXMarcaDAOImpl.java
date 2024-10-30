@@ -3,12 +3,9 @@ package pe.edu.pucp.cyberiastore.inventario.daoImpl;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import pe.edu.pucp.cyberiastore.config.DAOImpl;
 import pe.edu.pucp.cyberiastore.inventario.dao.ProductoXMarcaDAO;
-import pe.edu.pucp.cyberiastore.inventario.model.Producto;
-import pe.edu.pucp.cyberiastore.inventario.model.Marca;
 
 public class ProductoXMarcaDAOImpl extends DAOImpl implements ProductoXMarcaDAO {
 
