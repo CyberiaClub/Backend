@@ -1,7 +1,6 @@
 package pe.edu.pucp.cyberiastore.inventario.model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Producto {
 
@@ -10,9 +9,14 @@ public class Producto {
     private String nombre;
     private String descripcion;
     private Double precio;
-    // Estos 2 ultimos atributos son para el insertar
+    // Estos ultimos atributos son para el insertar
     private Integer cantidad;
     private ArrayList<Producto> productosMiembros;
+    private Integer idMarca;
+    private Integer idTipo;
+    private Integer idProveedor;
+    private Double precioProveedor;
+    private Integer idSede;
 
     public Producto() {
         this.productosMiembros = null;
@@ -91,12 +95,53 @@ public class Producto {
         this.cantidad = cantidad;
     }
 
+    /*Usados para el insertar*/
     public ArrayList<Producto> getProductosMiembros() {
         return productosMiembros;
     }
 
     public void setProductosMiembros(ArrayList<Producto> productosMiembros) {
         this.productosMiembros = productosMiembros;
+    }
+
+    public Integer getIdMarca() {
+        return idMarca;
+    }
+
+    public void setIdMarca(Integer idMarca) {
+        this.idMarca = idMarca;
+    }
+
+    public Integer getIdTipo() {
+        return idTipo;
+    }
+
+    public void setIdTipo(Integer idTipo) {
+        this.idTipo = idTipo;
+    }
+
+    public Integer getIdProveedor() {
+        return idProveedor;
+    }
+
+    public void setIdProveedor(Integer idProveedor) {
+        this.idProveedor = idProveedor;
+    }
+
+    public Double getPrecioProveedor() {
+        return precioProveedor;
+    }
+
+    public void setPrecioProveedor(Double precioProveedor) {
+        this.precioProveedor = precioProveedor;
+    }
+
+    public Integer getIdSede() {
+        return idSede;
+    }
+
+    public void setIdSede(Integer idSede) {
+        this.idSede = idSede;
     }
 
 }

@@ -19,35 +19,37 @@ public class ProductoXProveedorDAOImpl extends DAOImpl implements ProductoXProve
     public ProductoXProveedorDAOImpl() {
         super("PRODUCTO_X_PROVEEDOR");
     }
-    
+
     @Override
-    public Integer insertar(Integer idProducto, Integer idProveedor) {
+    public Integer insertar(Integer idProducto, Integer idProveedor, Double precioProveedor) {
         this.idProducto = idProducto;
         this.idProveedor = idProveedor;
+        this.precioProveedor = precioProveedor;
         return super.insertar();
     }
 
     @Override
-    public Integer insertar(Integer idProducto, Integer idProveedor, Boolean usarTransaccion, Connection conexion) {
+    public Integer insertar(Integer idProducto, Integer idProveedor, Double precioProveedor, Boolean usarTransaccion, Connection conexion) {
         this.usarTransaccion = usarTransaccion;
         this.conexion = conexion;
-        return this.insertar(idProveedor, idProducto);
+        return this.insertar(idProveedor, idProducto, precioProveedor);
     }
-    
+
     @Override
     protected String obtenerListaDeAtributosParaInsercion() {
-        return "id_producto, id_proveedor";
+        return "id_producto, id_proveedor, precio_proveedor";
     }
 
     @Override
     protected String incluirListaDeParametrosParaInsercion() {
-        return "?,?";
+        return "?,?,?";
     }
 
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
-        this.incluirParametroInt(1, idProducto);
-        this.incluirParametroInt(2, idProveedor);
+        this.incluirParametroInt(1, this.idProducto);
+        this.incluirParametroInt(2, this.idProveedor);
+        this.incluirParametroDouble(3, this.precioProveedor);
     }
 
     @Override
