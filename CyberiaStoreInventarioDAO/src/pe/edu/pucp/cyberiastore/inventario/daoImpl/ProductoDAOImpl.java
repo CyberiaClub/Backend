@@ -55,17 +55,17 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
                     }
                 }
                 // Insertar  producto x marca
-                ProductoXMarcaDAO productoxmarca = new ProductoXMarcaDAOImpl();
-                productoxmarca.insertar(idProducto, this.producto.getIdMarca(), usarTransaccion, conexion);
-                //Insertar  producto x sede
-                ProductoXSedeDAO productoxsede = new ProductoXSedeDAOImpl();
-                productoxsede.insertar(idProducto, this.producto.getIdSede(), usarTransaccion, conexion);
-                // insertar producto x tipo
-                ProductoXTipoDAO productoxtipo = new ProductoXTipoDAOImpl();
-                productoxtipo.insertar(idProducto, this.producto.getIdTipo(), usarTransaccion, conexion);
-                //insertar producto x proveedor
-                ProductoXProveedorDAO productoxproveedor = new ProductoXProveedorDAOImpl();
-                productoxproveedor.insertar(idProducto, this.producto.getIdProveedor(), this.producto.getPrecioProveedor(), usarTransaccion, conexion);
+//                ProductoXMarcaDAO productoxmarca = new ProductoXMarcaDAOImpl();
+//                productoxmarca.insertar(idProducto, this.producto.getIdMarca(), usarTransaccion, conexion);
+//                //Insertar  producto x sede
+//                ProductoXSedeDAO productoxsede = new ProductoXSedeDAOImpl();
+//                productoxsede.insertar(idProducto, this.producto.getIdSede(), usarTransaccion, conexion);
+//                // insertar producto x tipo
+//                ProductoXTipoDAO productoxtipo = new ProductoXTipoDAOImpl();
+//                productoxtipo.insertar(idProducto, this.producto.getIdTipo(), usarTransaccion, conexion);
+//                //insertar producto x proveedor
+//                ProductoXProveedorDAO productoxproveedor = new ProductoXProveedorDAOImpl();
+//                productoxproveedor.insertar(idProducto, this.producto.getIdProveedor(), this.producto.getPrecioProveedor(), usarTransaccion, conexion);
             } else {
                 idProducto = producto.getIdProducto();
             }
@@ -90,12 +90,12 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
 
     @Override
     protected String obtenerListaDeAtributosParaInsercion() {
-        return "SKU, NOMBRE, DESCRIPCION, PRECIO";
+        return "SKU, NOMBRE, DESCRIPCION, PRECIO,IMAGEN";
     }
 
     @Override
     protected String incluirListaDeParametrosParaInsercion() {
-        return "?,?,?,?";
+        return "?,?,?,?,?";
     }
 
     @Override
@@ -104,6 +104,7 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
         this.incluirParametroString(2, this.producto.getNombre());
         this.incluirParametroString(3, this.producto.getDescripcion());
         this.incluirParametroDouble(4, this.producto.getPrecio());
+        this.incluirParametroByte(5, this.producto.getImagen());
     }
 
     /*

@@ -13,8 +13,8 @@ public class ProductoBO {
         this.productoDAO = new ProductoDAOImpl();
     }
 
-    public Integer insertar(String sku, String nombre, String descripcion, Double precio, ArrayList<Producto> productoMiembros) {
-        Producto producto = new Producto(sku, nombre, descripcion, precio, productoMiembros);
+    public Integer insertar(String sku, String nombre, String descripcion, Double precio, ArrayList<Producto> productoMiembros,byte[] imagenBytes) {
+        Producto producto = new Producto(sku, nombre, descripcion, precio, productoMiembros,imagenBytes);
         return this.productoDAO.insertar(producto);
     }
 

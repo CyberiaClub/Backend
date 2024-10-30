@@ -416,6 +416,14 @@ public abstract class DAOImpl {
             this.statement.setDouble(numeroParametro, valor);
         }
     }
+    protected void incluirParametroByte(Integer numeroParametro, byte[] valor) throws SQLException{
+        if (valor == null) {
+            this.statement.setNull(numeroParametro, Types.BLOB);
+        } else {
+            this.statement.setBytes(numeroParametro, valor);
+        }
+    
+    }
     
     protected void incluirParametroString(String nombreParametro, String valor) throws SQLException {
         if (valor == null) {

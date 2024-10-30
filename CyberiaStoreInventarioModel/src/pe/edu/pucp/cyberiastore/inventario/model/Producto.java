@@ -9,6 +9,7 @@ public class Producto {
     private String nombre;
     private String descripcion;
     private Double precio;
+    private byte[] imagen;
     // Estos ultimos atributos son para el insertar
     private Integer cantidad;
     private ArrayList<Producto> productosMiembros;
@@ -30,12 +31,13 @@ public class Producto {
         this.productosMiembros = null;
     }
 
-    public Producto(String sku, String nombre, String descripcion, Double precio, ArrayList<Producto> productosMiembros) {
+    public Producto(String sku, String nombre, String descripcion, Double precio, ArrayList<Producto> productosMiembros,byte[] imagenBytes) {
         this.sku = sku;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
         this.productosMiembros = productosMiembros;
+        this.imagen = imagenBytes;
     }
 
     public Producto(Integer idProducto, String sku, String nombre, String descripcion, Double precio, ArrayList<Producto> productoMiembros) {
@@ -91,11 +93,20 @@ public class Producto {
         return cantidad;
     }
 
+    public byte[] getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(byte[] imagen) {
+        this.imagen = imagen;
+    }
+
+    
+    /*Usados para el insertar*/
     public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
     }
 
-    /*Usados para el insertar*/
     public ArrayList<Producto> getProductosMiembros() {
         return productosMiembros;
     }
