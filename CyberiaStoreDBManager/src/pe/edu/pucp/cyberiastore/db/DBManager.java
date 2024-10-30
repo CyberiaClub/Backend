@@ -60,7 +60,8 @@ public class DBManager {
         url = url.concat(":");
         url = url.concat(this.puerto);
         url = url.concat("/");
-        url = url.concat(this.base_de_datos);        
+        url = url.concat(this.base_de_datos);
+        url = url.concat("?useSSL=false");   
         return url;
     }
 

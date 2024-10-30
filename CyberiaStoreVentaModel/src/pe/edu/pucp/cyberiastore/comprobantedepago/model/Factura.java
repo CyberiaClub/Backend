@@ -16,9 +16,10 @@ public class Factura extends ComprobanteDePago {
         this.activo = true;
     }
     
-    public Factura(String ruc, String razonSocial, String direccionDeFacturacion, Date fecha, Double subtotal, Double total, Double igv, Double descuentoAplicado) {
+    public Factura(String ruc, String numeroDeFactura, String razonSocial, String direccionDeFacturacion, Date fecha, Double subtotal, Double total, Double igv, Double descuentoAplicado) {
         super(fecha, subtotal, total, igv, descuentoAplicado);
         this.ruc = ruc;
+        this.numeroDeFactura = this.numeroDeFactura;
         this.razonSocial = razonSocial;
         this.direccionDeFacturacion = direccionDeFacturacion;
         this.activo = true;

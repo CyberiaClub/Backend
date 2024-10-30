@@ -1,13 +1,14 @@
 package pe.edu.pucp.cyberiastore.pedido.model;
 
 import java.util.ArrayList;
-import java.util.Map;
 import pe.edu.pucp.cyberiastore.inventario.model.Producto;
 
 public class Pedido {
     private Integer idPedido;
     private EstadoPedido estadoPedido;
-    private ArrayList<Map.Entry<Producto,Integer>> productosCantidad;
+    private ArrayList<Producto> productos;
+    private ArrayList<Integer> cantidades;
+    private ArrayList<Double> precios;
     
     public Pedido(){
         this.estadoPedido = EstadoPedido.EN_PREPARACION;
@@ -34,17 +35,47 @@ public class Pedido {
     }
 
     /**
-     * @return the productosCantidad
+     * @return the productos
      */
-    public ArrayList<Map.Entry<Producto,Integer>> getProductosCantidad() {
-        return productosCantidad;
+    public ArrayList<Producto> getProductos() {
+        return productos;
     }
 
     /**
-     * @param productosCantidad the productosCantidad to set
+     * @param productos the productos to set
      */
-    public void setProductosCantidad(ArrayList<Map.Entry<Producto,Integer>> productosCantidad) {
-        this.productosCantidad = productosCantidad;
+    public void setProductos(ArrayList<Producto> productos) {
+        this.productos = productos;
     }
+
+    /**
+     * @return the cantidades
+     */
+    public ArrayList<Integer> getCantidades() {
+        return cantidades;
+    }
+
+    /**
+     * @param cantidades the cantidades to set
+     */
+    public void setCantidades(ArrayList<Integer> cantidades) {
+        this.cantidades = cantidades;
+    }
+
+    /**
+     * @return the precios
+     */
+    public ArrayList<Double> getPrecios() {
+        return precios;
+    }
+
+    /**
+     * @param precios the precios to set
+     */
+    public void setPrecios(ArrayList<Double> precios) {
+        this.precios = precios;
+    }
+
+
     
 }
