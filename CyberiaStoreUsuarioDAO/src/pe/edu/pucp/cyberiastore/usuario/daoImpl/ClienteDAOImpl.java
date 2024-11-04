@@ -37,6 +37,7 @@ public class ClienteDAOImpl extends DAOImpl implements ClienteDAO {
         usuario.setNombre(this.cliente.getNombre());
         usuario.setApellidoPaterno(this.cliente.getApellidoPaterno());
         usuario.setApellidoMaterno(this.cliente.getApellidoMaterno());
+        usuario.setSexo(this.cliente.getSexo());
         usuario.setFechaDeNacimiento(this.cliente.getFechaDeNacimiento());
         usuario.setCorreo(this.cliente.getCorreo());
         usuario.setActivo(this.cliente.getActivo());
@@ -114,6 +115,7 @@ public class ClienteDAOImpl extends DAOImpl implements ClienteDAO {
         usuario.setNombre(this.cliente.getNombre());
         usuario.setApellidoPaterno(this.cliente.getApellidoPaterno());
         usuario.setApellidoMaterno(this.cliente.getApellidoMaterno());
+        usuario.setSexo(this.cliente.getSexo());
         usuario.setFechaDeNacimiento(this.cliente.getFechaDeNacimiento());
         usuario.setCorreo(this.cliente.getCorreo());
         usuario.setActivo(this.cliente.getActivo());
@@ -246,7 +248,7 @@ public class ClienteDAOImpl extends DAOImpl implements ClienteDAO {
     protected String obtenerProyeccionParaSelect() {
         String sql = "CLI.ID_CLIENTE,CLI.VERIFICADO,";
         sql = sql.concat("US.ID_USUARIO,US.DOCUMENTO,US.TELEFONO,");
-        sql = sql.concat("US.NOMBRE,US.APELLIDO_PATERNO,US.APELLIDO_MATERNO,");
+        sql = sql.concat("US.NOMBRE,US.APELLIDO_PATERNO,US.APELLIDO_MATERNO,US.SEXO");
         sql = sql.concat("US.FECHA_NACIMIENTO,US.CORREO,US.DIRECCION,");
         sql = sql.concat("US.NACIONALIDAD,US.TIPO_DOCUMENTO");
         return sql;
@@ -269,6 +271,7 @@ public class ClienteDAOImpl extends DAOImpl implements ClienteDAO {
         this.cliente.setNombre(this.resultSet.getString("NOMBRE"));
         this.cliente.setApellidoPaterno(this.resultSet.getString("APELLIDO_PATERNO"));
         this.cliente.setApellidoMaterno(this.resultSet.getString("APELLIDO_MATERNO"));
+        this.cliente.setSexo(this.resultSet.getString("SEXO").charAt(0));
         this.cliente.setFechaDeNacimiento(this.resultSet.getDate("FECHA_NACIMIENTO"));
         this.cliente.setCorreo(this.resultSet.getString("CORREO"));
         this.cliente.setDireccion(this.resultSet.getString("DIRECCION"));

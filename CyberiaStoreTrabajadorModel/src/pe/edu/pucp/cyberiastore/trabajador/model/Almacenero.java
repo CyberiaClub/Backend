@@ -11,9 +11,9 @@ public class Almacenero extends Trabajador {
         super();
     }
 
-    public Almacenero(String documento, String telefono, String nombre, String apellidoPaterno, String apellidoMaterno, Date fechaDeNacimiento, String correo,
-            String direccion, String contrasena, String nacionalidad, TipoDocumento tipoDeDocumento, Double sueldo, Date fechaDeIngreso, Integer idSede) {
-        super(documento, telefono, nombre, apellidoPaterno, apellidoMaterno, fechaDeNacimiento, correo, direccion, contrasena, nacionalidad, tipoDeDocumento, sueldo, fechaDeIngreso, idSede);
+    public Almacenero(String documento, String telefono, String nombre, String apellidoPaterno, String apellidoMaterno,char sexo,
+            Date fechaDeNacimiento, String correo,String direccion, String contrasena, String nacionalidad, TipoDocumento tipoDeDocumento, Double sueldo, Date fechaDeIngreso, Integer idSede) {
+        super(documento, telefono, nombre, apellidoPaterno, apellidoMaterno,sexo, fechaDeNacimiento, correo, direccion, contrasena, nacionalidad, tipoDeDocumento, sueldo, fechaDeIngreso, idSede);
     }
 
     /**
@@ -29,6 +29,7 @@ public class Almacenero extends Trabajador {
      * @param nombre
      * @param apellidoPaterno
      * @param apellidoMaterno
+     * @param sexo
      * @param fechaDeNacimiento
      * @param correo
      * @param activo
@@ -37,8 +38,9 @@ public class Almacenero extends Trabajador {
      * @param direccion
      * @param tipoDeDocumento
      */
-    public Almacenero(Integer idAlmacenero,Integer idTrabajador, Double sueldo, Date fechaDeIngreso, Integer idUsuario, String documento, String telefono, String nombre, String apellidoPaterno, String apellidoMaterno, Date fechaDeNacimiento, String correo, Boolean activo, String contrasena, String nacionalidad, String direccion, TipoDocumento tipoDeDocumento) {
-        super(idTrabajador, sueldo, fechaDeIngreso, idUsuario, documento, telefono, nombre, apellidoPaterno, apellidoMaterno, fechaDeNacimiento, correo, activo, contrasena, nacionalidad, direccion, tipoDeDocumento);
+    public Almacenero(Integer idAlmacenero,Integer idTrabajador, Double sueldo, Date fechaDeIngreso, Integer idUsuario, String documento,
+            String telefono, String nombre, String apellidoPaterno, String apellidoMaterno, char sexo,Date fechaDeNacimiento, String correo, Boolean activo, String contrasena, String nacionalidad, String direccion, TipoDocumento tipoDeDocumento) {
+        super(idTrabajador, sueldo, fechaDeIngreso, idUsuario, documento, telefono, nombre, apellidoPaterno, apellidoMaterno, sexo,fechaDeNacimiento, correo, activo, contrasena, nacionalidad, direccion, tipoDeDocumento);
         this.idAlmacenero = idAlmacenero;
     }
 
