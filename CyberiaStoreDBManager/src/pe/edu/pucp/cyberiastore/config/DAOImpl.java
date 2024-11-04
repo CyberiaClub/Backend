@@ -176,8 +176,9 @@ public abstract class DAOImpl {
     }
 
     private String generarSQLParaEliminacion() {
-        String sql = "delete from ".concat(this.nombre_tabla);
-        sql = sql.concat(" where ");
+        String sql = "update ";
+        sql = sql.concat(this.nombre_tabla);
+        sql = sql.concat(" set activo = 0 where ");
         sql = sql.concat(this.obtenerPredicadoParaLlavePrimaria());
         return sql;
     }
@@ -414,6 +415,14 @@ public abstract class DAOImpl {
         }else{
             this.statement.setDouble(numeroParametro, valor);
         }
+    }
+    protected void incluirParametroByte(Integer numeroParametro, byte[] valor) throws SQLException{
+        if (valor == null) {
+            this.statement.setNull(numeroParametro, Types.BLOB);
+        } else {
+            this.statement.setBytes(numeroParametro, valor);
+        }
+    
     }
     
     protected void incluirParametroString(String nombreParametro, String valor) throws SQLException {
