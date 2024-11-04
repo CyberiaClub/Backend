@@ -163,6 +163,10 @@ public class MarcaDAOImpl extends DAOImpl implements MarcaDAO {
         return (ArrayList<Marca>) super.listarTodos(null);
     }
     
+    @Override
+    public ArrayList<Marca> listarIdNombre() {
+        return null;
+    }
     
 
     @Override

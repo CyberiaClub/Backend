@@ -10,6 +10,8 @@ public interface MarcaDAO {
     public Integer eliminar(Marca marca);
 
     public ArrayList<Marca> listarTodos();
+    
+    public ArrayList<Marca> listarIdNombre();
 
     public Marca obtenerPorId(Integer idMarca);
 
