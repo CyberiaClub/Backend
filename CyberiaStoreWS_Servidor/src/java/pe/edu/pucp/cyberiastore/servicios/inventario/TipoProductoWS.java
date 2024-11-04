@@ -4,48 +4,45 @@ import jakarta.jws.WebService;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
 import java.util.ArrayList;
-import pe.edu.pucp.cyberiastore.config.DAOImpl;
 import pe.edu.pucp.cyberiastore.inventario.model.TipoProducto;
-import pe.edu.pucp.cyberiastore.inventario.dao.TipoProductoDAO;
-import pe.edu.pucp.cyberiastore.inventario.daoImpl.TipoProductoDAOImpl;
+import pe.edu.pucp.cyberiastore.inventario.bo.TipoProductoBO;
 
 @WebService(serviceName = "TipoProductoWS")
 public class TipoProductoWS {
     
-    private final TipoProductoDAO tipoProductoDAO;
+    private final TipoProductoBO tipoProductoBO;
     private TipoProducto tipoProducto;
     
     public TipoProductoWS(){
-        this.tipoProductoDAO = new TipoProductoDAOImpl();
+        this.tipoProductoBO = new TipoProductoBO();
     }
     
     @WebMethod(operationName = "tipoProducto_insertar")
-    public Integer tipoProducto_insertar(@WebParam(name = "tipo") String tipo) {
-        this.tipoProducto = new TipoProducto(tipo);
-        return tipoProductoDAO.insertar(this.tipoProducto);
+    public Integer tipoProducto_insertar(@WebParam(name = "TipoProducto") TipoProducto tipoProducto) {
+        this.tipoProducto = tipoProducto;
+        return tipoProductoBO.insertar(this.tipoProducto);
     }
     
     @WebMethod(operationName = "tipoProducto_modificar")
-    public Integer tipoProducto_modificar(@WebParam(name = "tipo") String tipo) {
-        this.tipoProducto = new TipoProducto(tipo);
-        return tipoProductoDAO.modificar(this.tipoProducto);
+    public Integer tipoProducto_modificar(@WebParam(name = "TipoProducto") TipoProducto tipoProducto) {
+        this.tipoProducto = tipoProducto;
+        return tipoProductoBO.modificar(this.tipoProducto);
     }
     
     @WebMethod(operationName = "tipoProducto_listar")
     public ArrayList<TipoProducto> tipoProducto_listar() {
-        return tipoProductoDAO.listarTodos();
+        return tipoProductoBO.listarTodos();
     }
     
     @WebMethod(operationName = "tipoProducto_eliminar")
-    public void tipoProducto_eliminar(@WebParam(name = "idTipoProducto") Integer idTipoProducto) {
-        this.tipoProducto = new TipoProducto();
-        this.tipoProducto.setIdTipoProducto(idTipoProducto);
-        tipoProductoDAO.eliminar(this.tipoProducto);
+    public void tipoProducto_eliminar(@WebParam(name = "TipoProducto") TipoProducto tipoProducto) {
+        this.tipoProducto = tipoProducto;
+        tipoProductoBO.eliminar(this.tipoProducto);
     }
     
     @WebMethod(operationName = "tipoProducto_buscarIdPorNombre")
     public Integer tipoProducto_buscarIdPorNombre(@WebParam(name = "TipoProducto") TipoProducto tipoProducto, @WebParam(name = "abreConexion") Boolean abreConexion) {
         this.tipoProducto = tipoProducto;
-        return tipoProductoDAO.buscarIdPorTipo(this.tipoProducto, abreConexion);
+        return tipoProductoBO.buscarIdPorTipo(this.tipoProducto, abreConexion);
     }
 }
