@@ -375,6 +375,8 @@ public abstract class DAOImpl {
     // - Integer
     // - Date
     // - Boolean
+    // - Byte
+    // - localtime
     
     protected void incluirParametroString(Integer numeroParametro, String valor) throws SQLException {
         if (valor == null) {
@@ -383,7 +385,7 @@ public abstract class DAOImpl {
             this.statement.setString(numeroParametro, valor);
         }
     }
-
+    
     protected void incluirParametroInt(Integer numeroParametro, Integer valor) throws SQLException {
         if (valor == null) {
             this.statement.setNull(numeroParametro, Types.INTEGER);

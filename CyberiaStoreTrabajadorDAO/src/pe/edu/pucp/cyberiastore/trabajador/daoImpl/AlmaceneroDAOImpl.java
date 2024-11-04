@@ -39,6 +39,7 @@ public class AlmaceneroDAOImpl extends DAOImpl implements AlmaceneroDAO {
         trabajador.setNombre(almacenero.getNombre());
         trabajador.setApellidoPaterno(almacenero.getApellidoPaterno());
         trabajador.setApellidoMaterno(almacenero.getApellidoMaterno());
+        trabajador.setSexo(almacenero.getSexo());
         trabajador.setFechaDeNacimiento(almacenero.getFechaDeNacimiento());
         trabajador.setCorreo(almacenero.getCorreo());
         trabajador.setContrasena(almacenero.getContrasena());
@@ -124,6 +125,7 @@ public class AlmaceneroDAOImpl extends DAOImpl implements AlmaceneroDAO {
         trabajador.setNombre(almacenero.getNombre());
         trabajador.setApellidoPaterno(almacenero.getApellidoPaterno());
         trabajador.setApellidoMaterno(almacenero.getApellidoMaterno());
+        trabajador.setSexo(almacenero.getSexo());
         trabajador.setFechaDeNacimiento(almacenero.getFechaDeNacimiento());
         trabajador.setCorreo(almacenero.getCorreo());
         trabajador.setContrasena(almacenero.getContrasena());
@@ -259,7 +261,7 @@ public class AlmaceneroDAOImpl extends DAOImpl implements AlmaceneroDAO {
     @Override
     protected String obtenerProyeccionParaSelect() {
         String sql = "AL.ID_ALMACENERO,TR.ID_TRABAJADOR,US.ID_USUARIO,";
-        sql = sql.concat("US.NOMBRE, US.APELLIDO_PATERNO, US.APELLIDO_MATERNO,US.DOCUMENTO,US.FECHA_NACIMIENTO,");
+        sql = sql.concat("US.NOMBRE, US.APELLIDO_PATERNO, US.APELLIDO_MATERNO,US.SEXO,US.DOCUMENTO,US.FECHA_NACIMIENTO,");
         sql = sql.concat("US.TELEFONO, US.CORREO, US.NACIONALIDAD,US.TIPO_DOCUMENTO,");
         sql = sql.concat("TR.SUELDO,TR.FECHA_INGRESO,");
         sql = sql.concat("S.NOMBRE as SEDE_NOMBRE");
@@ -281,6 +283,7 @@ public class AlmaceneroDAOImpl extends DAOImpl implements AlmaceneroDAO {
         this.almacenero.setNombre(this.resultSet.getString("nombre"));
         this.almacenero.setApellidoPaterno(this.resultSet.getString("APELLIDO_PATERNO"));
         this.almacenero.setApellidoMaterno(this.resultSet.getString("APELLIDO_MATERNO"));
+        this.almacenero.setSexo(this.resultSet.getString("SEXO").charAt(0));
         this.almacenero.setDocumento(this.resultSet.getString("DOCUMENTO"));
         this.almacenero.setFechaDeNacimiento(this.resultSet.getTimestamp("FECHA_NACIMIENTO"));
         this.almacenero.setTelefono(this.resultSet.getString("TELEFONO"));
