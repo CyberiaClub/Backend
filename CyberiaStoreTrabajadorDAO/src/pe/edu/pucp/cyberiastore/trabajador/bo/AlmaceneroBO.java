@@ -5,7 +5,6 @@ import java.util.Date;
 import pe.edu.pucp.cyberiastore.trabajador.model.Almacenero;
 import pe.edu.pucp.cyberiastore.trabajador.dao.AlmaceneroDAO;
 import pe.edu.pucp.cyberiastore.trabajador.daoImpl.AlmaceneroDAOImpl;
-import pe.edu.pucp.cyberiastore.usuario.model.TipoDocumento;
 
 public class AlmaceneroBO {
 
@@ -14,24 +13,26 @@ public class AlmaceneroBO {
     public AlmaceneroBO() {
         this.almaceneroDAO = new AlmaceneroDAOImpl();
     }
-
-    public Integer insertar(String documento, String telefono, String nombre, String apellidoPaterno, String apellidoMaterno,char sexo, Date fechaDeNacimiento, String correo,
-            String direccion, String contrasena, String nacionalidad, TipoDocumento tipoDeDocumento, Double sueldo, Date fechaDeIngreso, Integer idSede) {
-        Almacenero almacenero = new Almacenero(documento, telefono, nombre, apellidoPaterno, apellidoMaterno,sexo, fechaDeNacimiento, correo, direccion, contrasena, nacionalidad, tipoDeDocumento, sueldo, fechaDeIngreso, idSede);
+    
+     public Integer insertar(Almacenero almacenero){
         return this.almaceneroDAO.insertar(almacenero);
     }
-
-    public Integer modificar(Integer idAlmacenero,Integer idTrabajador, Double sueldo, Date fechaDeIngreso, Integer idUsuario, String documento,
-            String telefono, String nombre, String apellidoPaterno, String apellidoMaterno,char sexo, Date fechaDeNacimiento, String correo, Boolean activo, String contrasena, String nacionalidad, String direccion, TipoDocumento tipoDeDocumento) {
-        Almacenero almacenero = new Almacenero(idAlmacenero,idTrabajador, sueldo, fechaDeIngreso, idUsuario, documento, telefono, nombre, apellidoPaterno, apellidoMaterno, sexo,fechaDeNacimiento, correo, activo, contrasena, nacionalidad, direccion, tipoDeDocumento);
+    
+    public Integer modificar(Almacenero almacenero){
         return this.almaceneroDAO.modificar(almacenero);
     }
 
-    public Almacenero obtenerPorId(Integer idAlmacenero) {
-        return this.almaceneroDAO.obtenerPorId(idAlmacenero);
+    public Integer eliminar(Almacenero almacenero){
+        return this.almaceneroDAO.eliminar(almacenero);
     }
 
-    public ArrayList<Almacenero> listarTodos() {
-        return this.almaceneroDAO.listarTodos();
+    public ArrayList<Almacenero> listarTodos(){
+        ArrayList<Almacenero> almaceneroes = this.almaceneroDAO.listarTodos();
+        return almaceneroes;
+    }
+
+    public Almacenero obtenerPorId(Integer idAlmacenero){
+        Almacenero almacenero = this.almaceneroDAO.obtenerPorId(idAlmacenero);
+        return almacenero;
     }
 }
