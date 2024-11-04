@@ -11,9 +11,9 @@ public class Vendedor extends Trabajador {
 
     }
 
-    public Vendedor(String documento, String telefono, String nombre, String apellidoPaterno, String apellidoMaterno, Date fechaDeNacimiento, String correo,
+    public Vendedor(String documento, String telefono, String nombre, String apellidoPaterno, String apellidoMaterno,char sexo, Date fechaDeNacimiento, String correo,
             String direccion, String contrasena, String nacionalidad, TipoDocumento tipoDeDocumento, Double sueldo, Date fechaDeIngreso, Integer idSede) {
-        super(documento, telefono, nombre, apellidoPaterno, apellidoMaterno, fechaDeNacimiento, correo, direccion, contrasena, nacionalidad, tipoDeDocumento, sueldo, fechaDeIngreso, idSede);
+        super(documento, telefono, nombre, apellidoPaterno, apellidoMaterno, sexo,fechaDeNacimiento, correo, direccion, contrasena, nacionalidad, tipoDeDocumento, sueldo, fechaDeIngreso, idSede);
     }
 
     /**
@@ -37,8 +37,9 @@ public class Vendedor extends Trabajador {
      * @param direccion
      * @param tipoDeDocumento
      */
-    public Vendedor(Integer idVendedor, Integer idTrabajador, Double sueldo, Date fechaDeIngreso, Integer idUsuario, String documento, String telefono, String nombre, String apellidoPaterno, String apellidoMaterno, Date fechaDeNacimiento, String correo, Boolean activo, String contrasena, String nacionalidad, String direccion, TipoDocumento tipoDeDocumento) {
-        super(idTrabajador, sueldo, fechaDeIngreso, idUsuario, documento, telefono, nombre, apellidoPaterno, apellidoMaterno, fechaDeNacimiento, correo, activo, contrasena, nacionalidad, direccion, tipoDeDocumento);
+    public Vendedor(Integer idVendedor, Integer idTrabajador, Double sueldo, Date fechaDeIngreso, Integer idUsuario, String documento, String telefono, String nombre, String apellidoPaterno, String apellidoMaterno,char sexo,
+            Date fechaDeNacimiento, String correo, Boolean activo, String contrasena, String nacionalidad, String direccion, TipoDocumento tipoDeDocumento) {
+        super(idTrabajador, sueldo, fechaDeIngreso, idUsuario, documento, telefono, nombre, apellidoPaterno, apellidoMaterno, sexo,fechaDeNacimiento, correo, activo, contrasena, nacionalidad, direccion, tipoDeDocumento);
         this.idVendedor = idVendedor;
     }
 

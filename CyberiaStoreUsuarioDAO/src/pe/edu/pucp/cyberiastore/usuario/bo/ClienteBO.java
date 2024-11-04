@@ -26,16 +26,16 @@ public class ClienteBO {
     }
 
     public Integer insertar(String documento, String telefono, String nombre, String apellidoPaterno, String apellidoMaterno,
-            Date fechaDeNacimiento, String correo, String contraseña, String nacionalidad, String direccion, TipoDocumento tipoDocumento) {
-        Cliente cliente = new Cliente(documento, telefono, nombre, apellidoPaterno, apellidoMaterno, fechaDeNacimiento, correo, contraseña,
+            char sexo,Date fechaDeNacimiento, String correo, String contraseña, String nacionalidad, String direccion, TipoDocumento tipoDocumento) {
+        Cliente cliente = new Cliente(documento, telefono, nombre, apellidoPaterno, apellidoMaterno, sexo,fechaDeNacimiento, correo, contraseña,
                 nacionalidad, direccion, tipoDocumento);
         return this.clienteDAO.insertar(cliente);
     }
     
     public Integer modificar(Integer idCliente,Boolean verificado, Integer IdUsuario,String documento, String telefono, String nombre, String apellidoPaterno, String apellidoMaterno,
-            Date fechaDeNacimiento, String correo,Boolean activo, String contraseña, String nacionalidad, String direccion, TipoDocumento tipoDocumento){
+            char sexo,Date fechaDeNacimiento, String correo,Boolean activo, String contraseña, String nacionalidad, String direccion, TipoDocumento tipoDocumento){
         Cliente cliente = new Cliente(idCliente,verificado,IdUsuario,documento, telefono, nombre, apellidoPaterno, apellidoMaterno,
-                fechaDeNacimiento, correo,activo, contraseña,nacionalidad, direccion, tipoDocumento);
+                sexo,fechaDeNacimiento, correo,activo, contraseña,nacionalidad, direccion, tipoDocumento);
         return this.clienteDAO.modificar(cliente);
     }
     
