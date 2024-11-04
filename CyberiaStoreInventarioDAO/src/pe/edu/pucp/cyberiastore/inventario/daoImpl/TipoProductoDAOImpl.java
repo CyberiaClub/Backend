@@ -62,7 +62,7 @@ public class TipoProductoDAOImpl extends DAOImpl implements TipoProductoDAO {
 
     @Override
     protected String incluirListaDeParametrosParaInsercion() {
-        return "?,?";
+        return "?,?,?";
     }
 
     @Override

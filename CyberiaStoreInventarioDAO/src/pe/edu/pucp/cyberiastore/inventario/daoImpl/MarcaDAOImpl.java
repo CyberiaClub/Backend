@@ -63,7 +63,7 @@ public class MarcaDAOImpl extends DAOImpl implements MarcaDAO {
 
     @Override
     protected String incluirListaDeParametrosParaInsercion() {
-        return "?,?";
+        return "?,?,?";
     }
 
     @Override
@@ -162,6 +162,8 @@ public class MarcaDAOImpl extends DAOImpl implements MarcaDAO {
     public ArrayList<Marca> listarTodos() {
         return (ArrayList<Marca>) super.listarTodos(null);
     }
+    
+    
 
     @Override
     protected String obtenerProyeccionParaSelect() {

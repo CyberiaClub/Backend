@@ -19,7 +19,6 @@ public class Sede {
     public Sede(String nombre, String descripcion, byte[] imagenBytes) {
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.imagen = imagenBytes;
     }
     
     public Integer getIdSede(){
