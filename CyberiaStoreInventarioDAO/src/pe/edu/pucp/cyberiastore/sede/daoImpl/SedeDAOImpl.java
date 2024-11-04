@@ -58,18 +58,19 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
 
     @Override
     protected String obtenerListaDeAtributosParaInsercion() {
-        return "NOMBRE, DESCRIPCION";
+        return "NOMBRE, DESCRIPCION, IMAGEN";
     }
 
     @Override
     protected String incluirListaDeParametrosParaInsercion() {
-        return "?,?";
+        return "?,?,?";
     }
 
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
         this.incluirParametroString(1, this.sede.getNombre());
         this.incluirParametroString(2, this.sede.getDescripcion());
+        this.incluirParametroByte(3, this.sede.getImagen());
     }
 
     @Override
@@ -102,7 +103,7 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
 
     @Override
     protected String obtenerListaDeValoresYAtributosParaModificacion() {
-        return "nombre=?, descripcion=?";
+        return "nombre=?, descripcion=?,imagen=?";
     }
 
     @Override
@@ -120,7 +121,8 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
         this.incluirParametroString(1, this.sede.getNombre());
         this.incluirParametroString(2, this.sede.getDescripcion());
-        this.incluirParametroInt(3, this.sede.getIdSede());
+        this.incluirParametroByte(3, this.sede.getImagen());
+        this.incluirParametroInt(4, this.sede.getIdSede());
 
     }
 
@@ -163,6 +165,7 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
         this.sede.setIdSede(this.resultSet.getInt("id_sede"));
         this.sede.setNombre(this.resultSet.getString("nombre"));
         this.sede.setDescripcion(this.resultSet.getString("descripcion"));
+        this.sede.setImagen(this.resultSet.getBytes("imagen"));
     }
 
     @Override

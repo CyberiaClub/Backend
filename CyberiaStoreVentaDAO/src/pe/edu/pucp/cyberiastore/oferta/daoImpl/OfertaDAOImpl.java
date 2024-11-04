@@ -58,12 +58,12 @@ public class OfertaDAOImpl extends DAOImpl implements OfertaDAO {
 
     @Override
     protected String obtenerListaDeAtributosParaInsercion() {
-        return "FECHA_INICIO, FECHA_FIN, PORCENTAJE";
+        return "FECHA_INICIO, FECHA_FIN, PORCENTAJE, IMAGEN";
     }
 
     @Override
     protected String incluirListaDeParametrosParaInsercion() {
-        return "?,?,?";
+        return "?,?,?,?";
     }
 
     @Override
@@ -71,6 +71,7 @@ public class OfertaDAOImpl extends DAOImpl implements OfertaDAO {
         this.incluirParametroDate(1, this.oferta.getFechaDeInicio());
         this.incluirParametroDate(2, this.oferta.getFechaDeFin());
         this.incluirParametroInt(3, this.oferta.getPorcentaje());
+        this.incluirParametroByte(4, this.oferta.getImagen());
     }
 
     @Override
@@ -103,7 +104,7 @@ public class OfertaDAOImpl extends DAOImpl implements OfertaDAO {
 
     @Override
     protected String obtenerListaDeValoresYAtributosParaModificacion() {
-        return "fecha_inicio=?, fecha_fin=?,porcentaje=?";
+        return "fecha_inicio=?, fecha_fin=?,porcentaje=?,imagen=?";
     }
 
     @Override
@@ -122,7 +123,8 @@ public class OfertaDAOImpl extends DAOImpl implements OfertaDAO {
         this.incluirParametroDate(1, this.oferta.getFechaDeInicio());
         this.incluirParametroDate(2, this.oferta.getFechaDeFin());
         this.incluirParametroInt(3, this.oferta.getPorcentaje());
-        this.incluirParametroInt(4, this.oferta.getIdOferta());
+        this.incluirParametroByte(4, this.oferta.getImagen());
+        this.incluirParametroInt(5, this.oferta.getIdOferta());
 
     }
 
@@ -144,7 +146,7 @@ public class OfertaDAOImpl extends DAOImpl implements OfertaDAO {
 
     @Override
     protected String obtenerProyeccionParaSelect() {
-        String sql = "id_oferta, fecha_inicio, fecha_fin, porcentaje";
+        String sql = "id_oferta, fecha_inicio, fecha_fin, porcentaje,imagen";
         return sql;
     }
 
@@ -166,6 +168,7 @@ public class OfertaDAOImpl extends DAOImpl implements OfertaDAO {
         this.oferta.setFechaDeInicio(this.resultSet.getDate("fecha_inicio"));
         this.oferta.setFechaDeFin(this.resultSet.getDate("fecha_fin"));
         this.oferta.setPorcentaje(this.resultSet.getInt("porcentaje"));
+        this.oferta.setImagen(this.resultSet.getBytes("imagen"));
     }
 
     @Override

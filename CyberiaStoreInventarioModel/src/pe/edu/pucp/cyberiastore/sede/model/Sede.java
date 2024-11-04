@@ -5,14 +5,16 @@ public class Sede {
     private Integer idSede;
     private String descripcion;
     private String nombre;
+    private byte[] imagen;
 
     public Sede(){
         
     }
     
-    public Sede(String nombre, String descripcion) {
+    public Sede(String nombre, String descripcion, byte[] imagenBytes) {
         this.nombre = nombre;
         this.descripcion = descripcion;
+        this.imagen = imagenBytes;
     }
     
     public Integer getIdSede(){
@@ -37,6 +39,20 @@ public class Sede {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    /**
+     * @return the imagen
+     */
+    public byte[] getImagen() {
+        return imagen;
+    }
+
+    /**
+     * @param imagen the imagen to set
+     */
+    public void setImagen(byte[] imagen) {
+        this.imagen = imagen;
     }
 
 }

@@ -58,7 +58,7 @@ public class MarcaDAOImpl extends DAOImpl implements MarcaDAO {
 
     @Override
     protected String obtenerListaDeAtributosParaInsercion() {
-        return "NOMBRE,ACTIVO";
+        return "NOMBRE,ACTIVO,IMAGEN";
     }
 
     @Override
@@ -70,6 +70,7 @@ public class MarcaDAOImpl extends DAOImpl implements MarcaDAO {
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
         this.incluirParametroString(1, this.marca.getNombre());
         this.incluirParametroBoolean(2, this.marca.getActivo());
+        this.incluirParametroByte(3, this.marca.getImagen());
     }
 
     @Override
@@ -102,7 +103,7 @@ public class MarcaDAOImpl extends DAOImpl implements MarcaDAO {
 
     @Override
     protected String obtenerListaDeValoresYAtributosParaModificacion() {
-        return "nombre=?,activo=?";
+        return "nombre=?,activo=?,imagen=?";
     }
 
     @Override
@@ -120,7 +121,8 @@ public class MarcaDAOImpl extends DAOImpl implements MarcaDAO {
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
         this.incluirParametroString(1, this.marca.getNombre());
         this.incluirParametroBoolean(2, this.marca.getActivo());
-        this.incluirParametroInt(3, this.marca.getIdMarca());
+        this.incluirParametroByte(3, this.marca.getImagen());
+        this.incluirParametroInt(4, this.marca.getIdMarca());
     }
 
     @Override
@@ -163,7 +165,7 @@ public class MarcaDAOImpl extends DAOImpl implements MarcaDAO {
 
     @Override
     protected String obtenerProyeccionParaSelect() {
-        String sql = "id_marca, nombre";
+        String sql = "id_marca, nombre,imagen";
         return sql;
     }
 
@@ -183,6 +185,7 @@ public class MarcaDAOImpl extends DAOImpl implements MarcaDAO {
         this.marca = new Marca();
         this.marca.setIdMarca(this.resultSet.getInt("id_marca"));
         this.marca.setNombre(this.resultSet.getString("nombre"));
+        this.marca.setImagen(this.resultSet.getBytes("imagen"));
     }
 
     @Override

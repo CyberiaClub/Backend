@@ -150,7 +150,7 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
 
     @Override
     protected String obtenerListaDeValoresYAtributosParaModificacion() {
-        return "SKU=?, NOMBRE=?, DESCRIPCION=?, PRECIO=?";
+        return "SKU=?, NOMBRE=?, DESCRIPCION=?, PRECIO=?, IMAGEN=?";
     }
 
     @Override
@@ -159,7 +159,8 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
         this.incluirParametroString(2, this.producto.getNombre());
         this.incluirParametroString(3, this.producto.getDescripcion());
         this.incluirParametroDouble(4, this.producto.getPrecio());
-        this.incluirParametroInt(5, this.producto.getIdProducto());
+        this.incluirParametroByte(5, this.producto.getImagen());
+        this.incluirParametroInt(6, this.producto.getIdProducto());
     }
 
     /*
@@ -230,7 +231,7 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
 
     @Override
     protected String obtenerProyeccionParaSelect() {
-        String sql = "id_Producto, sku, nombre, descripcion, precio";
+        String sql = "id_Producto, sku, nombre, descripcion, precio,imagen";
         return sql;
     }
 
@@ -248,7 +249,8 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
                 this.resultSet.getString("nombre"),
                 this.resultSet.getString("descripcion"),
                 this.resultSet.getDouble("precio"),
-                null
+                null,
+                this.resultSet.getBytes("imagen")
         );
     }
 

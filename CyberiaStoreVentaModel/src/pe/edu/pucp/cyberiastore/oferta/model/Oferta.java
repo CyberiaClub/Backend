@@ -9,16 +9,18 @@ public class Oferta {
     private Date fechaDeInicio;
     private Date fechaDeFin;
     private Integer porcentaje;
+    private byte[] imagen;
     private Integer idProducto; //Para la tabla intermedia
 
     public Oferta(){
         
     }
     
-    public Oferta(Date fechaDeInicio, Date fechaDeFin, Integer porcentaje) {
+    public Oferta(Date fechaDeInicio, Date fechaDeFin, Integer porcentaje, byte[] imagenBytes) {
         this.fechaDeInicio = fechaDeInicio;
         this.fechaDeFin = fechaDeFin;
         this.porcentaje = porcentaje;
+        this.imagen = imagenBytes;
     }
 
     public Integer getIdOferta() {
@@ -74,5 +76,19 @@ public class Oferta {
      */
     public void setIdProducto(Integer idProducto) {
         this.idProducto = idProducto;
+    }
+
+    /**
+     * @return the imagen
+     */
+    public byte[] getImagen() {
+        return imagen;
+    }
+
+    /**
+     * @param imagen the imagen to set
+     */
+    public void setImagen(byte[] imagen) {
+        this.imagen = imagen;
     }
 }

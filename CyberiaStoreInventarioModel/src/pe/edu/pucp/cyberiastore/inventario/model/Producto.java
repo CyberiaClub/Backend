@@ -40,13 +40,14 @@ public class Producto {
         this.imagen = imagenBytes;
     }
 
-    public Producto(Integer idProducto, String sku, String nombre, String descripcion, Double precio, ArrayList<Producto> productoMiembros) {
+    public Producto(Integer idProducto, String sku, String nombre, String descripcion, Double precio, ArrayList<Producto> productoMiembros,byte[] imagenBytes) {
         this.idProducto = idProducto;
         this.sku = sku;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
         this.productosMiembros = productoMiembros;
+        this.imagen = imagenBytes;
     }
 
     public void setIdProducto(Integer idProducto) {

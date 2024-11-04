@@ -191,17 +191,17 @@ public class CyberiaStoreInventarioTest {
         //            cadena = cadena.concat(tipoProductoListar.getActivo().toString());
         //            System.out.println(cadena);
         //        }
-        marca.setNombre("MARCA1");
-        System.out.println(marcaDAO.buscarIdPorNombre(marca, true));
-        tipoProducto.setTipo("Arte");
-        
-        System.out.println(proveedorDAO.buscarIdPorNombre(proveedor, true));
-        proveedor.setRazonSocial("RAZON_SOCIAL1");
-        
-        System.out.println(sedeDAO.buscarIdPorNombre(sede, true));
-        sede.setNombre("SEDE1");
-        
-        System.out.println(tipoProdDAO.buscarIdPorTipo(tipoProducto, true));
+//        marca.setNombre("MARCA1");
+//        System.out.println(marcaDAO.buscarIdPorNombre(marca, true));
+//        tipoProducto.setTipo("Arte");
+//        
+//        System.out.println(proveedorDAO.buscarIdPorNombre(proveedor, true));
+//        proveedor.setRazonSocial("RAZON_SOCIAL1");
+//        
+//        System.out.println(sedeDAO.buscarIdPorNombre(sede, true));
+//        sede.setNombre("SEDE1");
+//        
+//        System.out.println(tipoProdDAO.buscarIdPorTipo(tipoProducto, true));
     }
 
 }
