@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.util.List;
 import pe.edu.pucp.cyberiastore.sede.model.Sede;
 import pe.edu.pucp.cyberiastore.config.DAOImpl;
@@ -58,19 +59,21 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
 
     @Override
     protected String obtenerListaDeAtributosParaInsercion() {
-        return "NOMBRE, DESCRIPCION, IMAGEN";
+        return "NOMBRE, DESCRIPCION, TELEFONO, HORARIO_APERTURA, HORARIO_CIERRE";
     }
 
     @Override
     protected String incluirListaDeParametrosParaInsercion() {
-        return "?,?,?";
+        return "?,?,?,?,?";
     }
 
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
         this.incluirParametroString(1, this.sede.getNombre());
         this.incluirParametroString(2, this.sede.getDescripcion());
-        this.incluirParametroByte(3, this.sede.getImagen());
+        this.incluirParametroString(3, this.sede.getTelefono());
+        this.incluirParametroLocalTime(4, this.sede.getHorarioApertura());
+        this.incluirParametroLocalTime(5, this.sede.getHorarioCierre());
     }
 
     @Override
@@ -103,7 +106,7 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
 
     @Override
     protected String obtenerListaDeValoresYAtributosParaModificacion() {
-        return "nombre=?, descripcion=?,imagen=?";
+        return "nombre=?, descripcion=?, telefono=?,horario_apertura=?,horario_cierre=?";
     }
 
     @Override
@@ -121,8 +124,10 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
         this.incluirParametroString(1, this.sede.getNombre());
         this.incluirParametroString(2, this.sede.getDescripcion());
-        this.incluirParametroByte(3, this.sede.getImagen());
-        this.incluirParametroInt(4, this.sede.getIdSede());
+        this.incluirParametroString(3, this.sede.getTelefono());
+        this.incluirParametroLocalTime(4, this.sede.getHorarioApertura());
+        this.incluirParametroLocalTime(5, this.sede.getHorarioCierre());
+        this.incluirParametroInt(6, this.sede.getIdSede());
 
     }
 
@@ -144,7 +149,7 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
 
     @Override
     protected String obtenerProyeccionParaSelect() {
-        String sql = "id_sede, nombre, descripcion";
+        String sql = "id_sede, nombre, descripcion,telefono,horario_apertura,horario_cierre";
         return sql;
     }
 
@@ -165,7 +170,9 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
         this.sede.setIdSede(this.resultSet.getInt("id_sede"));
         this.sede.setNombre(this.resultSet.getString("nombre"));
         this.sede.setDescripcion(this.resultSet.getString("descripcion"));
-        this.sede.setImagen(this.resultSet.getBytes("imagen"));
+        this.sede.setTelefono(this.resultSet.getString("telefono"));
+        this.sede.setHorarioApertura(this.resultSet.getTime("horario_apertura").toLocalTime());
+        this.sede.setHorarioCierre(this.resultSet.getTime("horario_cierre").toLocalTime());
     }
 
     @Override
@@ -216,7 +223,7 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
         }
         return idSede != null;
     }
-    
+
     @Override
     public Integer buscarIdPorNombre(Sede sede, Boolean abreConexion) {
         this.sede = sede;
@@ -246,6 +253,5 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
         }
         return idSede;
     }
-
 
 }

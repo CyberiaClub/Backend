@@ -5,48 +5,105 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import pe.edu.pucp.cyberiastore.inventario.bo.ProductoBO;
+import pe.edu.pucp.cyberiastore.inventario.dao.MarcaDAO;
+import pe.edu.pucp.cyberiastore.inventario.daoImpl.MarcaDAOImpl;
+import pe.edu.pucp.cyberiastore.inventario.model.Marca;
+import pe.edu.pucp.cyberiastore.proveedor.dao.ProveedorDAO;
+import pe.edu.pucp.cyberiastore.proveedor.daoImpl.ProveedorDAOImpl;
+import pe.edu.pucp.cyberiastore.proveedor.model.Proveedor;
+import pe.edu.pucp.cyberiastore.inventario.model.TipoProducto;
+import pe.edu.pucp.cyberiastore.inventario.dao.TipoProductoDAO;
+import pe.edu.pucp.cyberiastore.inventario.daoImpl.TipoProductoDAOImpl;
+import pe.edu.pucp.cyberiastore.sede.dao.SedeDAO;
+import pe.edu.pucp.cyberiastore.sede.daoImpl.SedeDAOImpl;
+import pe.edu.pucp.cyberiastore.sede.model.Sede;
 
 public class CyberiaStoreInventarioTest {
 
     public static void main(String[] args) {
 
-        ProductoBO productoBO = new ProductoBO();
-        String rutaImagen = "../Img/cyberiaproducto.jpg";
-        BufferedImage imagen = null;
-        byte[] imagenBytes = null;
-        try {
-            imagen = ImageIO.read(new File(rutaImagen));
-        } catch (IOException ex) {
-            Logger.getLogger(CyberiaStoreInventarioTest.class.getName()).log(Level.SEVERE, null, ex);
+        Marca marca = new Marca();
+        MarcaDAO marcaDAO = new MarcaDAOImpl();
+        Proveedor proveedor = new Proveedor();
+        ProveedorDAO proveedorDAO = new ProveedorDAOImpl();
+        TipoProducto tipoProducto = new TipoProducto();
+        TipoProductoDAO tipoProdDAO = new TipoProductoDAOImpl();
+        Sede sede = new Sede();
+        SedeDAO sedeDAO = new SedeDAOImpl();
+        String cadena;
+
+        sede.setNombre("SEDE1");
+        sede.setDescripcion("DES1");
+        sede.setTelefono("TELEF1");
+        LocalTime horaApertura = LocalTime.of(8, 0, 0);
+        LocalTime horaCierre = LocalTime.of(20, 0, 0);
+        sede.setHorarioApertura(horaApertura);
+        sede.setHorarioCierre(horaCierre);
+
+        int id = sedeDAO.insertar(sede);
+
+        sede.setIdSede(id);
+        sede.setNombre("SEDE_MODIF1");
+        sedeDAO.modificar(sede);
+        ArrayList<Sede> sedes = sedeDAO.listarTodos();
+
+        for (Sede sedeListar : sedes) {
+            cadena = "";
+            cadena = cadena.concat(sedeListar.getIdSede().toString());
+            cadena = cadena.concat(", ");
+            cadena = cadena.concat(sedeListar.getNombre());
+            cadena = cadena.concat(", ");
+            cadena = cadena.concat(sedeListar.getDescripcion());
+            cadena = cadena.concat(", ");
+            cadena = cadena.concat(sedeListar.getTelefono());
+            cadena = cadena.concat(", ");
+            cadena = cadena.concat(sedeListar.getHorarioApertura().toString());
+            cadena = cadena.concat(", ");
+            cadena = cadena.concat(sedeListar.getHorarioCierre().toString());
+
+            System.out.println(cadena);
         }
 
-        if (imagen != null) {
-            //convertimos la imagen a byte[]
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            try {
-                ImageIO.write(imagen, "jpg", baos);
-            } catch (IOException ex) {
-                Logger.getLogger(CyberiaStoreInventarioTest.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            try {
-                baos.flush();
-            } catch (IOException ex) {
-                Logger.getLogger(CyberiaStoreInventarioTest.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            imagenBytes = baos.toByteArray();
-            try {
-                baos.close();
-            } catch (IOException ex) {
-                Logger.getLogger(CyberiaStoreInventarioTest.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+//        ProductoBO productoBO = new ProductoBO();
+//        String rutaImagen = "../Img/cyberiaproducto.jpg";
+//        BufferedImage imagen = null;
+//        byte[] imagenBytes = null;
+//        try {
+//            imagen = ImageIO.read(new File(rutaImagen));
+//        } catch (IOException ex) {
+//            Logger.getLogger(CyberiaStoreInventarioTest.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//
+//        if (imagen != null) {
+//            //convertimos la imagen a byte[]
+//            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//            try {
+//                ImageIO.write(imagen, "jpg", baos);
+//            } catch (IOException ex) {
+//                Logger.getLogger(CyberiaStoreInventarioTest.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//            try {
+//                baos.flush();
+//            } catch (IOException ex) {
+//                Logger.getLogger(CyberiaStoreInventarioTest.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//
+//            imagenBytes = baos.toByteArray();
+//            try {
+//                baos.close();
+//            } catch (IOException ex) {
+//                Logger.getLogger(CyberiaStoreInventarioTest.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
         //Producto p = new Producto();
-                productoBO.insertar("010101", "Producto01", "Este es un producto01", 5.0, null,imagenBytes);
+//                productoBO.insertar("010101", "Producto01", "Este es un producto01", 5.0, null,imagenBytes);
         //        productoBO.insertar("020202", "Producto02", "Este es un producto02", 5.0, null);
         //        productoBO.insertar("030303", "Producto03", "Este es un producto03", 5.0, null);
         //        productoBO.insertar("040404", "Producto04", "Este es un producto04", 5.0, null);
