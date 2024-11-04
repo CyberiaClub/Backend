@@ -11,4 +11,25 @@ public class SedeBO {
     public SedeBO(){
         this.sedeDAO = new SedeDAOImpl();
     }
+     public Integer insertar(Sede sede){
+        return this.sedeDAO.insertar(sede);
+    }
+    
+    public Integer modificar(Sede sede){
+        return this.sedeDAO.modificar(sede);
+    }
+
+    public Integer eliminar(Sede sede){
+        return this.sedeDAO.eliminar(sede);
+    }
+
+    public ArrayList<Sede> listarTodos(){
+        ArrayList<Sede> sedees = this.sedeDAO.listarTodos();
+        return sedees;
+    }
+
+    public Sede obtenerPorId(Integer idSede){
+        Sede sede = this.sedeDAO.obtenerPorId(idSede);
+        return sede;
+    }
 }
