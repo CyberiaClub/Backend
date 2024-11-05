@@ -25,12 +25,6 @@ public class MarcaWS {
         return marcaBO.insertar(this.marca);
     }
     
-    @WebMethod(operationName = "marca_modificar")
-    public Integer marca_modificar(@WebParam(name = "marca") Marca marca) {
-        this.marca = marca;
-        return marcaBO.modificar(this.marca);
-    }
-    
     @WebMethod(operationName = "marca_listar")
     public ArrayList<Marca> marca_listar() {
         return marcaBO.listarTodos();
@@ -42,9 +36,4 @@ public class MarcaWS {
         marcaBO.eliminar(this.marca);
     }
     
-    @WebMethod(operationName = "marca_buscarIdPorNombre")
-    public Integer marca_buscarIdPorNombre(@WebParam(name = "Marca") Marca marca, @WebParam(name = "abreConexion") Boolean abreConexion) {
-        this.marca = marca;
-        return marcaBO.buscarIdPorNombre(this.marca, abreConexion);
-    }
 }
