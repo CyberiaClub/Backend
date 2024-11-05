@@ -12,24 +12,25 @@ public class FacturaBO {
     public FacturaBO() {
         this.facturaDAO = new FacturaDAOImpl();
     }
-     public Integer insertar(Factura factura){
+
+    public Integer insertar(Factura factura) {
         return this.facturaDAO.insertar(factura);
     }
-    
-    public Integer modificar(Factura factura){
+
+    public Integer modificar(Factura factura) {
         return this.facturaDAO.modificar(factura);
     }
 
-    public Integer eliminar(Factura factura){
+    public Integer eliminar(Factura factura) {
         return this.facturaDAO.eliminar(factura);
     }
 
-    public ArrayList<Factura> listarTodos(){
+    public ArrayList<Factura> listarTodos() {
         ArrayList<Factura> facturaes = this.facturaDAO.listarTodos();
         return facturaes;
     }
 
-    public Factura obtenerPorId(Integer idFactura){
+    public Factura obtenerPorId(Integer idFactura) {
         Factura factura = this.facturaDAO.obtenerPorId(idFactura);
         return factura;
     }
