@@ -1,7 +1,6 @@
 package pe.edu.pucp.cyberiastore.inventario.dao;
 
 import java.util.ArrayList;
-import pe.edu.pucp.cyberiastore.inventario.model.Marca;
 import pe.edu.pucp.cyberiastore.inventario.model.Producto;
 public interface ProductoDAO {
     public Integer insertar (Producto producto);

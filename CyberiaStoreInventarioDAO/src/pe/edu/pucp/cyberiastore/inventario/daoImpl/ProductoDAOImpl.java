@@ -88,12 +88,12 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
 
     @Override
     protected String obtenerListaDeAtributosParaInsercion() {
-        return "SKU, NOMBRE, DESCRIPCION, PRECIO,IMAGEN";
+        return "SKU, NOMBRE, DESCRIPCION, PRECIO,IMAGEN,FECHA_INSERCION";
     }
 
     @Override
     protected String incluirListaDeParametrosParaInsercion() {
-        return "?,?,?,?,?";
+        return "?,?,?,?,?,?";
     }
 
     @Override
@@ -103,6 +103,7 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
         this.incluirParametroString(3, this.producto.getDescripcion());
         this.incluirParametroDouble(4, this.producto.getPrecio());
         this.incluirParametroByte(5, this.producto.getImagen());
+        this.incluirParametroDate(6, this.producto.getFechaInsercion());
     }
 
     /*
