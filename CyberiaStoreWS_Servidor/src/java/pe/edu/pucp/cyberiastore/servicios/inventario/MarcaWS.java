@@ -4,10 +4,8 @@ import jakarta.jws.WebService;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
 import java.util.ArrayList;
-import pe.edu.pucp.cyberiastore.config.DAOImpl;
 import pe.edu.pucp.cyberiastore.inventario.model.Marca;
 import pe.edu.pucp.cyberiastore.inventario.bo.MarcaBO;
-import pe.edu.pucp.cyberiastore.inventario.daoImpl.MarcaDAOImpl;
 
 @WebService(serviceName = "MarcaWS")
 public class MarcaWS {
