@@ -221,13 +221,13 @@ public class MarcaDAOImpl extends DAOImpl implements MarcaDAO {
             if (abreConexion) {
                 this.abrirConexion();
             }
-            String sql = "select id_Marca from marca where ";
+            String sql = "SELECT ID_MARCA FROM MARCA WHERE ";
             sql = sql.concat("nombre=? ");
             this.colocarSQLenStatement(sql);
             this.incluirParametroString(1, this.marca.getNombre());
             this.ejecutarConsultaEnBD(sql);
             if (this.resultSet.next()) {
-                idMarca = this.resultSet.getInt("id_Marca");
+                idMarca = this.resultSet.getInt("ID_MARCA");
             }
         } catch (SQLException ex) {
             System.err.println("Error al consultar si existe marca - " + ex);

@@ -8,10 +8,13 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import pe.edu.pucp.cyberiastore.inventario.bo.MarcaBO;
 import pe.edu.pucp.cyberiastore.inventario.bo.ProductoBO;
+import pe.edu.pucp.cyberiastore.inventario.bo.TipoProductoBO;
 import pe.edu.pucp.cyberiastore.inventario.dao.MarcaDAO;
 import pe.edu.pucp.cyberiastore.inventario.daoImpl.MarcaDAOImpl;
 import pe.edu.pucp.cyberiastore.inventario.model.Marca;
@@ -21,6 +24,8 @@ import pe.edu.pucp.cyberiastore.proveedor.model.Proveedor;
 import pe.edu.pucp.cyberiastore.inventario.model.TipoProducto;
 import pe.edu.pucp.cyberiastore.inventario.dao.TipoProductoDAO;
 import pe.edu.pucp.cyberiastore.inventario.daoImpl.TipoProductoDAOImpl;
+import pe.edu.pucp.cyberiastore.inventario.model.Producto;
+import pe.edu.pucp.cyberiastore.sede.bo.SedeBO;
 import pe.edu.pucp.cyberiastore.sede.dao.SedeDAO;
 import pe.edu.pucp.cyberiastore.sede.daoImpl.SedeDAOImpl;
 import pe.edu.pucp.cyberiastore.sede.model.Sede;
@@ -29,236 +34,89 @@ public class CyberiaStoreInventarioTest {
 
     public static void main(String[] args) {
 
-        Marca marca = new Marca();
-        MarcaDAO marcaDAO = new MarcaDAOImpl();
-        Proveedor proveedor = new Proveedor();
-        ProveedorDAO proveedorDAO = new ProveedorDAOImpl();
-        TipoProducto tipoProducto = new TipoProducto();
-        TipoProductoDAO tipoProdDAO = new TipoProductoDAOImpl();
-        Sede sede = new Sede();
-        SedeDAO sedeDAO = new SedeDAOImpl();
-        String cadena;
+        MarcaBO marcaBO = new MarcaBO();
 
-        sede.setNombre("SEDE1");
-        sede.setDescripcion("DES1");
-        sede.setTelefono("TELEF1");
-        LocalTime horaApertura = LocalTime.of(8, 0, 0);
-        LocalTime horaCierre = LocalTime.of(20, 0, 0);
-        sede.setHorarioApertura(horaApertura);
-        sede.setHorarioCierre(horaCierre);
-
-        int id = sedeDAO.insertar(sede);
-
-        sede.setIdSede(id);
-        sede.setNombre("SEDE_MODIF1");
-        sedeDAO.modificar(sede);
-        ArrayList<Sede> sedes = sedeDAO.listarTodos();
-
-        for (Sede sedeListar : sedes) {
-            cadena = "";
-            cadena = cadena.concat(sedeListar.getIdSede().toString());
-            cadena = cadena.concat(", ");
-            cadena = cadena.concat(sedeListar.getNombre());
-            cadena = cadena.concat(", ");
-            cadena = cadena.concat(sedeListar.getDescripcion());
-            cadena = cadena.concat(", ");
-            cadena = cadena.concat(sedeListar.getTelefono());
-            cadena = cadena.concat(", ");
-            cadena = cadena.concat(sedeListar.getHorarioApertura().toString());
-            cadena = cadena.concat(", ");
-            cadena = cadena.concat(sedeListar.getHorarioCierre().toString());
-
-            System.out.println(cadena);
+        String rutaImagen = "../Img/cyberiaproducto.jpg";
+        BufferedImage imagen = null;
+        byte[] imagenBytes = null;
+        try {
+            imagen = ImageIO.read(new File(rutaImagen));
+        } catch (IOException ex) {
+            Logger.getLogger(CyberiaStoreInventarioTest.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-//        ProductoBO productoBO = new ProductoBO();
-//        String rutaImagen = "../Img/cyberiaproducto.jpg";
-//        BufferedImage imagen = null;
-//        byte[] imagenBytes = null;
-//        try {
-//            imagen = ImageIO.read(new File(rutaImagen));
-//        } catch (IOException ex) {
-//            Logger.getLogger(CyberiaStoreInventarioTest.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//
-//        if (imagen != null) {
-//            //convertimos la imagen a byte[]
-//            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//            try {
-//                ImageIO.write(imagen, "jpg", baos);
-//            } catch (IOException ex) {
-//                Logger.getLogger(CyberiaStoreInventarioTest.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//            try {
-//                baos.flush();
-//            } catch (IOException ex) {
-//                Logger.getLogger(CyberiaStoreInventarioTest.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//
-//            imagenBytes = baos.toByteArray();
-//            try {
-//                baos.close();
-//            } catch (IOException ex) {
-//                Logger.getLogger(CyberiaStoreInventarioTest.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        }
-        //Producto p = new Producto();
-//                productoBO.insertar("010101", "Producto01", "Este es un producto01", 5.0, null,imagenBytes);
-        //        productoBO.insertar("020202", "Producto02", "Este es un producto02", 5.0, null);
-        //        productoBO.insertar("030303", "Producto03", "Este es un producto03", 5.0, null);
-        //        productoBO.insertar("040404", "Producto04", "Este es un producto04", 5.0, null);
-        //        ArrayList<Producto> productosmiembros = new ArrayList<Producto>();
-        //        Producto p = new Producto();
-        //        p.setIdProducto(1);
-        //        p.setCantidad(10);
-        //        productosmiembros.add(p);
-        //        Producto q = new Producto();
-        //        q.setIdProducto(2);
-        //        q.setCantidad(10);
-        //        productosmiembros.add(q);
-        //        productoBO.insertar("99999", "Producto010", "Este es un producto010", 10.0, productosmiembros);
-        //        ArrayList<Producto> productos = productoBO.listarTodos();
-        //        for (Producto producto : productos) {
-        //            System.out.print(producto.getIdProducto().toString());
-        //            System.out.print(producto.getSku());
-        //            System.out.print(producto.getNombre());
-        //            System.out.println(producto.getDescripcion());
-        //        }
-        //        Integer id = 0;
-        //        String cadena;
-        //        Sede sede = new Sede();
-        //        SedeDAO sedeDAO = new SedeDAOImpl();
-        //        Proveedor proveedor = new Proveedor();
-        //        ProveedorDAO proveedorDAO = new ProveedorDAOImpl();
-        //        Marca marca = new Marca();
-        //        MarcaDAO marcaDAO = new MarcaDAOImpl();
-        //        TipoProducto tipoProducto = new TipoProducto();
-        //        TipoProductoDAO tipoProdDAO = new TipoProductoDAOImpl();
-        //
-        //        for (int i = 0; i < 3; i++) {
-        //            sede.setNombre("SEDE0" + (i + 1));
-        //             sede.setDescripcion("NUEVA_SEDE_0" + (i + 1));
-        //
-        //            id = sedeDAO.insertar(sede);
-        //        }
-        //        sede.setIdSede(id);
-        //        sede.setNombre("NOMBRE_SEDE_MODIF03");
-        //        sede.setDescripcion("DESCRIPCION_SEDE_MODIF03");
-        //        sedeDAO.modificar(sede);
-        //        ArrayList<Sede> sedes = sedeDAO.listarTodos();
-        //
-        //        for (int i = 0; i < 5; i++) {
-        //            proveedor.setRuc("RUC0" + (i + 1));
-        //            proveedor.setRazonSocial("RAZON_SOCIAL0" + (i + 1));
-        //            proveedor.setNombreContacto("NOMBRE_CONTACTO0" + (i + 1));
-        //            proveedor.setCorreo("CORREO0" + (i + 1));
-        //            proveedor.setTelefono("TELEF0" + (i + 1));
-        //            proveedor.setDireccion("DIRECCION0" + (i + 1));
-        //            proveedor.setDescripcion("DESCRIPCION0" + (i + 1));
-        //            id = proveedorDAO.insertar(proveedor);
-        //        }
-        //
-        //        proveedor.setIdProveedor(id);
-        //        proveedor.setRuc("MODIF_RUC05");
-        //        proveedor.setRazonSocial("MODIF_PROVEEDOR_RAZON_SOCIAL05");
-        //        proveedor.setNombreContacto("MODIF_PROVEEDOR_NOMBRE_CONTACTO05");
-        //        proveedor.setCorreo("MODIF_PROVEEDOR_CORREO05");
-        //        proveedor.setTelefono("MOD_TEL05");
-        //        proveedor.setDireccion("MODIF_PROVEEDOR_DIRECCION05");
-        //        proveedor.setDescripcion("MODIF_PROVEEDOR_DESCRIPCION05");
-        //        proveedorDAO.modificar(proveedor);
-        //        proveedorDAO.eliminar(proveedor);
-        //        ArrayList<Proveedor> proveedores = proveedorDAO.listarTodos();
-        //
-        //        for (int i = 0; i < 5; i++) {
-        //            marca.setNombre("MARCA0"+(i+1));
-        //            id = marcaDAO.insertar(marca);
-        //        }
-        //        marca.setIdMarca(id);
-        //        marca.setNombre("MODIF_MARCA05");
-        //        marcaDAO.modificar(marca);
-        //        marcaDAO.eliminar(marca);
-        //        ArrayList<Marca> marcas = marcaDAO.listarTodos();
-        //
-        //        for (int i = 0; i < 5; i++) {
-        //            tipoProducto.setTipo("TIPO0"+(i+1));
-        //            id = tipoProdDAO.insertar(tipoProducto);
-        //        }
-        //        tipoProducto.setIdTipoProducto(id);
-        //        tipoProducto.setTipo("MODIF_TIPO5");
-        //        tipoProdDAO.modificar(tipoProducto);
-        //        tipoProdDAO.eliminar(tipoProducto);
-        //        ArrayList<TipoProducto> tipoProductos = tipoProdDAO.listarTodos();
-        //
-        //        for (Sede sedeListar : sedes) {
-        //            cadena = "";
-        //            cadena = cadena.concat(sedeListar.getIdSede().toString());
-        //            cadena = cadena.concat(", ");
-        //            cadena = cadena.concat(sedeListar.getNombre());
-        //            cadena = cadena.concat(", ");
-        //            cadena = cadena.concat(sedeListar.getDescripcion());
-        //            System.out.println(cadena);
-        //        }
-        //
-        //        System.out.println();
-        //
-        //        for (Proveedor proveedorListar : proveedores) {
-        //            cadena = "";
-        //            cadena = cadena.concat(proveedorListar.getIdProveedor().toString());
-        //            cadena = cadena.concat(", ");
-        //            cadena = cadena.concat(proveedorListar.getRuc());
-        //            cadena = cadena.concat(", ");
-        //            cadena = cadena.concat(proveedorListar.getRazonSocial());
-        //            cadena = cadena.concat(", ");
-        //            cadena = cadena.concat(proveedorListar.getNombreContacto());
-        //            cadena = cadena.concat(", ");
-        //            cadena = cadena.concat(proveedorListar.getCorreo());
-        //            cadena = cadena.concat(", ");
-        //            cadena = cadena.concat(proveedorListar.getTelefono());
-        //            cadena = cadena.concat(", ");
-        //            cadena = cadena.concat(proveedorListar.getDireccion());
-        //            cadena = cadena.concat(", ");
-        //            cadena = cadena.concat(proveedorListar.getDescripcion());
-        //            cadena = cadena.concat(", ");
-        //            cadena = cadena.concat(proveedorListar.getActivo().toString());
-        //
-        //            System.out.println(cadena);
-        //        }
-        //
-        //        System.out.println();
-        //
-        //        for (Marca marcaListar : marcas) {
-        //            cadena = "";
-        //            cadena = cadena.concat(marcaListar.getIdMarca().toString());
-        //            cadena = cadena.concat(", ");
-        //            cadena = cadena.concat(marcaListar.getNombre());
-        //            cadena = cadena.concat(", ");
-        //            cadena = cadena.concat(marcaListar.getActivo().toString());
-        //            System.out.println(cadena);
-        //        }
-        //
-        //        System.out.println();
-        //
-        //        for (TipoProducto tipoProductoListar : tipoProductos) {
-        //            cadena = "";
-        //            cadena = cadena.concat(tipoProductoListar.getIdTipoProducto().toString());
-        //            cadena = cadena.concat(", ");
-        //            cadena = cadena.concat(tipoProductoListar.getTipo());
-        //            cadena = cadena.concat(", ");
-        //            cadena = cadena.concat(tipoProductoListar.getActivo().toString());
-        //            System.out.println(cadena);
-        //        }
-//        marca.setNombre("MARCA1");
-//        System.out.println(marcaDAO.buscarIdPorNombre(marca, true));
-//        tipoProducto.setTipo("Arte");
-//        
-//        System.out.println(proveedorDAO.buscarIdPorNombre(proveedor, true));
-//        proveedor.setRazonSocial("RAZON_SOCIAL1");
-//        
-//        System.out.println(sedeDAO.buscarIdPorNombre(sede, true));
-//        sede.setNombre("SEDE1");
-//        
-//        System.out.println(tipoProdDAO.buscarIdPorTipo(tipoProducto, true));
+        if (imagen != null) {
+            //convertimos la imagen a byte[]
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            try {
+                ImageIO.write(imagen, "jpg", baos);
+            } catch (IOException ex) {
+                Logger.getLogger(CyberiaStoreInventarioTest.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                baos.flush();
+            } catch (IOException ex) {
+                Logger.getLogger(CyberiaStoreInventarioTest.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            imagenBytes = baos.toByteArray();
+            try {
+                baos.close();
+            } catch (IOException ex) {
+                Logger.getLogger(CyberiaStoreInventarioTest.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        // Insercion de producto
+        TipoProductoBO tipoProductoBO = new TipoProductoBO();
+        TipoProducto tipoProducto = new TipoProducto();
+        tipoProducto.setImagen(imagenBytes);
+        tipoProducto.setTipo("TIPO PRODUCTO01");
+        tipoProductoBO.insertar(tipoProducto);
+        tipoProducto.setTipo("TIPO PRODUCTO02");
+        tipoProductoBO.insertar(tipoProducto);
+        tipoProducto.setTipo("TIPO PRODUCTO03");
+        tipoProductoBO.insertar(tipoProducto);
+        tipoProducto.setTipo("TIPO PRODUCTO04");
+        tipoProductoBO.insertar(tipoProducto);
+        tipoProducto.setTipo("TIPO PRODUCTO05");
+        tipoProductoBO.insertar(tipoProducto);
+        //insercion de marca
+        Marca marca = new Marca();
+        marca.setImagen(imagenBytes);
+        marca.setNombre("Marca01");
+        marcaBO.insertar(marca);
+        marca.setNombre("Marca02");
+        marcaBO.insertar(marca);
+        marca.setNombre("Marca03");
+        marcaBO.insertar(marca);
+        marca.setNombre("Marca04");
+        marcaBO.insertar(marca);
+        marca.setNombre("Marca05");
+        marcaBO.insertar(marca);
+        //Insercion de Productos
+        ProductoBO productoBO = new ProductoBO();
+        Producto producto = new Producto();
+        Date hoy = new Date();
+        producto.setIdProveedor(1); // todos tiene el mismo proveedor
+        producto.setFechaInsercion(hoy);
+        producto.setImagen(imagenBytes);
+        Integer v = 1;
+        for (Integer i = 0; i < 50; i++) {
+            if (i % 10 == 0 && i != 0) {
+                v++;
+                producto.setIdSede(v);
+                producto.setIdTipo(v);
+                producto.setIdMarca(v);
+            }
+            producto.setSku("SKU" + i.toString());
+            producto.setNombre("nombre del producto " + i.toString());
+            producto.setDescripcion("Esta es la descripcion del producto " + i.toString());
+            producto.setPrecio(15.0 + i);
+            producto.setCantidad(10);
+            producto.setPrecioProveedor(5.0);
+            productoBO.insertar(producto);
+        }
+
     }
 
 }

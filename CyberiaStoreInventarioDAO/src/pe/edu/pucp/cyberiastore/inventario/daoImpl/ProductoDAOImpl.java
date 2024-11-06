@@ -52,12 +52,13 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
                         productoXProducto.insertar(idProducto, productoMiembro.getIdProducto(), productoMiembro.getCantidad(), this.usarTransaccion, this.conexion);
                     }
                 }
+                System.out.println(idProducto);
 //                Insertar producto x marca
                 ProductoXMarcaDAO productoxmarca = new ProductoXMarcaDAOImpl();
                 productoxmarca.insertar(idProducto, this.producto.getIdMarca(), usarTransaccion, conexion);
                 //Insertar  producto x sede
                 ProductoXSedeDAO productoxsede = new ProductoXSedeDAOImpl();
-                productoxsede.insertar(idProducto, this.producto.getIdSede(), usarTransaccion, conexion);
+                productoxsede.insertar(idProducto, this.producto.getIdSede(),this.producto.getCantidad(), usarTransaccion, conexion);
                 // insertar producto x tipo
                 ProductoXTipoDAO productoxtipo = new ProductoXTipoDAOImpl();
                 productoxtipo.insertar(idProducto, this.producto.getIdTipo(), usarTransaccion, conexion);

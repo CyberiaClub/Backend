@@ -3,13 +3,11 @@ package pe.edu.pucp.cyberiastore.servicios.inventario;
 import jakarta.jws.WebService;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
-import jakarta.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import pe.edu.pucp.cyberiastore.inventario.model.Marca;
 import pe.edu.pucp.cyberiastore.inventario.bo.MarcaBO;
 
 @WebService(serviceName = "MarcaWS",targetNamespace = "CyberiaWS")
-@XmlRootElement
 
 public class MarcaWS {
 
