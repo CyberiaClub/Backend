@@ -2,6 +2,8 @@ package pe.edu.pucp.cyberiastore.comprobantedepago.model;
 
 import java.util.Date;
 
+
+
 public class Boleta extends ComprobanteDePago {
 
     private Integer idBoleta;

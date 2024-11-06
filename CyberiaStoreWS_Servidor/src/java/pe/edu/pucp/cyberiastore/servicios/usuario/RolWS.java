@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import pe.edu.pucp.cyberiastore.rol.model.Rol;
 import pe.edu.pucp.cyberiastore.rol.bo.RolBO;
 
-@WebService(serviceName = "RolWS")
+@WebService(serviceName = "RolWS",targetNamespace = "CyberiaWS")
 public class RolWS {
     
     private final RolBO rolBO;

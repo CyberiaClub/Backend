@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import pe.edu.pucp.cyberiastore.trabajador.model.Administrador;
 import pe.edu.pucp.cyberiastore.trabajador.bo.AdministradorBO;
 
-@WebService(serviceName = "AdministradorWS")
+@WebService(serviceName = "AdministradorWS",targetNamespace = "CyberiaWS")
 public class AdministradorWS {
 
     private final AdministradorBO administradorBO;

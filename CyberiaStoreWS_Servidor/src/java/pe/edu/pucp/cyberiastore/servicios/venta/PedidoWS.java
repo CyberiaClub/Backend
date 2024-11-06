@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import pe.edu.pucp.cyberiastore.pedido.model.Pedido;
 import pe.edu.pucp.cyberiastore.pedido.bo.PedidoBO;
 
-@WebService(serviceName = "PedidoWS")
+@WebService(serviceName = "PedidoWS",targetNamespace = "CyberiaWS")
 public class PedidoWS {
     
     private final PedidoBO pedidoBO;

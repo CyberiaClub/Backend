@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import pe.edu.pucp.cyberiastore.inventario.model.TipoProducto;
 import pe.edu.pucp.cyberiastore.inventario.bo.TipoProductoBO;
 
-@WebService(serviceName = "TipoProductoWS")
+@WebService(serviceName = "TipoProductoWS",targetNamespace = "CyberiaWS")
 public class TipoProductoWS {
 
     private final TipoProductoBO tipoProductoBO;

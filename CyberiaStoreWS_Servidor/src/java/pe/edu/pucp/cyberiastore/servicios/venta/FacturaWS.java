@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import pe.edu.pucp.cyberiastore.comprobantedepago.model.Factura;
 import pe.edu.pucp.cyberiastore.comprobantedepago.bo.FacturaBO;
 
-@WebService(serviceName = "FacturaWS")
+@WebService(serviceName = "FacturaWS",targetNamespace = "CyberiaWS")
 public class FacturaWS {
 
     private final FacturaBO facturaBO;
