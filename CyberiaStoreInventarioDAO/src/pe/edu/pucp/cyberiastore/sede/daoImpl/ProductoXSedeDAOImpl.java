@@ -21,18 +21,18 @@ public class ProductoXSedeDAOImpl extends DAOImpl implements ProductoXSedeDAO {
     }
     
     @Override
-    public Integer insertar(Integer idProducto, Integer idSede, Integer cnt) {
+    public Integer insertar(Integer idProducto, Integer idSede, Integer cantidadStock) {
         this.idProducto = idProducto;
         this.idSede = idSede;
-        this.cantidadStock = cnt;
+        this.cantidadStock = cantidadStock;
         return super.insertar();
     }
 
     @Override
-    public Integer insertar(Integer idProducto, Integer idSede, Integer cnt, Boolean usarTransaccion, Connection conexion) {
+    public Integer insertar(Integer idProducto, Integer idSede, Integer cantidadStock, Boolean usarTransaccion, Connection conexion) {
         this.usarTransaccion = usarTransaccion;
         this.conexion = conexion;
-        return this.insertar(idSede, idProducto,cnt);
+        return this.insertar(idProducto, idSede, cantidadStock);
     }
     
     @Override

@@ -42,6 +42,7 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
             if (!existeProducto) {
                 this.retornarLlavePrimaria = true;
                 idProducto = super.insertar();
+                System.out.println("ID PRODUCTO: "+idProducto);
                 this.retornarLlavePrimaria = false;
                 // insertar productos individuales
                 ArrayList<Producto> productosMiembros = this.producto.getProductosMiembros();
@@ -94,7 +95,7 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
 
     @Override
     protected String incluirListaDeParametrosParaInsercion() {
-        return "?,?,?,?,?,?";
+        return "?,?,?,?,?,SYSDATE()";
     }
 
     @Override
@@ -102,9 +103,10 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
         this.incluirParametroString(1, this.producto.getSku());
         this.incluirParametroString(2, this.producto.getNombre());
         this.incluirParametroString(3, this.producto.getDescripcion());
+        System.out.println(this.producto.getPrecio());
         this.incluirParametroDouble(4, this.producto.getPrecio());
         this.incluirParametroByte(5, this.producto.getImagen());
-        this.incluirParametroDate(6, this.producto.getFechaInsercion());
+//        this.incluirParametroDate(6, this.producto.getFechaInsercion());
     }
 
     /*

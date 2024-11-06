@@ -25,8 +25,8 @@ public class TipoProductoBO {
     }
     
     public ArrayList<TipoProducto> listarTodos(){
-        ArrayList<TipoProducto> tiposProducto = new ArrayList();
-        
+        ArrayList<TipoProducto> tiposProducto;
+        tiposProducto = tipoProductoDAO.listarTodos();
         return tiposProducto;
     }
     

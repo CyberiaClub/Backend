@@ -6,6 +6,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -32,7 +33,7 @@ import pe.edu.pucp.cyberiastore.sede.model.Sede;
 
 public class CyberiaStoreInventarioTest {
 
-    public static void main(String[] args) {
+    public static void main (String[] args) {
 
         MarcaBO marcaBO = new MarcaBO();
 
