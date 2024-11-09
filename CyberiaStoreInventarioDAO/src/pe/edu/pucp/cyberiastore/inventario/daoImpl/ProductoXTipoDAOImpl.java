@@ -27,12 +27,12 @@ public class ProductoXTipoDAOImpl extends DAOImpl implements ProductoXTipoDAO {
     public Integer insertar(Integer idProducto, Integer idTipoProducto, Boolean usarTransaccion, Connection conexion) {
         this.usarTransaccion = usarTransaccion;
         this.conexion = conexion;
-        return this.insertar(idTipoProducto, idProducto);
+        return this.insertar(idProducto, idTipoProducto);
     }
 
     @Override
     protected String obtenerListaDeAtributosParaInsercion() {
-        return "id_producto, id_tipo_de_producto";
+        return "id_producto, id_tipo_producto";
     }
 
     @Override

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.CallableStatement;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.Types;
+import java.time.LocalTime;
 import pe.edu.pucp.cyberiastore.db.DBManager;
 
 public abstract class DAOImpl {
@@ -375,6 +377,8 @@ public abstract class DAOImpl {
     // - Integer
     // - Date
     // - Boolean
+    // - Byte
+    // - localtime
     
     protected void incluirParametroString(Integer numeroParametro, String valor) throws SQLException {
         if (valor == null) {
@@ -383,7 +387,7 @@ public abstract class DAOImpl {
             this.statement.setString(numeroParametro, valor);
         }
     }
-
+    
     protected void incluirParametroInt(Integer numeroParametro, Integer valor) throws SQLException {
         if (valor == null) {
             this.statement.setNull(numeroParametro, Types.INTEGER);
@@ -401,6 +405,15 @@ public abstract class DAOImpl {
         }
     }
 
+    protected void incluirParametroLocalTime(Integer numeroParametro, LocalTime valor) throws SQLException {
+        if (valor == null) {
+            this.statement.setNull(numeroParametro, Types.DATE);
+        } else {
+            java.sql.Time sqlTime = new java.sql.Time(valor.getHour(),valor.getMinute(),valor.getSecond());
+            this.statement.setTime(numeroParametro, sqlTime);
+        }
+    }
+
     protected void incluirParametroBoolean(Integer numeroParametro, Boolean valor) throws SQLException {
         if (valor == null) {
             this.statement.setNull(numeroParametro, Types.BOOLEAN);
@@ -408,23 +421,24 @@ public abstract class DAOImpl {
             this.statement.setBoolean(numeroParametro, valor);
         }
     }
-    
-    protected void incluirParametroDouble(Integer numeroParametro, Double valor)throws SQLException {
-        if (valor == null){
+
+    protected void incluirParametroDouble(Integer numeroParametro, Double valor) throws SQLException {
+        if (valor == null) {
             this.statement.setNull(numeroParametro, Types.DOUBLE);
-        }else{
+        } else {
             this.statement.setDouble(numeroParametro, valor);
         }
     }
-    protected void incluirParametroByte(Integer numeroParametro, byte[] valor) throws SQLException{
+
+    protected void incluirParametroByte(Integer numeroParametro, byte[] valor) throws SQLException {
         if (valor == null) {
             this.statement.setNull(numeroParametro, Types.BLOB);
         } else {
             this.statement.setBytes(numeroParametro, valor);
         }
-    
+
     }
-    
+
     protected void incluirParametroString(String nombreParametro, String valor) throws SQLException {
         if (valor == null) {
             this.statement.setNull(nombreParametro, Types.VARCHAR);
@@ -457,7 +471,7 @@ public abstract class DAOImpl {
             this.statement.setBoolean(nombreParametro, valor);
         }
     }
-    
+
     protected void incluirParametroDouble(String nombreParametro, Double valor) throws SQLException {
         if (valor == null) {
             this.statement.setNull(nombreParametro, Types.DOUBLE);

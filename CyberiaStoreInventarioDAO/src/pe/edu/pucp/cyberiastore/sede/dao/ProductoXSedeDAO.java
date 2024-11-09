@@ -7,7 +7,7 @@ import pe.edu.pucp.cyberiastore.sede.model.Sede;
 
 public interface ProductoXSedeDAO {
 
-    public Integer insertar(Integer idProducto, Integer idSede);
+    public Integer insertar(Integer idProducto, Integer idSede, Integer cantidadStock);
 
-    public Integer insertar(Integer idProducto, Integer idSede, Boolean usarTransaccion, Connection conexion);
+    public Integer insertar(Integer idProducto, Integer idSede, Integer cantidadStock, Boolean usarTransaccion, Connection conexion);
 }

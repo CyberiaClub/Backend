@@ -39,6 +39,7 @@ public class VendedorDAOImpl extends DAOImpl implements VendedorDAO {
         trabajador.setNombre(vendedor.getNombre());
         trabajador.setApellidoPaterno(vendedor.getApellidoPaterno());
         trabajador.setApellidoMaterno(vendedor.getApellidoMaterno());
+        trabajador.setSexo(vendedor.getSexo());
         trabajador.setFechaDeNacimiento(vendedor.getFechaDeNacimiento());
         trabajador.setCorreo(vendedor.getCorreo());
         trabajador.setContrasena(vendedor.getContrasena());
@@ -125,6 +126,7 @@ public class VendedorDAOImpl extends DAOImpl implements VendedorDAO {
         trabajador.setNombre(vendedor.getNombre());
         trabajador.setApellidoPaterno(vendedor.getApellidoPaterno());
         trabajador.setApellidoMaterno(vendedor.getApellidoMaterno());
+        trabajador.setSexo(vendedor.getSexo());
         trabajador.setFechaDeNacimiento(vendedor.getFechaDeNacimiento());
         trabajador.setCorreo(vendedor.getCorreo());
         trabajador.setContrasena(vendedor.getContrasena());
@@ -259,7 +261,7 @@ public class VendedorDAOImpl extends DAOImpl implements VendedorDAO {
     @Override
     protected String obtenerProyeccionParaSelect() {
         String sql = "VEN.ID_VENDEDOR,TR.ID_TRABAJADOR,US.ID_USUARIO,";
-        sql = sql.concat("US.NOMBRE, US.APELLIDO_PATERNO, US.APELLIDO_MATERNO,US.DOCUMENTO,US.FECHA_NACIMIENTO,");
+        sql = sql.concat("US.NOMBRE, US.APELLIDO_PATERNO, US.APELLIDO_MATERNO,US.SEXO,US.DOCUMENTO,US.FECHA_NACIMIENTO,");
         sql = sql.concat("US.TELEFONO, US.CORREO, US.NACIONALIDAD,US.TIPO_DOCUMENTO,");
         sql = sql.concat("TR.SUELDO,TR.FECHA_INGRESO,");
         sql = sql.concat("S.NOMBRE as SEDE_NOMBRE");
@@ -281,6 +283,7 @@ public class VendedorDAOImpl extends DAOImpl implements VendedorDAO {
         this.vendedor.setNombre(this.resultSet.getString("nombre"));
         this.vendedor.setApellidoPaterno(this.resultSet.getString("APELLIDO_PATERNO"));
         this.vendedor.setApellidoMaterno(this.resultSet.getString("APELLIDO_MATERNO"));
+        this.vendedor.setSexo(this.resultSet.getString("SEXO").charAt(0));
         this.vendedor.setDocumento(this.resultSet.getString("DOCUMENTO"));
         this.vendedor.setFechaDeNacimiento(this.resultSet.getTimestamp("FECHA_NACIMIENTO"));
         this.vendedor.setTelefono(this.resultSet.getString("TELEFONO"));

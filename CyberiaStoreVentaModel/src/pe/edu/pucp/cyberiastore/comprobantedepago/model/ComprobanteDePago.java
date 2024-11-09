@@ -4,8 +4,8 @@ import java.text.SimpleDateFormat;
 import pe.edu.pucp.cyberiastore.usuario.model.Cliente;
 import java.util.Date;
 
-
 public class ComprobanteDePago {
+
     private Integer idComprobanteDePago;
     private Date fecha;
     private Double subtotal;
@@ -17,14 +17,14 @@ public class ComprobanteDePago {
     private Integer idOferta;
     private Boolean activo;
     private Cliente cliente; //Para insertar en tabla intermedia
-    
-    public ComprobanteDePago(){
+
+    public ComprobanteDePago() {
         this.igv = 18.0;
         this.idOferta = null;
         this.activo = true;
         this.cliente = new Cliente();
     }
-    
+
     public ComprobanteDePago(Date fecha, Double subtotal, Double total, Double igv, Double descuentoAplicado) {
         this.fecha = fecha;
         this.subtotal = subtotal;
@@ -104,8 +104,8 @@ public class ComprobanteDePago {
     public void setActivo(Boolean activo) {
         this.activo = activo;
     }
-    
-    public Boolean getActivo(){
+
+    public Boolean getActivo() {
         return this.activo;
     }
 

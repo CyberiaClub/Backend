@@ -44,6 +44,7 @@ public class TrabajadorDAOImpl extends DAOImpl implements TrabajadorDAO {
         usuario.setNombre(this.trabajador.getNombre());
         usuario.setApellidoPaterno(this.trabajador.getApellidoPaterno());
         usuario.setApellidoMaterno(this.trabajador.getApellidoMaterno());
+        usuario.setSexo(this.trabajador.getSexo());
         usuario.setFechaDeNacimiento(this.trabajador.getFechaDeNacimiento());
         usuario.setCorreo(this.trabajador.getCorreo());
         usuario.setActivo(this.trabajador.getActivo());

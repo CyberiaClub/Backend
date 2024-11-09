@@ -21,17 +21,18 @@ public class ProductoXSedeDAOImpl extends DAOImpl implements ProductoXSedeDAO {
     }
     
     @Override
-    public Integer insertar(Integer idProducto, Integer idSede) {
+    public Integer insertar(Integer idProducto, Integer idSede, Integer cantidadStock) {
         this.idProducto = idProducto;
         this.idSede = idSede;
+        this.cantidadStock = cantidadStock;
         return super.insertar();
     }
 
     @Override
-    public Integer insertar(Integer idProducto, Integer idSede, Boolean usarTransaccion, Connection conexion) {
+    public Integer insertar(Integer idProducto, Integer idSede, Integer cantidadStock, Boolean usarTransaccion, Connection conexion) {
         this.usarTransaccion = usarTransaccion;
         this.conexion = conexion;
-        return this.insertar(idSede, idProducto);
+        return this.insertar(idProducto, idSede, cantidadStock);
     }
     
     @Override
@@ -48,6 +49,7 @@ public class ProductoXSedeDAOImpl extends DAOImpl implements ProductoXSedeDAO {
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
         this.incluirParametroInt(1, this.idProducto);
         this.incluirParametroInt(2, this.idSede);
+        this.incluirParametroInt(3, this.cantidadStock);
     }
 
     @Override

@@ -17,6 +17,7 @@ public class Usuario {
     private String apellidoPaterno;
     private String apellidoMaterno;
     private Date fechaDeNacimiento;
+    private char sexo;
     private String correo;
     private Boolean activo;
     private String contrasena;
@@ -30,7 +31,7 @@ public class Usuario {
         this.activo = true;
     }
 
-    public Usuario(String documento, String telefono, String nombre, String apellidoPaterno, String apellidoMaterno, Date fechaDeNacimiento, String correo,
+    public Usuario(String documento, String telefono, String nombre, String apellidoPaterno, String apellidoMaterno,char sexo, Date fechaDeNacimiento, String correo,
             String direccion, String contrasena, String nacionalidad, TipoDocumento tipoDeDocumento) {
         this.documento = documento;
         this.telefono = telefono;
@@ -38,6 +39,7 @@ public class Usuario {
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
         this.fechaDeNacimiento = fechaDeNacimiento;
+        this.sexo = sexo;
         this.correo = correo;
         this.contrasena = Cifrado.cifrarMD5(contrasena);
         this.nacionalidad = nacionalidad;
@@ -64,13 +66,14 @@ public class Usuario {
      * @param tipoDeDocumento
      */
     public Usuario(Integer idUsuario, String documento, String telefono, String nombre, String apellidoPaterno, String apellidoMaterno,
-            Date fechaDeNacimiento, String correo, Boolean activo, String contrasena, String nacionalidad, String direccion, TipoDocumento tipoDeDocumento) {
+            char sexo,Date fechaDeNacimiento, String correo, Boolean activo, String contrasena, String nacionalidad, String direccion, TipoDocumento tipoDeDocumento) {
         this.idUsuario = idUsuario;
         this.documento = documento;
         this.telefono = telefono;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
+        this.sexo = sexo;
         this.fechaDeNacimiento = fechaDeNacimiento;
         this.correo = correo;
         this.activo = activo;
@@ -134,6 +137,14 @@ public class Usuario {
 
     public void setFechaDeNacimiento(Date fechaDeNacimiento) {
         this.fechaDeNacimiento = fechaDeNacimiento;
+    }
+
+    public char getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(char sexo) {
+        this.sexo = sexo;
     }
 
     public String getCorreo() {

@@ -62,6 +62,7 @@ public class DBManager {
         url = url.concat("/");
         url = url.concat(this.base_de_datos);
         url = url.concat("?useSSL=false");   
+//        url = url.concat("&allowPublicKeyRetrieval=true");   
         return url;
     }
 
@@ -71,8 +72,8 @@ public class DBManager {
             //el siguiente código ha sido probado en Windows
             //el archivo de configuración se encuentra en la carpeta resources/jdbc.properties
             //del proyecto que lo invoca
-            String nmArchivoConf = "C:\\Program Files\\glassfish7\\glassfish\\resources" + "\\" + ARCHIVO_CONFIGURACION;
-
+//            String nmArchivoConf = "C:\\Program Files\\glassfish7\\glassfish\\resources" + "\\" + ARCHIVO_CONFIGURACION;
+            String nmArchivoConf = "C:\\glassfish-7.0.18\\glassfish7\\glassfish\\resources" + "\\" + ARCHIVO_CONFIGURACION;
             properties.load(new FileInputStream(new File(nmArchivoConf)));
             this.driver = properties.getProperty("driver");
             System.out.println(this.driver);

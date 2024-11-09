@@ -27,7 +27,7 @@ public class ProductoXMarcaDAOImpl extends DAOImpl implements ProductoXMarcaDAO 
     public Integer insertar(Integer idProducto, Integer idMarca, Boolean usarTransaccion, Connection conexion) {
         this.usarTransaccion = usarTransaccion;
         this.conexion = conexion;
-        return this.insertar(idMarca, idProducto);
+        return this.insertar(idProducto, idMarca);
     }
 
     @Override

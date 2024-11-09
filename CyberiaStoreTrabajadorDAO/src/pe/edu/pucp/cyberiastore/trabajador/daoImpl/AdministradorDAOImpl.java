@@ -39,6 +39,7 @@ public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
         trabajador.setNombre(administrador.getNombre());
         trabajador.setApellidoPaterno(administrador.getApellidoPaterno());
         trabajador.setApellidoMaterno(administrador.getApellidoMaterno());
+        trabajador.setSexo(administrador.getSexo());
         trabajador.setFechaDeNacimiento(administrador.getFechaDeNacimiento());
         trabajador.setCorreo(administrador.getCorreo());
         trabajador.setContrasena(administrador.getContrasena());
@@ -126,6 +127,7 @@ public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
         trabajador.setNombre(administrador.getNombre());
         trabajador.setApellidoPaterno(administrador.getApellidoPaterno());
         trabajador.setApellidoMaterno(administrador.getApellidoMaterno());
+        trabajador.setSexo(administrador.getSexo());
         trabajador.setFechaDeNacimiento(administrador.getFechaDeNacimiento());
         trabajador.setCorreo(administrador.getCorreo());
         trabajador.setContrasena(administrador.getContrasena());
@@ -259,7 +261,7 @@ public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
     @Override
     protected String obtenerProyeccionParaSelect() {
         String sql = "AD.ID_ADMINISTRADOR,TR.ID_TRABAJADOR,US.ID_USUARIO,";
-        sql = sql.concat("US.NOMBRE, US.APELLIDO_PATERNO, US.APELLIDO_MATERNO,US.DOCUMENTO,US.FECHA_NACIMIENTO,");
+        sql = sql.concat("US.NOMBRE, US.APELLIDO_PATERNO, US.APELLIDO_MATERNO,US.SEXO,US.DOCUMENTO,US.FECHA_NACIMIENTO,");
         sql = sql.concat("US.TELEFONO, US.CORREO, US.NACIONALIDAD,US.TIPO_DOCUMENTO,");
         sql = sql.concat("TR.SUELDO,TR.FECHA_INGRESO,");
         sql = sql.concat("S.NOMBRE as SEDE_NOMBRE");
@@ -281,6 +283,7 @@ public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
         this.administrador.setNombre(this.resultSet.getString("nombre"));
         this.administrador.setApellidoPaterno(this.resultSet.getString("APELLIDO_PATERNO"));
         this.administrador.setApellidoMaterno(this.resultSet.getString("APELLIDO_MATERNO"));
+        this.administrador.setSexo(this.resultSet.getString("SEXO").charAt(0));
         this.administrador.setDocumento(this.resultSet.getString("DOCUMENTO"));
         this.administrador.setFechaDeNacimiento(this.resultSet.getTimestamp("FECHA_NACIMIENTO"));
         this.administrador.setTelefono(this.resultSet.getString("TELEFONO"));

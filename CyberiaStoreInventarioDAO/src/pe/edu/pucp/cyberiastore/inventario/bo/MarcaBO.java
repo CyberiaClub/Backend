@@ -12,18 +12,11 @@ public class MarcaBO {
         this.marcaDAO = new MarcaDAOImpl();
     }
     
-    public Integer insertar(String nombre){
-        Marca marca = new Marca(nombre);
+    public Integer insertar(Marca marca){
         return this.marcaDAO.insertar(marca);
     }
     
-    public Integer modificar(String nombre){
-        Marca marca = new Marca(nombre);
-        return this.marcaDAO.modificar(marca);
-    }
-    
-    public Integer eliminar(String nombre){
-        Marca marca = new Marca(nombre);
+    public Integer eliminar(Marca marca){
         return this.marcaDAO.eliminar(marca);
     }
     

@@ -12,30 +12,26 @@ public class TipoProductoBO {
         this.tipoProductoDAO = new TipoProductoDAOImpl();
     }
     
-    public Integer insertar(String tipo){
-        TipoProducto tipoProducto = new TipoProducto(tipo);
+    public Integer insertar(TipoProducto tipoProducto){
         return this.tipoProductoDAO.insertar(tipoProducto);
     }
     
-    public Integer modificar(String tipo){
-        TipoProducto tipoProducto = new TipoProducto(tipo);
+    public Integer modificar(TipoProducto tipoProducto){
         return this.tipoProductoDAO.modificar(tipoProducto);
     }
     
-    public Integer eliminar(String tipo){
-        TipoProducto tipoProducto = new TipoProducto(tipo);
+    public Integer eliminar(TipoProducto tipoProducto){
         return this.tipoProductoDAO.eliminar(tipoProducto);
     }
     
     public ArrayList<TipoProducto> listarTodos(){
-        ArrayList<TipoProducto> tiposProducto = new ArrayList();
-        
+        ArrayList<TipoProducto> tiposProducto;
+        tiposProducto = tipoProductoDAO.listarTodos();
         return tiposProducto;
     }
     
     public TipoProducto buscarPorId(Integer idTipoProducto){
         TipoProducto tipoProducto = this.tipoProductoDAO.obtenerPorId(idTipoProducto);
-        
         return tipoProducto;
     }
     

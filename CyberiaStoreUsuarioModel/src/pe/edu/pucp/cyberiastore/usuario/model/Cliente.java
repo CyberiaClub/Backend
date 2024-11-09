@@ -13,8 +13,8 @@ public class Cliente extends Usuario {
         this.setActivo(true);
     }
 
-    public Cliente(String documento, String telefono, String nombre, String apellidoPaterno, String apellidoMaterno, Date fechaDeNacimiento, String correo, String contrasena, String nacionalidad, String direccion, TipoDocumento tipoDeDocumento) {
-        super(documento, telefono, nombre, apellidoPaterno, apellidoMaterno, fechaDeNacimiento, correo, contrasena, nacionalidad, direccion, tipoDeDocumento);
+    public Cliente(String documento, String telefono, String nombre, String apellidoPaterno, String apellidoMaterno,char sexo, Date fechaDeNacimiento, String correo, String contrasena, String nacionalidad, String direccion, TipoDocumento tipoDeDocumento) {
+        super(documento, telefono, nombre, apellidoPaterno, apellidoMaterno, sexo,fechaDeNacimiento, correo, contrasena, nacionalidad, direccion, tipoDeDocumento);
         this.verificado = false;
     }
     
@@ -37,9 +37,9 @@ public class Cliente extends Usuario {
      * @param tipoDeDocumento 
      */
     public Cliente(Integer idCliente,Boolean verificado, Integer idUsuario,String documento, String telefono, String nombre,
-            String apellidoPaterno, String apellidoMaterno, Date fechaDeNacimiento, String correo,Boolean activo, String contrasena,
+            String apellidoPaterno, String apellidoMaterno,char sexo, Date fechaDeNacimiento, String correo,Boolean activo, String contrasena,
             String nacionalidad, String direccion, TipoDocumento tipoDeDocumento) {
-        super(idUsuario,documento, telefono, nombre, apellidoPaterno, apellidoMaterno, fechaDeNacimiento,
+        super(idUsuario,documento, telefono, nombre, apellidoPaterno, apellidoMaterno,sexo, fechaDeNacimiento,
                 correo,activo, contrasena, nacionalidad, direccion, tipoDeDocumento);
         this.idCliente = idCliente;
         this.verificado = verificado;

@@ -1,6 +1,7 @@
 package pe.edu.pucp.cyberiastore.inventario.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Producto {
 
@@ -10,6 +11,7 @@ public class Producto {
     private String descripcion;
     private Double precio;
     private byte[] imagen;
+    private Date fechaInsercion;
     // Estos ultimos atributos son para el insertar
     private Integer cantidad;
     private ArrayList<Producto> productosMiembros;
@@ -31,7 +33,7 @@ public class Producto {
         this.productosMiembros = null;
     }
 
-    public Producto(String sku, String nombre, String descripcion, Double precio, ArrayList<Producto> productosMiembros,byte[] imagenBytes) {
+    public Producto(String sku, String nombre, String descripcion, Double precio, ArrayList<Producto> productosMiembros, byte[] imagenBytes) {
         this.sku = sku;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -40,13 +42,14 @@ public class Producto {
         this.imagen = imagenBytes;
     }
 
-    public Producto(Integer idProducto, String sku, String nombre, String descripcion, Double precio, ArrayList<Producto> productoMiembros) {
+    public Producto(Integer idProducto, String sku, String nombre, String descripcion, Double precio, ArrayList<Producto> productoMiembros, byte[] imagenBytes) {
         this.idProducto = idProducto;
         this.sku = sku;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
         this.productosMiembros = productoMiembros;
+        this.imagen = imagenBytes;
     }
 
     public void setIdProducto(Integer idProducto) {
@@ -101,7 +104,14 @@ public class Producto {
         this.imagen = imagen;
     }
 
-    
+    public Date getFechaInsercion() {
+        return fechaInsercion;
+    }
+
+    public void setFechaInsercion(Date fechaInsercion) {
+        this.fechaInsercion = fechaInsercion;
+    }
+
     /*Usados para el insertar*/
     public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;

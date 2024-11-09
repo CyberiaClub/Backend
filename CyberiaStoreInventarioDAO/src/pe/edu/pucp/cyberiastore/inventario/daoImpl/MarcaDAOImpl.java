@@ -58,18 +58,19 @@ public class MarcaDAOImpl extends DAOImpl implements MarcaDAO {
 
     @Override
     protected String obtenerListaDeAtributosParaInsercion() {
-        return "NOMBRE,ACTIVO";
+        return "NOMBRE,ACTIVO,IMAGEN";
     }
 
     @Override
     protected String incluirListaDeParametrosParaInsercion() {
-        return "?,?";
+        return "?,?,?";
     }
 
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
         this.incluirParametroString(1, this.marca.getNombre());
         this.incluirParametroBoolean(2, this.marca.getActivo());
+        this.incluirParametroByte(3, this.marca.getImagen());
     }
 
     @Override
@@ -102,7 +103,7 @@ public class MarcaDAOImpl extends DAOImpl implements MarcaDAO {
 
     @Override
     protected String obtenerListaDeValoresYAtributosParaModificacion() {
-        return "nombre=?,activo=?";
+        return "nombre=?,activo=?,imagen=?";
     }
 
     @Override
@@ -120,7 +121,8 @@ public class MarcaDAOImpl extends DAOImpl implements MarcaDAO {
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
         this.incluirParametroString(1, this.marca.getNombre());
         this.incluirParametroBoolean(2, this.marca.getActivo());
-        this.incluirParametroInt(3, this.marca.getIdMarca());
+        this.incluirParametroByte(3, this.marca.getImagen());
+        this.incluirParametroInt(4, this.marca.getIdMarca());
     }
 
     @Override
@@ -160,10 +162,16 @@ public class MarcaDAOImpl extends DAOImpl implements MarcaDAO {
     public ArrayList<Marca> listarTodos() {
         return (ArrayList<Marca>) super.listarTodos(null);
     }
+    
+    @Override
+    public ArrayList<Marca> listarIdNombre() {
+        return null;
+    }
+    
 
     @Override
     protected String obtenerProyeccionParaSelect() {
-        String sql = "id_marca, nombre";
+        String sql = "id_marca, nombre,imagen";
         return sql;
     }
 
@@ -183,6 +191,7 @@ public class MarcaDAOImpl extends DAOImpl implements MarcaDAO {
         this.marca = new Marca();
         this.marca.setIdMarca(this.resultSet.getInt("id_marca"));
         this.marca.setNombre(this.resultSet.getString("nombre"));
+        this.marca.setImagen(this.resultSet.getBytes("imagen"));
     }
 
     @Override
@@ -212,13 +221,13 @@ public class MarcaDAOImpl extends DAOImpl implements MarcaDAO {
             if (abreConexion) {
                 this.abrirConexion();
             }
-            String sql = "select id_Marca from marca where ";
+            String sql = "SELECT ID_MARCA FROM MARCA WHERE ";
             sql = sql.concat("nombre=? ");
             this.colocarSQLenStatement(sql);
             this.incluirParametroString(1, this.marca.getNombre());
             this.ejecutarConsultaEnBD(sql);
             if (this.resultSet.next()) {
-                idMarca = this.resultSet.getInt("id_Marca");
+                idMarca = this.resultSet.getInt("ID_MARCA");
             }
         } catch (SQLException ex) {
             System.err.println("Error al consultar si existe marca - " + ex);

@@ -15,22 +15,25 @@ public class VendedorBO {
         this.vendedorDAO = new VendedorDAOImpl();
     }
     
-    public Integer insertar(String documento, String telefono, String nombre, String apellidoPaterno, String apellidoMaterno, Date fechaDeNacimiento, String correo,
-            String direccion, String contrasena, String nacionalidad, TipoDocumento tipoDeDocumento, Double sueldo, Date fechaDeIngreso, Integer idSede) {
-        Vendedor vendedor = new Vendedor(documento, telefono, nombre, apellidoPaterno, apellidoMaterno, fechaDeNacimiento, correo, direccion, contrasena, nacionalidad, tipoDeDocumento, sueldo, fechaDeIngreso, idSede);
+     public Integer insertar(Vendedor vendedor){
         return this.vendedorDAO.insertar(vendedor);
     }
-
-    public Integer modificar(Integer idVendedor,Integer idTrabajador, Double sueldo, Date fechaDeIngreso, Integer idUsuario, String documento, String telefono, String nombre, String apellidoPaterno, String apellidoMaterno, Date fechaDeNacimiento, String correo, Boolean activo, String contrasena, String nacionalidad, String direccion, TipoDocumento tipoDeDocumento) {
-        Vendedor vendedor = new Vendedor(idVendedor,idTrabajador, sueldo, fechaDeIngreso, idUsuario, documento, telefono, nombre, apellidoPaterno, apellidoMaterno, fechaDeNacimiento, correo, activo, contrasena, nacionalidad, direccion, tipoDeDocumento);
+    
+    public Integer modificar(Vendedor vendedor){
         return this.vendedorDAO.modificar(vendedor);
     }
 
-    public Vendedor obtenerPorId(Integer idVendedor) {
-        return this.vendedorDAO.obtenerPorId(idVendedor);
+    public Integer eliminar(Vendedor vendedor){
+        return this.vendedorDAO.eliminar(vendedor);
     }
 
-    public ArrayList<Vendedor> listarTodos() {
-        return this.vendedorDAO.listarTodos();
+    public ArrayList<Vendedor> listarTodos(){
+        ArrayList<Vendedor> vendedores = this.vendedorDAO.listarTodos();
+        return vendedores;
+    }
+
+    public Vendedor obtenerPorId(Integer idVendedor){
+        Vendedor vendedor = this.vendedorDAO.obtenerPorId(idVendedor);
+        return vendedor;
     }
 }
