@@ -29,7 +29,7 @@ public class ProductoXProveedorDAOImpl extends DAOImpl implements ProductoXProve
     public Integer insertar(Integer idProducto, Integer idProveedor, Double precioProveedor, Boolean usarTransaccion, Connection conexion) {
         this.usarTransaccion = usarTransaccion;
         this.conexion = conexion;
-        return this.insertar(idProveedor, idProducto, precioProveedor);
+        return this.insertar(idProducto, idProveedor, precioProveedor);
     }
 
     @Override

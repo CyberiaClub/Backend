@@ -163,7 +163,7 @@ public class TipoProductoDAOImpl extends DAOImpl implements TipoProductoDAO {
 
     @Override
     protected String obtenerProyeccionParaSelect() {
-        String sql = "id_tipoProducto, tipo, imagen";
+        String sql = "id_tipo_producto, tipo, imagen";
         return sql;
     }
 
@@ -181,7 +181,7 @@ public class TipoProductoDAOImpl extends DAOImpl implements TipoProductoDAO {
     @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.tipoProducto = new TipoProducto();
-        this.tipoProducto.setIdTipoProducto(this.resultSet.getInt("id_tipoProducto"));
+        this.tipoProducto.setIdTipoProducto(this.resultSet.getInt("id_tipo_producto"));
         this.tipoProducto.setTipo(this.resultSet.getString("tipo"));
         this.tipoProducto.setImagen(this.resultSet.getBytes("imagen"));
     }
