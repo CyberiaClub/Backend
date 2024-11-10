@@ -1,12 +1,7 @@
 package pe.edu.pucp.cyberiastore.usuario.model;
 
 import java.util.Date;
-import java.util.ArrayList;
-import java.text.SimpleDateFormat;
 import pe.edu.pucp.cyberiastore.cifrado.Cifrado;
-
-import pe.edu.pucp.cyberiastore.rol.model.Rol;
-import pe.edu.pucp.cyberiastore.rol.model.Permiso;
 
 public class Usuario {
 
@@ -24,15 +19,15 @@ public class Usuario {
     private String nacionalidad;
     private String direccion;
     private TipoDocumento tipoDeDocumento;
-//    Byte foto[];
-    private ArrayList<Rol> roles;
+    private Rol rol;
 
+//    Byte foto[];
     public Usuario() {
         this.activo = true;
     }
 
-    public Usuario(String documento, String telefono, String nombre, String apellidoPaterno, String apellidoMaterno,char sexo, Date fechaDeNacimiento, String correo,
-            String direccion, String contrasena, String nacionalidad, TipoDocumento tipoDeDocumento) {
+    public Usuario(String documento, String telefono, String nombre, String apellidoPaterno, String apellidoMaterno, char sexo, Date fechaDeNacimiento, String correo,
+            String direccion, String contrasena, String nacionalidad, TipoDocumento tipoDeDocumento, Rol rol) {
         this.documento = documento;
         this.telefono = telefono;
         this.nombre = nombre;
@@ -46,6 +41,7 @@ public class Usuario {
         this.direccion = direccion;
         this.tipoDeDocumento = tipoDeDocumento;
         this.activo = true;
+        this.rol = rol;
     }
 
     /**
@@ -57,6 +53,7 @@ public class Usuario {
      * @param nombre
      * @param apellidoPaterno
      * @param apellidoMaterno
+     * @param sexo
      * @param fechaDeNacimiento
      * @param correo
      * @param activo
@@ -66,7 +63,7 @@ public class Usuario {
      * @param tipoDeDocumento
      */
     public Usuario(Integer idUsuario, String documento, String telefono, String nombre, String apellidoPaterno, String apellidoMaterno,
-            char sexo,Date fechaDeNacimiento, String correo, Boolean activo, String contrasena, String nacionalidad, String direccion, TipoDocumento tipoDeDocumento) {
+            char sexo, Date fechaDeNacimiento, String correo, Boolean activo, String contrasena, String nacionalidad, String direccion, TipoDocumento tipoDeDocumento, Rol rol) {
         this.idUsuario = idUsuario;
         this.documento = documento;
         this.telefono = telefono;
@@ -81,6 +78,7 @@ public class Usuario {
         this.nacionalidad = nacionalidad;
         this.direccion = direccion;
         this.tipoDeDocumento = tipoDeDocumento;
+        this.rol = rol;
     }
 
     public Integer getIdUsuario() {
@@ -195,27 +193,12 @@ public class Usuario {
         this.tipoDeDocumento = tipoDeDocumento;
     }
 
-    public int getActivoAsInt() {
-        if (this.activo) {
-            return 1;
-        }
-        return 0;
-    }
-
-    public void agregarRol(Rol rol) {
-        this.roles.add(rol);
-    }
-
-    public int getCantidadRoles() {
-        return this.roles.size();
-    }
-
-    public Rol getRol(int index) {
-        Rol rol = new Rol(roles.get(index).getIdRol(), roles.get(index).getNombre());
-        for (int i = 0; i < roles.get(index).getCantidadPermisos(); i++) {
-            Permiso permiso = roles.get(index).getPermiso(i);
-            rol.agregarPermiso(permiso);
-        }
+    public Rol getRol() {
         return rol;
     }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
+    }
+
 }

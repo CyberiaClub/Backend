@@ -13,9 +13,9 @@ import pe.edu.pucp.cyberiastore.trabajador.model.Trabajador;
 import pe.edu.pucp.cyberiastore.usuario.model.TipoDocumento;
 
 public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
-
+    
     private Administrador administrador;
-
+    
     public AdministradorDAOImpl() {
         super("ADMINISTRADOR");
         this.administrador = null;
@@ -46,11 +46,12 @@ public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
         trabajador.setNacionalidad(administrador.getNacionalidad());
         trabajador.setDireccion(administrador.getDireccion());
         trabajador.setTipoDeDocumento(administrador.getTipoDeDocumento());
-
+        trabajador.setRol(administrador.getRol());
+        
         TrabajadorDAO trabajadorDAO = new TrabajadorDAOImpl();
-
+        
         Integer idAdministrador = null;
-
+        
         Boolean existeTrabajador = trabajadorDAO.existeTrabajador(trabajador);
         Boolean existeAdministrador = false;
         this.usarTransaccion = false;
@@ -91,17 +92,17 @@ public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
         this.usarTransaccion = true;
         return idAdministrador;
     }
-
+    
     @Override
     protected String obtenerListaDeAtributosParaInsercion() {
         return "ID_TRABAJADOR";
     }
-
+    
     @Override
     protected String incluirListaDeParametrosParaInsercion() {
         return "?";
     }
-
+    
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
         this.incluirParametroInt(1, this.administrador.getIdTrabajador());
@@ -134,9 +135,9 @@ public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
         trabajador.setNacionalidad(administrador.getNacionalidad());
         trabajador.setDireccion(administrador.getDireccion());
         trabajador.setTipoDeDocumento(administrador.getTipoDeDocumento());
-
+        
         TrabajadorDAO trabajadorDAO = new TrabajadorDAOImpl();
-
+        
         this.usarTransaccion = false;
         try {
             this.iniciarTransaccion();
@@ -161,12 +162,12 @@ public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
         this.usarTransaccion = true;
         return retorno;
     }
-
+    
     @Override
     protected String obtenerListaDeValoresYAtributosParaModificacion() {
         return "ID_TRABAJADOR=?";
     }
-
+    
     @Override
     protected String obtenerPredicadoParaLlavePrimaria() {
         String sql = "";
@@ -177,7 +178,7 @@ public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
         }
         return sql;
     }
-
+    
     @Override
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
         this.incluirParametroInt(1, this.administrador.getIdAdministrador());
@@ -194,7 +195,7 @@ public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
     public Integer eliminar(Administrador administrador) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    
     @Override
     protected void incluirValorDeParametrosParaEliminacion() throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -212,7 +213,7 @@ public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
         super.obtenerPorId();
         return this.administrador;
     }
-
+    
     @Override
     protected String generarSQLParaListarPorId() {
         String sql = "select ";
@@ -226,7 +227,7 @@ public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
         sql = sql.concat(this.obtenerPredicadoParaLlavePrimaria());
         return sql;
     }
-
+    
     @Override
     protected void incluirValorDeParametrosParaObtenerPorId() throws SQLException {
         this.incluirParametroInt(1, this.administrador.getIdAdministrador());
@@ -241,7 +242,7 @@ public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
     public ArrayList<Administrador> listarTodos() {
         return (ArrayList<Administrador>) super.listarTodos(null);
     }
-
+    
     @Override
     protected String generarSQLParaListarTodos(Integer limite) {
         String sql = "select ";
@@ -257,7 +258,7 @@ public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
         }
         return sql;
     }
-
+    
     @Override
     protected String obtenerProyeccionParaSelect() {
         String sql = "AD.ID_ADMINISTRADOR,TR.ID_TRABAJADOR,US.ID_USUARIO,";
@@ -267,13 +268,13 @@ public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
         sql = sql.concat("S.NOMBRE as SEDE_NOMBRE");
         return sql;
     }
-
+    
     @Override
     protected void agregarObjetoALaLista(List lista, ResultSet resultSet) throws SQLException {
         instanciarObjetoDelResultSet();
         lista.add(this.administrador);
     }
-
+    
     @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.administrador = new Administrador();
@@ -289,16 +290,16 @@ public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
         this.administrador.setTelefono(this.resultSet.getString("TELEFONO"));
         this.administrador.setCorreo(this.resultSet.getString("CORREO"));
         this.administrador.setNacionalidad(this.resultSet.getString("NACIONALIDAD"));
-
+        
         String tipoDocumentoStr = this.resultSet.getString("TIPO_DOCUMENTO");
         TipoDocumento tipoDocumento = TipoDocumento.valueOf(tipoDocumentoStr);
         this.administrador.setTipoDeDocumento(tipoDocumento);
-
+        
         this.administrador.setFechaDeIngreso(this.resultSet.getTimestamp("FECHA_INGRESO"));
         this.administrador.setSueldo(this.resultSet.getDouble("SUELDO"));
         this.administrador.setNombreSede(this.resultSet.getString("SEDE_NOMBRE"));
     }
-
+    
     @Override
     protected void limpiarObjetoDelResultSet() {
         this.administrador = null;
@@ -315,7 +316,7 @@ public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
         Boolean abreConexion = true;
         return existeAdministrador(administrador, abreConexion);
     }
-
+    
     @Override
     public Boolean existeAdministrador(Administrador administrador, Boolean abreConexion) {
         this.administrador = administrador;

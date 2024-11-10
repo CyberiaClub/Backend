@@ -46,6 +46,7 @@ public class AlmaceneroDAOImpl extends DAOImpl implements AlmaceneroDAO {
         trabajador.setNacionalidad(almacenero.getNacionalidad());
         trabajador.setDireccion(almacenero.getDireccion());
         trabajador.setTipoDeDocumento(almacenero.getTipoDeDocumento());
+        trabajador.setRol(almacenero.getRol());
 
         TrabajadorDAO trabajadorDAO = new TrabajadorDAOImpl();
         Integer idAlmacenero = null;

@@ -46,6 +46,7 @@ public class VendedorDAOImpl extends DAOImpl implements VendedorDAO {
         trabajador.setNacionalidad(vendedor.getNacionalidad());
         trabajador.setDireccion(vendedor.getDireccion());
         trabajador.setTipoDeDocumento(vendedor.getTipoDeDocumento());
+        trabajador.setRol(vendedor.getRol());
 
         TrabajadorDAO trabajadorDAO = new TrabajadorDAOImpl();
         Integer idVendedor = null;

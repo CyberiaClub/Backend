@@ -11,7 +11,6 @@ public class Producto {
     private String descripcion;
     private Double precio;
     private byte[] imagen;
-    private Date fechaInsercion;
     // Estos ultimos atributos son para el insertar
     private Integer cantidad;
     private ArrayList<Producto> productosMiembros;
@@ -102,14 +101,6 @@ public class Producto {
 
     public void setImagen(byte[] imagen) {
         this.imagen = imagen;
-    }
-
-    public Date getFechaInsercion() {
-        return fechaInsercion;
-    }
-
-    public void setFechaInsercion(Date fechaInsercion) {
-        this.fechaInsercion = fechaInsercion;
     }
 
     /*Usados para el insertar*/

@@ -13,13 +13,14 @@ public class Cliente extends Usuario {
         this.setActivo(true);
     }
 
-    public Cliente(String documento, String telefono, String nombre, String apellidoPaterno, String apellidoMaterno,char sexo, Date fechaDeNacimiento, String correo, String contrasena, String nacionalidad, String direccion, TipoDocumento tipoDeDocumento) {
-        super(documento, telefono, nombre, apellidoPaterno, apellidoMaterno, sexo,fechaDeNacimiento, correo, contrasena, nacionalidad, direccion, tipoDeDocumento);
+    public Cliente(String documento, String telefono, String nombre, String apellidoPaterno, String apellidoMaterno, char sexo, Date fechaDeNacimiento, String correo, String contrasena, String nacionalidad, String direccion, TipoDocumento tipoDeDocumento, Rol rol) {
+        super(documento, telefono, nombre, apellidoPaterno, apellidoMaterno, sexo, fechaDeNacimiento, correo, contrasena, nacionalidad, direccion, tipoDeDocumento, rol);
         this.verificado = false;
     }
-    
+
     /**
      * Este es un constructor que se uso para el modificar
+     *
      * @param idCliente
      * @param verificado
      * @param idUsuario
@@ -28,19 +29,21 @@ public class Cliente extends Usuario {
      * @param nombre
      * @param apellidoPaterno
      * @param apellidoMaterno
+     * @param sexo
      * @param fechaDeNacimiento
      * @param correo
      * @param activo
      * @param contrasena
      * @param nacionalidad
      * @param direccion
-     * @param tipoDeDocumento 
+     * @param tipoDeDocumento
+     * @param rol
      */
-    public Cliente(Integer idCliente,Boolean verificado, Integer idUsuario,String documento, String telefono, String nombre,
-            String apellidoPaterno, String apellidoMaterno,char sexo, Date fechaDeNacimiento, String correo,Boolean activo, String contrasena,
-            String nacionalidad, String direccion, TipoDocumento tipoDeDocumento) {
-        super(idUsuario,documento, telefono, nombre, apellidoPaterno, apellidoMaterno,sexo, fechaDeNacimiento,
-                correo,activo, contrasena, nacionalidad, direccion, tipoDeDocumento);
+    public Cliente(Integer idCliente, Boolean verificado, Integer idUsuario, String documento, String telefono, String nombre,
+            String apellidoPaterno, String apellidoMaterno, char sexo, Date fechaDeNacimiento, String correo, Boolean activo, String contrasena,
+            String nacionalidad, String direccion, TipoDocumento tipoDeDocumento, Rol rol) {
+        super(idUsuario, documento, telefono, nombre, apellidoPaterno, apellidoMaterno, sexo, fechaDeNacimiento,
+                correo, activo, contrasena, nacionalidad, direccion, tipoDeDocumento, rol);
         this.idCliente = idCliente;
         this.verificado = verificado;
     }
@@ -59,13 +62,5 @@ public class Cliente extends Usuario {
 
     public void setVerificado(Boolean verificado) {
         this.verificado = verificado;
-    }
-
-    public Integer getVerificadoAsInt() {
-        if (this.verificado) {
-            return 1;
-        } else {
-            return 0;
-        }
     }
 }

@@ -58,12 +58,12 @@ public class UsuarioDAOImpl extends DAOImpl implements UsuarioDAO {
 
     @Override
     protected String obtenerListaDeAtributosParaInsercion() {
-        return "DOCUMENTO, TELEFONO, NOMBRE,APELLIDO_PATERNO, APELLIDO_MATERNO,SEXO , FECHA_NACIMIENTO, CORREO, DIRECCION, ACTIVO, CONTRASEÑA, NACIONALIDAD, TIPO_DOCUMENTO";
+        return "DOCUMENTO, TELEFONO, NOMBRE,APELLIDO_PATERNO, APELLIDO_MATERNO,SEXO , FECHA_NACIMIENTO, CORREO, DIRECCION, ACTIVO, CONTRASEÑA, NACIONALIDAD, TIPO_DOCUMENTO,ROL";
     }
 
     @Override
     protected String incluirListaDeParametrosParaInsercion() {
-        return "?,?,?,?,?,?,?,?,?,?,?,?,?";
+        return "?,?,?,?,?,?,?,?,?,?,?,?,?,?";
     }
 
     @Override
@@ -73,7 +73,7 @@ public class UsuarioDAOImpl extends DAOImpl implements UsuarioDAO {
         this.incluirParametroString(3, this.usuario.getNombre());
         this.incluirParametroString(4, this.usuario.getApellidoPaterno());
         this.incluirParametroString(5, this.usuario.getApellidoMaterno());
-        this.incluirParametroString(6,this.usuario.getSexo() + "");
+        this.incluirParametroString(6, this.usuario.getSexo() + "");
         this.incluirParametroDate(7, this.usuario.getFechaDeNacimiento());
         this.incluirParametroString(8, this.usuario.getCorreo());
         this.incluirParametroString(9, this.usuario.getDireccion());
@@ -81,6 +81,7 @@ public class UsuarioDAOImpl extends DAOImpl implements UsuarioDAO {
         this.incluirParametroString(11, this.usuario.getContrasena());
         this.incluirParametroString(12, this.usuario.getNacionalidad());
         this.incluirParametroString(13, this.usuario.getTipoDeDocumento().toString());
+        this.incluirParametroString(14, this.usuario.getRol().toString());
     }
 
     /*
@@ -103,12 +104,12 @@ public class UsuarioDAOImpl extends DAOImpl implements UsuarioDAO {
 
     @Override
     protected String obtenerPredicadoParaLlavePrimaria() {
-        return "id_usuario=?";
+        return "ID_USUARIO=?";
     }
 
     @Override
     protected String obtenerListaDeValoresYAtributosParaModificacion() {
-        return "DOCUMENTO=?, TELEFONO=?, NOMBRE=?,APELLIDO_PATERNO=?, APELLIDO_MATERNO =?,SEXO=?, FECHA_NACIMIENTO=?, CORREO=?, DIRECCION=?, ACTIVO=?, CONTRASEÑA=?, NACIONALIDAD=?, TIPO_DOCUMENTO=?";
+        return "DOCUMENTO=?, TELEFONO=?, NOMBRE=?,APELLIDO_PATERNO=?, APELLIDO_MATERNO =?,SEXO=?, FECHA_NACIMIENTO=?, CORREO=?, DIRECCION=?, ACTIVO=?, CONTRASEÑA=?, NACIONALIDAD=?, TIPO_DOCUMENTO=?,ROL=?";
     }
 
     @Override
@@ -126,8 +127,9 @@ public class UsuarioDAOImpl extends DAOImpl implements UsuarioDAO {
         this.incluirParametroString(11, this.usuario.getContrasena());
         this.incluirParametroString(12, this.usuario.getNacionalidad());
         this.incluirParametroString(13, this.usuario.getTipoDeDocumento().toString());
+        this.incluirParametroString(14, this.usuario.getRol().toString());
         // este es para la comparacion de id_usuario = ?
-        this.incluirParametroInt(14, this.usuario.getIdUsuario());
+        this.incluirParametroInt(15, this.usuario.getIdUsuario());
     }
 
     /*

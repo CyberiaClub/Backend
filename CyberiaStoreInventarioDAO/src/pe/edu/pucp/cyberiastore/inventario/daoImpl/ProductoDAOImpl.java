@@ -42,7 +42,7 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
             if (!existeProducto) {
                 this.retornarLlavePrimaria = true;
                 idProducto = super.insertar();
-                System.out.println("ID PRODUCTO: "+idProducto);
+                System.out.println("ID PRODUCTO: " + idProducto);
                 this.retornarLlavePrimaria = false;
                 // insertar productos individuales
                 ArrayList<Producto> productosMiembros = this.producto.getProductosMiembros();
@@ -59,7 +59,7 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
                 productoxmarca.insertar(idProducto, this.producto.getIdMarca(), usarTransaccion, conexion);
                 //Insertar  producto x sede
                 ProductoXSedeDAO productoxsede = new ProductoXSedeDAOImpl();
-                productoxsede.insertar(idProducto, this.producto.getIdSede(),this.producto.getCantidad(), usarTransaccion, conexion);
+                productoxsede.insertar(idProducto, this.producto.getIdSede(), this.producto.getCantidad(), usarTransaccion, conexion);
                 // insertar producto x tipo
                 ProductoXTipoDAO productoxtipo = new ProductoXTipoDAOImpl();
                 productoxtipo.insertar(idProducto, this.producto.getIdTipo(), usarTransaccion, conexion);
@@ -90,12 +90,12 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
 
     @Override
     protected String obtenerListaDeAtributosParaInsercion() {
-        return "SKU, NOMBRE, DESCRIPCION, PRECIO,IMAGEN,FECHA_INSERCION";
+        return "SKU, NOMBRE, DESCRIPCION, PRECIO,IMAGEN";
     }
 
     @Override
     protected String incluirListaDeParametrosParaInsercion() {
-        return "?,?,?,?,?,SYSDATE()";
+        return "?,?,?,?,?";
     }
 
     @Override
@@ -106,7 +106,6 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
         System.out.println(this.producto.getPrecio());
         this.incluirParametroDouble(4, this.producto.getPrecio());
         this.incluirParametroByte(5, this.producto.getImagen());
-//        this.incluirParametroDate(6, this.producto.getFechaInsercion());
     }
 
     /*

@@ -52,6 +52,7 @@ public class TrabajadorDAOImpl extends DAOImpl implements TrabajadorDAO {
         usuario.setNacionalidad(this.trabajador.getNacionalidad());
         usuario.setDireccion(this.trabajador.getDireccion());
         usuario.setTipoDeDocumento(this.trabajador.getTipoDeDocumento());
+        usuario.setRol(this.trabajador.getRol());
 
         UsuarioDAO usuarioDAO = new UsuarioDAOImpl();
         Boolean existeUsuario = usuarioDAO.existeUsuario(usuario);

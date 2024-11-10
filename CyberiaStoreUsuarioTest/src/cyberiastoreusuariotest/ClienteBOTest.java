@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import pe.edu.pucp.cyberiastore.usuario.bo.ClienteBO;
 import pe.edu.pucp.cyberiastore.usuario.model.Cliente;
+import pe.edu.pucp.cyberiastore.usuario.model.Rol;
 import pe.edu.pucp.cyberiastore.usuario.model.TipoDocumento;
 
 public class ClienteBOTest {
@@ -37,12 +38,12 @@ public class ClienteBOTest {
             java.util.logging.Logger.getLogger(ClienteBOTest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
-        int resultado = clienteBO.insertar("11111111", "111111111", "AAAAAA", "APELLIDO AAAA", "APELLIDO AAAA",'F', fechaNacimiento,
-                "AAAAAA@gmail.com", "AAAAAAAAAAAAA", "PERUANO", "CALLE A", TipoDocumento.DNI);
-        resultado = clienteBO.insertar("22222222", "222222222", "BBBBBB", "APELLIDO BBBB", "APELLIDO BBBB",'M', fechaNacimiento, "BBBBB@gmail.com",
-                "BBBBBBB", "PERUANO", "CALLE B", TipoDocumento.CARNET_DE_EXTRANJERIA);
-        resultado = clienteBO.insertar("33333333", "333333333", "CCCCCC", "APELLIDO CCCC", "APELLIDO CCCC",'F', fechaNacimiento, "CCCCCC@gmail.com",
-                "CCCCCCCC", "PERUANO", "CALLE C", TipoDocumento.PASAPORTE);
+        int resultado = clienteBO.insertar("11111111", "111111111", "AAAAAA", "APELLIDO AAAA", "APELLIDO AAAA", 'F', fechaNacimiento,
+                "AAAAAA@gmail.com", "AAAAAAAAAAAAA", "PERUANO", "CALLE A", TipoDocumento.DNI, Rol.ADMINISTRADOR);
+        resultado = clienteBO.insertar("22222222", "222222222", "BBBBBB", "APELLIDO BBBB", "APELLIDO BBBB", 'M', fechaNacimiento, "BBBBB@gmail.com",
+                "BBBBBBB", "PERUANO", "CALLE B", TipoDocumento.CARNET_DE_EXTRANJERIA, Rol.CLIENTE);
+        resultado = clienteBO.insertar("33333333", "333333333", "CCCCCC", "APELLIDO CCCC", "APELLIDO CCCC", 'F', fechaNacimiento, "CCCCCC@gmail.com",
+                "CCCCCCCC", "PERUANO", "CALLE C", TipoDocumento.PASAPORTE, Rol.CLIENTE);
     }
 
     private static void testClienteBOModificar() {
@@ -55,12 +56,12 @@ public class ClienteBOTest {
         } catch (ParseException ex) {
             java.util.logging.Logger.getLogger(ClienteBOTest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        clienteBO.modificar(1, true, 1, "11111111", "111111111", "AAAAAA", "APELLIDO AAAA", "APELLIDO AAAA",'F', fechaNacimiento,
-                "AAAAAA@gmail.com", activo, "AAAAAAAAAAAAA", "PERUANO", "CALLE A", TipoDocumento.DNI);
-        clienteBO.modificar(2, true, 2, "22222222", "222222222", "BBBBBB", "APELLIDO BBBB", "APELLIDO BBBB",'M', fechaNacimiento,
-                "BBBBB@gmail.com", activo, "BBBBBBB", "PERUANO", "CALLE B", TipoDocumento.CARNET_DE_EXTRANJERIA);
-        clienteBO.modificar(3, true, 3, "33333333", "333333333", "CCCCCC", "APELLIDO CCCC", "APELLIDO CCCC",'F', fechaNacimiento,
-                "CCCCCC@gmail.com", activo, "CCCCCCCC", "PERUANO", "CALLE C", TipoDocumento.PASAPORTE);
+        clienteBO.modificar(1, true, 1, "11111111", "111111111", "AAAAAA", "APELLIDO AAAA", "APELLIDO AAAA", 'F', fechaNacimiento,
+                "AAAAAA@gmail.com", activo, "AAAAAAAAAAAAA", "PERUANO", "CALLE A", TipoDocumento.DNI, Rol.CLIENTE);
+        clienteBO.modificar(2, true, 2, "22222222", "222222222", "BBBBBB", "APELLIDO BBBB", "APELLIDO BBBB", 'M', fechaNacimiento,
+                "BBBBB@gmail.com", activo, "BBBBBBB", "PERUANO", "CALLE B", TipoDocumento.CARNET_DE_EXTRANJERIA, Rol.CLIENTE);
+        clienteBO.modificar(3, true, 3, "33333333", "333333333", "CCCCCC", "APELLIDO CCCC", "APELLIDO CCCC", 'F', fechaNacimiento,
+                "CCCCCC@gmail.com", activo, "CCCCCCCC", "PERUANO", "CALLE C", TipoDocumento.PASAPORTE, Rol.CLIENTE);
     }
 
     /**
