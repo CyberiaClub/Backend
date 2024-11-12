@@ -144,9 +144,9 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
     protected String obtenerPredicadoParaLlavePrimaria() {
         String sql = "";
         if (this.tipo_Operacion == Tipo_Operacion.MODIFICAR || this.tipo_Operacion == Tipo_Operacion.ELIMINAR) {
-            sql = "id_producto=?";
+            sql = "ID_PRODUCTO=?";
         } else {
-            sql = "id_producto=?";
+            sql = "ID_PRODUCTO=?";
         }
         return sql;
     }
@@ -234,7 +234,7 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
 
     @Override
     protected String obtenerProyeccionParaSelect() {
-        String sql = "id_Producto, sku, nombre, descripcion, precio,imagen";
+        String sql = "ID_PRODUCTO, SKU, NOMBRE, DESCRIPCION, PRECIO,IMAGEN";
         return sql;
     }
 
@@ -247,13 +247,13 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
     @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.producto = new Producto(
-                this.resultSet.getInt("id_producto"),
-                this.resultSet.getString("sku"),
-                this.resultSet.getString("nombre"),
-                this.resultSet.getString("descripcion"),
-                this.resultSet.getDouble("precio"),
+                this.resultSet.getInt("ID_PRODUCTO"),
+                this.resultSet.getString("SKU"),
+                this.resultSet.getString("NOMBRE"),
+                this.resultSet.getString("DESCRIPCION"),
+                this.resultSet.getDouble("PRECIO"),
                 null,
-                this.resultSet.getBytes("imagen")
+                this.resultSet.getBytes("IMAGEN")
         );
     }
 
@@ -283,13 +283,13 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
                 this.abrirConexion();
             }
             String sql = "select ID_PRODUCTO from PRODUCTO where ";
-            sql = sql.concat("sku=? ");
+            sql = sql.concat("SKU=? ");
             this.colocarSQLenStatement(sql);
             this.colocarSQLenStatement(sql);
             this.incluirParametroString(1, this.producto.getSku());
             this.ejecutarConsultaEnBD(sql);
             if (this.resultSet.next()) {
-                idProducto = this.resultSet.getInt("id_Producto");
+                idProducto = this.resultSet.getInt("ID_PRODUCTO");
             }
         } catch (SQLException ex) {
             System.err.println("Error al consultar si existe producto - " + ex);

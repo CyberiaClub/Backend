@@ -106,16 +106,16 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
 
     @Override
     protected String obtenerListaDeValoresYAtributosParaModificacion() {
-        return "nombre=?, descripcion=?, telefono=?,horario_apertura=?,horario_cierre=?";
+        return "NOMBRE=?, DESCRIPCION=?, TELEFONO=?,HORARIO_APERTURA=?,HORARIO_CIERRE=?";
     }
 
     @Override
     protected String obtenerPredicadoParaLlavePrimaria() {
         String sql = "";
         if (this.tipo_Operacion == Tipo_Operacion.MODIFICAR || this.tipo_Operacion == Tipo_Operacion.ELIMINAR) {
-            sql = "id_sede=?";
+            sql = "ID_SEDE=?";
         } else {
-            sql = "per.id_sede=?";
+            sql = "PER.ID_SEDE=?";
         }
         return sql;
     }
@@ -149,7 +149,7 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
 
     @Override
     protected String obtenerProyeccionParaSelect() {
-        String sql = "id_sede, nombre, descripcion,telefono,horario_apertura,horario_cierre";
+        String sql = "ID_SEDE, NOMBRE, DESCRIPCION,TELEFONO,HORARIO_APERTURA,HORARIO_CIERRE";
         return sql;
     }
 
@@ -167,12 +167,12 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
     @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.sede = new Sede();
-        this.sede.setIdSede(this.resultSet.getInt("id_sede"));
-        this.sede.setNombre(this.resultSet.getString("nombre"));
-        this.sede.setDescripcion(this.resultSet.getString("descripcion"));
-        this.sede.setTelefono(this.resultSet.getString("telefono"));
-        this.sede.setHorarioApertura(this.resultSet.getTime("horario_apertura").toLocalTime());
-        this.sede.setHorarioCierre(this.resultSet.getTime("horario_cierre").toLocalTime());
+        this.sede.setIdSede(this.resultSet.getInt("ID_SEDE"));
+        this.sede.setNombre(this.resultSet.getString("NOMBRE"));
+        this.sede.setDescripcion(this.resultSet.getString("DESCRIPCION"));
+        this.sede.setTelefono(this.resultSet.getString("TELEFONO"));
+        this.sede.setHorarioApertura(this.resultSet.getTime("HORARIO_APERTURA").toLocalTime());
+        this.sede.setHorarioCierre(this.resultSet.getTime("HORARIO_CIERRE").toLocalTime());
     }
 
     @Override
@@ -202,13 +202,13 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
             if (abreConexion) {
                 this.abrirConexion();
             }
-            String sql = "select id_Sede from sede where ";
-            sql = sql.concat("nombre=? ");
+            String sql = "select ID_SEDE from SEDE where ";
+            sql = sql.concat("NOMBRE=? ");
             this.colocarSQLenStatement(sql);
             this.incluirParametroString(1, this.sede.getNombre());
             this.ejecutarConsultaEnBD(sql);
             if (this.resultSet.next()) {
-                idSede = this.resultSet.getInt("id_Sede");
+                idSede = this.resultSet.getInt("ID_SEDE");
             }
         } catch (SQLException ex) {
             System.err.println("Error al consultar si existe sede - " + ex);

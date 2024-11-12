@@ -37,7 +37,7 @@ public class ProductoXSedeDAOImpl extends DAOImpl implements ProductoXSedeDAO {
     
     @Override
     protected String obtenerListaDeAtributosParaInsercion() {
-        return "id_producto, id_sede, stock_sede";
+        return "ID_PRODUCTO, ID_SEDE, STOCK_SEDE";
     }
 
     @Override

@@ -118,9 +118,9 @@ public class FacturaDAOImpl extends DAOImpl implements FacturaDAO {
     protected String obtenerPredicadoParaLlavePrimaria() {
         String sql = "";
         if (this.tipo_Operacion == Tipo_Operacion.MODIFICAR || this.tipo_Operacion == Tipo_Operacion.ELIMINAR) {
-            sql = "id_factura=?";
+            sql = "ID_FACTURA=?";
         } else {
-            sql = "f.id_factura=?";
+            sql = "F.ID_FACTURA=?";
         }
         return sql;
     }
@@ -194,10 +194,10 @@ public class FacturaDAOImpl extends DAOImpl implements FacturaDAO {
         String sql = "select ";
         sql = sql.concat(obtenerProyeccionParaSelect());
         sql = sql.concat(" from ").concat(this.nombre_tabla).concat(" F ");
-        sql = sql.concat("JOIN comprobante_de_pago CP ON F.ID_COMPROBANTE_DE_PAGO = CP.ID_COMPROBANTE_DE_PAGO ");
-        sql = sql.concat("JOIN factura_x_cliente FXC ON F.ID_FACTURA = FXC.ID_FACTURA ");
-        sql = sql.concat("JOIN cliente C ON FXC.ID_CLIENTE = C.ID_CLIENTE ");
-        sql = sql.concat("JOIN usuario U ON C.ID_CLIENTE = U.ID_USUARIO ");
+        sql = sql.concat("JOIN COMPROBANTE_DE_PAGO CP ON F.ID_COMPROBANTE_DE_PAGO = CP.ID_COMPROBANTE_DE_PAGO ");
+        sql = sql.concat("JOIN FACTURA_X_CLIENTE FXC ON F.ID_FACTURA = FXC.ID_FACTURA ");
+        sql = sql.concat("JOIN CLIENTE C ON FXC.ID_CLIENTE = C.ID_CLIENTE ");
+        sql = sql.concat("JOIN USUARIO U ON C.ID_CLIENTE = U.ID_USUARIO ");
 //        sql = sql.concat("JOIN pedido p ON CP.ID_PEDIDO = P.ID_PEDIDO");
         if (limite != null && limite > 0) {
             sql = sql.concat(" limit ").concat(limite.toString());
@@ -224,22 +224,22 @@ public class FacturaDAOImpl extends DAOImpl implements FacturaDAO {
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.factura = new Factura();
 
-        this.factura.setIdFactura(this.resultSet.getInt("id_factura"));
-        this.factura.setIdComprobanteDePago(this.resultSet.getInt("id_comprobante_de_pago"));
-        this.factura.setFecha(this.resultSet.getDate("fecha"));
-        this.factura.setSubtotal(this.resultSet.getDouble("subtotal"));
-        this.factura.setIgv(this.resultSet.getDouble("igv"));
-        this.factura.setTotal(this.resultSet.getDouble("total"));
-        this.factura.setDescuentoAplicado(this.resultSet.getDouble("descuento_aplicado"));
-        this.factura.setNumeroDeFactura(this.resultSet.getInt("numero_factura"));
-        this.factura.setRuc(this.resultSet.getString("ruc"));
-        this.factura.setRazonSocial(this.resultSet.getString("razon_social"));
-        this.factura.setDireccionDeFacturacion(this.resultSet.getString("direccion"));
+        this.factura.setIdFactura(this.resultSet.getInt("ID_FACTURA"));
+        this.factura.setIdComprobanteDePago(this.resultSet.getInt("ID_COMPROBANTE_DE_PAGO"));
+        this.factura.setFecha(this.resultSet.getDate("FECHA"));
+        this.factura.setSubtotal(this.resultSet.getDouble("SUBTOTAL"));
+        this.factura.setIgv(this.resultSet.getDouble("IGV"));
+        this.factura.setTotal(this.resultSet.getDouble("TOTAL"));
+        this.factura.setDescuentoAplicado(this.resultSet.getDouble("DESCUENTO_APLICADO"));
+        this.factura.setNumeroDeFactura(this.resultSet.getInt("NUMERO_FACTURA"));
+        this.factura.setRuc(this.resultSet.getString("RUC"));
+        this.factura.setRazonSocial(this.resultSet.getString("RAZON_SOCIAL"));
+        this.factura.setDireccionDeFacturacion(this.resultSet.getString("DIRECCION"));
 
-        this.factura.getCliente().setDocumento(this.resultSet.getString("documento"));
-        this.factura.getCliente().setNombre(this.resultSet.getString("nombre"));
-        this.factura.getCliente().setApellidoPaterno(this.resultSet.getString("apellido_paterno"));
-        this.factura.getCliente().setApellidoMaterno(this.resultSet.getString("apellido_materno"));
+        this.factura.getCliente().setDocumento(this.resultSet.getString("DOCUMENTO"));
+        this.factura.getCliente().setNombre(this.resultSet.getString("NOMBRE"));
+        this.factura.getCliente().setApellidoPaterno(this.resultSet.getString("APELLIDO_PATERNO"));
+        this.factura.getCliente().setApellidoMaterno(this.resultSet.getString("APELLIDO_MATERNO"));
 
     }
 
@@ -267,13 +267,13 @@ public class FacturaDAOImpl extends DAOImpl implements FacturaDAO {
             if (abreConexion) {
                 this.abrirConexion();
             }
-            String sql = "select id_factura from factura where ";
-            sql = sql.concat("id_comprobante_de_pago=? ");
+            String sql = "select ID_FACTURA from FACTURA where ";
+            sql = sql.concat("ID_COMPROBANTE_DE_PAGO=? ");
             this.colocarSQLenStatement(sql);
             this.incluirParametroInt(1, this.factura.getIdComprobanteDePago());
             this.ejecutarConsultaEnBD(sql);
             if (this.resultSet.next()) {
-                idFactura = this.resultSet.getInt("id_factura");
+                idFactura = this.resultSet.getInt("ID_FACTURA");
             }
         } catch (SQLException ex) {
             System.err.println("Error al consultar si existe factura - " + ex);

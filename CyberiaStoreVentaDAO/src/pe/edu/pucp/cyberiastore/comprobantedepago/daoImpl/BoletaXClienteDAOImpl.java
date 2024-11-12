@@ -38,7 +38,7 @@ public class BoletaXClienteDAOImpl extends DAOImpl implements BoletaXClienteDAO 
 
     @Override
     protected String obtenerListaDeAtributosParaInsercion() {
-        return "id_boleta,id_cliente";
+        return "ID_BOLETA,ID_CLIENTE";
     }
 
     @Override

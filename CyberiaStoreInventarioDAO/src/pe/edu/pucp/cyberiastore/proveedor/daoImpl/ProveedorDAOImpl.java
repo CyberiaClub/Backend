@@ -108,16 +108,16 @@ public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
 
     @Override
     protected String obtenerListaDeValoresYAtributosParaModificacion() {
-        return "ruc=?,razon_social=?, nombre_del_contacto=?, correo=?, telefono=?, direccion=?, descripcion=?";
+        return "RUC=?,RAZON_SOCIAL=?, NOMBRE_DEL_CONTACTO=?, CORREO=?, TELEFONO=?, DIRECCION=?, DESCRIPCION=?";
     }
 
     @Override
     protected String obtenerPredicadoParaLlavePrimaria() {
         String sql = "";
         if (this.tipo_Operacion == Tipo_Operacion.MODIFICAR || this.tipo_Operacion == Tipo_Operacion.ELIMINAR) {
-            sql = "id_proveedor=?";
+            sql = "ID_PROVEEDOR=?";
         } else {
-            sql = "id_proveedor=?";
+            sql = "ID_PROVEEDOR=?";
         }
         return sql;
     }
@@ -174,7 +174,7 @@ public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
 
     @Override
     protected String obtenerProyeccionParaSelect() {
-        String sql = "id_proveedor, ruc, razon_social, nombre_del_contacto, correo, telefono, direccion, descripcion, activo";
+        String sql = "ID_PROVEEDOR, RUC, RAZON_SOCIAL, NOMBRE_DEL_CONTACTO, CORREO, TELEFONO, DIRECCION, DESCRIPCION, ACTIVO";
         return sql;
     }
 
@@ -200,15 +200,15 @@ public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
     @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.proveedor = new Proveedor();
-        this.proveedor.setIdProveedor(this.resultSet.getInt("id_proveedor"));
-        this.proveedor.setRuc(this.resultSet.getString("ruc"));
-        this.proveedor.setRazonSocial(this.resultSet.getString("razon_social"));
-        this.proveedor.setNombreContacto(this.resultSet.getString("nombre_del_contacto"));
-        this.proveedor.setCorreo(this.resultSet.getString("correo"));
-        this.proveedor.setTelefono(this.resultSet.getString("telefono"));
-        this.proveedor.setDireccion(this.resultSet.getString("direccion"));
-        this.proveedor.setDescripcion(this.resultSet.getString("descripcion"));
-        this.proveedor.setActivo(this.resultSet.getBoolean("activo"));
+        this.proveedor.setIdProveedor(this.resultSet.getInt("ID_PROVEEDOR"));
+        this.proveedor.setRuc(this.resultSet.getString("RUC"));
+        this.proveedor.setRazonSocial(this.resultSet.getString("RAZON_SOCIAL"));
+        this.proveedor.setNombreContacto(this.resultSet.getString("NOMBRE_DEL_CONTACTO"));
+        this.proveedor.setCorreo(this.resultSet.getString("CORREO"));
+        this.proveedor.setTelefono(this.resultSet.getString("TELEFONO"));
+        this.proveedor.setDireccion(this.resultSet.getString("DIRECCION"));
+        this.proveedor.setDescripcion(this.resultSet.getString("DESCRIPCION"));
+        this.proveedor.setActivo(this.resultSet.getBoolean("ACTIVO"));
     }
 
     @Override
