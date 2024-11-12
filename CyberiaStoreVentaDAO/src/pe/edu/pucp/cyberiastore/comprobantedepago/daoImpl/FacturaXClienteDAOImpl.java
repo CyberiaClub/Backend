@@ -32,7 +32,7 @@ public class FacturaXClienteDAOImpl extends DAOImpl implements FacturaXClienteDA
     
     @Override
     protected String obtenerListaDeAtributosParaInsercion() {
-        return "id_factura,id_cliente";
+        return "ID_FACTURA,ID_CLIENTE";
     }
 
     @Override

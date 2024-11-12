@@ -210,11 +210,11 @@ public class UsuarioDAOImpl extends DAOImpl implements UsuarioDAO {
         Integer idUsuario = null;
         try {
             this.abrirConexion();
-            String sql = "select id_usuario from usuario where ";
-            sql = sql.concat("apellido_paterno=? ");
-            sql = sql.concat("and apellido_materno=? ");
-            sql = sql.concat("and nombre=? ");
-            sql = sql.concat("and documento=? ");
+            String sql = "select ID_USUARIO from USUARIO where ";
+            sql = sql.concat("APELLIDO_PATERNO=? ");
+            sql = sql.concat("and APELLIDO_MATERNO=? ");
+            sql = sql.concat("and NOMBRE=? ");
+            sql = sql.concat("and DOCUMENTO=? ");
             this.colocarSQLenStatement(sql);
             this.incluirParametroString(1, this.usuario.getApellidoPaterno());
             this.incluirParametroString(2, this.usuario.getApellidoMaterno());
@@ -222,7 +222,7 @@ public class UsuarioDAOImpl extends DAOImpl implements UsuarioDAO {
             this.incluirParametroString(4, this.usuario.getDocumento());
             this.ejecutarConsultaEnBD(sql);
             if (this.resultSet.next()) {
-                idUsuario = this.resultSet.getInt("id_usuario");
+                idUsuario = this.resultSet.getInt("ID_USUARIO");
             }
         } catch (SQLException ex) {
             System.err.println("Error al consultar si existe usuario - " + ex);

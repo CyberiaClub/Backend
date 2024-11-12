@@ -191,16 +191,16 @@ public class TrabajadorDAOImpl extends DAOImpl implements TrabajadorDAO {
     protected String obtenerPredicadoParaLlavePrimaria() {
         String sql = "";
         if (this.tipo_Operacion == Tipo_Operacion.MODIFICAR || this.tipo_Operacion == Tipo_Operacion.ELIMINAR) {
-            sql = "id_trabajador=?";
+            sql = "ID_TRABAJADOR=?";
         } else {
-            sql = "tra.id_trabajador=?";
+            sql = "TRA.ID_TRABAJADOR=?";
         }
         return sql;
     }
 
     @Override
     protected String obtenerListaDeValoresYAtributosParaModificacion() {
-        return "sueldo=?, fecha_ingreso=?";
+        return "SUELDO=?, FECHA_INGRESO=?";
     }
 
     @Override
@@ -277,13 +277,13 @@ public class TrabajadorDAOImpl extends DAOImpl implements TrabajadorDAO {
             if (abreConexion) {
                 this.abrirConexion();
             }
-            String sql = "select id_trabajador from trabajador where ";
-            sql = sql.concat("id_trabajador=? ");
+            String sql = "select ID_TRABAJADOR from TRABAJADOR where ";
+            sql = sql.concat("ID_TRABAJADOR=? ");
             this.colocarSQLenStatement(sql);
             this.incluirParametroInt(1, this.trabajador.getIdTrabajador());
             this.ejecutarConsultaEnBD(sql);
             if (this.resultSet.next()) {
-                idTrabajador = this.resultSet.getInt("idAdministrador");
+                idTrabajador = this.resultSet.getInt("ID_ADMINISTRADOR");
             }
         } catch (SQLException ex) {
             System.err.println("Error al consultar si existe alumno - " + ex);

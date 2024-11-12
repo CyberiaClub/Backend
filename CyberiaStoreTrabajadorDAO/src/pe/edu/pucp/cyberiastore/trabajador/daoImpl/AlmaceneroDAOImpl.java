@@ -169,9 +169,9 @@ public class AlmaceneroDAOImpl extends DAOImpl implements AlmaceneroDAO {
     protected String obtenerPredicadoParaLlavePrimaria() {
         String sql = "";
         if (this.tipo_Operacion == Tipo_Operacion.MODIFICAR || this.tipo_Operacion == Tipo_Operacion.ELIMINAR) {
-            sql = "id_almacenero=?";
+            sql = "ID_ALMACENERO=?";
         } else {
-            sql = "AND AL.id_almacenero=?";
+            sql = "AND AL.ID_ALMACENERO=?";
         }
         return sql;
     }
@@ -216,11 +216,11 @@ public class AlmaceneroDAOImpl extends DAOImpl implements AlmaceneroDAO {
         String sql = "select ";
         sql = sql.concat(obtenerProyeccionParaSelect());
         sql = sql.concat(" from ").concat(this.nombre_tabla).concat(" AL ");
-        sql = sql.concat("JOIN trabajador TR ON AL.ID_TRABAJADOR = TR.ID_TRABAJADOR ");
-        sql = sql.concat("JOIN usuario US ON TR.ID_USUARIO = US.ID_USUARIO ");
-        sql = sql.concat("JOIN trabajador_x_sede TRXS ON TR.ID_TRABAJADOR = TRXS.ID_TRABAJADOR ");
-        sql = sql.concat("JOIN sede S ON TRXS.ID_SEDE = S.ID_SEDE ");
-        sql = sql.concat(" where US.activo = 1 ");
+        sql = sql.concat("JOIN TRABAJADOR TR ON AL.ID_TRABAJADOR = TR.ID_TRABAJADOR ");
+        sql = sql.concat("JOIN USUARIO US ON TR.ID_USUARIO = US.ID_USUARIO ");
+        sql = sql.concat("JOIN TRABAJADOR_X_SEDE TRXS ON TR.ID_TRABAJADOR = TRXS.ID_TRABAJADOR ");
+        sql = sql.concat("JOIN SEDE S ON TRXS.ID_SEDE = S.ID_SEDE ");
+        sql = sql.concat(" where US.ACTIVO = 1 ");
         sql = sql.concat(this.obtenerPredicadoParaLlavePrimaria());
         return sql;
     }
@@ -248,11 +248,11 @@ public class AlmaceneroDAOImpl extends DAOImpl implements AlmaceneroDAO {
         String sql = "select ";
         sql = sql.concat(obtenerProyeccionParaSelect());
         sql = sql.concat(" from ").concat(this.nombre_tabla).concat(" AL ");
-        sql = sql.concat("JOIN trabajador TR ON AL.ID_TRABAJADOR = TR.ID_TRABAJADOR ");
-        sql = sql.concat("JOIN usuario US ON TR.ID_USUARIO = US.ID_USUARIO ");
-        sql = sql.concat("JOIN trabajador_x_sede TRXS ON TR.ID_TRABAJADOR = TRXS.ID_TRABAJADOR ");
-        sql = sql.concat("JOIN sede S ON TRXS.ID_SEDE = S.ID_SEDE ");
-        sql = sql.concat("WHERE US.activo = 1 ");
+        sql = sql.concat("JOIN TRABAJADOR TR ON AL.ID_TRABAJADOR = TR.ID_TRABAJADOR ");
+        sql = sql.concat("JOIN USUARIO US ON TR.ID_USUARIO = US.ID_USUARIO ");
+        sql = sql.concat("JOIN TRABAJADOR_X_SEDE TRXS ON TR.ID_TRABAJADOR = TRXS.ID_TRABAJADOR ");
+        sql = sql.concat("JOIN SEDE S ON TRXS.ID_SEDE = S.ID_SEDE ");
+        sql = sql.concat("WHERE US.ACTIVO = 1 ");
         if (limite != null && limite > 0) {
             sql = sql.concat(" limit ").concat(limite.toString());
         }
@@ -278,10 +278,10 @@ public class AlmaceneroDAOImpl extends DAOImpl implements AlmaceneroDAO {
     @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.almacenero = new Almacenero();
-        this.almacenero.setIdAlmacenero(this.resultSet.getInt("id_almacenero"));
-        this.almacenero.setIdTrabajador(this.resultSet.getInt("id_trabajador"));
-        this.almacenero.setIdUsuario(this.resultSet.getInt("id_usuario"));
-        this.almacenero.setNombre(this.resultSet.getString("nombre"));
+        this.almacenero.setIdAlmacenero(this.resultSet.getInt("ID_ALMACENERO"));
+        this.almacenero.setIdTrabajador(this.resultSet.getInt("ID_TRABAJADOR"));
+        this.almacenero.setIdUsuario(this.resultSet.getInt("ID_USUARIO"));
+        this.almacenero.setNombre(this.resultSet.getString("NOMBRE"));
         this.almacenero.setApellidoPaterno(this.resultSet.getString("APELLIDO_PATERNO"));
         this.almacenero.setApellidoMaterno(this.resultSet.getString("APELLIDO_MATERNO"));
         this.almacenero.setSexo(this.resultSet.getString("SEXO").charAt(0));
@@ -324,13 +324,13 @@ public class AlmaceneroDAOImpl extends DAOImpl implements AlmaceneroDAO {
             if (abreConexion) {
                 this.abrirConexion();
             }
-            String sql = "select id_almacenero from almacenero where ";
+            String sql = "select ID_ALMACENERO from ALMACENERO where ";
             sql = sql.concat("id_trabajador=? ");
             this.colocarSQLenStatement(sql);
             this.incluirParametroInt(1, this.almacenero.getIdTrabajador());
             this.ejecutarConsultaEnBD(sql);
             if (this.resultSet.next()) {
-                idVendedor = this.resultSet.getInt("id_almacenero");
+                idVendedor = this.resultSet.getInt("ID_ALMACENERO");
             }
         } catch (SQLException ex) {
             System.err.println("Error al consultar si existe almacenero - " + ex);

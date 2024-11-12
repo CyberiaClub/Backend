@@ -172,9 +172,9 @@ public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
     protected String obtenerPredicadoParaLlavePrimaria() {
         String sql = "";
         if (this.tipo_Operacion == Tipo_Operacion.MODIFICAR || this.tipo_Operacion == Tipo_Operacion.ELIMINAR) {
-            sql = "id_administrador=?";
+            sql = "ID_ADMINISTRADOR=?";
         } else {
-            sql = "AND AD.id_administrador=?";
+            sql = "AND AD.ID_ADMINISTRADOR=?";
         }
         return sql;
     }
@@ -219,11 +219,11 @@ public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
         String sql = "select ";
         sql = sql.concat(obtenerProyeccionParaSelect());
         sql = sql.concat(" from ").concat(this.nombre_tabla).concat(" AD ");
-        sql = sql.concat("JOIN trabajador TR ON AD.ID_TRABAJADOR = TR.ID_TRABAJADOR ");
-        sql = sql.concat("JOIN usuario US ON TR.ID_USUARIO = US.ID_USUARIO ");
-        sql = sql.concat("JOIN trabajador_x_sede TRXS ON TR.ID_TRABAJADOR = TRXS.ID_TRABAJADOR ");
-        sql = sql.concat("JOIN sede S ON TRXS.ID_SEDE = S.ID_SEDE ");
-        sql = sql.concat(" where US.activo = 1 ");
+        sql = sql.concat("JOIN TRABAJADOR TR ON AD.ID_TRABAJADOR = TR.ID_TRABAJADOR ");
+        sql = sql.concat("JOIN USUARIO US ON TR.ID_USUARIO = US.ID_USUARIO ");
+        sql = sql.concat("JOIN TRABAJADOR_X_SEDE TRXS ON TR.ID_TRABAJADOR = TRXS.ID_TRABAJADOR ");
+        sql = sql.concat("JOIN SEDE S ON TRXS.ID_SEDE = S.ID_SEDE ");
+        sql = sql.concat(" where US.ACTIVO = 1 ");
         sql = sql.concat(this.obtenerPredicadoParaLlavePrimaria());
         return sql;
     }
@@ -248,11 +248,11 @@ public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
         String sql = "select ";
         sql = sql.concat(obtenerProyeccionParaSelect());
         sql = sql.concat(" from ").concat(this.nombre_tabla).concat(" AD ");
-        sql = sql.concat("JOIN trabajador TR ON AD.ID_TRABAJADOR = TR.ID_TRABAJADOR ");
-        sql = sql.concat("JOIN usuario US ON TR.ID_USUARIO = US.ID_USUARIO ");
-        sql = sql.concat("JOIN trabajador_x_sede TRXS ON TR.ID_TRABAJADOR = TRXS.ID_TRABAJADOR ");
-        sql = sql.concat("JOIN sede S ON TRXS.ID_SEDE = S.ID_SEDE ");
-        sql = sql.concat("WHERE US.activo = 1 ");
+        sql = sql.concat("JOIN TRABAJADOR TR ON AD.ID_TRABAJADOR = TR.ID_TRABAJADOR ");
+        sql = sql.concat("JOIN USUARIO US ON TR.ID_USUARIO = US.ID_USUARIO ");
+        sql = sql.concat("JOIN TRABAJADOR_X_SEDE TRXS ON TR.ID_TRABAJADOR = TRXS.ID_TRABAJADOR ");
+        sql = sql.concat("JOIN SEDE S ON TRXS.ID_SEDE = S.ID_SEDE ");
+        sql = sql.concat("WHERE US.ACTIVO = 1 ");
         if (limite != null && limite > 0) {
             sql = sql.concat(" limit ").concat(limite.toString());
         }
@@ -278,10 +278,10 @@ public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
     @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.administrador = new Administrador();
-        this.administrador.setIdAdministrador(this.resultSet.getInt("id_administrador"));
-        this.administrador.setIdTrabajador(this.resultSet.getInt("id_trabajador"));
-        this.administrador.setIdUsuario(this.resultSet.getInt("id_usuario"));
-        this.administrador.setNombre(this.resultSet.getString("nombre"));
+        this.administrador.setIdAdministrador(this.resultSet.getInt("ID_ADMINISTRADOR"));
+        this.administrador.setIdTrabajador(this.resultSet.getInt("ID_TRABAJADOR"));
+        this.administrador.setIdUsuario(this.resultSet.getInt("ID_USUARIO"));
+        this.administrador.setNombre(this.resultSet.getString("NOMBRE"));
         this.administrador.setApellidoPaterno(this.resultSet.getString("APELLIDO_PATERNO"));
         this.administrador.setApellidoMaterno(this.resultSet.getString("APELLIDO_MATERNO"));
         this.administrador.setSexo(this.resultSet.getString("SEXO").charAt(0));
@@ -325,13 +325,13 @@ public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
             if (abreConexion) {
                 this.abrirConexion();
             }
-            String sql = "select id_administrador from administrador where ";
-            sql = sql.concat("id_trabajador=? ");
+            String sql = "select ID_ADMINISTRADOR from ADMINISTRADOR where ";
+            sql = sql.concat("ID_TRABAJADOR=? ");
             this.colocarSQLenStatement(sql);
             this.incluirParametroInt(1, this.administrador.getIdTrabajador());
             this.ejecutarConsultaEnBD(sql);
             if (this.resultSet.next()) {
-                idAdministrador = this.resultSet.getInt("id_administrador");
+                idAdministrador = this.resultSet.getInt("ID_ADMINISTRADOR");
             }
         } catch (SQLException ex) {
             System.err.println("Error al consultar si existe alumno - " + ex);

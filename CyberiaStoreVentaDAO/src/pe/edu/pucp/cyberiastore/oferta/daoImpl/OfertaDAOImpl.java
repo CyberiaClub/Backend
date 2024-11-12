@@ -104,16 +104,16 @@ public class OfertaDAOImpl extends DAOImpl implements OfertaDAO {
 
     @Override
     protected String obtenerListaDeValoresYAtributosParaModificacion() {
-        return "fecha_inicio=?, fecha_fin=?,porcentaje=?,imagen=?";
+        return "FECHA_INICIO=?, FECHA_FIN=?,PORCENTAJE=?,IMAGEN=?";
     }
 
     @Override
     protected String obtenerPredicadoParaLlavePrimaria() {
         String sql = "";
         if (this.tipo_Operacion == Tipo_Operacion.MODIFICAR || this.tipo_Operacion == Tipo_Operacion.ELIMINAR) {
-            sql = "id_oferta=?";
+            sql = "ID_OFERTA=?";
         } else {
-            sql = "per.id_oferta=?";
+            sql = "PER.ID_OFERTA=?";
         }
         return sql;
     }
@@ -164,11 +164,11 @@ public class OfertaDAOImpl extends DAOImpl implements OfertaDAO {
     @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.oferta = new Oferta();
-        this.oferta.setIdOferta(this.resultSet.getInt("id_oferta"));
-        this.oferta.setFechaDeInicio(this.resultSet.getDate("fecha_inicio"));
-        this.oferta.setFechaDeFin(this.resultSet.getDate("fecha_fin"));
-        this.oferta.setPorcentaje(this.resultSet.getInt("porcentaje"));
-        this.oferta.setImagen(this.resultSet.getBytes("imagen"));
+        this.oferta.setIdOferta(this.resultSet.getInt("ID_OFERTA"));
+        this.oferta.setFechaDeInicio(this.resultSet.getDate("FECHA_INICIO"));
+        this.oferta.setFechaDeFin(this.resultSet.getDate("FECHA_FIN"));
+        this.oferta.setPorcentaje(this.resultSet.getInt("PORCENTAJE"));
+        this.oferta.setImagen(this.resultSet.getBytes("IMAGEN"));
     }
 
     @Override

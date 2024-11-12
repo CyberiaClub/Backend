@@ -117,9 +117,9 @@ public class BoletaDAOImpl extends DAOImpl implements BoletaDAO {
     protected String obtenerPredicadoParaLlavePrimaria() {
         String sql = "";
         if (this.tipo_Operacion == Tipo_Operacion.MODIFICAR || this.tipo_Operacion == Tipo_Operacion.ELIMINAR) {
-            sql = "id_boleta=?";
+            sql = "ID_BOLETA=?";
         } else {
-            sql = "b.id_boleta=?";
+            sql = "b.ID_BOLETA=?";
         }
         return sql;
     }
@@ -193,10 +193,10 @@ public class BoletaDAOImpl extends DAOImpl implements BoletaDAO {
         String sql = "select ";
         sql = sql.concat(obtenerProyeccionParaSelect());
         sql = sql.concat(" from ").concat(this.nombre_tabla).concat(" B ");
-        sql = sql.concat("JOIN comprobante_de_pago CP ON B.ID_COMPROBANTE_DE_PAGO = CP.ID_COMPROBANTE_DE_PAGO ");
-        sql = sql.concat("JOIN boleta_x_cliente BXC ON B.ID_BOLETA = BXC.ID_BOLETA ");
-        sql = sql.concat("JOIN cliente C ON BXC.ID_CLIENTE = C.ID_CLIENTE ");
-        sql = sql.concat("JOIN usuario U ON C.ID_CLIENTE = U.ID_USUARIO ");
+        sql = sql.concat("JOIN COMPROBANTE_DE_PAGO CP ON B.ID_COMPROBANTE_DE_PAGO = CP.ID_COMPROBANTE_DE_PAGO ");
+        sql = sql.concat("JOIN BOLETA_X_CLIENTE BXC ON B.ID_BOLETA = BXC.ID_BOLETA ");
+        sql = sql.concat("JOIN CLIENTE C ON BXC.ID_CLIENTE = C.ID_CLIENTE ");
+        sql = sql.concat("JOIN USUARIO U ON C.ID_CLIENTE = U.ID_USUARIO ");
 //        sql = sql.concat("JOIN pedido p ON CP.ID_PEDIDO = P.ID_PEDIDO");
         if (limite != null && limite > 0) {
             sql = sql.concat(" limit ").concat(limite.toString());
@@ -223,19 +223,19 @@ public class BoletaDAOImpl extends DAOImpl implements BoletaDAO {
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.boleta = new Boleta();
 
-        this.boleta.setIdBoleta(this.resultSet.getInt("id_boleta"));
-        this.boleta.setIdComprobanteDePago(this.resultSet.getInt("id_comprobante_de_pago"));
-        this.boleta.setFecha(this.resultSet.getDate("fecha"));
-        this.boleta.setSubtotal(this.resultSet.getDouble("subtotal"));
-        this.boleta.setIgv(this.resultSet.getDouble("igv"));
-        this.boleta.setTotal(this.resultSet.getDouble("total"));
-        this.boleta.setDescuentoAplicado(this.resultSet.getDouble("descuento_aplicado"));
-        this.boleta.setNumeroDeBoleta(this.resultSet.getInt("numero_boleta"));
+        this.boleta.setIdBoleta(this.resultSet.getInt("ID_BOLETA"));
+        this.boleta.setIdComprobanteDePago(this.resultSet.getInt("ID_COMPROBANTE_DE_PAGO"));
+        this.boleta.setFecha(this.resultSet.getDate("FECHA"));
+        this.boleta.setSubtotal(this.resultSet.getDouble("SUBTOTAL"));
+        this.boleta.setIgv(this.resultSet.getDouble("IGV"));
+        this.boleta.setTotal(this.resultSet.getDouble("TOTAL"));
+        this.boleta.setDescuentoAplicado(this.resultSet.getDouble("DESCUENTO_APLICADO"));
+        this.boleta.setNumeroDeBoleta(this.resultSet.getInt("NUMERO_BOLETA"));
 
-        this.boleta.getCliente().setDocumento(this.resultSet.getString("documento"));
-        this.boleta.getCliente().setNombre(this.resultSet.getString("nombre"));
-        this.boleta.getCliente().setApellidoPaterno(this.resultSet.getString("apellido_paterno"));
-        this.boleta.getCliente().setApellidoMaterno(this.resultSet.getString("apellido_materno"));
+        this.boleta.getCliente().setDocumento(this.resultSet.getString("DOCUMENTO"));
+        this.boleta.getCliente().setNombre(this.resultSet.getString("NOMBRE"));
+        this.boleta.getCliente().setApellidoPaterno(this.resultSet.getString("APELLIDO_PATERNO"));
+        this.boleta.getCliente().setApellidoMaterno(this.resultSet.getString("APELLIDO_MATERNO"));
 
     }
 
@@ -263,13 +263,13 @@ public class BoletaDAOImpl extends DAOImpl implements BoletaDAO {
             if (abreConexion) {
                 this.abrirConexion();
             }
-            String sql = "select id_boleta from boleta where ";
-            sql = sql.concat("id_comprobante_de_pago=? ");
+            String sql = "select ID_BOLETA from BOLETA where ";
+            sql = sql.concat("ID_COMPROBANTE_DE_PAGO=? ");
             this.colocarSQLenStatement(sql);
             this.incluirParametroInt(1, this.boleta.getIdComprobanteDePago());
             this.ejecutarConsultaEnBD(sql);
             if (this.resultSet.next()) {
-                idBoleta = this.resultSet.getInt("id_boleta");
+                idBoleta = this.resultSet.getInt("ID_BOLETA");
             }
         } catch (SQLException ex) {
             System.err.println("Error al consultar si existe alumno - " + ex);
