@@ -262,18 +262,6 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `CyberiaStore`.`ROL`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `CyberiaStore`.`ROL` ;
-
-CREATE TABLE IF NOT EXISTS `CyberiaStore`.`ROL` (
-  `ID_ROL` INT NOT NULL AUTO_INCREMENT,
-  `NOMBRE` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`ID_ROL`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `CyberiaStore`.`USUARIO`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `CyberiaStore`.`USUARIO` ;
@@ -293,8 +281,9 @@ CREATE TABLE IF NOT EXISTS `CyberiaStore`.`USUARIO` (
   `CONTRASEÑA` VARCHAR(128) NOT NULL,
   `NACIONALIDAD` VARCHAR(30) NOT NULL,
   `TIPO_DOCUMENTO` VARCHAR(25) NOT NULL,
-  `ID_ROL` INT NOT NULL,
-  PRIMARY KEY (`ID_USUARIO`, `ID_ROL`),
+  `ROL` VARCHAR(20) NOT NULL,
+  `IMAGEN` BLOB NULL,
+  PRIMARY KEY (`ID_USUARIO`),
   UNIQUE INDEX `DOCUMENTO_UNIQUE` (`DOCUMENTO` ASC) VISIBLE)
 ENGINE = InnoDB;
 

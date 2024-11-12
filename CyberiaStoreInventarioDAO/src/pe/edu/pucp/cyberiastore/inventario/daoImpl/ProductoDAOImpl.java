@@ -285,10 +285,8 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
             String sql = "select ID_PRODUCTO from PRODUCTO where ";
             sql = sql.concat("sku=? ");
             this.colocarSQLenStatement(sql);
-            sql = sql.concat("or nombre=? ");
             this.colocarSQLenStatement(sql);
             this.incluirParametroString(1, this.producto.getSku());
-            this.incluirParametroString(2, this.producto.getNombre());
             this.ejecutarConsultaEnBD(sql);
             if (this.resultSet.next()) {
                 idProducto = this.resultSet.getInt("id_Producto");
@@ -306,5 +304,28 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
         }
         return idProducto != null;
     }
-
+    /*
+     */
+//    void foo(){
+////        List lista = new ArrayList<>();
+//        try {
+//            this.abrirConexion();
+//            String sql = this.generarSQLParaListarTodos(limite);
+//            this.colocarSQLenStatement(sql);
+//            this.incluirValorDeParametrosParaListado();
+//            this.ejecutarConsultaEnBD(sql);
+//            while (this.resultSet.next()) {
+//                agregarObjetoALaLista(lista, this.resultSet);
+//            }
+//        } catch (SQLException ex) {
+//            System.err.println("Error al intentar listarTodos - " + ex);
+//        } finally {
+//            try {
+//                this.cerrarConexion();
+//            } catch (SQLException ex) {
+//                System.err.println("Error al cerrar la conexión - " + ex);
+//            }
+//        }
+////        return lista;
+//    }
 }
