@@ -12,13 +12,14 @@ public class Producto {
     private Double precio;
     private byte[] imagen;
     // Estos ultimos atributos son para el insertar
-    private Integer cantidad;
+    private Integer cantidad; // esto es STOCK 
     private ArrayList<Producto> productosMiembros;
     private Integer idMarca;
     private Integer idTipo;
     private Integer idProveedor;
     private Double precioProveedor;
     private Integer idSede;
+    private String nombreSede; // usado para el listar por SKU
 
     public Producto() {
         this.productosMiembros = null;
@@ -154,6 +155,14 @@ public class Producto {
 
     public void setIdSede(Integer idSede) {
         this.idSede = idSede;
+    }
+
+    public String getNombreSede() {
+        return nombreSede;
+    }
+
+    public void setNombreSede(String nombreSede) {
+        this.nombreSede = nombreSede;
     }
 
 }

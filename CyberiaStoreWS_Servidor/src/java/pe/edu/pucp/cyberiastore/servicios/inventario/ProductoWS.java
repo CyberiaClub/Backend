@@ -23,10 +23,10 @@ public class ProductoWS {
         System.out.println(this.producto.getPrecio());
         return productoBO.insertar(this.producto);
     }
-    
+
     @WebMethod(operationName = "producto_insertar2")
-    public Integer producto_insertar2(@WebParam(name ="producto") Producto producto,
-                                     @WebParam(name = "precio") Double precio) {
+    public Integer producto_insertar2(@WebParam(name = "producto") Producto producto,
+            @WebParam(name = "precio") Double precio) {
         this.producto = producto;
         this.producto.setPrecio(precio);
         this.producto.setIdMarca(1);
@@ -49,4 +49,10 @@ public class ProductoWS {
     public ArrayList<Producto> producto_listar() {
         return productoBO.listarTodos();
     }
+
+    @WebMethod(operationName = "producto_buscar_cantidad_sedes")
+    public ArrayList<Producto> buscar_sku(String sku) {
+        return productoBO.buscar_sku(sku);
+    }
+
 }
