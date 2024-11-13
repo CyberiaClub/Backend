@@ -1,7 +1,6 @@
 package pe.edu.pucp.cyberiastore.inventario.model;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Producto {
 
@@ -14,10 +13,14 @@ public class Producto {
     // Estos ultimos atributos son para el insertar
     private Integer cantidad; // esto es STOCK 
     private ArrayList<Producto> productosMiembros;
+    
     private Integer idMarca;
+    private String nombreMarca;
     private Integer idTipo;
+    private String nombreTipo;
     private Integer idProveedor;
     private Double precioProveedor;
+    private String razonSocial;
     private Integer idSede;
     private String nombreSede; // usado para el listar por SKU
 
@@ -164,5 +167,31 @@ public class Producto {
     public void setNombreSede(String nombreSede) {
         this.nombreSede = nombreSede;
     }
+
+    public String getNombreMarca() {
+        return nombreMarca;
+    }
+
+    public void setNombreMarca(String nombreMarca) {
+        this.nombreMarca = nombreMarca;
+    }
+
+    public String getNombreTipo() {
+        return nombreTipo;
+    }
+
+    public void setNombreTipo(String nombreTipo) {
+        this.nombreTipo = nombreTipo;
+    }
+
+    public String getRazonSocial() {
+        return razonSocial;
+    }
+
+    public void setRazonSocial(String razonSocial) {
+        this.razonSocial = razonSocial;
+    }
+    
+    
 
 }

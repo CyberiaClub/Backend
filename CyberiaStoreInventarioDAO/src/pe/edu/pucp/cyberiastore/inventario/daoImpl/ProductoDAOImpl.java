@@ -19,6 +19,7 @@ import pe.edu.pucp.cyberiastore.sede.daoImpl.ProductoXSedeDAOImpl;
 public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
 
     private Producto producto;
+    private Integer value;
 
     public ProductoDAOImpl() {
         super("PRODUCTO");
@@ -229,12 +230,31 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
      */
     @Override
     public ArrayList<Producto> listarTodos() {
+        this.value = 1;
         return (ArrayList<Producto>) super.listarTodos(null);
     }
 
     @Override
     protected String obtenerProyeccionParaSelect() {
-        String sql = "ID_PRODUCTO, SKU, NOMBRE, DESCRIPCION, PRECIO,IMAGEN";
+        String sql = "p.ID_PRODUCTO,p.SKU,p.NOMBRE AS NOMBRE_PRODUCTO,p.DESCRIPCION AS DESCRIPCION_PRODUCTO,p.PRECIO,p.IMAGEN, ";
+        sql = sql.concat("m.ID_MARCA,m.NOMBRE AS NOMBRE_MARCA, ");
+        sql = sql.concat("tp.ID_TIPO_PRODUCTO,tp.TIPO AS NOMBRE_TIPO_PRODUCTO, ");
+        sql = sql.concat("s.ID_SEDE,s.NOMBRE AS NOMBRE_SEDE, ");
+        sql = sql.concat("prv.ID_PROVEEDOR,prv.RAZON_SOCIAL ");
+        return sql;
+    }
+
+    @Override
+    protected String obtenerPredicadoParaListado() {
+        String sql = "PRODUCTO p";
+        sql = sql.concat("LEFT JOIN PRODUCTO_X_MARCA pm ON p.ID_PRODUCTO = pm.ID_PRODUCTO ");
+        sql = sql.concat("LEFT JOIN MARCA m ON pm.ID_MARCA = m.ID_MARCA ");
+        sql = sql.concat("LEFT JOIN PRODUCTO_X_TIPO pt ON p.ID_PRODUCTO = pt.ID_PRODUCTO ");
+        sql = sql.concat("LEFT JOIN TIPO_PRODUCTO tp ON pt.ID_TIPO_PRODUCTO = tp.ID_TIPO_PRODUCTO ");
+        sql = sql.concat("LEFT JOIN PRODUCTO_X_SEDE ps ON p.ID_PRODUCTO = ps.ID_PRODUCTO ");
+        sql = sql.concat("LEFT JOIN SEDE s ON ps.ID_SEDE = s.ID_SEDE ");
+        sql = sql.concat("LEFT JOIN PRODUCTO_X_PROVEEDOR pp ON p.ID_PRODUCTO = pp.ID_PRODUCTO ");
+        sql = sql.concat("LEFT JOIN PROVEEDOR prv ON pp.ID_PROVEEDOR = prv.ID_PROVEEDOR ");
         return sql;
     }
 
@@ -246,15 +266,25 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
 
     @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
-        this.producto = new Producto(
-                this.resultSet.getInt("ID_PRODUCTO"),
-                this.resultSet.getString("SKU"),
-                this.resultSet.getString("NOMBRE"),
-                this.resultSet.getString("DESCRIPCION"),
-                this.resultSet.getDouble("PRECIO"),
-                null,
-                this.resultSet.getBytes("IMAGEN")
-        );
+        this.producto = new Producto();
+        this.producto.setIdProducto(this.resultSet.getInt("ID_PRODUCTO"));
+        this.producto.setSku(this.resultSet.getString("SKU"));
+        this.producto.setNombre(this.resultSet.getString("NOMBRE_PRODUCTO"));
+        this.producto.setDescripcion(this.resultSet.getString("DESCRIPCION"));
+        this.producto.setPrecio(this.resultSet.getDouble("PRECIO"));
+        this.producto.setImagen(this.resultSet.getBytes("IMAGEN"));
+
+        this.producto.setIdMarca(this.resultSet.getInt("ID_MARCA"));
+        this.producto.setNombreMarca(this.resultSet.getString("NOMBRE_MARCA"));
+
+        this.producto.setIdMarca(this.resultSet.getInt("ID_TIPO_PRODUCTO"));
+        this.producto.setNombreMarca(this.resultSet.getString("NOMBRE_TIPO_PRODUCTO"));
+
+        this.producto.setIdMarca(this.resultSet.getInt("ID_SEDE"));
+        this.producto.setNombreMarca(this.resultSet.getString("NOMBRE_SEDE"));
+
+        this.producto.setIdMarca(this.resultSet.getInt("ID_PROVEEDOR"));
+        this.producto.setNombreMarca(this.resultSet.getString("RAZON_SOCIAL"));
     }
 
     @Override
@@ -307,6 +337,7 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
 
     @Override
     public ArrayList<Producto> buscar_sku(String sku) {
+        this.value = 2;
         List lista = new ArrayList<>();
         try {
             this.abrirConexion();
@@ -336,7 +367,8 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
                 System.err.println("Error al cerrar la conexión - " + ex);
             }
         }
-        return (ArrayList<Producto>)lista;
+        this.value = 0;
+        return (ArrayList<Producto>) lista;
     }
 
 }
