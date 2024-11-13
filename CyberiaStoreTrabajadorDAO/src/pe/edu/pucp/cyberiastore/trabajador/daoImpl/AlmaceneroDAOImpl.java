@@ -31,21 +31,22 @@ public class AlmaceneroDAOImpl extends DAOImpl implements AlmaceneroDAO {
         this.almacenero = almacenero;
         Integer idTrabajador = null;// el ID de la clase que hereda
         Trabajador trabajador = new Trabajador();// traemos la clase padre
+        trabajador.setIdUsuario(almacenero.getIdUsuario());
         trabajador.setSueldo(almacenero.getSueldo());
         trabajador.setFechaDeIngreso(almacenero.getFechaDeIngreso());
         trabajador.setIdSede(almacenero.getIdSede());
-        trabajador.setDocumento(almacenero.getDocumento());
-        trabajador.setTelefono(almacenero.getTelefono());
-        trabajador.setNombre(almacenero.getNombre());
-        trabajador.setApellidoPaterno(almacenero.getApellidoPaterno());
-        trabajador.setApellidoMaterno(almacenero.getApellidoMaterno());
-        trabajador.setSexo(almacenero.getSexo());
-        trabajador.setFechaDeNacimiento(almacenero.getFechaDeNacimiento());
-        trabajador.setCorreo(almacenero.getCorreo());
-        trabajador.setContrasena(almacenero.getContrasena());
-        trabajador.setNacionalidad(almacenero.getNacionalidad());
-        trabajador.setDireccion(almacenero.getDireccion());
-        trabajador.setTipoDeDocumento(almacenero.getTipoDeDocumento());
+//        trabajador.setDocumento(almacenero.getDocumento());
+//        trabajador.setTelefono(almacenero.getTelefono());
+//        trabajador.setNombre(almacenero.getNombre());
+//        trabajador.setApellidoPaterno(almacenero.getApellidoPaterno());
+//        trabajador.setApellidoMaterno(almacenero.getApellidoMaterno());
+//        trabajador.setSexo(almacenero.getSexo());
+//        trabajador.setFechaDeNacimiento(almacenero.getFechaDeNacimiento());
+//        trabajador.setCorreo(almacenero.getCorreo());
+//        trabajador.setContrasena(almacenero.getContrasena());
+//        trabajador.setNacionalidad(almacenero.getNacionalidad());
+//        trabajador.setDireccion(almacenero.getDireccion());
+//        trabajador.setTipoDeDocumento(almacenero.getTipoDeDocumento());
         trabajador.setRol(almacenero.getRol());
 
         TrabajadorDAO trabajadorDAO = new TrabajadorDAOImpl();

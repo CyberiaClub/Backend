@@ -23,4 +23,6 @@ public interface UsuarioDAO {
     public Usuario obtenerPorId(Integer idUsuario);
 
     public Boolean existeUsuario(Usuario usuario);
+    
+    public Integer modificarRol(Usuario usuario, Boolean usarTransaccion, Connection conexion);
 }

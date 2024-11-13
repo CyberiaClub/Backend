@@ -18,4 +18,6 @@ public interface ClienteDAO {
     public Boolean existeCliente(Cliente cliente);
 
     public Boolean existeCliente(Cliente cliente, Boolean abreConexion);
+    
+    public Cliente buscarPorDocumento(String documento);
 }

@@ -1,0 +1,404 @@
+[2024-11-12T19:46:28.673413-05:00] [GF 7.0.18] [INFO] [] [com.sun.enterprise.server.logging.LogManagerService] [tid: _ThreadID=1 _ThreadName=main] [levelValue: 800] [[
+  Using property file: C:\Users\usuario\Documents\Universidad\Programación3\Repositorio\Backend\glassfish7\glassfish\domains\domain1\config\logging.properties]]
+
+[2024-11-12T19:46:28.748726-05:00] [GF 7.0.18] [INFO] [NCLS-LOGGING-00009] [com.sun.enterprise.server.logging.LogManagerService] [tid: _ThreadID=1 _ThreadName=main] [levelValue: 800] [[
+  Running GlassFish Version: Eclipse GlassFish 7.0.18 (commit: 9c7fd856064b9cb74226a825d6ef6c75d7ea5e6e)]]
+
+[2024-11-12T19:46:29.356601-05:00] [GF 7.0.18] [INFO] [NCLS-CORE-00087] [jakarta.enterprise.system.core] [tid: _ThreadID=1 _ThreadName=main] [levelValue: 800] [[
+  Grizzly Framework 4.0.2 started in: 78 ms - bound to [/0.0.0.0:8080]]]
+
+[2024-11-12T19:46:29.385525-05:00] [GF 7.0.18] [INFO] [NCLS-CORE-00087] [jakarta.enterprise.system.core] [tid: _ThreadID=1 _ThreadName=main] [levelValue: 800] [[
+  Grizzly Framework 4.0.2 started in: 4 ms - bound to [/0.0.0.0:8181]]]
+
+[2024-11-12T19:46:29.401007-05:00] [GF 7.0.18] [INFO] [NCLS-CORE-00087] [jakarta.enterprise.system.core] [tid: _ThreadID=1 _ThreadName=main] [levelValue: 800] [[
+  Grizzly Framework 4.0.2 started in: 6 ms - bound to [/0.0.0.0:4848]]]
+
+[2024-11-12T19:46:29.585029-05:00] [GF 7.0.18] [INFO] [SEC-SVCS-00100] [jakarta.enterprise.security.services] [tid: _ThreadID=1 _ThreadName=main] [levelValue: 800] [[
+  Authorization Service has successfully initialized.]]
+
+[2024-11-12T19:46:29.656956-05:00] [GF 7.0.18] [INFO] [NCLS-SECURITY-01115] [jakarta.enterprise.system.core.security] [tid: _ThreadID=1 _ThreadName=main] [levelValue: 800] [[
+  Realm [admin-realm] of classtype [com.sun.enterprise.security.auth.realm.file.FileRealm] successfully created.]]
+
+[2024-11-12T19:46:29.658951-05:00] [GF 7.0.18] [INFO] [NCLS-SECURITY-01115] [jakarta.enterprise.system.core.security] [tid: _ThreadID=1 _ThreadName=main] [levelValue: 800] [[
+  Realm [file] of classtype [com.sun.enterprise.security.auth.realm.file.FileRealm] successfully created.]]
+
+[2024-11-12T19:46:29.674908-05:00] [GF 7.0.18] [INFO] [NCLS-SECURITY-01115] [jakarta.enterprise.system.core.security] [tid: _ThreadID=1 _ThreadName=main] [levelValue: 800] [[
+  Realm [certificate] of classtype [com.sun.enterprise.security.auth.realm.certificate.CertificateRealm] successfully created.]]
+
+[2024-11-12T19:46:30.362307-05:00] [GF 7.0.18] [INFO] [] [org.glassfish.ha.store.spi.BackingStoreFactoryRegistry] [tid: _ThreadID=1 _ThreadName=main] [levelValue: 800] [[
+  Registered org.glassfish.ha.store.adapter.cache.ShoalBackingStoreProxy for persistence-type = replicated in BackingStoreFactoryRegistry]]
+
+[2024-11-12T19:46:30.483979-05:00] [GF 7.0.18] [INFO] [NCLS-CORE-00087] [jakarta.enterprise.system.core] [tid: _ThreadID=1 _ThreadName=main] [levelValue: 800] [[
+  Grizzly Framework 4.0.2 started in: 3 ms - bound to [/0.0.0.0:3700]]]
+
+[2024-11-12T19:46:30.501932-05:00] [GF 7.0.18] [INFO] [NCLS-CORE-00017] [jakarta.enterprise.system.core] [tid: _ThreadID=1 _ThreadName=main] [levelValue: 800] [[
+  Eclipse GlassFish 7.0.18 (commit: 9c7fd856064b9cb74226a825d6ef6c75d7ea5e6e) startup time: Embedded (6,905 ms), startup services (1,923 ms), total (8,828 ms)]]
+
+[2024-11-12T19:46:30.904854-05:00] [GF 7.0.18] [INFO] [NCLS-JMX-00005] [jakarta.enterprise.system.jmx] [tid: _ThreadID=85 _ThreadName=Thread-6] [levelValue: 800] [[
+  JMXStartupService has started JMXConnector on JMXService URL service:jmx:rmi://DESKTOP-AOIFE62:8686/jndi/rmi://DESKTOP-AOIFE62:8686/jmxrmi]]
+
+[2024-11-12T19:46:31.278012-05:00] [GF 7.0.18] [INFO] [NCLS-CORE-00087] [jakarta.enterprise.system.core] [tid: _ThreadID=1 _ThreadName=main] [levelValue: 800] [[
+  Grizzly Framework 4.0.2 started in: 4 ms - bound to [/0.0.0.0:7676]]]
+
+[2024-11-12T19:46:32.011784-05:00] [GF 7.0.18] [INFO] [NCLS-CORE-00087] [jakarta.enterprise.system.core] [tid: _ThreadID=100 _ThreadName=pool-14-thread-1] [levelValue: 800] [[
+  Grizzly Framework 4.0.2 started in: 2 ms - bound to [/0.0.0.0:8080]]]
+
+[2024-11-12T19:46:32.024749-05:00] [GF 7.0.18] [INFO] [NCLS-CORE-00087] [jakarta.enterprise.system.core] [tid: _ThreadID=100 _ThreadName=pool-14-thread-1] [levelValue: 800] [[
+  Grizzly Framework 4.0.2 started in: 3 ms - bound to [/0.0.0.0:8181]]]
+
+[2024-11-12T19:46:32.972613-05:00] [GF 7.0.18] [INFO] [NCLS-CORE-00087] [jakarta.enterprise.system.core] [tid: _ThreadID=137 _ThreadName=pool-15-thread-1] [levelValue: 800] [[
+  Grizzly Framework 4.0.2 started in: 10 ms - bound to [/0.0.0.0:8181]]]
+
+[2024-11-12T19:46:33.151147-05:00] [GF 7.0.18] [INFO] [NCLS-CORE-00087] [jakarta.enterprise.system.core] [tid: _ThreadID=137 _ThreadName=pool-15-thread-1] [levelValue: 800] [[
+  Grizzly Framework 4.0.2 started in: 4 ms - bound to [/0.0.0.0:8080]]]
+
+[2024-11-12T19:46:35.013672-05:00] [GF 7.0.18] [INFO] [AS-WEB-GLUE-00198] [jakarta.enterprise.web] [tid: _ThreadID=136 _ThreadName=Thread-23] [levelValue: 800] [[
+  Created HTTP listener http-listener-1 on host/port 0.0.0.0:8080]]
+
+[2024-11-12T19:46:35.017664-05:00] [GF 7.0.18] [INFO] [AS-WEB-GLUE-00198] [jakarta.enterprise.web] [tid: _ThreadID=136 _ThreadName=Thread-23] [levelValue: 800] [[
+  Created HTTP listener http-listener-2 on host/port 0.0.0.0:8181]]
+
+[2024-11-12T19:46:35.021651-05:00] [GF 7.0.18] [INFO] [AS-WEB-GLUE-00198] [jakarta.enterprise.web] [tid: _ThreadID=136 _ThreadName=Thread-23] [levelValue: 800] [[
+  Created HTTP listener admin-listener on host/port 0.0.0.0:4848]]
+
+[2024-11-12T19:46:35.092463-05:00] [GF 7.0.18] [INFO] [AS-WEB-GLUE-00200] [jakarta.enterprise.web] [tid: _ThreadID=136 _ThreadName=Thread-23] [levelValue: 800] [[
+  Created virtual server server]]
+
+[2024-11-12T19:46:35.102434-05:00] [GF 7.0.18] [INFO] [AS-WEB-GLUE-00200] [jakarta.enterprise.web] [tid: _ThreadID=136 _ThreadName=Thread-23] [levelValue: 800] [[
+  Created virtual server __asadmin]]
+
+[2024-11-12T19:46:35.715795-05:00] [GF 7.0.18] [INFO] [AS-WEB-CORE-00306] [jakarta.enterprise.web.core] [tid: _ThreadID=136 _ThreadName=Thread-23] [levelValue: 800] [[
+  Setting JAAS app name glassfish-web]]
+
+[2024-11-12T19:46:35.717789-05:00] [GF 7.0.18] [INFO] [AS-WEB-GLUE-00201] [jakarta.enterprise.web] [tid: _ThreadID=136 _ThreadName=Thread-23] [levelValue: 800] [[
+  Virtual server server loaded default web module ]]
+
+[2024-11-12T19:46:36.375964-05:00] [GF 7.0.18] [INFO] [NCLS-SECURITY-01002] [jakarta.enterprise.system.core.security] [tid: _ThreadID=136 _ThreadName=Thread-23] [levelValue: 800] [[
+  Java security manager is disabled.]]
+
+[2024-11-12T19:46:36.377957-05:00] [GF 7.0.18] [INFO] [NCLS-SECURITY-01010] [jakarta.enterprise.system.core.security] [tid: _ThreadID=136 _ThreadName=Thread-23] [levelValue: 800] [[
+  Entering Security Startup Service.]]
+
+[2024-11-12T19:46:36.382944-05:00] [GF 7.0.18] [INFO] [NCLS-SECURITY-01143] [jakarta.enterprise.system.core.security] [tid: _ThreadID=136 _ThreadName=Thread-23] [levelValue: 800] [[
+  Loading policy provider org.glassfish.exousia.modules.locked.SimplePolicyProvider.]]
+
+[2024-11-12T19:46:36.488662-05:00] [GF 7.0.18] [INFO] [NCLS-SECURITY-01011] [jakarta.enterprise.system.core.security] [tid: _ThreadID=136 _ThreadName=Thread-23] [levelValue: 800] [[
+  Security Service(s) started successfully.]]
+
+[2024-11-12T19:46:36.621309-05:00] [GF 7.0.18] [INFO] [NCLS-REST-00001] [jakarta.enterprise.admin.rest] [tid: _ThreadID=69 _ThreadName=admin-listener(4)] [levelValue: 800] [[
+  Listening to REST requests at context: /management/domain.]]
+
+[2024-11-12T19:46:36.632279-05:00] [GF 7.0.18] [SEVERE] [AS-DEPLOYMENT-00118] [jakarta.enterprise.system.tools.deployment.dol] [tid: _ThreadID=136 _ThreadName=Thread-23] [levelValue: 1000] [[
+  DOLUtils: Invalid Deployment Descriptors in Deployment descriptor file WEB-INF/web.xml in archive [__admingui]. 
+Line 258 Column 50 -- src-resolve: Cannot resolve the name 'jakartaee:web-commonType' to a(n) 'group' component..]]
+
+[2024-11-12T19:46:36.634271-05:00] [GF 7.0.18] [SEVERE] [AS-DEPLOYMENT-00120] [jakarta.enterprise.system.tools.deployment.dol] [tid: _ThreadID=136 _ThreadName=Thread-23] [levelValue: 1000] [[
+  Deployment Descriptor parsing failure: src-resolve: Cannot resolve the name 'jakartaee:web-commonType' to a(n) 'group' component.]]
+
+[2024-11-12T19:46:36.635279-05:00] [GF 7.0.18] [SEVERE] [] [jakarta.enterprise.system.core] [tid: _ThreadID=136 _ThreadName=Thread-23] [levelValue: 1000] [[
+  Exception while deploying the app [__admingui]]]
+
+[2024-11-12T19:46:36.636268-05:00] [GF 7.0.18] [SEVERE] [NCLS-CORE-00026] [jakarta.enterprise.system.core] [tid: _ThreadID=136 _ThreadName=Thread-23] [levelValue: 1000] [[
+  Exception during lifecycle processing
+java.io.IOException: org.xml.sax.SAXParseExceptionpublicId: file:/C:/Users/usuario/Documents/Universidad/Programación3/Repositorio/Backend/glassfish7/glassfish/lib/schemas/web-app_6_0.xsd; lineNumber: 258; columnNumber: 50; Deployment descriptor file WEB-INF/web.xml in archive [__admingui].  src-resolve: Cannot resolve the name 'jakartaee:web-commonType' to a(n) 'group' component.
+	at org.glassfish.javaee.core.deployment.DolProvider.processDOL(DolProvider.java:193)
+	at org.glassfish.javaee.core.deployment.DolProvider.load(DolProvider.java:210)
+	at org.glassfish.javaee.core.deployment.DolProvider.load(DolProvider.java:80)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.loadDeployer(ApplicationLifecycle.java:942)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.setupContainerInfos(ApplicationLifecycle.java:881)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.deploy(ApplicationLifecycle.java:411)
+	at com.sun.enterprise.v3.server.ApplicationLoaderService.processApplication(ApplicationLoaderService.java:405)
+	at com.sun.enterprise.v3.admin.adapter.InstallerThread.load(InstallerThread.java:144)
+	at com.sun.enterprise.v3.admin.adapter.InstallerThread.run(InstallerThread.java:80)
+Caused by: org.xml.sax.SAXParseExceptionpublicId: file:/C:/Users/usuario/Documents/Universidad/Programación3/Repositorio/Backend/glassfish7/glassfish/lib/schemas/web-app_6_0.xsd; lineNumber: 258; columnNumber: 50; Deployment descriptor file WEB-INF/web.xml in archive [__admingui].  src-resolve: Cannot resolve the name 'jakartaee:web-commonType' to a(n) 'group' component.
+	at com.sun.enterprise.deployment.io.DeploymentDescriptorFile.read(DeploymentDescriptorFile.java:290)
+	at com.sun.enterprise.deployment.io.DeploymentDescriptorFile.read(DeploymentDescriptorFile.java:213)
+	at com.sun.enterprise.deployment.archivist.Archivist.readStandardDeploymentDescriptor(Archivist.java:655)
+	at com.sun.enterprise.deployment.archivist.Archivist.readDeploymentDescriptors(Archivist.java:393)
+	at com.sun.enterprise.deployment.archivist.Archivist.open(Archivist.java:275)
+	at com.sun.enterprise.deployment.archivist.Archivist.open(Archivist.java:284)
+	at com.sun.enterprise.deployment.archivist.Archivist.open(Archivist.java:243)
+	at com.sun.enterprise.deployment.archivist.ApplicationFactory.openArchive(ApplicationFactory.java:131)
+	at org.glassfish.javaee.core.deployment.DolProvider.processDOL(DolProvider.java:187)
+	... 8 more
+Caused by: org.xml.sax.SAXParseException; systemId: file:/C:/Users/usuario/Documents/Universidad/Programación3/Repositorio/Backend/glassfish7/glassfish/lib/schemas/web-app_6_0.xsd; lineNumber: 258; columnNumber: 50; src-resolve: Cannot resolve the name 'jakartaee:web-commonType' to a(n) 'group' component.
+	at java.xml/com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.createSAXParseException(ErrorHandlerWrapper.java:204)
+	at java.xml/com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.error(ErrorHandlerWrapper.java:135)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(XMLErrorReporter.java:396)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDHandler.reportSchemaErr(XSDHandler.java:4254)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDHandler.reportSchemaError(XSDHandler.java:4237)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDHandler.getGlobalDecl(XSDHandler.java:1791)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDGroupTraverser.traverseLocal(XSDGroupTraverser.java:80)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDAbstractParticleTraverser.traverseSeqChoice(XSDAbstractParticleTraverser.java:232)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDAbstractParticleTraverser.traverseChoice(XSDAbstractParticleTraverser.java:184)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDComplexTypeTraverser.processComplexContent(XSDComplexTypeTraverser.java:1055)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDComplexTypeTraverser.traverseComplexTypeDecl(XSDComplexTypeTraverser.java:337)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDComplexTypeTraverser.traverseGlobal(XSDComplexTypeTraverser.java:193)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDHandler.traverseGlobalDecl(XSDHandler.java:1939)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDHandler.getGlobalDecl(XSDHandler.java:1826)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDElementTraverser.traverseNamedElement(XSDElementTraverser.java:405)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDElementTraverser.traverseGlobal(XSDElementTraverser.java:242)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDHandler.traverseSchemas(XSDHandler.java:1483)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDHandler.parseSchema(XSDHandler.java:663)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.xs.XMLSchemaLoader.loadSchema(XMLSchemaLoader.java:618)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.xs.XMLSchemaValidator.findSchemaGrammar(XMLSchemaValidator.java:2711)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.xs.XMLSchemaValidator.handleStartElement(XMLSchemaValidator.java:2070)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.xs.XMLSchemaValidator.startElement(XMLSchemaValidator.java:830)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl.scanStartElement(XMLNSDocumentScannerImpl.java:376)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl$NSContentDriver.scanRootElementHook(XMLNSDocumentScannerImpl.java:615)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl$FragmentContentDriver.next(XMLDocumentFragmentScannerImpl.java:3079)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl$PrologDriver.next(XMLDocumentScannerImpl.java:836)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.next(XMLDocumentScannerImpl.java:605)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl.next(XMLNSDocumentScannerImpl.java:114)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(XMLDocumentFragmentScannerImpl.java:542)
+	at java.xml/com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:889)
+	at java.xml/com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:825)
+	at java.xml/com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(XMLParser.java:141)
+	at java.xml/com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(AbstractSAXParser.java:1224)
+	at java.xml/com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser.parse(SAXParserImpl.java:637)
+	at java.xml/com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl.parse(SAXParserImpl.java:326)
+	at com.sun.enterprise.deployment.io.DeploymentDescriptorFile.read(DeploymentDescriptorFile.java:281)
+	... 16 more
+]]
+
+[2024-11-12T19:46:36.640254-05:00] [GF 7.0.18] [INFO] [] [org.glassfish.web.loader.WebappClassLoader] [tid: _ThreadID=136 _ThreadName=Thread-23] [levelValue: 800] [[
+  close(), this:
+org.glassfish.web.loader.WebappClassLoader@1f4de23[name=__admingui], urls=[
+file:/C:/Users/usuario/Documents/Universidad/Programación3/Repositorio/Backend/glassfish7/glassfish/lib/install/applications/__admingui/WEB-INF/classes/
+file:/C:/Users/usuario/Documents/Universidad/Programación3/Repositorio/Backend/glassfish7/glassfish/lib/install/applications/__admingui/WEB-INF/lib/console-commandrecorder-plugin-7.0.18.jar
+file:/C:/Users/usuario/Documents/Universidad/Programación3/Repositorio/Backend/glassfish7/glassfish/lib/install/applications/__admingui/WEB-INF/lib/console-core-7.0.18.jar
+file:/C:/Users/usuario/Documents/Universidad/Programación3/Repositorio/Backend/glassfish7/glassfish/domains/domain1/generated/ejb/__admingui/
+file:/C:/Users/usuario/Documents/Universidad/Programación3/Repositorio/Backend/glassfish7/glassfish/lib/install/applications/__admingui/WEB-INF/extra/woodstock-webui-jsf-suntheme-6.0.1.jar
+file:/C:/Users/usuario/Documents/Universidad/Programación3/Repositorio/Backend/glassfish7/glassfish/lib/install/applications/__admingui/WEB-INF/extra/dojo-ajax-nodemo-1.12.4.jar
+file:/C:/Users/usuario/Documents/Universidad/Programación3/Repositorio/Backend/glassfish7/glassfish/lib/install/applications/__admingui/WEB-INF/extra/woodstock-webui-jsf-6.0.1.jar
+file:/C:/Users/usuario/Documents/Universidad/Programación3/Repositorio/Backend/glassfish7/glassfish/lib/install/applications/__admingui/WEB-INF/extra/json-2.0.jar
+file:/C:/Users/usuario/Documents/Universidad/Programación3/Repositorio/Backend/glassfish7/glassfish/lib/install/applications/__admingui/WEB-INF/extra/prototype-1.7.3.jar
+file:/C:/Users/usuario/Documents/Universidad/Programación3/Repositorio/Backend/glassfish7/glassfish/lib/install/applications/__admingui/WEB-INF/extra/commons-io-2.16.1.jar
+][delegate=true, context=__admingui, status=RUNNING, antiJARLocking=false, securityManager=false, packageDefinitionSecurityEnabled=false, repositories=RepositoryManager[WEB-INF/classes/], notFound.size=27, pathTimestamps.size=2, resourceEntryCache.size=0]]]
+
+[2024-11-12T19:46:36.706079-05:00] [GF 7.0.18] [SEVERE] [NCLS-CORE-00041] [jakarta.enterprise.system.core] [tid: _ThreadID=136 _ThreadName=Thread-23] [levelValue: 1000] [[
+  Application deployment failed: Exception while deploying the app [__admingui]]]
+
+[2024-11-12T19:50:34.076141-05:00] [GF 7.0.18] [INFO] [NCLS-CORE-00092] [jakarta.enterprise.system.core] [tid: _ThreadID=173 _ThreadName=Thread-39] [levelValue: 800] [[
+  Server shutdown initiated]]
+
+[2024-11-12T19:50:34.116035-05:00] [GF 7.0.18] [INFO] [] [jakarta.enterprise.logging.stdout] [tid: _ThreadID=173 _ThreadName=Thread-39] [levelValue: 800] [[
+  FileMonitoring shutdown]]
+
+[2024-11-12T19:50:34.131993-05:00] [GF 7.0.18] [INFO] [NCLS-JMX-00002] [jakarta.enterprise.system.jmx] [tid: _ThreadID=173 _ThreadName=Thread-39] [levelValue: 800] [[
+  JMXStartupService: Stopped JMXConnectorServer: null]]
+
+[2024-11-12T19:50:34.131993-05:00] [GF 7.0.18] [INFO] [NCLS-JMX-00001] [jakarta.enterprise.system.jmx] [tid: _ThreadID=173 _ThreadName=Thread-39] [levelValue: 800] [[
+  JMXStartupService and JMXConnectors have been shut down.]]
+
+[2024-11-12T19:50:34.234717-05:00] [GF 7.0.18] [INFO] [] [jakarta.enterprise.logging.stdout] [tid: _ThreadID=180 _ThreadName=RunLevelControllerThread-1731459034143] [levelValue: 800] [[
+  JdbcRuntimeExtension,  getAllSystemRAResourcesAndPools = [GlassFishConfigBean.org.glassfish.jdbc.config.JdbcResource(pool-name=__TimerPool,object-type=system-all,jndi-name=jdbc/__TimerPool), GlassFishConfigBean.org.glassfish.jdbc.config.JdbcResource(pool-name=DerbyPool,object-type=system-all-req,jndi-name=jdbc/__default), GlassFishConfigBean.org.glassfish.jdbc.config.JdbcConnectionPool(datasource-classname=org.apache.derby.jdbc.EmbeddedXADataSource,name=__TimerPool,res-type=javax.sql.XADataSource), GlassFishConfigBean.org.glassfish.jdbc.config.JdbcConnectionPool(is-isolation-level-guaranteed=false,datasource-classname=org.apache.derby.jdbc.ClientDataSource,name=DerbyPool,res-type=javax.sql.DataSource)]]]
+
+[2024-11-12T19:50:34.268626-05:00] [GF 7.0.18] [INFO] [NCLS-CORE-00013] [jakarta.enterprise.system.core] [tid: _ThreadID=173 _ThreadName=Thread-39] [levelValue: 800] [[
+  Shutdown procedure finished]]
+
+[2024-11-12T19:50:34.270621-05:00] [GF 7.0.18] [INFO] [] [jakarta.enterprise.logging.stdout] [tid: _ThreadID=25 _ThreadName=GlassFish Shutdown Hook] [levelValue: 800] [[
+  Completed shutdown of GlassFish runtime]]
+
+[2024-11-12T19:52:56.796723-05:00] [GF 7.0.18] [INFO] [] [com.sun.enterprise.server.logging.LogManagerService] [tid: _ThreadID=1 _ThreadName=main] [levelValue: 800] [[
+  Using property file: C:\Users\usuario\Documents\Universidad\Programación3\Repositorio\Backend\glassfish7\glassfish\domains\domain1\config\logging.properties]]
+
+[2024-11-12T19:52:56.858559-05:00] [GF 7.0.18] [INFO] [NCLS-LOGGING-00009] [com.sun.enterprise.server.logging.LogManagerService] [tid: _ThreadID=1 _ThreadName=main] [levelValue: 800] [[
+  Running GlassFish Version: Eclipse GlassFish 7.0.18 (commit: 9c7fd856064b9cb74226a825d6ef6c75d7ea5e6e)]]
+
+[2024-11-12T19:52:57.527310-05:00] [GF 7.0.18] [INFO] [NCLS-CORE-00087] [jakarta.enterprise.system.core] [tid: _ThreadID=1 _ThreadName=main] [levelValue: 800] [[
+  Grizzly Framework 4.0.2 started in: 88 ms - bound to [/0.0.0.0:8080]]]
+
+[2024-11-12T19:52:57.561218-05:00] [GF 7.0.18] [INFO] [NCLS-CORE-00087] [jakarta.enterprise.system.core] [tid: _ThreadID=1 _ThreadName=main] [levelValue: 800] [[
+  Grizzly Framework 4.0.2 started in: 3 ms - bound to [/0.0.0.0:8181]]]
+
+[2024-11-12T19:52:57.572189-05:00] [GF 7.0.18] [INFO] [NCLS-CORE-00087] [jakarta.enterprise.system.core] [tid: _ThreadID=1 _ThreadName=main] [levelValue: 800] [[
+  Grizzly Framework 4.0.2 started in: 3 ms - bound to [/0.0.0.0:4848]]]
+
+[2024-11-12T19:52:57.723038-05:00] [GF 7.0.18] [INFO] [SEC-SVCS-00100] [jakarta.enterprise.security.services] [tid: _ThreadID=1 _ThreadName=main] [levelValue: 800] [[
+  Authorization Service has successfully initialized.]]
+
+[2024-11-12T19:52:57.828756-05:00] [GF 7.0.18] [INFO] [NCLS-SECURITY-01115] [jakarta.enterprise.system.core.security] [tid: _ThreadID=1 _ThreadName=main] [levelValue: 800] [[
+  Realm [admin-realm] of classtype [com.sun.enterprise.security.auth.realm.file.FileRealm] successfully created.]]
+
+[2024-11-12T19:52:57.831748-05:00] [GF 7.0.18] [INFO] [NCLS-SECURITY-01115] [jakarta.enterprise.system.core.security] [tid: _ThreadID=1 _ThreadName=main] [levelValue: 800] [[
+  Realm [file] of classtype [com.sun.enterprise.security.auth.realm.file.FileRealm] successfully created.]]
+
+[2024-11-12T19:52:57.863664-05:00] [GF 7.0.18] [INFO] [NCLS-SECURITY-01115] [jakarta.enterprise.system.core.security] [tid: _ThreadID=1 _ThreadName=main] [levelValue: 800] [[
+  Realm [certificate] of classtype [com.sun.enterprise.security.auth.realm.certificate.CertificateRealm] successfully created.]]
+
+[2024-11-12T19:52:58.063128-05:00] [GF 7.0.18] [INFO] [] [org.glassfish.ha.store.spi.BackingStoreFactoryRegistry] [tid: _ThreadID=1 _ThreadName=main] [levelValue: 800] [[
+  Registered org.glassfish.ha.store.adapter.cache.ShoalBackingStoreProxy for persistence-type = replicated in BackingStoreFactoryRegistry]]
+
+[2024-11-12T19:52:58.121974-05:00] [GF 7.0.18] [INFO] [NCLS-CORE-00087] [jakarta.enterprise.system.core] [tid: _ThreadID=1 _ThreadName=main] [levelValue: 800] [[
+  Grizzly Framework 4.0.2 started in: 3 ms - bound to [/0.0.0.0:3700]]]
+
+[2024-11-12T19:52:58.136935-05:00] [GF 7.0.18] [INFO] [NCLS-CORE-00017] [jakarta.enterprise.system.core] [tid: _ThreadID=1 _ThreadName=main] [levelValue: 800] [[
+  Eclipse GlassFish 7.0.18 (commit: 9c7fd856064b9cb74226a825d6ef6c75d7ea5e6e) startup time: Embedded (6,833 ms), startup services (1,454 ms), total (8,287 ms)]]
+
+[2024-11-12T19:52:58.488989-05:00] [GF 7.0.18] [INFO] [NCLS-JMX-00005] [jakarta.enterprise.system.jmx] [tid: _ThreadID=75 _ThreadName=Thread-6] [levelValue: 800] [[
+  JMXStartupService has started JMXConnector on JMXService URL service:jmx:rmi://DESKTOP-AOIFE62:8686/jndi/rmi://DESKTOP-AOIFE62:8686/jmxrmi]]
+
+[2024-11-12T19:52:58.626145-05:00] [GF 7.0.18] [INFO] [NCLS-CORE-00087] [jakarta.enterprise.system.core] [tid: _ThreadID=1 _ThreadName=main] [levelValue: 800] [[
+  Grizzly Framework 4.0.2 started in: 4 ms - bound to [/0.0.0.0:7676]]]
+
+[2024-11-12T19:53:00.153224-05:00] [GF 7.0.18] [INFO] [NCLS-CORE-00087] [jakarta.enterprise.system.core] [tid: _ThreadID=112 _ThreadName=pool-10-thread-1] [levelValue: 800] [[
+  Grizzly Framework 4.0.2 started in: 4 ms - bound to [/0.0.0.0:8080]]]
+
+[2024-11-12T19:53:00.167190-05:00] [GF 7.0.18] [INFO] [NCLS-CORE-00087] [jakarta.enterprise.system.core] [tid: _ThreadID=112 _ThreadName=pool-10-thread-1] [levelValue: 800] [[
+  Grizzly Framework 4.0.2 started in: 3 ms - bound to [/0.0.0.0:8181]]]
+
+[2024-11-12T19:53:01.294289-05:00] [GF 7.0.18] [INFO] [NCLS-CORE-00087] [jakarta.enterprise.system.core] [tid: _ThreadID=111 _ThreadName=pool-8-thread-1] [levelValue: 800] [[
+  Grizzly Framework 4.0.2 started in: 14 ms - bound to [/0.0.0.0:8181]]]
+
+[2024-11-12T19:53:01.558373-05:00] [GF 7.0.18] [INFO] [NCLS-CORE-00087] [jakarta.enterprise.system.core] [tid: _ThreadID=129 _ThreadName=pool-13-thread-1] [levelValue: 800] [[
+  Grizzly Framework 4.0.2 started in: 19 ms - bound to [/0.0.0.0:8080]]]
+
+[2024-11-12T19:53:03.238150-05:00] [GF 7.0.18] [INFO] [AS-WEB-GLUE-00198] [jakarta.enterprise.web] [tid: _ThreadID=133 _ThreadName=Thread-21] [levelValue: 800] [[
+  Created HTTP listener http-listener-1 on host/port 0.0.0.0:8080]]
+
+[2024-11-12T19:53:03.241144-05:00] [GF 7.0.18] [INFO] [AS-WEB-GLUE-00198] [jakarta.enterprise.web] [tid: _ThreadID=133 _ThreadName=Thread-21] [levelValue: 800] [[
+  Created HTTP listener http-listener-2 on host/port 0.0.0.0:8181]]
+
+[2024-11-12T19:53:03.245133-05:00] [GF 7.0.18] [INFO] [AS-WEB-GLUE-00198] [jakarta.enterprise.web] [tid: _ThreadID=133 _ThreadName=Thread-21] [levelValue: 800] [[
+  Created HTTP listener admin-listener on host/port 0.0.0.0:4848]]
+
+[2024-11-12T19:53:03.289017-05:00] [GF 7.0.18] [INFO] [AS-WEB-GLUE-00200] [jakarta.enterprise.web] [tid: _ThreadID=133 _ThreadName=Thread-21] [levelValue: 800] [[
+  Created virtual server server]]
+
+[2024-11-12T19:53:03.294004-05:00] [GF 7.0.18] [INFO] [AS-WEB-GLUE-00200] [jakarta.enterprise.web] [tid: _ThreadID=133 _ThreadName=Thread-21] [levelValue: 800] [[
+  Created virtual server __asadmin]]
+
+[2024-11-12T19:53:03.657030-05:00] [GF 7.0.18] [INFO] [AS-WEB-CORE-00306] [jakarta.enterprise.web.core] [tid: _ThreadID=133 _ThreadName=Thread-21] [levelValue: 800] [[
+  Setting JAAS app name glassfish-web]]
+
+[2024-11-12T19:53:03.658026-05:00] [GF 7.0.18] [INFO] [AS-WEB-GLUE-00201] [jakarta.enterprise.web] [tid: _ThreadID=133 _ThreadName=Thread-21] [levelValue: 800] [[
+  Virtual server server loaded default web module ]]
+
+[2024-11-12T19:53:04.486036-05:00] [GF 7.0.18] [INFO] [NCLS-SECURITY-01002] [jakarta.enterprise.system.core.security] [tid: _ThreadID=133 _ThreadName=Thread-21] [levelValue: 800] [[
+  Java security manager is disabled.]]
+
+[2024-11-12T19:53:04.488028-05:00] [GF 7.0.18] [INFO] [NCLS-SECURITY-01010] [jakarta.enterprise.system.core.security] [tid: _ThreadID=133 _ThreadName=Thread-21] [levelValue: 800] [[
+  Entering Security Startup Service.]]
+
+[2024-11-12T19:53:04.495010-05:00] [GF 7.0.18] [INFO] [NCLS-SECURITY-01143] [jakarta.enterprise.system.core.security] [tid: _ThreadID=133 _ThreadName=Thread-21] [levelValue: 800] [[
+  Loading policy provider org.glassfish.exousia.modules.locked.SimplePolicyProvider.]]
+
+[2024-11-12T19:53:04.558839-05:00] [GF 7.0.18] [INFO] [NCLS-REST-00001] [jakarta.enterprise.admin.rest] [tid: _ThreadID=67 _ThreadName=admin-listener(4)] [levelValue: 800] [[
+  Listening to REST requests at context: /management/domain.]]
+
+[2024-11-12T19:53:04.616682-05:00] [GF 7.0.18] [INFO] [NCLS-SECURITY-01011] [jakarta.enterprise.system.core.security] [tid: _ThreadID=133 _ThreadName=Thread-21] [levelValue: 800] [[
+  Security Service(s) started successfully.]]
+
+[2024-11-12T19:53:04.781864-05:00] [GF 7.0.18] [SEVERE] [AS-DEPLOYMENT-00118] [jakarta.enterprise.system.tools.deployment.dol] [tid: _ThreadID=133 _ThreadName=Thread-21] [levelValue: 1000] [[
+  DOLUtils: Invalid Deployment Descriptors in Deployment descriptor file WEB-INF/web.xml in archive [__admingui]. 
+Line 258 Column 50 -- src-resolve: Cannot resolve the name 'jakartaee:web-commonType' to a(n) 'group' component..]]
+
+[2024-11-12T19:53:04.783861-05:00] [GF 7.0.18] [SEVERE] [AS-DEPLOYMENT-00120] [jakarta.enterprise.system.tools.deployment.dol] [tid: _ThreadID=133 _ThreadName=Thread-21] [levelValue: 1000] [[
+  Deployment Descriptor parsing failure: src-resolve: Cannot resolve the name 'jakartaee:web-commonType' to a(n) 'group' component.]]
+
+[2024-11-12T19:53:04.785856-05:00] [GF 7.0.18] [SEVERE] [] [jakarta.enterprise.system.core] [tid: _ThreadID=133 _ThreadName=Thread-21] [levelValue: 1000] [[
+  Exception while deploying the app [__admingui]]]
+
+[2024-11-12T19:53:04.785856-05:00] [GF 7.0.18] [SEVERE] [NCLS-CORE-00026] [jakarta.enterprise.system.core] [tid: _ThreadID=133 _ThreadName=Thread-21] [levelValue: 1000] [[
+  Exception during lifecycle processing
+java.io.IOException: org.xml.sax.SAXParseExceptionpublicId: file:/C:/Users/usuario/Documents/Universidad/Programación3/Repositorio/Backend/glassfish7/glassfish/lib/schemas/web-app_6_0.xsd; lineNumber: 258; columnNumber: 50; Deployment descriptor file WEB-INF/web.xml in archive [__admingui].  src-resolve: Cannot resolve the name 'jakartaee:web-commonType' to a(n) 'group' component.
+	at org.glassfish.javaee.core.deployment.DolProvider.processDOL(DolProvider.java:193)
+	at org.glassfish.javaee.core.deployment.DolProvider.load(DolProvider.java:210)
+	at org.glassfish.javaee.core.deployment.DolProvider.load(DolProvider.java:80)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.loadDeployer(ApplicationLifecycle.java:942)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.setupContainerInfos(ApplicationLifecycle.java:881)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.deploy(ApplicationLifecycle.java:411)
+	at com.sun.enterprise.v3.server.ApplicationLoaderService.processApplication(ApplicationLoaderService.java:405)
+	at com.sun.enterprise.v3.admin.adapter.InstallerThread.load(InstallerThread.java:144)
+	at com.sun.enterprise.v3.admin.adapter.InstallerThread.run(InstallerThread.java:80)
+Caused by: org.xml.sax.SAXParseExceptionpublicId: file:/C:/Users/usuario/Documents/Universidad/Programación3/Repositorio/Backend/glassfish7/glassfish/lib/schemas/web-app_6_0.xsd; lineNumber: 258; columnNumber: 50; Deployment descriptor file WEB-INF/web.xml in archive [__admingui].  src-resolve: Cannot resolve the name 'jakartaee:web-commonType' to a(n) 'group' component.
+	at com.sun.enterprise.deployment.io.DeploymentDescriptorFile.read(DeploymentDescriptorFile.java:290)
+	at com.sun.enterprise.deployment.io.DeploymentDescriptorFile.read(DeploymentDescriptorFile.java:213)
+	at com.sun.enterprise.deployment.archivist.Archivist.readStandardDeploymentDescriptor(Archivist.java:655)
+	at com.sun.enterprise.deployment.archivist.Archivist.readDeploymentDescriptors(Archivist.java:393)
+	at com.sun.enterprise.deployment.archivist.Archivist.open(Archivist.java:275)
+	at com.sun.enterprise.deployment.archivist.Archivist.open(Archivist.java:284)
+	at com.sun.enterprise.deployment.archivist.Archivist.open(Archivist.java:243)
+	at com.sun.enterprise.deployment.archivist.ApplicationFactory.openArchive(ApplicationFactory.java:131)
+	at org.glassfish.javaee.core.deployment.DolProvider.processDOL(DolProvider.java:187)
+	... 8 more
+Caused by: org.xml.sax.SAXParseException; systemId: file:/C:/Users/usuario/Documents/Universidad/Programación3/Repositorio/Backend/glassfish7/glassfish/lib/schemas/web-app_6_0.xsd; lineNumber: 258; columnNumber: 50; src-resolve: Cannot resolve the name 'jakartaee:web-commonType' to a(n) 'group' component.
+	at java.xml/com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.createSAXParseException(ErrorHandlerWrapper.java:204)
+	at java.xml/com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.error(ErrorHandlerWrapper.java:135)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(XMLErrorReporter.java:396)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDHandler.reportSchemaErr(XSDHandler.java:4254)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDHandler.reportSchemaError(XSDHandler.java:4237)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDHandler.getGlobalDecl(XSDHandler.java:1791)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDGroupTraverser.traverseLocal(XSDGroupTraverser.java:80)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDAbstractParticleTraverser.traverseSeqChoice(XSDAbstractParticleTraverser.java:232)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDAbstractParticleTraverser.traverseChoice(XSDAbstractParticleTraverser.java:184)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDComplexTypeTraverser.processComplexContent(XSDComplexTypeTraverser.java:1055)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDComplexTypeTraverser.traverseComplexTypeDecl(XSDComplexTypeTraverser.java:337)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDComplexTypeTraverser.traverseGlobal(XSDComplexTypeTraverser.java:193)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDHandler.traverseGlobalDecl(XSDHandler.java:1939)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDHandler.getGlobalDecl(XSDHandler.java:1826)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDElementTraverser.traverseNamedElement(XSDElementTraverser.java:405)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDElementTraverser.traverseGlobal(XSDElementTraverser.java:242)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDHandler.traverseSchemas(XSDHandler.java:1483)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDHandler.parseSchema(XSDHandler.java:663)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.xs.XMLSchemaLoader.loadSchema(XMLSchemaLoader.java:618)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.xs.XMLSchemaValidator.findSchemaGrammar(XMLSchemaValidator.java:2711)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.xs.XMLSchemaValidator.handleStartElement(XMLSchemaValidator.java:2070)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.xs.XMLSchemaValidator.startElement(XMLSchemaValidator.java:830)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl.scanStartElement(XMLNSDocumentScannerImpl.java:376)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl$NSContentDriver.scanRootElementHook(XMLNSDocumentScannerImpl.java:615)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl$FragmentContentDriver.next(XMLDocumentFragmentScannerImpl.java:3079)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl$PrologDriver.next(XMLDocumentScannerImpl.java:836)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.next(XMLDocumentScannerImpl.java:605)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl.next(XMLNSDocumentScannerImpl.java:114)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(XMLDocumentFragmentScannerImpl.java:542)
+	at java.xml/com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:889)
+	at java.xml/com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:825)
+	at java.xml/com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(XMLParser.java:141)
+	at java.xml/com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(AbstractSAXParser.java:1224)
+	at java.xml/com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser.parse(SAXParserImpl.java:637)
+	at java.xml/com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl.parse(SAXParserImpl.java:326)
+	at com.sun.enterprise.deployment.io.DeploymentDescriptorFile.read(DeploymentDescriptorFile.java:281)
+	... 16 more
+]]
+
+[2024-11-12T19:53:04.793835-05:00] [GF 7.0.18] [INFO] [] [org.glassfish.web.loader.WebappClassLoader] [tid: _ThreadID=133 _ThreadName=Thread-21] [levelValue: 800] [[
+  close(), this:
+org.glassfish.web.loader.WebappClassLoader@6e3350aa[name=__admingui], urls=[
+file:/C:/Users/usuario/Documents/Universidad/Programación3/Repositorio/Backend/glassfish7/glassfish/lib/install/applications/__admingui/WEB-INF/classes/
+file:/C:/Users/usuario/Documents/Universidad/Programación3/Repositorio/Backend/glassfish7/glassfish/lib/install/applications/__admingui/WEB-INF/lib/console-commandrecorder-plugin-7.0.18.jar
+file:/C:/Users/usuario/Documents/Universidad/Programación3/Repositorio/Backend/glassfish7/glassfish/lib/install/applications/__admingui/WEB-INF/lib/console-core-7.0.18.jar
+file:/C:/Users/usuario/Documents/Universidad/Programación3/Repositorio/Backend/glassfish7/glassfish/domains/domain1/generated/ejb/__admingui/
+file:/C:/Users/usuario/Documents/Universidad/Programación3/Repositorio/Backend/glassfish7/glassfish/lib/install/applications/__admingui/WEB-INF/extra/woodstock-webui-jsf-suntheme-6.0.1.jar
+file:/C:/Users/usuario/Documents/Universidad/Programación3/Repositorio/Backend/glassfish7/glassfish/lib/install/applications/__admingui/WEB-INF/extra/dojo-ajax-nodemo-1.12.4.jar
+file:/C:/Users/usuario/Documents/Universidad/Programación3/Repositorio/Backend/glassfish7/glassfish/lib/install/applications/__admingui/WEB-INF/extra/woodstock-webui-jsf-6.0.1.jar
+file:/C:/Users/usuario/Documents/Universidad/Programación3/Repositorio/Backend/glassfish7/glassfish/lib/install/applications/__admingui/WEB-INF/extra/json-2.0.jar
+file:/C:/Users/usuario/Documents/Universidad/Programación3/Repositorio/Backend/glassfish7/glassfish/lib/install/applications/__admingui/WEB-INF/extra/prototype-1.7.3.jar
+file:/C:/Users/usuario/Documents/Universidad/Programación3/Repositorio/Backend/glassfish7/glassfish/lib/install/applications/__admingui/WEB-INF/extra/commons-io-2.16.1.jar
+][delegate=true, context=__admingui, status=RUNNING, antiJARLocking=false, securityManager=false, packageDefinitionSecurityEnabled=false, repositories=RepositoryManager[WEB-INF/classes/], notFound.size=27, pathTimestamps.size=2, resourceEntryCache.size=0]]]
+
+[2024-11-12T19:53:04.873137-05:00] [GF 7.0.18] [SEVERE] [NCLS-CORE-00041] [jakarta.enterprise.system.core] [tid: _ThreadID=133 _ThreadName=Thread-21] [levelValue: 1000] [[
+  Application deployment failed: Exception while deploying the app [__admingui]]]
+
+[2024-11-12T21:20:57.874616-05:00] [GF 7.0.18] [INFO] [NCLS-CORE-00092] [jakarta.enterprise.system.core] [tid: _ThreadID=185 _ThreadName=Thread-35] [levelValue: 800] [[
+  Server shutdown initiated]]
+
+[2024-11-12T21:20:57.897565-05:00] [GF 7.0.18] [INFO] [] [jakarta.enterprise.logging.stdout] [tid: _ThreadID=185 _ThreadName=Thread-35] [levelValue: 800] [[
+  FileMonitoring shutdown]]
+
+[2024-11-12T21:20:57.912029-05:00] [GF 7.0.18] [INFO] [NCLS-JMX-00002] [jakarta.enterprise.system.jmx] [tid: _ThreadID=185 _ThreadName=Thread-35] [levelValue: 800] [[
+  JMXStartupService: Stopped JMXConnectorServer: null]]
+
+[2024-11-12T21:20:57.913025-05:00] [GF 7.0.18] [INFO] [NCLS-JMX-00001] [jakarta.enterprise.system.jmx] [tid: _ThreadID=185 _ThreadName=Thread-35] [levelValue: 800] [[
+  JMXStartupService and JMXConnectors have been shut down.]]
+
+[2024-11-12T21:20:58.012015-05:00] [GF 7.0.18] [INFO] [] [jakarta.enterprise.logging.stdout] [tid: _ThreadID=191 _ThreadName=RunLevelControllerThread-1731464457963] [levelValue: 800] [[
+  JdbcRuntimeExtension,  getAllSystemRAResourcesAndPools = [GlassFishConfigBean.org.glassfish.jdbc.config.JdbcResource(pool-name=SamplePool,object-type=user,enabled=true,jndi-name=jdbc/sample), GlassFishConfigBean.org.glassfish.jdbc.config.JdbcResource(pool-name=__TimerPool,object-type=system-all,jndi-name=jdbc/__TimerPool), GlassFishConfigBean.org.glassfish.jdbc.config.JdbcResource(pool-name=DerbyPool,object-type=system-all-req,jndi-name=jdbc/__default), GlassFishConfigBean.org.glassfish.jdbc.config.JdbcConnectionPool(datasource-classname=org.apache.derby.jdbc.EmbeddedXADataSource,name=__TimerPool,res-type=javax.sql.XADataSource), GlassFishConfigBean.org.glassfish.jdbc.config.JdbcConnectionPool(is-isolation-level-guaranteed=false,datasource-classname=org.apache.derby.jdbc.ClientDataSource,name=DerbyPool,res-type=javax.sql.DataSource), GlassFishConfigBean.org.glassfish.jdbc.config.JdbcConnectionPool(is-isolation-level-guaranteed=false,datasource-classname=org.apache.derby.jdbc.ClientDataSource,name=SamplePool,res-type=javax.sql.DataSource)]]]
+
+[2024-11-12T21:20:58.052844-05:00] [GF 7.0.18] [INFO] [NCLS-CORE-00013] [jakarta.enterprise.system.core] [tid: _ThreadID=185 _ThreadName=Thread-35] [levelValue: 800] [[
+  Shutdown procedure finished]]
+
+[2024-11-12T21:20:58.054838-05:00] [GF 7.0.18] [INFO] [] [jakarta.enterprise.logging.stdout] [tid: _ThreadID=23 _ThreadName=GlassFish Shutdown Hook] [levelValue: 800] [[
+  Completed shutdown of GlassFish runtime]]
+
