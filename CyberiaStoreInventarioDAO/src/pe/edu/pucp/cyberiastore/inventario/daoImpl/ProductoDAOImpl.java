@@ -314,7 +314,7 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
             sql = sql.concat("FROM PRODUCTO p");
             sql = sql.concat("JOIN PRODUCTO_X_SEDE ps ON p.ID_PRODUCTO = ps.ID_PRODUCTO");
             sql = sql.concat("JOIN SEDE s ON ps.ID_SEDE = s.ID_SEDE");
-            sql = sql.concat("WHERE p.SKU = ?");
+            sql = sql.concat("WHERE p.SKU = '?'");
             this.colocarSQLenStatement(sql);
             this.incluirParametroString(1, sku);
             this.ejecutarConsultaEnBD(sql);
