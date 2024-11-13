@@ -35,7 +35,7 @@ public class ProductoXPedidoDAOImpl extends DAOImpl implements ProductoXPedidoDA
 
     @Override
     protected String obtenerListaDeAtributosParaInsercion() {
-        return "id_producto, id_pedido, cantidad";
+        return "ID_PRODUCTO, ID_PEDIDO, CANTIDAD";
     }
 
     @Override

@@ -32,7 +32,7 @@ public class ProductoXMarcaDAOImpl extends DAOImpl implements ProductoXMarcaDAO 
 
     @Override
     protected String obtenerListaDeAtributosParaInsercion() {
-        return "id_producto, id_marca";
+        return "ID_PRODUCTO, ID_MARCA";
     }
 
     @Override

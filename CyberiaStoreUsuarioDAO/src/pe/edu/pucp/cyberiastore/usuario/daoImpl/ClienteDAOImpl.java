@@ -15,11 +15,13 @@ import pe.edu.pucp.cyberiastore.usuario.model.Usuario;
 public class ClienteDAOImpl extends DAOImpl implements ClienteDAO {
 
     private Cliente cliente;
+    private Tipo_Operacion tipoSelect;
 
     public ClienteDAOImpl() {
         super("CLIENTE");
         this.retornarLlavePrimaria = true;
         this.cliente = null;
+        this.tipoSelect = null;
     }
 
     /*
@@ -45,6 +47,7 @@ public class ClienteDAOImpl extends DAOImpl implements ClienteDAO {
         usuario.setNacionalidad(this.cliente.getNacionalidad());
         usuario.setDireccion(this.cliente.getDireccion());
         usuario.setTipoDeDocumento(this.cliente.getTipoDeDocumento());
+        usuario.setRol(this.cliente.getRol());
 
         UsuarioDAO usuarioDAO = new UsuarioDAOImpl();
         Boolean existeUsuario = usuarioDAO.existeUsuario(usuario);
@@ -227,7 +230,31 @@ public class ClienteDAOImpl extends DAOImpl implements ClienteDAO {
      */
     @Override
     public ArrayList<Cliente> listarTodos() {
+        this.tipoSelect = Tipo_Operacion.LISTARTODOS;
         return (ArrayList<Cliente>) super.listarTodos(null);
+    }
+
+    @Override
+    public Cliente buscarPorDocumento(String documento) {
+        this.cliente.setDocumento(documento);
+        this.tipoSelect = Tipo_Operacion.BUSCARPORDOCUMENTO;
+        return this.listarTodos().getFirst();
+    }
+    
+    @Override
+    protected String obtenerPredicadoParaListado() {
+        if(this.tipoSelect == Tipo_Operacion.LISTARTODOS)
+            return "";
+        else if(this.tipoSelect == Tipo_Operacion.BUSCARPORDOCUMENTO)
+            return "where US.DOCUMENTO = ?";
+        
+        return "";
+    }
+
+    @Override
+    protected void incluirValorDeParametrosParaListado() throws SQLException {
+        if(this.tipoSelect == Tipo_Operacion.BUSCARPORDOCUMENTO)
+            this.incluirParametroString(1, this.cliente.getDocumento());
     }
 
     @Override
@@ -246,7 +273,8 @@ public class ClienteDAOImpl extends DAOImpl implements ClienteDAO {
 
     @Override
     protected String obtenerProyeccionParaSelect() {
-        String sql = "CLI.ID_CLIENTE,CLI.VERIFICADO,";
+        String sql = "";
+        sql = sql.concat("CLI.ID_CLIENTE,CLI.VERIFICADO,");
         sql = sql.concat("US.ID_USUARIO,US.DOCUMENTO,US.TELEFONO,");
         sql = sql.concat("US.NOMBRE,US.APELLIDO_PATERNO,US.APELLIDO_MATERNO,US.SEXO");
         sql = sql.concat("US.FECHA_NACIMIENTO,US.CORREO,US.DIRECCION,");
@@ -307,13 +335,13 @@ public class ClienteDAOImpl extends DAOImpl implements ClienteDAO {
             if (abreConexion) {
                 this.abrirConexion();
             }
-            String sql = "select id_cliente from cliente where ";
-            sql = sql.concat("id_cliente=? ");
+            String sql = "select ID_CLIENTE from CLIENTE where ";
+            sql = sql.concat("ID_CLIENTE=? ");
             this.colocarSQLenStatement(sql);
             this.incluirParametroInt(1, this.cliente.getIdCliente());
             this.ejecutarConsultaEnBD(sql);
             if (this.resultSet.next()) {
-                idCliente = this.resultSet.getInt("id_cliente");
+                idCliente = this.resultSet.getInt("ID_CLIENTE");
             }
         } catch (SQLException ex) {
             System.err.println("Error al consultar si zexiste cliente - " + ex);

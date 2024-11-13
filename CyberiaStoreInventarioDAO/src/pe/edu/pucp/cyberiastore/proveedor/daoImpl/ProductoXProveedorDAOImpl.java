@@ -34,7 +34,7 @@ public class ProductoXProveedorDAOImpl extends DAOImpl implements ProductoXProve
 
     @Override
     protected String obtenerListaDeAtributosParaInsercion() {
-        return "id_producto, id_proveedor, precio_proveedor";
+        return "ID_PRODUCTO, ID_PROVEEDOR, PRECIO_PROVEEDOR";
     }
 
     @Override

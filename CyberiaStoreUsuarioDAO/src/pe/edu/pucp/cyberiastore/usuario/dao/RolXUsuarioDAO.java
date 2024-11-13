@@ -1,7 +1,7 @@
 package pe.edu.pucp.cyberiastore.usuario.dao;
 
 import java.util.ArrayList;
-import pe.edu.pucp.cyberiastore.rol.model.Rol;
+import pe.edu.pucp.cyberiastore.usuario.model.Rol;
 import pe.edu.pucp.cyberiastore.usuario.model.Usuario;
 
 public interface RolXUsuarioDAO {

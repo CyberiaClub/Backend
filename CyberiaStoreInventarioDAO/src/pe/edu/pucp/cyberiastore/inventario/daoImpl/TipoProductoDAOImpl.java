@@ -213,13 +213,13 @@ public class TipoProductoDAOImpl extends DAOImpl implements TipoProductoDAO {
             if (abreConexion) {
                 this.abrirConexion();
             }
-            String sql = "select id_TipoProducto from tipoProducto where ";
+            String sql = "select ID_TIPO_PRODUCTO from TIPO_PRODUCTO where ";
             sql = sql.concat("tipo=? ");
             this.colocarSQLenStatement(sql);
             this.incluirParametroString(1, this.tipoProducto.getTipo());
             this.ejecutarConsultaEnBD(sql);
             if (this.resultSet.next()) {
-                idTipoProducto = this.resultSet.getInt("id_TipoProducto");
+                idTipoProducto = this.resultSet.getInt("ID_TIPO_PRODUCTO");
             }
         } catch (SQLException ex) {
             System.err.println("Error al consultar si existe tipoProducto - " + ex);

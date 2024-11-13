@@ -33,4 +33,9 @@ public class ClienteBO {
         return cliente;
     }
     
+    public Cliente buscarPorDocumento(String documento){
+        Cliente cliente = this.clienteDAO.buscarPorDocumento(documento);
+        return cliente;
+    }
+    
 }

@@ -85,7 +85,7 @@ public class ComprobanteDePagoDAOImpl extends DAOImpl implements ComprobanteDePa
 
     @Override
     protected String obtenerPredicadoParaLlavePrimaria() {
-        return "id_comprobanteDePago=?";
+        return "ID_COMPROBANTE_DE_PAGO=?";
     }
 
     protected String obtenerListaDeValoresYAtributosParaModificacion() {

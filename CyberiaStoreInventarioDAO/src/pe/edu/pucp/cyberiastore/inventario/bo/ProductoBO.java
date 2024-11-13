@@ -37,4 +37,9 @@ public class ProductoBO {
         Producto producto = this.productoDAO.obtenerPorId(idProducto);
         return producto;
     }
+    
+    public ArrayList<Producto> buscar_sku(String sku){
+        ArrayList<Producto> productos_stock_sede = this.productoDAO.buscar_sku(sku);
+        return productos_stock_sede;
+    }
 }

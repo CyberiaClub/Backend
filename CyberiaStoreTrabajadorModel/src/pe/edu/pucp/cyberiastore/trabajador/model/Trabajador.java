@@ -2,6 +2,7 @@ package pe.edu.pucp.cyberiastore.trabajador.model;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import pe.edu.pucp.cyberiastore.usuario.model.Rol;
 import pe.edu.pucp.cyberiastore.usuario.model.TipoDocumento;
 import pe.edu.pucp.cyberiastore.usuario.model.Usuario;
 
@@ -27,19 +28,21 @@ public class Trabajador extends Usuario {
      * @param nombre
      * @param apellidoPaterno
      * @param apellidoMaterno
+     * @param sexo
      * @param fechaDeNacimiento
      * @param correo
      * @param direccion
      * @param contrasena
      * @param nacionalidad
      * @param tipoDeDocumento
+     * @param rol
      * @param sueldo
      * @param fechaDeIngreso
      * @param idSede
      */
-    public Trabajador(String documento, String telefono, String nombre, String apellidoPaterno, String apellidoMaterno,char sexo, Date fechaDeNacimiento,String correo,
-            String direccion, String contrasena, String nacionalidad, TipoDocumento tipoDeDocumento, Double sueldo, Date fechaDeIngreso, Integer idSede) {
-        super(documento, telefono, nombre, apellidoPaterno, apellidoMaterno,sexo, fechaDeNacimiento, correo, direccion, contrasena, nacionalidad, tipoDeDocumento);
+    public Trabajador(String documento, String telefono, String nombre, String apellidoPaterno, String apellidoMaterno, char sexo, Date fechaDeNacimiento, String correo,
+            String direccion, String contrasena, String nacionalidad, TipoDocumento tipoDeDocumento, Rol rol, Double sueldo, Date fechaDeIngreso, Integer idSede) {
+        super(documento, telefono, nombre, apellidoPaterno, apellidoMaterno, sexo, fechaDeNacimiento, correo, direccion, contrasena, nacionalidad, tipoDeDocumento, rol);
         this.sueldo = sueldo;
         this.fechaDeIngreso = fechaDeIngreso;
         this.fechaDeSalida = null;// siempre es nulo
@@ -65,8 +68,8 @@ public class Trabajador extends Usuario {
      * @param direccion
      * @param tipoDeDocumento
      */
-    public Trabajador(Integer idTrabajador, Double sueldo, Date fechaDeIngreso, Integer idUsuario, String documento, String telefono, String nombre, String apellidoPaterno, String apellidoMaterno, char sexo, Date fechaDeNacimiento, String correo, Boolean activo, String contrasena, String nacionalidad, String direccion, TipoDocumento tipoDeDocumento) {
-        super(idUsuario, documento, telefono, nombre, apellidoPaterno, apellidoMaterno,sexo,fechaDeNacimiento, correo, activo, contrasena, nacionalidad, direccion, tipoDeDocumento);
+    public Trabajador(Integer idTrabajador, Double sueldo, Date fechaDeIngreso, Integer idUsuario, String documento, String telefono, String nombre, String apellidoPaterno, String apellidoMaterno, char sexo, Date fechaDeNacimiento, String correo, Boolean activo, String contrasena, String nacionalidad, String direccion, TipoDocumento tipoDeDocumento, Rol rol) {
+        super(idUsuario, documento, telefono, nombre, apellidoPaterno, apellidoMaterno, sexo, fechaDeNacimiento, correo, activo, contrasena, nacionalidad, direccion, tipoDeDocumento, rol);
         this.idTrabajador = idTrabajador;
         this.sueldo = sueldo;
         this.fechaDeIngreso = fechaDeIngreso;

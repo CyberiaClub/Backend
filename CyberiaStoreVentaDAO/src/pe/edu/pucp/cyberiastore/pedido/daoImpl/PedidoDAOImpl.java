@@ -61,7 +61,7 @@ public class PedidoDAOImpl extends DAOImpl implements PedidoDAO {
 
     @Override
     protected String obtenerListaDeAtributosParaInsercion() {
-        return "estado";
+        return "ESTADO";
     }
 
     @Override

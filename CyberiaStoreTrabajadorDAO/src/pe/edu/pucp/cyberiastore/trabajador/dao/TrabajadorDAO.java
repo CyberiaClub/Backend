@@ -25,4 +25,5 @@ public interface TrabajadorDAO {
     public Boolean existeTrabajador(Trabajador trabajador);
 
     public Boolean existeTrabajador(Trabajador trabajador, Boolean abreConexion);
+    
 }

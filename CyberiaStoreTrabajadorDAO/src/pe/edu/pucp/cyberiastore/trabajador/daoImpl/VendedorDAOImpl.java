@@ -31,21 +31,23 @@ public class VendedorDAOImpl extends DAOImpl implements VendedorDAO {
         this.vendedor = vendedor;
         Integer idTrabajador = null;
         Trabajador trabajador = new Trabajador();
+        trabajador.setIdUsuario(vendedor.getIdUsuario());
         trabajador.setSueldo(vendedor.getSueldo());
         trabajador.setFechaDeIngreso(vendedor.getFechaDeIngreso());
         trabajador.setIdSede(vendedor.getIdSede());
-        trabajador.setDocumento(vendedor.getDocumento());
-        trabajador.setTelefono(vendedor.getTelefono());
-        trabajador.setNombre(vendedor.getNombre());
-        trabajador.setApellidoPaterno(vendedor.getApellidoPaterno());
-        trabajador.setApellidoMaterno(vendedor.getApellidoMaterno());
-        trabajador.setSexo(vendedor.getSexo());
-        trabajador.setFechaDeNacimiento(vendedor.getFechaDeNacimiento());
-        trabajador.setCorreo(vendedor.getCorreo());
-        trabajador.setContrasena(vendedor.getContrasena());
-        trabajador.setNacionalidad(vendedor.getNacionalidad());
-        trabajador.setDireccion(vendedor.getDireccion());
-        trabajador.setTipoDeDocumento(vendedor.getTipoDeDocumento());
+//        trabajador.setDocumento(vendedor.getDocumento());
+//        trabajador.setTelefono(vendedor.getTelefono());
+//        trabajador.setNombre(vendedor.getNombre());
+//        trabajador.setApellidoPaterno(vendedor.getApellidoPaterno());
+//        trabajador.setApellidoMaterno(vendedor.getApellidoMaterno());
+//        trabajador.setSexo(vendedor.getSexo());
+//        trabajador.setFechaDeNacimiento(vendedor.getFechaDeNacimiento());
+//        trabajador.setCorreo(vendedor.getCorreo());
+//        trabajador.setContrasena(vendedor.getContrasena());
+//        trabajador.setNacionalidad(vendedor.getNacionalidad());
+//        trabajador.setDireccion(vendedor.getDireccion());
+//        trabajador.setTipoDeDocumento(vendedor.getTipoDeDocumento());
+        trabajador.setRol(vendedor.getRol());
 
         TrabajadorDAO trabajadorDAO = new TrabajadorDAOImpl();
         Integer idVendedor = null;
@@ -170,9 +172,9 @@ public class VendedorDAOImpl extends DAOImpl implements VendedorDAO {
     protected String obtenerPredicadoParaLlavePrimaria() {
         String sql = "";
         if (this.tipo_Operacion == Tipo_Operacion.MODIFICAR || this.tipo_Operacion == Tipo_Operacion.ELIMINAR) {
-            sql = "id_vendedor=?";
+            sql = "ID_VENDEDOR=?";
         } else {
-            sql = "AND VEN.id_vendedor=?";
+            sql = "AND VEN.ID_VENDEDOR=?";
         }
         return sql;
     }
@@ -217,11 +219,11 @@ public class VendedorDAOImpl extends DAOImpl implements VendedorDAO {
         String sql = "select ";
         sql = sql.concat(obtenerProyeccionParaSelect());
         sql = sql.concat(" from ").concat(this.nombre_tabla).concat(" VEN ");
-        sql = sql.concat("JOIN trabajador TR ON VEN.ID_TRABAJADOR = TR.ID_TRABAJADOR ");
-        sql = sql.concat("JOIN usuario US ON TR.ID_USUARIO = US.ID_USUARIO ");
-        sql = sql.concat("JOIN trabajador_x_sede TRXS ON TR.ID_TRABAJADOR = TRXS.ID_TRABAJADOR ");
-        sql = sql.concat("JOIN sede S ON TRXS.ID_SEDE = S.ID_SEDE ");
-        sql = sql.concat(" where US.activo = 1 ");
+        sql = sql.concat("JOIN TRABAJADOR TR ON VEN.ID_TRABAJADOR = TR.ID_TRABAJADOR ");
+        sql = sql.concat("JOIN USUARIO US ON TR.ID_USUARIO = US.ID_USUARIO ");
+        sql = sql.concat("JOIN TRABAJADOR_X_SEDE TRXS ON TR.ID_TRABAJADOR = TRXS.ID_TRABAJADOR ");
+        sql = sql.concat("JOIN SEDE S ON TRXS.ID_SEDE = S.ID_SEDE ");
+        sql = sql.concat(" where US.ACTIVO = 1 ");
         sql = sql.concat(this.obtenerPredicadoParaLlavePrimaria());
         return sql;
     }
@@ -247,11 +249,11 @@ public class VendedorDAOImpl extends DAOImpl implements VendedorDAO {
         String sql = "select ";
         sql = sql.concat(obtenerProyeccionParaSelect());
         sql = sql.concat(" from ").concat(this.nombre_tabla).concat(" VEN ");
-        sql = sql.concat("JOIN trabajador TR ON VEN.ID_TRABAJADOR = TR.ID_TRABAJADOR ");
-        sql = sql.concat("JOIN usuario US ON TR.ID_USUARIO = US.ID_USUARIO ");
-        sql = sql.concat("JOIN trabajador_x_sede TRXS ON TR.ID_TRABAJADOR = TRXS.ID_TRABAJADOR ");
-        sql = sql.concat("JOIN sede S ON TRXS.ID_SEDE = S.ID_SEDE ");
-        sql = sql.concat("WHERE US.activo = 1 ");
+        sql = sql.concat("JOIN TRABAJADOR TR ON VEN.ID_TRABAJADOR = TR.ID_TRABAJADOR ");
+        sql = sql.concat("JOIN USUARIO US ON TR.ID_USUARIO = US.ID_USUARIO ");
+        sql = sql.concat("JOIN TRABAJADOR_X_SEDE TRXS ON TR.ID_TRABAJADOR = TRXS.ID_TRABAJADOR ");
+        sql = sql.concat("JOIN SEDE S ON TRXS.ID_SEDE = S.ID_SEDE ");
+        sql = sql.concat("WHERE US.ACTIVO = 1 ");
         if (limite != null && limite > 0) {
             sql = sql.concat(" limit ").concat(limite.toString());
         }
@@ -277,10 +279,10 @@ public class VendedorDAOImpl extends DAOImpl implements VendedorDAO {
     @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.vendedor = new Vendedor();
-        this.vendedor.setIdVendedor(this.resultSet.getInt("id_vendedor"));
-        this.vendedor.setIdTrabajador(this.resultSet.getInt("id_trabajador"));
-        this.vendedor.setIdUsuario(this.resultSet.getInt("id_usuario"));
-        this.vendedor.setNombre(this.resultSet.getString("nombre"));
+        this.vendedor.setIdVendedor(this.resultSet.getInt("ID_VENDEDOR"));
+        this.vendedor.setIdTrabajador(this.resultSet.getInt("ID_TRABAJADOR"));
+        this.vendedor.setIdUsuario(this.resultSet.getInt("ID_USUARIO"));
+        this.vendedor.setNombre(this.resultSet.getString("NOMBRE"));
         this.vendedor.setApellidoPaterno(this.resultSet.getString("APELLIDO_PATERNO"));
         this.vendedor.setApellidoMaterno(this.resultSet.getString("APELLIDO_MATERNO"));
         this.vendedor.setSexo(this.resultSet.getString("SEXO").charAt(0));
@@ -324,13 +326,13 @@ public class VendedorDAOImpl extends DAOImpl implements VendedorDAO {
             if (abreConexion) {
                 this.abrirConexion();
             }
-            String sql = "select id_vendedor from vendedor where ";
-            sql = sql.concat("id_trabajador=? ");
+            String sql = "select ID_VENDEDOR from VENDEDOR where ";
+            sql = sql.concat("ID_TRABAJADOR=? ");
             this.colocarSQLenStatement(sql);
             this.incluirParametroInt(1, this.vendedor.getIdTrabajador());
             this.ejecutarConsultaEnBD(sql);
             if (this.resultSet.next()) {
-                idVendedor = this.resultSet.getInt("id_vendedor");
+                idVendedor = this.resultSet.getInt("ID_VENDEDOR");
             }
         } catch (SQLException ex) {
             System.err.println("Error al consultar si existe vendedor - " + ex);
