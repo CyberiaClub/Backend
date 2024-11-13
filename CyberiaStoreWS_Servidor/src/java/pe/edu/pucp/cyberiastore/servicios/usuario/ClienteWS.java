@@ -33,4 +33,10 @@ public class ClienteWS {
     public ArrayList<Cliente> cliente_listar() {
         return clienteBO.listarTodos();
     }
+    
+    @WebMethod(operationName = "cliente_buscar_por_documento")
+    public Cliente cliente_buscar_por_documento(@WebParam(name = "documento") String documento) {
+        return clienteBO.buscarPorDocumento(documento);
+    }
+    
 }

@@ -13,13 +13,15 @@ import pe.edu.pucp.cyberiastore.usuario.model.TipoDocumento;
 import pe.edu.pucp.cyberiastore.usuario.model.Usuario;
 
 public class ClienteDAOImpl extends DAOImpl implements ClienteDAO {
-    
+
     private Cliente cliente;
-    
+    private Tipo_Operacion tipoSelect;
+
     public ClienteDAOImpl() {
         super("CLIENTE");
         this.retornarLlavePrimaria = true;
         this.cliente = null;
+        this.tipoSelect = null;
     }
 
     /*
@@ -46,7 +48,7 @@ public class ClienteDAOImpl extends DAOImpl implements ClienteDAO {
         usuario.setDireccion(this.cliente.getDireccion());
         usuario.setTipoDeDocumento(this.cliente.getTipoDeDocumento());
         usuario.setRol(this.cliente.getRol());
-        
+
         UsuarioDAO usuarioDAO = new UsuarioDAOImpl();
         Boolean existeUsuario = usuarioDAO.existeUsuario(usuario);
         Boolean existeCliente = false;
@@ -83,17 +85,17 @@ public class ClienteDAOImpl extends DAOImpl implements ClienteDAO {
         this.usarTransaccion = true;
         return idUsuario;
     }
-    
+
     @Override
     protected String obtenerListaDeAtributosParaInsercion() {
         return "VERIFICADO, ID_USUARIO";
     }
-    
+
     @Override
     protected String incluirListaDeParametrosParaInsercion() {
         return "?,?";
     }
-    
+
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
         this.incluirParametroBoolean(1, this.cliente.getVerificado());
@@ -124,9 +126,9 @@ public class ClienteDAOImpl extends DAOImpl implements ClienteDAO {
         usuario.setNacionalidad(this.cliente.getNacionalidad());
         usuario.setDireccion(this.cliente.getDireccion());
         usuario.setTipoDeDocumento(this.cliente.getTipoDeDocumento());
-        
+
         UsuarioDAO usuarioDAO = new UsuarioDAOImpl();
-        
+
         this.usarTransaccion = false;
         try {
             this.iniciarTransaccion();
@@ -150,7 +152,7 @@ public class ClienteDAOImpl extends DAOImpl implements ClienteDAO {
         this.usarTransaccion = true;
         return retorno;
     }
-    
+
     @Override
     protected String obtenerPredicadoParaLlavePrimaria() {
         String sql = "";
@@ -161,12 +163,12 @@ public class ClienteDAOImpl extends DAOImpl implements ClienteDAO {
         }
         return sql;
     }
-    
+
     @Override
     protected String obtenerListaDeValoresYAtributosParaModificacion() {
         return "VERIFICADO=?";
     }
-    
+
     @Override
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
         this.incluirParametroBoolean(1, this.cliente.getVerificado());
@@ -185,7 +187,7 @@ public class ClienteDAOImpl extends DAOImpl implements ClienteDAO {
     public Integer eliminar(Cliente cliente) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     @Override
     protected void incluirValorDeParametrosParaEliminacion() throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -203,7 +205,7 @@ public class ClienteDAOImpl extends DAOImpl implements ClienteDAO {
         super.obtenerPorId();
         return this.cliente;
     }
-    
+
     @Override
     protected String generarSQLParaListarPorId() {
         String sql = "select ";
@@ -215,7 +217,7 @@ public class ClienteDAOImpl extends DAOImpl implements ClienteDAO {
         sql = sql.concat(this.obtenerPredicadoParaLlavePrimaria());
         return sql;
     }
-    
+
     @Override
     protected void incluirValorDeParametrosParaObtenerPorId() throws SQLException {
         this.incluirParametroInt(1, this.cliente.getIdCliente());
@@ -228,9 +230,33 @@ public class ClienteDAOImpl extends DAOImpl implements ClienteDAO {
      */
     @Override
     public ArrayList<Cliente> listarTodos() {
+        this.tipoSelect = Tipo_Operacion.LISTARTODOS;
         return (ArrayList<Cliente>) super.listarTodos(null);
     }
+
+    @Override
+    public Cliente buscarPorDocumento(String documento) {
+        this.cliente.setDocumento(documento);
+        this.tipoSelect = Tipo_Operacion.BUSCARPORDOCUMENTO;
+        return this.listarTodos().getFirst();
+    }
     
+    @Override
+    protected String obtenerPredicadoParaListado() {
+        if(this.tipoSelect == Tipo_Operacion.LISTARTODOS)
+            return "";
+        else if(this.tipoSelect == Tipo_Operacion.BUSCARPORDOCUMENTO)
+            return "where US.DOCUMENTO = ?";
+        
+        return "";
+    }
+
+    @Override
+    protected void incluirValorDeParametrosParaListado() throws SQLException {
+        if(this.tipoSelect == Tipo_Operacion.BUSCARPORDOCUMENTO)
+            this.incluirParametroString(1, this.cliente.getDocumento());
+    }
+
     @Override
     protected String generarSQLParaListarTodos(Integer limite) {
         String sql = "select ";
@@ -244,23 +270,24 @@ public class ClienteDAOImpl extends DAOImpl implements ClienteDAO {
         }
         return sql;
     }
-    
+
     @Override
     protected String obtenerProyeccionParaSelect() {
-        String sql = "CLI.ID_CLIENTE,CLI.VERIFICADO,";
+        String sql = "";
+        sql = sql.concat("CLI.ID_CLIENTE,CLI.VERIFICADO,");
         sql = sql.concat("US.ID_USUARIO,US.DOCUMENTO,US.TELEFONO,");
         sql = sql.concat("US.NOMBRE,US.APELLIDO_PATERNO,US.APELLIDO_MATERNO,US.SEXO");
         sql = sql.concat("US.FECHA_NACIMIENTO,US.CORREO,US.DIRECCION,");
         sql = sql.concat("US.NACIONALIDAD,US.TIPO_DOCUMENTO");
         return sql;
     }
-    
+
     @Override
     protected void agregarObjetoALaLista(List lista, ResultSet resultSet) throws SQLException {
         instanciarObjetoDelResultSet();
         lista.add(this.cliente);
     }
-    
+
     @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.cliente = new Cliente();
@@ -277,12 +304,12 @@ public class ClienteDAOImpl extends DAOImpl implements ClienteDAO {
         this.cliente.setCorreo(this.resultSet.getString("CORREO"));
         this.cliente.setDireccion(this.resultSet.getString("DIRECCION"));
         this.cliente.setNacionalidad(this.resultSet.getString("NACIONALIDAD"));
-        
+
         String tipoDocumentoStr = this.resultSet.getString("TIPO_DOCUMENTO");
         TipoDocumento tipoDocumento = TipoDocumento.valueOf(tipoDocumentoStr);
         this.cliente.setTipoDeDocumento(tipoDocumento);
     }
-    
+
     @Override
     protected void limpiarObjetoDelResultSet() {
         this.cliente = null;
@@ -299,7 +326,7 @@ public class ClienteDAOImpl extends DAOImpl implements ClienteDAO {
         Boolean abreConexion = true;
         return existeCliente(cliente, abreConexion);
     }
-    
+
     @Override
     public Boolean existeCliente(Cliente cliente, Boolean abreConexion) {
         this.cliente = cliente;
@@ -329,5 +356,5 @@ public class ClienteDAOImpl extends DAOImpl implements ClienteDAO {
         }
         return idCliente != null;
     }
-    
+
 }
