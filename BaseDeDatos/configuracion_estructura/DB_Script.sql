@@ -7,6 +7,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema CyberiaStore
 -- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `CyberiaStore` ;
 
 -- -----------------------------------------------------
 -- Schema CyberiaStore
@@ -36,38 +37,6 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `CyberiaStore`.`PRODUCTO`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `CyberiaStore`.`PRODUCTO` ;
-
-CREATE TABLE IF NOT EXISTS `CyberiaStore`.`PRODUCTO` (
-  `ID_PRODUCTO` INT NOT NULL AUTO_INCREMENT,
-  `SKU` VARCHAR(8) NOT NULL,
-  `NOMBRE` VARCHAR(45) NOT NULL,
-  `DESCRIPCION` TEXT NOT NULL,
-  `PRECIO` DOUBLE NOT NULL,
-  `IMAGEN` BLOB NOT NULL,
-  UNIQUE INDEX `SKU_UNIQUE` (`SKU` ASC) VISIBLE,
-  PRIMARY KEY (`ID_PRODUCTO`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `CyberiaStore`.`MARCA`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `CyberiaStore`.`MARCA` ;
-
-CREATE TABLE IF NOT EXISTS `CyberiaStore`.`MARCA` (
-  `ID_MARCA` INT NOT NULL AUTO_INCREMENT,
-  `NOMBRE` VARCHAR(45) NOT NULL,
-  `ACTIVO` TINYINT NOT NULL,
-  `IMAGEN` BLOB NOT NULL,
-  PRIMARY KEY (`ID_MARCA`),
-  UNIQUE INDEX `NOMBRE_UNIQUE` (`NOMBRE` ASC) VISIBLE)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `CyberiaStore`.`TIPO_PRODUCTO`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `CyberiaStore`.`TIPO_PRODUCTO` ;
@@ -82,6 +51,42 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `CyberiaStore`.`MARCA`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `CyberiaStore`.`MARCA` ;
+
+CREATE TABLE IF NOT EXISTS `CyberiaStore`.`MARCA` (
+  `ID_MARCA` INT NOT NULL AUTO_INCREMENT,
+  `NOMBRE` VARCHAR(45) NOT NULL,
+  `ACTIVO` TINYINT NOT NULL,
+  `IMAGEN` BLOB NOT NULL,
+  `ID_PROVEEDOR` INT NOT NULL,
+  PRIMARY KEY (`ID_MARCA`, `ID_PROVEEDOR`),
+  UNIQUE INDEX `NOMBRE_UNIQUE` (`NOMBRE` ASC) VISIBLE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `CyberiaStore`.`PRODUCTO`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `CyberiaStore`.`PRODUCTO` ;
+
+CREATE TABLE IF NOT EXISTS `CyberiaStore`.`PRODUCTO` (
+  `ID_PRODUCTO` INT NOT NULL AUTO_INCREMENT,
+  `SKU` VARCHAR(8) NOT NULL,
+  `NOMBRE` VARCHAR(45) NOT NULL,
+  `DESCRIPCION` TEXT NOT NULL,
+  `PRECIO` DOUBLE NOT NULL,
+  `PRECIO_PROVEEDOR` DOUBLE NOT NULL,
+  `IMAGEN` BLOB NOT NULL,
+  `ID_TIPO_PRODUCTO` INT NOT NULL,
+  `ID_MARCA` INT NOT NULL,
+  UNIQUE INDEX `SKU_UNIQUE` (`SKU` ASC) VISIBLE,
+  PRIMARY KEY (`ID_PRODUCTO`, `ID_TIPO_PRODUCTO`, `ID_MARCA`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `CyberiaStore`.`PRODUCTO_COMPUESTO`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `CyberiaStore`.`PRODUCTO_COMPUESTO` ;
@@ -90,40 +95,6 @@ CREATE TABLE IF NOT EXISTS `CyberiaStore`.`PRODUCTO_COMPUESTO` (
   `ID_PRODUCTO_PADRE` INT NOT NULL,
   `ID_PRODUCTO` INT NOT NULL,
   `CANTIDAD` INT NOT NULL)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `CyberiaStore`.`PRODUCTO_X_TIPO`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `CyberiaStore`.`PRODUCTO_X_TIPO` ;
-
-CREATE TABLE IF NOT EXISTS `CyberiaStore`.`PRODUCTO_X_TIPO` (
-  `ID_TIPO_PRODUCTO` INT NOT NULL,
-  `ID_PRODUCTO` INT NOT NULL)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `CyberiaStore`.`PRODUCTO_X_PROVEEDOR`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `CyberiaStore`.`PRODUCTO_X_PROVEEDOR` ;
-
-CREATE TABLE IF NOT EXISTS `CyberiaStore`.`PRODUCTO_X_PROVEEDOR` (
-  `ID_PROVEEDOR` INT NOT NULL,
-  `ID_PRODUCTO` INT NOT NULL,
-  `PRECIO_PROVEEDOR` DOUBLE NOT NULL)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `CyberiaStore`.`PRODUCTO_X_MARCA`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `CyberiaStore`.`PRODUCTO_X_MARCA` ;
-
-CREATE TABLE IF NOT EXISTS `CyberiaStore`.`PRODUCTO_X_MARCA` (
-  `ID_PRODUCTO` INT NOT NULL,
-  `ID_MARCA` INT NOT NULL)
 ENGINE = InnoDB;
 
 
@@ -158,31 +129,6 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `CyberiaStore`.`PEDIDO`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `CyberiaStore`.`PEDIDO` ;
-
-CREATE TABLE IF NOT EXISTS `CyberiaStore`.`PEDIDO` (
-  `ID_PEDIDO` INT NOT NULL AUTO_INCREMENT,
-  `ESTADO` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`ID_PEDIDO`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `CyberiaStore`.`PRODUCTO_X_PEDIDO`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `CyberiaStore`.`PRODUCTO_X_PEDIDO` ;
-
-CREATE TABLE IF NOT EXISTS `CyberiaStore`.`PRODUCTO_X_PEDIDO` (
-  `ID_PEDIDO` INT NOT NULL,
-  `ID_PRODUCTO` INT NOT NULL,
-  `CANTIDAD` INT NOT NULL,
-  PRIMARY KEY (`ID_PEDIDO`, `ID_PRODUCTO`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `CyberiaStore`.`OFERTA`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `CyberiaStore`.`OFERTA` ;
@@ -209,76 +155,36 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `CyberiaStore`.`COMPROBANTE_DE_PAGO`
+-- Table `CyberiaStore`.`TIPO_TRANSACCION`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `CyberiaStore`.`COMPROBANTE_DE_PAGO` ;
+DROP TABLE IF EXISTS `CyberiaStore`.`TIPO_TRANSACCION` ;
 
-CREATE TABLE IF NOT EXISTS `CyberiaStore`.`COMPROBANTE_DE_PAGO` (
-  `ID_COMPROBANTE_DE_PAGO` INT NOT NULL AUTO_INCREMENT,
-  `FECHA` DATE NOT NULL,
-  `SUBTOTAL` DOUBLE NOT NULL,
-  `IGV` DOUBLE NOT NULL,
-  `TOTAL` DOUBLE NOT NULL,
-  `DESCUENTO_APLICADO` DOUBLE NULL,
-  `ACTIVO` TINYINT NOT NULL,
-  `ID_PEDIDO` INT NOT NULL,
-  `ID_OFERTA` INT NULL,
-  PRIMARY KEY (`ID_COMPROBANTE_DE_PAGO`, `ID_PEDIDO`),
-  UNIQUE INDEX `ID_COMPROBANTE_DE_PAGO_UNIQUE` (`ID_COMPROBANTE_DE_PAGO` ASC) VISIBLE)
+CREATE TABLE IF NOT EXISTS `CyberiaStore`.`TIPO_TRANSACCION` (
+  `ID_TIPO_TRANSACCION` INT NOT NULL,
+  `SECUENCIAL` VARCHAR(2) NOT NULL,
+  `TIPO_TRANSACCION` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`ID_TIPO_TRANSACCION`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `CyberiaStore`.`BOLETA`
+-- Table `CyberiaStore`.`TIPO_TRABAJADOR`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `CyberiaStore`.`BOLETA` ;
+DROP TABLE IF EXISTS `CyberiaStore`.`TIPO_TRABAJADOR` ;
 
-CREATE TABLE IF NOT EXISTS `CyberiaStore`.`BOLETA` (
-  `ID_BOLETA` INT NOT NULL AUTO_INCREMENT,
-  `ACTIVO` TINYINT NOT NULL,
-  `NUMERO_BOLETA` VARCHAR(8) NOT NULL,
-  `ID_COMPROBANTE_DE_PAGO` INT NOT NULL,
-  PRIMARY KEY (`ID_BOLETA`, `ID_COMPROBANTE_DE_PAGO`),
-  UNIQUE INDEX `NUMERO_BOLETA_UNIQUE` (`NUMERO_BOLETA` ASC) VISIBLE)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `CyberiaStore`.`FACTURA`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `CyberiaStore`.`FACTURA` ;
-
-CREATE TABLE IF NOT EXISTS `CyberiaStore`.`FACTURA` (
-  `ID_FACTURA` INT NOT NULL AUTO_INCREMENT,
-  `NUMERO_FACTURA` VARCHAR(8) NOT NULL,
-  `RUC` VARCHAR(11) NOT NULL,
-  `RAZON_SOCIAL` VARCHAR(45) NOT NULL,
-  `DIRECCION` VARCHAR(45) NOT NULL,
-  `ACTIVO` TINYINT NOT NULL,
-  `ID_COMPROBANTE_DE_PAGO` INT NOT NULL,
-  PRIMARY KEY (`ID_FACTURA`, `ID_COMPROBANTE_DE_PAGO`),
-  UNIQUE INDEX `NUMERO_FACTURA_UNIQUE` (`NUMERO_FACTURA` ASC) VISIBLE)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `CyberiaStore`.`ROL`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `CyberiaStore`.`ROL` ;
-
-CREATE TABLE IF NOT EXISTS `CyberiaStore`.`ROL` (
-  `ID_ROL` INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `CyberiaStore`.`TIPO_TRABAJADOR` (
+  `ID_TIPO_TRABAJADOR` INT NOT NULL,
   `NOMBRE` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`ID_ROL`))
+  PRIMARY KEY (`ID_TIPO_TRABAJADOR`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `CyberiaStore`.`USUARIO`
+-- Table `CyberiaStore`.`PERSONA`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `CyberiaStore`.`USUARIO` ;
+DROP TABLE IF EXISTS `CyberiaStore`.`PERSONA` ;
 
-CREATE TABLE IF NOT EXISTS `CyberiaStore`.`USUARIO` (
+CREATE TABLE IF NOT EXISTS `CyberiaStore`.`PERSONA` (
   `ID_USUARIO` INT NOT NULL AUTO_INCREMENT,
   `DOCUMENTO` VARCHAR(15) NOT NULL,
   `TELEFONO` VARCHAR(13) NOT NULL,
@@ -293,59 +199,37 @@ CREATE TABLE IF NOT EXISTS `CyberiaStore`.`USUARIO` (
   `CONTRASEÑA` VARCHAR(128) NOT NULL,
   `NACIONALIDAD` VARCHAR(30) NOT NULL,
   `TIPO_DOCUMENTO` VARCHAR(25) NOT NULL,
-  `ID_ROL` INT NOT NULL,
-  PRIMARY KEY (`ID_USUARIO`, `ID_ROL`),
+  `ID_TRABAJADOR` INT NULL,
+  `SUELDO` DOUBLE NULL,
+  `FECHA_INGRESO` DATE NULL,
+  `FECHA_SALIDA` DATE NULL,
+  `ID_TIPO_TRABAJADOR` INT NULL,
+  PRIMARY KEY (`ID_USUARIO`),
   UNIQUE INDEX `DOCUMENTO_UNIQUE` (`DOCUMENTO` ASC) VISIBLE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `CyberiaStore`.`CLIENTE`
+-- Table `CyberiaStore`.`COMPROBANTE_DE_PAGO`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `CyberiaStore`.`CLIENTE` ;
+DROP TABLE IF EXISTS `CyberiaStore`.`COMPROBANTE_DE_PAGO` ;
 
-CREATE TABLE IF NOT EXISTS `CyberiaStore`.`CLIENTE` (
-  `ID_CLIENTE` INT NOT NULL AUTO_INCREMENT,
-  `VERIFICADO` TINYINT NOT NULL,
-  `ID_USUARIO` INT NOT NULL,
-  PRIMARY KEY (`ID_CLIENTE`, `ID_USUARIO`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `CyberiaStore`.`BOLETA_X_CLIENTE`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `CyberiaStore`.`BOLETA_X_CLIENTE` ;
-
-CREATE TABLE IF NOT EXISTS `CyberiaStore`.`BOLETA_X_CLIENTE` (
-  `ID_CLIENTE` INT NOT NULL,
-  `ID_BOLETA` INT NOT NULL)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `CyberiaStore`.`FACTURA_X_CLIENTE`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `CyberiaStore`.`FACTURA_X_CLIENTE` ;
-
-CREATE TABLE IF NOT EXISTS `CyberiaStore`.`FACTURA_X_CLIENTE` (
-  `ID_FACTURA` INT NOT NULL,
-  `ID_CLIENTE` INT NOT NULL)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `CyberiaStore`.`TRABAJADOR`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `CyberiaStore`.`TRABAJADOR` ;
-
-CREATE TABLE IF NOT EXISTS `CyberiaStore`.`TRABAJADOR` (
-  `ID_TRABAJADOR` INT NOT NULL AUTO_INCREMENT,
-  `SUELDO` DOUBLE NOT NULL,
-  `FECHA_INGRESO` DATE NOT NULL,
-  `FECHA_SALIDA` DATE NULL,
-  `ID_USUARIO` INT NOT NULL,
-  PRIMARY KEY (`ID_TRABAJADOR`, `ID_USUARIO`))
+CREATE TABLE IF NOT EXISTS `CyberiaStore`.`COMPROBANTE_DE_PAGO` (
+  `ID_COMPROBANTE_DE_PAGO` INT NOT NULL AUTO_INCREMENT,
+  `FECHA` DATE NOT NULL,
+  `SUBTOTAL` DOUBLE NOT NULL,
+  `IGV` DOUBLE NOT NULL,
+  `TOTAL` DOUBLE NOT NULL,
+  `ACTIVO` TINYINT NOT NULL,
+  `ESTADO_PEDIDO` VARCHAR(45) NOT NULL,
+  `NUMERO` VARCHAR(8) NOT NULL,
+  `RUC` VARCHAR(11) NULL,
+  `RAZON_SOCIAL` VARCHAR(45) NULL,
+  `DIRECCION` VARCHAR(45) NULL,
+  `ID_TIPO_TRANSACCION` INT NOT NULL,
+  `ID_PERSONA` INT NOT NULL,
+  PRIMARY KEY (`ID_COMPROBANTE_DE_PAGO`, `ID_TIPO_TRANSACCION`, `ID_PERSONA`),
+  UNIQUE INDEX `ID_COMPROBANTE_DE_PAGO_UNIQUE` (`ID_COMPROBANTE_DE_PAGO` ASC) VISIBLE)
 ENGINE = InnoDB;
 
 
@@ -355,44 +239,21 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `CyberiaStore`.`TRABAJADOR_X_SEDE` ;
 
 CREATE TABLE IF NOT EXISTS `CyberiaStore`.`TRABAJADOR_X_SEDE` (
-  `ID_TRABAJADOR` INT NOT NULL,
-  `ID_SEDE` INT NOT NULL)
+  `ID_SEDE` INT NOT NULL,
+  `ID_TRABAJADOR` INT NOT NULL)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `CyberiaStore`.`ADMINISTRADOR`
+-- Table `CyberiaStore`.`COMPROBANTE_DE_PAGO_X_PRODUCTO`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `CyberiaStore`.`ADMINISTRADOR` ;
+DROP TABLE IF EXISTS `CyberiaStore`.`COMPROBANTE_DE_PAGO_X_PRODUCTO` ;
 
-CREATE TABLE IF NOT EXISTS `CyberiaStore`.`ADMINISTRADOR` (
-  `ID_ADMINISTRADOR` INT NOT NULL AUTO_INCREMENT,
-  `ID_TRABAJADOR` INT NOT NULL,
-  PRIMARY KEY (`ID_ADMINISTRADOR`, `ID_TRABAJADOR`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `CyberiaStore`.`ALMACENERO`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `CyberiaStore`.`ALMACENERO` ;
-
-CREATE TABLE IF NOT EXISTS `CyberiaStore`.`ALMACENERO` (
-  `ID_ALMACENERO` INT NOT NULL AUTO_INCREMENT,
-  `ID_TRABAJADOR` INT NOT NULL,
-  PRIMARY KEY (`ID_ALMACENERO`, `ID_TRABAJADOR`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `CyberiaStore`.`VENDEDOR`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `CyberiaStore`.`VENDEDOR` ;
-
-CREATE TABLE IF NOT EXISTS `CyberiaStore`.`VENDEDOR` (
-  `ID_VENDEDOR` INT NOT NULL AUTO_INCREMENT,
-  `ID_TRABAJADOR` INT NOT NULL,
-  PRIMARY KEY (`ID_VENDEDOR`, `ID_TRABAJADOR`))
+CREATE TABLE IF NOT EXISTS `CyberiaStore`.`COMPROBANTE_DE_PAGO_X_PRODUCTO` (
+  `ID_COMPROBANTE_DE_PAGO` INT NOT NULL,
+  `ID_PRODUCTO` INT NOT NULL,
+  `CANTIDAD` INT NOT NULL,
+  PRIMARY KEY (`ID_COMPROBANTE_DE_PAGO`, `ID_PRODUCTO`))
 ENGINE = InnoDB;
 
 

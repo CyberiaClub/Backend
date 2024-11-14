@@ -73,7 +73,7 @@ public class DBManager {
             //el archivo de configuración se encuentra en la carpeta resources/jdbc.properties
             //del proyecto que lo invoca
 //            String nmArchivoConf = "C:\\Program Files\\glassfish7\\glassfish\\resources" + "\\" + ARCHIVO_CONFIGURACION;
-            String nmArchivoConf = "C:\\glassfish-7.0.18\\glassfish7\\glassfish\\resources" + "\\" + ARCHIVO_CONFIGURACION;
+            String nmArchivoConf = "C:\\Users\\ipana\\Downloads" + "\\" + ARCHIVO_CONFIGURACION;
             properties.load(new FileInputStream(new File(nmArchivoConf)));
             this.driver = properties.getProperty("driver");
             System.out.println(this.driver);
