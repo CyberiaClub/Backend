@@ -8,13 +8,17 @@ public class Marca {
     private byte[] imagen;
 
     public Marca() {
+        this.idMarca = null;
+        this.nombre = null;
         this.activo = true;
+        this.imagen = null;
     }
 
-    public Marca(String nombre, byte[] imagenBytes) {
+    public Marca(Integer idMarca, String nombre, Boolean activo, byte[] imagen) {
+        this.idMarca = idMarca;
         this.nombre = nombre;
-        this.imagen = imagenBytes;
-        this.activo = true;
+        this.activo = (activo==null) ? true:activo;
+        this.imagen = imagen;
     }
 
     public void setIdMarca(Integer idMarca) {
@@ -40,19 +44,12 @@ public class Marca {
     public void setActivo(Boolean activo) {
         this.activo = activo;
     }
-
-    /**
-     * @return the imagen
-     */
+    
     public byte[] getImagen() {
-        return imagen;
+        return imagen.clone();
     }
-
-    /**
-     * @param imagen the imagen to set
-     */
+    
     public void setImagen(byte[] imagen) {
         this.imagen = imagen;
     }
-
 }

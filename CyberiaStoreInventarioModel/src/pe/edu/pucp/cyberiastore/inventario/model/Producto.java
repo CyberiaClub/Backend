@@ -1,7 +1,6 @@
 package pe.edu.pucp.cyberiastore.inventario.model;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Producto {
 
@@ -10,45 +9,39 @@ public class Producto {
     private String nombre;
     private String descripcion;
     private Double precio;
-    private byte[] imagen;
-    // Estos ultimos atributos son para el insertar
-    private Integer cantidad;
-    private ArrayList<Producto> productosMiembros;
-    private Integer idMarca;
-    private Integer idTipo;
-    private Integer idProveedor;
     private Double precioProveedor;
-    private Integer idSede;
+    private Boolean activo;
+    private byte[] imagen;
+    private ArrayList<Producto> productosMiembros;
+    private TipoProducto tipoProducto;
+    private Marca marca;
 
     public Producto() {
+        this.idProducto = null;
+        this.sku = null;
+        this.nombre = null;
+        this.descripcion = null;
+        this.precio = null;
+        this.precioProveedor = null;
+        this.activo = true;
+        this.imagen = null;
         this.productosMiembros = null;
+        this.tipoProducto = null;
+        this.marca = null;
     }
 
-    public Producto(String sku, String nombre, String descripcion, Double precio) {
-        this.sku = sku;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.precio = precio;
-        this.productosMiembros = null;
-    }
-
-    public Producto(String sku, String nombre, String descripcion, Double precio, ArrayList<Producto> productosMiembros, byte[] imagenBytes) {
-        this.sku = sku;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.precio = precio;
-        this.productosMiembros = productosMiembros;
-        this.imagen = imagenBytes;
-    }
-
-    public Producto(Integer idProducto, String sku, String nombre, String descripcion, Double precio, ArrayList<Producto> productoMiembros, byte[] imagenBytes) {
+    public Producto(Integer idProducto, String sku, String nombre, String descripcion, Double precio, Double precioProveedor, Boolean activo, ArrayList<Producto> productoMiembros, byte[] imagen, TipoProducto tipoProducto, Marca marca) {
         this.idProducto = idProducto;
         this.sku = sku;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
+        this.precioProveedor = precioProveedor;
+        this.activo = (activo == null) ? true:activo;
+        this.imagen = imagen;
         this.productosMiembros = productoMiembros;
-        this.imagen = imagenBytes;
+        this.tipoProducto = tipoProducto;
+        this.marca = marca;
     }
 
     public void setIdProducto(Integer idProducto) {
@@ -91,8 +84,20 @@ public class Producto {
         this.precio = precio;
     }
 
-    public Integer getCantidad() {
-        return cantidad;
+    public Double getPrecioProveedor() {
+        return precioProveedor;
+    }
+
+    public void setPrecioProveedor(Double precioProveedor) {
+        this.precioProveedor = precioProveedor;
+    }
+
+    public Boolean getActivo() {
+        return activo;
+    }
+
+    public void setActivo(Boolean activo) {
+        this.activo = activo;
     }
 
     public byte[] getImagen() {
@@ -103,57 +108,33 @@ public class Producto {
         this.imagen = imagen;
     }
 
-    /*Usados para el insertar*/
-    public void setCantidad(Integer cantidad) {
-        this.cantidad = cantidad;
-    }
-
     public ArrayList<Producto> getProductosMiembros() {
-        return productosMiembros;
+        return (ArrayList<Producto>)productosMiembros.clone();
     }
 
     public void setProductosMiembros(ArrayList<Producto> productosMiembros) {
         this.productosMiembros = productosMiembros;
     }
-
-    public Integer getIdMarca() {
-        return idMarca;
+    
+    public TipoProducto getTipoProducto(){
+        return new TipoProducto(this.tipoProducto.getIdTipoProducto(),
+                                this.tipoProducto.getTipo(),
+                                this.tipoProducto.getActivo(),
+                                this.tipoProducto.getImagen());
     }
-
-    public void setIdMarca(Integer idMarca) {
-        this.idMarca = idMarca;
+    
+    public void setTipoProducto(TipoProducto tipoProducto){
+        this.tipoProducto = tipoProducto;
     }
-
-    public Integer getIdTipo() {
-        return idTipo;
+    
+    public Marca getMarca(){
+        return new Marca(this.marca.getIdMarca(),
+                         this.marca.getNombre(),
+                         this.marca.getActivo(),
+                         this.marca.getImagen());
     }
-
-    public void setIdTipo(Integer idTipo) {
-        this.idTipo = idTipo;
+    
+    public void setMarca(Marca marca){
+        this.marca = marca;
     }
-
-    public Integer getIdProveedor() {
-        return idProveedor;
-    }
-
-    public void setIdProveedor(Integer idProveedor) {
-        this.idProveedor = idProveedor;
-    }
-
-    public Double getPrecioProveedor() {
-        return precioProveedor;
-    }
-
-    public void setPrecioProveedor(Double precioProveedor) {
-        this.precioProveedor = precioProveedor;
-    }
-
-    public Integer getIdSede() {
-        return idSede;
-    }
-
-    public void setIdSede(Integer idSede) {
-        this.idSede = idSede;
-    }
-
 }
