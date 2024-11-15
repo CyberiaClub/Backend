@@ -1,5 +1,6 @@
 package pe.edu.pucp.cyberiastore.pedido.model;
 
+import pe.edu.pucp.cyberiastore.comprobantedepago.model.EstadoPedido;
 import java.util.ArrayList;
 import pe.edu.pucp.cyberiastore.inventario.model.Producto;
 
