@@ -7,16 +7,16 @@ import java.util.ArrayList;
 import java.util.List;
 import pe.edu.pucp.cyberiastore.config.DAOImpl;
 import pe.edu.pucp.cyberiastore.inventario.model.Producto;
-import pe.edu.pucp.cyberiastore.sede.dao.ProductoXSedeDAO;
 import pe.edu.pucp.cyberiastore.sede.model.Sede;
+import pe.edu.pucp.cyberiastore.sede.dao.StockSedeDAO;
 
-public class ProductoXSedeDAOImpl extends DAOImpl implements ProductoXSedeDAO {
+public class StockSedeDAOImpl extends DAOImpl implements StockSedeDAO {
 
     private Integer idProducto;
     private Integer idSede;
     private Integer cantidadStock;
 
-    public ProductoXSedeDAOImpl() {
+    public StockSedeDAOImpl() {
         super("PRODUCTO_X_SEDE");
     }
     

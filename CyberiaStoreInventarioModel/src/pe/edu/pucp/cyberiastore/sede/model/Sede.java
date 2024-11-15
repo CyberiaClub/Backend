@@ -5,8 +5,8 @@ import java.time.LocalTime;
 public class Sede {
 
     private Integer idSede;
-    private String descripcion;
     private String nombre;
+    private String descripcion;
     private String telefono;
     private LocalTime horarioApertura;
     private LocalTime horarioCierre;

@@ -10,12 +10,14 @@ public class Producto {
     private String descripcion;
     private Double precio;
     private Double precioProveedor;
-    private Boolean activo;
     private byte[] imagen;
     private ArrayList<Producto> productosMiembros;
     private TipoProducto tipoProducto;
     private Marca marca;
-
+    //Esto es para el insert de las tablas intermedias
+    private Integer idSede;
+    private Integer cantidad;
+    
     public Producto() {
         this.idProducto = null;
         this.sku = null;
@@ -23,7 +25,6 @@ public class Producto {
         this.descripcion = null;
         this.precio = null;
         this.precioProveedor = null;
-        this.activo = true;
         this.imagen = null;
         this.productosMiembros = null;
         this.tipoProducto = null;
@@ -37,7 +38,6 @@ public class Producto {
         this.descripcion = descripcion;
         this.precio = precio;
         this.precioProveedor = precioProveedor;
-        this.activo = (activo == null) ? true:activo;
         this.imagen = imagen;
         this.productosMiembros = productoMiembros;
         this.tipoProducto = tipoProducto;
@@ -92,14 +92,6 @@ public class Producto {
         this.precioProveedor = precioProveedor;
     }
 
-    public Boolean getActivo() {
-        return activo;
-    }
-
-    public void setActivo(Boolean activo) {
-        this.activo = activo;
-    }
-
     public byte[] getImagen() {
         return imagen;
     }
@@ -107,9 +99,9 @@ public class Producto {
     public void setImagen(byte[] imagen) {
         this.imagen = imagen;
     }
-
+    
     public ArrayList<Producto> getProductosMiembros() {
-        return (ArrayList<Producto>)productosMiembros.clone();
+        return productosMiembros;
     }
 
     public void setProductosMiembros(ArrayList<Producto> productosMiembros) {
@@ -136,5 +128,21 @@ public class Producto {
     
     public void setMarca(Marca marca){
         this.marca = marca;
+    }
+
+    public Integer getIdSede() {
+        return idSede;
+    }
+
+    public void setIdSede(Integer idSede) {
+        this.idSede = idSede;
+    }
+
+    public Integer getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(Integer cantidad) {
+        this.cantidad = cantidad;
     }
 }

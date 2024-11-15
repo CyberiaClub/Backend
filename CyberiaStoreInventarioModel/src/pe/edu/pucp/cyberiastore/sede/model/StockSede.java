@@ -17,7 +17,4 @@ public class StockSede {
     public Sede getSede() {
         return sede;
     }
-    
-    
-    
 }

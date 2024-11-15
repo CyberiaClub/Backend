@@ -6,8 +6,8 @@ import java.util.Date;
 public class Proveedor {
     private Integer idProveedor;
     private String ruc;
-    private String nombreContacto;
     private String razonSocial;
+    private String nombreContacto;
     private String correo;
     private String telefono;
     private String direccion;

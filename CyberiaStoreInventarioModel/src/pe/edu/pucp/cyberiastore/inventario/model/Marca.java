@@ -1,11 +1,14 @@
 package pe.edu.pucp.cyberiastore.inventario.model;
 
+import pe.edu.pucp.cyberiastore.proveedor.model.Proveedor;
+
 public class Marca {
 
     private Integer idMarca;
     private String nombre;
     private Boolean activo;
     private byte[] imagen;
+    private Proveedor proveedor;
 
     public Marca() {
         this.idMarca = null;
@@ -51,5 +54,13 @@ public class Marca {
     
     public void setImagen(byte[] imagen) {
         this.imagen = imagen;
+    }
+
+    public Proveedor getProveedor() {
+        return proveedor;
+    }
+
+    public void setProveedor(Proveedor proveedor) {
+        this.proveedor = proveedor;
     }
 }
