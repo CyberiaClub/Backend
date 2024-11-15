@@ -20,7 +20,7 @@ public interface PersonaDAO {
 
     public ArrayList<Persona> listarTodos();
 
-    public Persona obtenerPorId(Integer idPersona);
+    public Persona obtenerPorDocumento(String documento);
 
     public Boolean existePersona(Persona persona);
 }
