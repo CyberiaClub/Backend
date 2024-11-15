@@ -10,6 +10,7 @@ public class Producto {
     private String descripcion;
     private Double precio;
     private Double precioProveedor;
+    private Double precioDescuento;
     private Boolean activo;
     private byte[] imagen;
     private ArrayList<Producto> productosMiembros;
@@ -23,6 +24,7 @@ public class Producto {
         this.descripcion = null;
         this.precio = null;
         this.precioProveedor = null;
+        this.precioDescuento = null;
         this.activo = true;
         this.imagen = null;
         this.productosMiembros = null;
@@ -30,13 +32,14 @@ public class Producto {
         this.marca = null;
     }
 
-    public Producto(Integer idProducto, String sku, String nombre, String descripcion, Double precio, Double precioProveedor, Boolean activo, ArrayList<Producto> productoMiembros, byte[] imagen, TipoProducto tipoProducto, Marca marca) {
+    public Producto(Integer idProducto, String sku, String nombre, String descripcion, Double precio, Double precioProveedor, Double precioDescuento, Boolean activo, ArrayList<Producto> productoMiembros, byte[] imagen, TipoProducto tipoProducto, Marca marca) {
         this.idProducto = idProducto;
         this.sku = sku;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
         this.precioProveedor = precioProveedor;
+        this.precioDescuento = precioDescuento;
         this.activo = (activo == null) ? true:activo;
         this.imagen = imagen;
         this.productosMiembros = productoMiembros;
@@ -92,6 +95,14 @@ public class Producto {
         this.precioProveedor = precioProveedor;
     }
 
+    public Double getPrecioDescuento() {
+        return precioDescuento;
+    }
+
+    public void setPrecioDescuento(Double precioDescuento) {
+        this.precioDescuento = precioDescuento;
+    }
+
     public Boolean getActivo() {
         return activo;
     }
@@ -130,6 +141,7 @@ public class Producto {
     public Marca getMarca(){
         return new Marca(this.marca.getIdMarca(),
                          this.marca.getNombre(),
+                         this.marca.getProveedor(),
                          this.marca.getActivo(),
                          this.marca.getImagen());
     }
