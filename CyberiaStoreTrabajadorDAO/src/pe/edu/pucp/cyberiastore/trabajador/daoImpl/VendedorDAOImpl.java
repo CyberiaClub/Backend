@@ -10,7 +10,7 @@ import pe.edu.pucp.cyberiastore.trabajador.dao.TrabajadorDAO;
 import pe.edu.pucp.cyberiastore.trabajador.model.Vendedor;
 import pe.edu.pucp.cyberiastore.trabajador.dao.VendedorDAO;
 import pe.edu.pucp.cyberiastore.trabajador.model.Trabajador;
-import pe.edu.pucp.cyberiastore.usuario.model.TipoDocumento;
+import pe.edu.pucp.cyberiastore.persona.model.TipoDocumento;
 
 public class VendedorDAOImpl extends DAOImpl implements VendedorDAO {
 
@@ -37,8 +37,8 @@ public class VendedorDAOImpl extends DAOImpl implements VendedorDAO {
         trabajador.setDocumento(vendedor.getDocumento());
         trabajador.setTelefono(vendedor.getTelefono());
         trabajador.setNombre(vendedor.getNombre());
-        trabajador.setApellidoPaterno(vendedor.getApellidoPaterno());
-        trabajador.setApellidoMaterno(vendedor.getApellidoMaterno());
+        trabajador.setPrimerApellido(vendedor.getPrimerApellido());
+        trabajador.setSegundoApellido(vendedor.getSegundoApellido());
         trabajador.setSexo(vendedor.getSexo());
         trabajador.setFechaDeNacimiento(vendedor.getFechaDeNacimiento());
         trabajador.setCorreo(vendedor.getCorreo());
@@ -69,7 +69,7 @@ public class VendedorDAOImpl extends DAOImpl implements VendedorDAO {
                 idVendedor = super.insertar();
                 this.vendedor.setIdVendedor(idVendedor);
                 this.vendedor.setIdTrabajador(trabajador.getIdTrabajador());
-                this.vendedor.setIdUsuario(trabajador.getIdUsuario());
+                this.vendedor.setIdPersona(trabajador.getIdPersona());
                 this.retornarLlavePrimaria = false;
             }
             this.comitarTransaccion();
@@ -121,12 +121,12 @@ public class VendedorDAOImpl extends DAOImpl implements VendedorDAO {
         trabajador.setSueldo(vendedor.getSueldo());
         trabajador.setFechaDeIngreso(vendedor.getFechaDeIngreso());
         trabajador.setIdSede(vendedor.getIdSede());
-        trabajador.setIdUsuario(vendedor.getIdUsuario());
+        trabajador.setIdPersona(vendedor.getIdPersona());
         trabajador.setDocumento(vendedor.getDocumento());
         trabajador.setTelefono(vendedor.getTelefono());
         trabajador.setNombre(vendedor.getNombre());
-        trabajador.setApellidoPaterno(vendedor.getApellidoPaterno());
-        trabajador.setApellidoMaterno(vendedor.getApellidoMaterno());
+        trabajador.setPrimerApellido(vendedor.getPrimerApellido());
+        trabajador.setSegundoApellido(vendedor.getSegundoApellido());
         trabajador.setSexo(vendedor.getSexo());
         trabajador.setFechaDeNacimiento(vendedor.getFechaDeNacimiento());
         trabajador.setCorreo(vendedor.getCorreo());
@@ -280,10 +280,10 @@ public class VendedorDAOImpl extends DAOImpl implements VendedorDAO {
         this.vendedor = new Vendedor();
         this.vendedor.setIdVendedor(this.resultSet.getInt("id_vendedor"));
         this.vendedor.setIdTrabajador(this.resultSet.getInt("id_trabajador"));
-        this.vendedor.setIdUsuario(this.resultSet.getInt("id_usuario"));
+        this.vendedor.setIdPersona(this.resultSet.getInt("id_usuario"));
         this.vendedor.setNombre(this.resultSet.getString("nombre"));
-        this.vendedor.setApellidoPaterno(this.resultSet.getString("APELLIDO_PATERNO"));
-        this.vendedor.setApellidoMaterno(this.resultSet.getString("APELLIDO_MATERNO"));
+        this.vendedor.setPrimerApellido(this.resultSet.getString("APELLIDO_PATERNO"));
+        this.vendedor.setSegundoApellido(this.resultSet.getString("APELLIDO_MATERNO"));
         this.vendedor.setSexo(this.resultSet.getString("SEXO").charAt(0));
         this.vendedor.setDocumento(this.resultSet.getString("DOCUMENTO"));
         this.vendedor.setFechaDeNacimiento(this.resultSet.getTimestamp("FECHA_NACIMIENTO"));

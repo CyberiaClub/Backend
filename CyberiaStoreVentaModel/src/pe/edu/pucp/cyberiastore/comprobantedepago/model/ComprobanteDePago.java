@@ -1,7 +1,7 @@
 package pe.edu.pucp.cyberiastore.comprobantedepago.model;
 
 import java.text.SimpleDateFormat;
-import pe.edu.pucp.cyberiastore.usuario.model.Cliente;
+import pe.edu.pucp.cyberiastore.persona.model.Cliente;
 import java.util.Date;
 
 public class ComprobanteDePago {

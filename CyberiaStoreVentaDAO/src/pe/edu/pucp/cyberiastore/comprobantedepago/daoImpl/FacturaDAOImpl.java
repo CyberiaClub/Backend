@@ -238,8 +238,8 @@ public class FacturaDAOImpl extends DAOImpl implements FacturaDAO {
 
         this.factura.getCliente().setDocumento(this.resultSet.getString("documento"));
         this.factura.getCliente().setNombre(this.resultSet.getString("nombre"));
-        this.factura.getCliente().setApellidoPaterno(this.resultSet.getString("apellido_paterno"));
-        this.factura.getCliente().setApellidoMaterno(this.resultSet.getString("apellido_materno"));
+        this.factura.getCliente().setPrimerApellido(this.resultSet.getString("apellido_paterno"));
+        this.factura.getCliente().setSegundoApellido(this.resultSet.getString("apellido_materno"));
 
     }
 

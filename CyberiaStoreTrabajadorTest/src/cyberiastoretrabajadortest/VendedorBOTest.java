@@ -8,7 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import pe.edu.pucp.cyberiastore.trabajador.bo.VendedorBO;
 import pe.edu.pucp.cyberiastore.trabajador.model.Vendedor;
-import pe.edu.pucp.cyberiastore.usuario.model.TipoDocumento;
+import pe.edu.pucp.cyberiastore.persona.model.TipoDocumento;
 import pe.edu.pucp.cyberiastore.util.MuestraFecha;
 
 public class VendedorBOTest {
@@ -102,9 +102,9 @@ public class VendedorBOTest {
             System.out.print(", ");
             System.out.print(vendedor.getIdTrabajador().toString());
             System.out.print(", ");
-            System.out.print(vendedor.getApellidoPaterno());
+            System.out.print(vendedor.getPrimerApellido());
             System.out.print(", ");
-            System.out.print(vendedor.getApellidoMaterno());
+            System.out.print(vendedor.getSegundoApellido());
             System.out.print(", ");
             System.out.print(vendedor.getNombre());
             System.out.print(", ");
@@ -137,9 +137,9 @@ public class VendedorBOTest {
         System.out.print(", ");
         System.out.print(vendedor.getIdTrabajador().toString());
         System.out.print(", ");
-        System.out.print(vendedor.getApellidoPaterno());
+        System.out.print(vendedor.getPrimerApellido());
         System.out.print(", ");
-        System.out.print(vendedor.getApellidoMaterno());
+        System.out.print(vendedor.getSegundoApellido());
         System.out.print(", ");
         System.out.print(vendedor.getNombre());
         System.out.print(", ");

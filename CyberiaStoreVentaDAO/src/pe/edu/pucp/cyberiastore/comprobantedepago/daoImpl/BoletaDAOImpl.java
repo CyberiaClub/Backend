@@ -11,8 +11,8 @@ import pe.edu.pucp.cyberiastore.comprobantedepago.dao.ComprobanteDePagoDAO;
 import pe.edu.pucp.cyberiastore.comprobantedepago.model.Boleta;
 import pe.edu.pucp.cyberiastore.comprobantedepago.model.ComprobanteDePago;
 import pe.edu.pucp.cyberiastore.comprobantedepago.dao.BoletaXClienteDAO;
-import pe.edu.pucp.cyberiastore.usuario.model.Usuario;
-import pe.edu.pucp.cyberiastore.usuario.model.Cliente;
+import pe.edu.pucp.cyberiastore.persona.model.Usuario;
+import pe.edu.pucp.cyberiastore.persona.model.Cliente;
 import pe.edu.pucp.cyberiastore.comprobantedepago.daoImpl.BoletaXClienteDAOImpl;
 
 public class BoletaDAOImpl extends DAOImpl implements BoletaDAO {
@@ -60,7 +60,7 @@ public class BoletaDAOImpl extends DAOImpl implements BoletaDAO {
                 this.retornarLlavePrimaria = false;
                 // pasamos llamar a la clase BOLETAXCLIENTE
                 BoletaXClienteDAO boletaXCliente = new BoletaXClienteDAOImpl();
-                boletaXCliente.insertar(idBoleta, boleta.getCliente().getIdUsuario(), this.usarTransaccion, this.conexion);
+                boletaXCliente.insertar(idBoleta, boleta.getCliente().getIdPersona(), this.usarTransaccion, this.conexion);
             }
             this.comitarTransaccion();
         } catch (SQLException ex) {
@@ -234,8 +234,8 @@ public class BoletaDAOImpl extends DAOImpl implements BoletaDAO {
 
         this.boleta.getCliente().setDocumento(this.resultSet.getString("documento"));
         this.boleta.getCliente().setNombre(this.resultSet.getString("nombre"));
-        this.boleta.getCliente().setApellidoPaterno(this.resultSet.getString("apellido_paterno"));
-        this.boleta.getCliente().setApellidoMaterno(this.resultSet.getString("apellido_materno"));
+        this.boleta.getCliente().setPrimerApellido(this.resultSet.getString("apellido_paterno"));
+        this.boleta.getCliente().setSegundoApellido(this.resultSet.getString("apellido_materno"));
 
     }
 

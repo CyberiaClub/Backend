@@ -5,7 +5,7 @@ import java.util.Date;
 import pe.edu.pucp.cyberiastore.trabajador.model.Vendedor;
 import pe.edu.pucp.cyberiastore.trabajador.dao.VendedorDAO;
 import pe.edu.pucp.cyberiastore.trabajador.daoImpl.VendedorDAOImpl;
-import pe.edu.pucp.cyberiastore.usuario.model.TipoDocumento;
+import pe.edu.pucp.cyberiastore.persona.model.TipoDocumento;
 
 
 public class VendedorBO {

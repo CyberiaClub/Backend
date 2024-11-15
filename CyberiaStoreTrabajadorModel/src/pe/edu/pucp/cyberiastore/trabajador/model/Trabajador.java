@@ -3,8 +3,8 @@ package pe.edu.pucp.cyberiastore.trabajador.model;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import pe.edu.pucp.cyberiastore.usuario.model.Rol;
-import pe.edu.pucp.cyberiastore.usuario.model.TipoDocumento;
-import pe.edu.pucp.cyberiastore.usuario.model.Usuario;
+import pe.edu.pucp.cyberiastore.persona.model.TipoDocumento;
+import pe.edu.pucp.cyberiastore.persona.model.Usuario;
 
 //DEFINIR ESTRUCTURAS DE DATOS
 public class Trabajador extends Usuario {

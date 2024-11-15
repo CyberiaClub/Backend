@@ -8,7 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import pe.edu.pucp.cyberiastore.trabajador.bo.AlmaceneroBO;
 import pe.edu.pucp.cyberiastore.trabajador.model.Almacenero;
-import pe.edu.pucp.cyberiastore.usuario.model.TipoDocumento;
+import pe.edu.pucp.cyberiastore.persona.model.TipoDocumento;
 import pe.edu.pucp.cyberiastore.util.MuestraFecha;
 
 public class AlmaceneroBOTest {
@@ -102,9 +102,9 @@ public class AlmaceneroBOTest {
             System.out.print(", ");
             System.out.print(almacenero.getIdTrabajador().toString());
             System.out.print(", ");
-            System.out.print(almacenero.getApellidoPaterno());
+            System.out.print(almacenero.getPrimerApellido());
             System.out.print(", ");
-            System.out.print(almacenero.getApellidoMaterno());
+            System.out.print(almacenero.getSegundoApellido());
             System.out.print(", ");
             System.out.print(almacenero.getNombre());
             System.out.print(", ");
@@ -137,9 +137,9 @@ public class AlmaceneroBOTest {
         System.out.print(", ");
         System.out.print(almacenero.getIdTrabajador().toString());
         System.out.print(", ");
-        System.out.print(almacenero.getApellidoPaterno());
+        System.out.print(almacenero.getPrimerApellido());
         System.out.print(", ");
-        System.out.print(almacenero.getApellidoMaterno());
+        System.out.print(almacenero.getSegundoApellido());
         System.out.print(", ");
         System.out.print(almacenero.getNombre());
         System.out.print(", ");

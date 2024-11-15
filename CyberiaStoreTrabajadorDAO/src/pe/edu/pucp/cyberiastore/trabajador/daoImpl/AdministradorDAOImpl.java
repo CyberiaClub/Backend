@@ -10,7 +10,7 @@ import pe.edu.pucp.cyberiastore.trabajador.model.Administrador;
 import pe.edu.pucp.cyberiastore.trabajador.dao.AdministradorDAO;
 import pe.edu.pucp.cyberiastore.trabajador.dao.TrabajadorDAO;
 import pe.edu.pucp.cyberiastore.trabajador.model.Trabajador;
-import pe.edu.pucp.cyberiastore.usuario.model.TipoDocumento;
+import pe.edu.pucp.cyberiastore.persona.model.TipoDocumento;
 
 public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
     
@@ -37,8 +37,8 @@ public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
         trabajador.setDocumento(administrador.getDocumento());
         trabajador.setTelefono(administrador.getTelefono());
         trabajador.setNombre(administrador.getNombre());
-        trabajador.setApellidoPaterno(administrador.getApellidoPaterno());
-        trabajador.setApellidoMaterno(administrador.getApellidoMaterno());
+        trabajador.setPrimerApellido(administrador.getPrimerApellido());
+        trabajador.setSegundoApellido(administrador.getSegundoApellido());
         trabajador.setSexo(administrador.getSexo());
         trabajador.setFechaDeNacimiento(administrador.getFechaDeNacimiento());
         trabajador.setCorreo(administrador.getCorreo());
@@ -71,7 +71,7 @@ public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
                 idAdministrador = super.insertar();
                 this.administrador.setIdAdministrador(idAdministrador);
                 this.administrador.setIdTrabajador(trabajador.getIdTrabajador());
-                this.administrador.setIdUsuario(trabajador.getIdUsuario());
+                this.administrador.setIdPersona(trabajador.getIdPersona());
                 this.retornarLlavePrimaria = false;
             }
             this.comitarTransaccion();
@@ -122,12 +122,12 @@ public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
         trabajador.setSueldo(administrador.getSueldo());
         trabajador.setFechaDeIngreso(administrador.getFechaDeIngreso());
         trabajador.setIdSede(administrador.getIdSede());
-        trabajador.setIdUsuario(administrador.getIdUsuario());
+        trabajador.setIdPersona(administrador.getIdPersona());
         trabajador.setDocumento(administrador.getDocumento());
         trabajador.setTelefono(administrador.getTelefono());
         trabajador.setNombre(administrador.getNombre());
-        trabajador.setApellidoPaterno(administrador.getApellidoPaterno());
-        trabajador.setApellidoMaterno(administrador.getApellidoMaterno());
+        trabajador.setPrimerApellido(administrador.getPrimerApellido());
+        trabajador.setSegundoApellido(administrador.getSegundoApellido());
         trabajador.setSexo(administrador.getSexo());
         trabajador.setFechaDeNacimiento(administrador.getFechaDeNacimiento());
         trabajador.setCorreo(administrador.getCorreo());
@@ -280,10 +280,10 @@ public class AdministradorDAOImpl extends DAOImpl implements AdministradorDAO {
         this.administrador = new Administrador();
         this.administrador.setIdAdministrador(this.resultSet.getInt("id_administrador"));
         this.administrador.setIdTrabajador(this.resultSet.getInt("id_trabajador"));
-        this.administrador.setIdUsuario(this.resultSet.getInt("id_usuario"));
+        this.administrador.setIdPersona(this.resultSet.getInt("id_usuario"));
         this.administrador.setNombre(this.resultSet.getString("nombre"));
-        this.administrador.setApellidoPaterno(this.resultSet.getString("APELLIDO_PATERNO"));
-        this.administrador.setApellidoMaterno(this.resultSet.getString("APELLIDO_MATERNO"));
+        this.administrador.setPrimerApellido(this.resultSet.getString("APELLIDO_PATERNO"));
+        this.administrador.setSegundoApellido(this.resultSet.getString("APELLIDO_MATERNO"));
         this.administrador.setSexo(this.resultSet.getString("SEXO").charAt(0));
         this.administrador.setDocumento(this.resultSet.getString("DOCUMENTO"));
         this.administrador.setFechaDeNacimiento(this.resultSet.getTimestamp("FECHA_NACIMIENTO"));

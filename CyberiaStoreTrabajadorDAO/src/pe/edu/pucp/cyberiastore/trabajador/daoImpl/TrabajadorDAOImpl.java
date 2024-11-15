@@ -13,7 +13,7 @@ import pe.edu.pucp.cyberiastore.trabajador.dao.TrabajadorXSedeDAO;
 import pe.edu.pucp.cyberiastore.trabajador.model.Trabajador;
 import pe.edu.pucp.cyberiastore.usuario.dao.UsuarioDAO;
 import pe.edu.pucp.cyberiastore.usuario.daoImpl.UsuarioDAOImpl;
-import pe.edu.pucp.cyberiastore.usuario.model.Usuario;
+import pe.edu.pucp.cyberiastore.persona.model.Usuario;
 
 public class TrabajadorDAOImpl extends DAOImpl implements TrabajadorDAO {
 
@@ -42,8 +42,8 @@ public class TrabajadorDAOImpl extends DAOImpl implements TrabajadorDAO {
         usuario.setDocumento(this.trabajador.getDocumento());
         usuario.setTelefono(this.trabajador.getTelefono());
         usuario.setNombre(this.trabajador.getNombre());
-        usuario.setApellidoPaterno(this.trabajador.getApellidoPaterno());
-        usuario.setApellidoMaterno(this.trabajador.getApellidoMaterno());
+        usuario.setPrimerApellido(this.trabajador.getPrimerApellido());
+        usuario.setSegundoApellido(this.trabajador.getSegundoApellido());
         usuario.setSexo(this.trabajador.getSexo());
         usuario.setFechaDeNacimiento(this.trabajador.getFechaDeNacimiento());
         usuario.setCorreo(this.trabajador.getCorreo());
@@ -62,10 +62,10 @@ public class TrabajadorDAOImpl extends DAOImpl implements TrabajadorDAO {
             this.iniciarTransaccion();
             if (!existeUsuario) {
                 idUsuario = usuarioDAO.insertar(usuario, this.usarTransaccion, this.conexion);
-                this.trabajador.setIdUsuario(idUsuario);
+                this.trabajador.setIdPersona(idUsuario);
             } else {
-                idUsuario = usuario.getIdUsuario();
-                this.trabajador.setIdUsuario(idUsuario);
+                idUsuario = usuario.getIdPersona();
+                this.trabajador.setIdPersona(idUsuario);
                 Boolean abreConexion = false;
                 existeTrabajador = this.existeTrabajador(this.trabajador, abreConexion);
             }
@@ -127,7 +127,7 @@ public class TrabajadorDAOImpl extends DAOImpl implements TrabajadorDAO {
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
         this.incluirParametroDouble(1, this.trabajador.getSueldo());
         this.incluirParametroDate(2, this.trabajador.getFechaDeIngreso());
-        this.incluirParametroInt(3, this.trabajador.getIdUsuario());
+        this.incluirParametroInt(3, this.trabajador.getIdPersona());
     }
 
     /*
@@ -140,12 +140,12 @@ public class TrabajadorDAOImpl extends DAOImpl implements TrabajadorDAO {
         Integer retorno = 0;
         this.trabajador = trabajador;
         Usuario usuario = new Usuario();
-        usuario.setIdUsuario(this.trabajador.getIdUsuario());
+        usuario.setIdPersona(this.trabajador.getIdPersona());
         usuario.setDocumento(this.trabajador.getDocumento());
         usuario.setTelefono(this.trabajador.getTelefono());
         usuario.setNombre(this.trabajador.getNombre());
-        usuario.setApellidoPaterno(this.trabajador.getApellidoPaterno());
-        usuario.setApellidoMaterno(this.trabajador.getApellidoMaterno());
+        usuario.setPrimerApellido(this.trabajador.getPrimerApellido());
+        usuario.setSegundoApellido(this.trabajador.getSegundoApellido());
         usuario.setFechaDeNacimiento(this.trabajador.getFechaDeNacimiento());
         usuario.setCorreo(this.trabajador.getCorreo());
         usuario.setActivo(this.trabajador.getActivo());

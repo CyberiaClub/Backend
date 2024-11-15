@@ -2,7 +2,7 @@ package pe.edu.pucp.cyberiastore.trabajador.model;
 
 import java.util.Date;
 import pe.edu.pucp.cyberiastore.usuario.model.Rol;
-import pe.edu.pucp.cyberiastore.usuario.model.TipoDocumento;
+import pe.edu.pucp.cyberiastore.persona.model.TipoDocumento;
 
 public class Almacenero extends Trabajador {
 
