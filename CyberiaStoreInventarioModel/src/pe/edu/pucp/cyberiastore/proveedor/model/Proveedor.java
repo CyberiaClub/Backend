@@ -15,158 +15,98 @@ public class Proveedor {
     private Boolean activo;
     
     public Proveedor(){
+        this.idProveedor = null;
+        this.ruc = null;
+        this.razonSocial = null;
+        this.nombreContacto = null;
+        this.correo = null;
+        this.telefono = null;
+        this.direccion = null;
+        this.descripcion = null;
         this.activo = true;
     }
 
-    public Proveedor(String ruc, String nombre, String razonSocial, String correo, String telefono, String direccion, String descripcion) {
+    public Proveedor(Integer idProveedor, String ruc, String razonSocial, String nombreContacto, String correo, String telefono, String direccion, String descripcion, Boolean activo) {
+        this.idProveedor = idProveedor;
         this.ruc = ruc;
-        this.nombreContacto = nombre;
         this.razonSocial = razonSocial;
+        this.nombreContacto = nombreContacto;
         this.correo = correo;
         this.telefono = telefono;
         this.direccion = direccion;
         this.descripcion = descripcion;
-        this.activo = true;
-    }
-
-    public Proveedor(String ruc, String nombre, String razonSocial, String correo, String telefono, String direccion, String descripcion, Boolean activo) {
-        this.ruc = ruc;
-        this.nombreContacto = nombre;
-        this.razonSocial = razonSocial;
-        this.correo = correo;
-        this.telefono = telefono;
-        this.direccion = direccion;
-        this.descripcion = descripcion;
-        this.activo = activo;
+        this.activo = (activo == null) ? true:activo;
     }
     
-    /**
-     * @return the idProveedor
-     */
     public Integer getIdProveedor() {
         return idProveedor;
     }
-
-    /**
-     * @param idProveedor the idProveedor to set
-     */
+    
     public void setIdProveedor(Integer idProveedor) {
         this.idProveedor = idProveedor;
     }
-
-    /**
-     * @return the ruc
-     */
+    
     public String getRuc() {
         return ruc;
     }
-
-    /**
-     * @param ruc the ruc to set
-     */
+    
     public void setRuc(String ruc) {
         this.ruc = ruc;
     }
-
-    /**
-     * @return the nombreContacto
-     */
-    public String getNombreContacto() {
-        return nombreContacto;
-    }
-
-    /**
-     * @param nombreContacto the nombreContacto to set
-     */
-    public void setNombreContacto(String nombreContacto) {
-        this.nombreContacto = nombreContacto;
-    }
-
-    /**
-     * @return the razonSocial
-     */
+    
     public String getRazonSocial() {
         return razonSocial;
     }
-
-    /**
-     * @param razonSocial the razonSocial to set
-     */
+    
     public void setRazonSocial(String razonSocial) {
         this.razonSocial = razonSocial;
     }
-
-    /**
-     * @return the correo
-     */
+    
+    public String getNombreContacto() {
+        return nombreContacto;
+    }
+    
+    public void setNombreContacto(String nombreContacto) {
+        this.nombreContacto = nombreContacto;
+    }
+    
     public String getCorreo() {
         return correo;
     }
-
-    /**
-     * @param correo the correo to set
-     */
+    
     public void setCorreo(String correo) {
         this.correo = correo;
     }
-
-    /**
-     * @return the telefono
-     */
+    
     public String getTelefono() {
         return telefono;
     }
-
-    /**
-     * @param telefono the telefono to set
-     */
+    
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-
-    /**
-     * @return the direccion
-     */
+    
     public String getDireccion() {
         return direccion;
     }
-
-    /**
-     * @param direccion the direccion to set
-     */
+    
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-
-    /**
-     * @return the descripcion
-     */
+    
     public String getDescripcion() {
         return descripcion;
     }
-
-    /**
-     * @param descripcion the descripcion to set
-     */
+    
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-
-    /**
-     * @return the activo
-     */
+    
     public Boolean getActivo() {
         return activo;
     }
-
-    /**
-     * @param activo the activo to set
-     */
+    
     public void setActivo(Boolean activo) {
         this.activo = activo;
     }
-    
-
-    
-    
 }

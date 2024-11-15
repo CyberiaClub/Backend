@@ -31,7 +31,7 @@ public class Producto {
         this.marca = null;
     }
 
-    public Producto(Integer idProducto, String sku, String nombre, String descripcion, Double precio, Double precioProveedor, Boolean activo, ArrayList<Producto> productoMiembros, byte[] imagen, TipoProducto tipoProducto, Marca marca) {
+    public Producto(Integer idProducto, String sku, String nombre, String descripcion, Double precio, Double precioProveedor, Double precioDescuento, Boolean activo, ArrayList<Producto> productoMiembros, byte[] imagen, TipoProducto tipoProducto, Marca marca) {
         this.idProducto = idProducto;
         this.sku = sku;
         this.nombre = nombre;
@@ -122,6 +122,7 @@ public class Producto {
     public Marca getMarca(){
         return new Marca(this.marca.getIdMarca(),
                          this.marca.getNombre(),
+                         this.marca.getProveedor(),
                          this.marca.getActivo(),
                          this.marca.getImagen());
     }
