@@ -21,14 +21,6 @@
                 <id>jar</id>
             </reference>
             <reference>
-                <foreign-project>CyberiaStoreInventarioModel</foreign-project>
-                <artifact-type>jar</artifact-type>
-                <script>build.xml</script>
-                <target>jar</target>
-                <clean-target>clean</clean-target>
-                <id>jar</id>
-            </reference>
-            <reference>
                 <foreign-project>CyberiaStoreUsuarioModel</foreign-project>
                 <artifact-type>jar</artifact-type>
                 <script>build.xml</script>
@@ -37,7 +29,7 @@
                 <id>jar</id>
             </reference>
             <reference>
-                <foreign-project>VentaModel</foreign-project>
+                <foreign-project>CyberiaStoreVentaModel</foreign-project>
                 <artifact-type>jar</artifact-type>
                 <script>build.xml</script>
                 <target>jar</target>

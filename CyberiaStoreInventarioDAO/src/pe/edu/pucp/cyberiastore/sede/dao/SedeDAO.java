@@ -1,7 +1,7 @@
 package pe.edu.pucp.cyberiastore.sede.dao;
 
 import java.util.ArrayList;
-import pe.edu.pucp.cyberiastore.sede.model.Sede;
+import pe.edu.pucp.cyberiastore.inventario.model.Sede;
 
 public interface SedeDAO {
     

@@ -1,7 +1,5 @@
 package pe.edu.pucp.cyberiastore.inventario.model;
 
-import pe.edu.pucp.cyberiastore.proveedor.model.Proveedor;
-
 public class Marca {
 
     private Integer idMarca;

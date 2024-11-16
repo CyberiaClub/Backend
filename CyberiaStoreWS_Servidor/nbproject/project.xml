@@ -12,10 +12,6 @@
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${reference.CyberiaStoreInventarioModel.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
-                </library>
-                <library dirs="200">
                     <file>${reference.CyberiaStoreInventarioDAO.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
@@ -25,10 +21,6 @@
                 </library>
                 <library dirs="200">
                     <file>${reference.CyberiaStoreTrabajadorDAO.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
-                </library>
-                <library dirs="200">
-                    <file>${reference.CyberiaStoreVentaModel.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
@@ -55,6 +47,10 @@
                     <file>${reference.CyberiaStoreUsuarioDAO.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
+                <library dirs="200">
+                    <file>${reference.CyberiaStoreVentaModel.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
             </web-module-libraries>
             <web-module-additional-libraries/>
             <source-roots>
@@ -75,14 +71,6 @@
             </reference>
             <reference>
                 <foreign-project>CyberiaStoreInventarioDAO</foreign-project>
-                <artifact-type>jar</artifact-type>
-                <script>build.xml</script>
-                <target>jar</target>
-                <clean-target>clean</clean-target>
-                <id>jar</id>
-            </reference>
-            <reference>
-                <foreign-project>CyberiaStoreInventarioModel</foreign-project>
                 <artifact-type>jar</artifact-type>
                 <script>build.xml</script>
                 <target>jar</target>

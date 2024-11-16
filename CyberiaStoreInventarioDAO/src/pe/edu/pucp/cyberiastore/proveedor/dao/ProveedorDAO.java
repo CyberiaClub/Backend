@@ -1,7 +1,7 @@
     package pe.edu.pucp.cyberiastore.proveedor.dao;
 
 import java.util.ArrayList;
-import pe.edu.pucp.cyberiastore.proveedor.model.Proveedor;
+import pe.edu.pucp.cyberiastore.inventario.model.Proveedor;
 public interface ProveedorDAO {
     public Integer insertar(Proveedor proveedor);
 

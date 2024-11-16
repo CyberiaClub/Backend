@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import pe.edu.pucp.cyberiastore.proveedor.daoImpl.ProveedorDAOImpl;
 import pe.edu.pucp.cyberiastore.proveedor.dao.ProveedorDAO;
-import pe.edu.pucp.cyberiastore.proveedor.model.Proveedor;
+import pe.edu.pucp.cyberiastore.inventario.model.Proveedor;
 
 public class ProveedorBO {
     ProveedorDAO proveedorDAO;

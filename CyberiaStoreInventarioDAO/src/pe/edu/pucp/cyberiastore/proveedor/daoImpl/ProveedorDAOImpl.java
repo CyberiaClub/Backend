@@ -7,7 +7,7 @@ import java.util.List;
 import pe.edu.pucp.cyberiastore.config.DAOImpl;
 import pe.edu.pucp.cyberiastore.config.Tipo_Operacion;
 import pe.edu.pucp.cyberiastore.proveedor.dao.ProveedorDAO;
-import pe.edu.pucp.cyberiastore.proveedor.model.Proveedor;
+import pe.edu.pucp.cyberiastore.inventario.model.Proveedor;
 
 public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
 

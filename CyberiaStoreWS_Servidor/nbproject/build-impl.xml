@@ -844,9 +844,6 @@ exists or setup the property manually. For example like this:
         <ant antfile="${project.CyberiaStoreInventarioDAO}/build.xml" inheritall="false" target="jar">
             <property name="deploy.on.save" value="false"/>
         </ant>
-        <ant antfile="${project.CyberiaStoreInventarioModel}/build.xml" inheritall="false" target="jar">
-            <property name="deploy.on.save" value="false"/>
-        </ant>
         <ant antfile="${project.CyberiaStoreTrabajadorDAO}/build.xml" inheritall="false" target="jar">
             <property name="deploy.on.save" value="false"/>
         </ant>
@@ -871,9 +868,6 @@ exists or setup the property manually. For example like this:
             <property name="deploy.on.save" value="false"/>
         </ant>
         <ant antfile="${project.CyberiaStoreInventarioDAO}/build.xml" inheritall="false" target="jar">
-            <property name="deploy.on.save" value="false"/>
-        </ant>
-        <ant antfile="${project.CyberiaStoreInventarioModel}/build.xml" inheritall="false" target="jar">
             <property name="deploy.on.save" value="false"/>
         </ant>
         <ant antfile="${project.CyberiaStoreTrabajadorDAO}/build.xml" inheritall="false" target="jar">
@@ -1039,33 +1033,31 @@ exists or setup the property manually. For example like this:
     <target depends="init,compile,compile-jsps,-pre-dist,-do-dist-with-manifest,-do-dist-without-manifest" name="do-dist"/>
     <target depends="init" if="dist.ear.dir" name="library-inclusion-in-manifest">
         <copyfiles files="${reference.CyberiaStoreDBManager.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
-        <copyfiles files="${reference.CyberiaStoreInventarioModel.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${reference.CyberiaStoreInventarioDAO.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${reference.CyberiaStoreTrabajadorModel.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${reference.CyberiaStoreTrabajadorDAO.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
-        <copyfiles files="${reference.CyberiaStoreVentaModel.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${reference.CyberiaStoreVentaDAO.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${file.reference.jakarta.xml.ws-api-4.0.1.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${file.reference.commons-codec-1.17.1.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${file.reference.mysql-connector-j-9.0.0.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${reference.CyberiaStoreUsuarioModel.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${reference.CyberiaStoreUsuarioDAO.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
+        <copyfiles files="${reference.CyberiaStoreVentaModel.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <mkdir dir="${build.web.dir}/META-INF"/>
         <manifest file="${build.web.dir}/META-INF/MANIFEST.MF" mode="update"/>
     </target>
     <target depends="init" name="library-inclusion-in-archive" unless="dist.ear.dir">
         <copyfiles files="${reference.CyberiaStoreDBManager.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
-        <copyfiles files="${reference.CyberiaStoreInventarioModel.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${reference.CyberiaStoreInventarioDAO.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${reference.CyberiaStoreTrabajadorModel.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${reference.CyberiaStoreTrabajadorDAO.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
-        <copyfiles files="${reference.CyberiaStoreVentaModel.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${reference.CyberiaStoreVentaDAO.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${file.reference.jakarta.xml.ws-api-4.0.1.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${file.reference.commons-codec-1.17.1.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${file.reference.mysql-connector-j-9.0.0.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${reference.CyberiaStoreUsuarioModel.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${reference.CyberiaStoreUsuarioDAO.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
+        <copyfiles files="${reference.CyberiaStoreVentaModel.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
     </target>
     <target depends="init" if="dist.ear.dir" name="-clean-webinf-lib">
         <delete dir="${build.web.dir}/WEB-INF/lib"/>
@@ -1482,7 +1474,6 @@ exists or setup the property manually. For example like this:
     <target depends="init" name="deps-clean" unless="no.deps">
         <ant antfile="${project.CyberiaStoreDBManager}/build.xml" inheritall="false" target="clean"/>
         <ant antfile="${project.CyberiaStoreInventarioDAO}/build.xml" inheritall="false" target="clean"/>
-        <ant antfile="${project.CyberiaStoreInventarioModel}/build.xml" inheritall="false" target="clean"/>
         <ant antfile="${project.CyberiaStoreTrabajadorDAO}/build.xml" inheritall="false" target="clean"/>
         <ant antfile="${project.CyberiaStoreTrabajadorModel}/build.xml" inheritall="false" target="clean"/>
         <ant antfile="${project.CyberiaStoreUsuarioDAO}/build.xml" inheritall="false" target="clean"/>

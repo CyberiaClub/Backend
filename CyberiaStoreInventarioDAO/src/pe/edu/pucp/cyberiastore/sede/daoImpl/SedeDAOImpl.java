@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.util.List;
-import pe.edu.pucp.cyberiastore.sede.model.Sede;
+import pe.edu.pucp.cyberiastore.inventario.model.Sede;
 import pe.edu.pucp.cyberiastore.config.DAOImpl;
 import pe.edu.pucp.cyberiastore.config.Tipo_Operacion;
 import pe.edu.pucp.cyberiastore.sede.dao.SedeDAO;

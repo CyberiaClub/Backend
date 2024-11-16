@@ -3,7 +3,7 @@ package pe.edu.pucp.cyberiastore.sede.bo;
 import java.util.ArrayList;
 import pe.edu.pucp.cyberiastore.sede.daoImpl.SedeDAOImpl;
 import pe.edu.pucp.cyberiastore.sede.dao.SedeDAO;
-import pe.edu.pucp.cyberiastore.sede.model.Sede;
+import pe.edu.pucp.cyberiastore.inventario.model.Sede;
 
 public class SedeBO {
     SedeDAO sedeDAO;

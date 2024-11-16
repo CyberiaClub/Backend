@@ -18,10 +18,10 @@ import pe.edu.pucp.cyberiastore.inventario.bo.ProductoBO;
 import pe.edu.pucp.cyberiastore.inventario.bo.TipoProductoBO;
 import pe.edu.pucp.cyberiastore.sede.bo.SedeBO;
 import pe.edu.pucp.cyberiastore.inventario.model.Marca;
-import pe.edu.pucp.cyberiastore.proveedor.model.Proveedor;
+import pe.edu.pucp.cyberiastore.inventario.model.Proveedor;
 import pe.edu.pucp.cyberiastore.inventario.model.TipoProducto;
 import pe.edu.pucp.cyberiastore.inventario.model.Producto;
-import pe.edu.pucp.cyberiastore.sede.model.Sede;
+import pe.edu.pucp.cyberiastore.inventario.model.Sede;
 
 public class CyberiaStoreInventarioTest {
 

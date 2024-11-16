@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import pe.edu.pucp.cyberiastore.config.DAOImpl;
-import pe.edu.pucp.cyberiastore.pedido.dao.PedidoDAO;
-import pe.edu.pucp.cyberiastore.pedido.model.Pedido;
 import pe.edu.pucp.cyberiastore.inventario.model.Producto;
 import pe.edu.pucp.cyberiastore.pedido.daoImpl.ProductoXPedidoDAOImpl;
 import pe.edu.pucp.cyberiastore.pedido.dao.ProductoXPedidoDAO;

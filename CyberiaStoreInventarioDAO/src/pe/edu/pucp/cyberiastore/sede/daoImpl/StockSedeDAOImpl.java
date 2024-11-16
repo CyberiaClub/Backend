@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import pe.edu.pucp.cyberiastore.config.DAOImpl;
 import pe.edu.pucp.cyberiastore.inventario.model.Producto;
-import pe.edu.pucp.cyberiastore.sede.model.Sede;
+import pe.edu.pucp.cyberiastore.inventario.model.Sede;
 import pe.edu.pucp.cyberiastore.sede.dao.StockSedeDAO;
 
 public class StockSedeDAOImpl extends DAOImpl implements StockSedeDAO {

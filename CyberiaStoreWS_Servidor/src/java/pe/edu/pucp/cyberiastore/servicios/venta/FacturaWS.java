@@ -5,7 +5,7 @@ import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
 import java.util.ArrayList;
 import pe.edu.pucp.cyberiastore.comprobantedepago.model.Factura;
-import pe.edu.pucp.cyberiastore.comprobantedepago.bo.FacturaBO;
+import pe.edu.pucp.cyberiastore.comprobantepago.bo.FacturaBO;
 
 @WebService(serviceName = "FacturaWS",targetNamespace = "CyberiaWS")
 public class FacturaWS {
