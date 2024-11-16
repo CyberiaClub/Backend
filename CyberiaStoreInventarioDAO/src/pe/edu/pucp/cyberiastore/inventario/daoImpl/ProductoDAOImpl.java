@@ -8,11 +8,7 @@ import pe.edu.pucp.cyberiastore.inventario.model.Producto;
 import pe.edu.pucp.cyberiastore.inventario.dao.ProductoDAO;
 import pe.edu.pucp.cyberiastore.config.DAOImpl;
 import pe.edu.pucp.cyberiastore.config.Tipo_Operacion;
-import pe.edu.pucp.cyberiastore.inventario.dao.ProductoXMarcaDAO;
 import pe.edu.pucp.cyberiastore.inventario.dao.ProductoXProductoDAO;
-import pe.edu.pucp.cyberiastore.inventario.dao.ProductoXTipoDAO;
-import pe.edu.pucp.cyberiastore.proveedor.dao.ProductoXProveedorDAO;
-import pe.edu.pucp.cyberiastore.proveedor.daoImpl.ProductoXProveedorDAOImpl;
 import pe.edu.pucp.cyberiastore.sede.daoImpl.StockSedeDAOImpl;
 import pe.edu.pucp.cyberiastore.sede.dao.StockSedeDAO;
 
@@ -79,7 +75,7 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
 
     @Override
     protected String obtenerListaDeAtributosParaInsercion() {
-        return "SKU, NOMBRE, DESCRIPCION, PRECIO, PRECIO_PROVEEDOR, IMAGEN, ID_TIPO_PRODUCTO, ID_SEDE";
+        return "SKU, NOMBRE, DESCRIPCION, PRECIO, PRECIO_PROVEEDOR, IMAGEN, ID_TIPO_PRODUCTO, ID_MARCA";
     }
 
     @Override
@@ -95,6 +91,7 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
         this.incluirParametroDouble(4, this.producto.getPrecio());
         this.incluirParametroDouble(5, this.producto.getPrecioProveedor());
         this.incluirParametroByte(6, this.producto.getImagen());
+        
         this.incluirParametroInt(7, this.producto.getTipoProducto().getIdTipoProducto());
         this.incluirParametroInt(8, this.producto.getMarca().getIdMarca());
     }
@@ -135,27 +132,25 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
     protected String obtenerPredicadoParaLlavePrimaria() {
         String sql = "";
         if (this.tipo_Operacion == Tipo_Operacion.MODIFICAR || this.tipo_Operacion == Tipo_Operacion.ELIMINAR) {
-            sql = "id_producto=?";
+            sql = "ID_PRODUCTO=?";
         } else {
-            sql = "id_producto=?";
+            sql = "ID_PRODUCTO=?";
         }
         return sql;
     }
 
     @Override
     protected String obtenerListaDeValoresYAtributosParaModificacion() {
-        return "SKU=?, NOMBRE=?, DESCRIPCION=?, PRECIO=?, PRECIO_PROVEEDOR=?, IMAGEN=?";
+        return "NOMBRE=?, DESCRIPCION=?, PRECIO=?, IMAGEN=?";
     }
 
     @Override
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
-        this.incluirParametroString(1, this.producto.getSku());
-        this.incluirParametroString(2, this.producto.getNombre());
-        this.incluirParametroString(3, this.producto.getDescripcion());
-        this.incluirParametroDouble(4, this.producto.getPrecio());
-        this.incluirParametroDouble(5, this.producto.getPrecioProveedor());
-        this.incluirParametroByte(6, this.producto.getImagen());
-        this.incluirParametroInt(7, this.producto.getIdProducto());
+        this.incluirParametroString(1, this.producto.getNombre());
+        this.incluirParametroString(2, this.producto.getDescripcion());
+        this.incluirParametroDouble(3, this.producto.getPrecio());
+        this.incluirParametroByte(4, this.producto.getImagen());
+        this.incluirParametroInt(5, this.producto.getIdProducto());
     }
 
     /*
@@ -226,7 +221,19 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
 
     @Override
     protected String obtenerProyeccionParaSelect() {
-        String sql = "ID_PRODUCTO, SKU, NOMBRE, DESCRIPCION, PRECIO, PRECIO_PROVEEDOR, IMAGEN";
+        String sql = "PD.ID_PRODUCTO, PD.SKU, PD.NOMBRE, PD.DESCRIPCION, PD.PRECIO, PD.PRECIO_PROVEEDOR, "
+                   + "PD.IMAGEN, M.ID_MARCA, M.NOMBRE, TP.ID_TIPO_PRODUCTO, TP.TIPO ";
+        return sql;
+    }
+    
+    @Override
+    protected String obtenerPredicadoParaListado(){
+        String sql="";
+        
+        sql = sql.concat(" PD ");
+        sql = sql.concat("join MARCA M on PD.ID_MARCA = M.ID_MARCA ");
+        sql = sql.concat("join TIPO_PRODUCTO TP on PD.ID_TIPO_PRODUCTO = TP.ID_TIPO_PRODUCTO");
+        
         return sql;
     }
 
@@ -246,6 +253,14 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
         this.producto.setPrecio(this.resultSet.getDouble("PRECIO"));
         this.producto.setPrecioProveedor(this.resultSet.getDouble("PRECIO_PROVEEDOR"));
         this.producto.setImagen(this.resultSet.getBytes("IMAGEN"));
+        
+        this.producto.getTipoProducto().setIdTipoProducto(this.resultSet.getInt("ID_TIPO_PRODUCTO"));
+        this.producto.getTipoProducto().setTipo(this.resultSet.getString("TIPO"));
+        this.producto.getMarca().setIdMarca(this.resultSet.getInt("ID_MARCA"));
+        this.producto.getMarca().setNombre(this.resultSet.getString("NOMBRE"));
+    
+        
+        
     }
 
     @Override

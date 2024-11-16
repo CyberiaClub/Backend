@@ -27,8 +27,8 @@ public class Producto {
         this.precioProveedor = null;
         this.imagen = null;
         this.productosMiembros = null;
-        this.tipoProducto = null;
-        this.marca = null;
+        this.tipoProducto = new TipoProducto();
+        this.marca = new Marca();
     }
 
     public Producto(Integer idProducto, String sku, String nombre, String descripcion, Double precio, Double precioProveedor, Double precioDescuento, Boolean activo, ArrayList<Producto> productoMiembros, byte[] imagen, TipoProducto tipoProducto, Marca marca) {
@@ -109,10 +109,7 @@ public class Producto {
     }
     
     public TipoProducto getTipoProducto(){
-        return new TipoProducto(this.tipoProducto.getIdTipoProducto(),
-                                this.tipoProducto.getTipo(),
-                                this.tipoProducto.getActivo(),
-                                this.tipoProducto.getImagen());
+        return this.tipoProducto;
     }
     
     public void setTipoProducto(TipoProducto tipoProducto){
@@ -120,11 +117,7 @@ public class Producto {
     }
     
     public Marca getMarca(){
-        return new Marca(this.marca.getIdMarca(),
-                         this.marca.getNombre(),
-                         this.marca.getProveedor(),
-                         this.marca.getActivo(),
-                         this.marca.getImagen());
+        return this.marca;
     }
     
     public void setMarca(Marca marca){

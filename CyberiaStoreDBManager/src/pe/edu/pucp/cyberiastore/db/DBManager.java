@@ -72,23 +72,16 @@ public class DBManager {
             //el siguiente código ha sido probado en Windows
             //el archivo de configuración se encuentra en la carpeta resources/jdbc.properties
             //del proyecto que lo invoca
-//            String nmArchivoConf = "C:\\Program Files\\glassfish7\\glassfish\\resources" + "\\" + ARCHIVO_CONFIGURACION;
-            String nmArchivoConf = "C:\\Users\\ipana\\Downloads" + "\\" + ARCHIVO_CONFIGURACION;
+            String nmArchivoConf = "C:\\Program Files\\glassfish7\\glassfish\\resources" + "\\" + ARCHIVO_CONFIGURACION;
+//            String nmArchivoConf = "C:\\Users\\ipana\\Downloads" + "\\" + ARCHIVO_CONFIGURACION;
             properties.load(new FileInputStream(new File(nmArchivoConf)));
             this.driver = properties.getProperty("driver");
-            System.out.println(this.driver);
             this.tipo_de_driver = properties.getProperty("tipo_de_driver");
-            System.out.println(this.tipo_de_driver);
             this.base_de_datos = properties.getProperty("base_de_datos");
-            System.out.println(this.base_de_datos);
             this.nombre_de_host = properties.getProperty("nombre_de_host");
-            System.out.println(this.nombre_de_host);
             this.puerto = properties.getProperty("puerto");
-            System.out.println(this.puerto);
             this.usuario = properties.getProperty("usuario");
-            System.out.println(this.usuario);
             this.contraseña = properties.getProperty("contrasenha");
-            System.out.println(this.contraseña);
         } catch (FileNotFoundException ex) {
             System.err.println("Error al leer el archivo de propiedades - " + ex);
         } catch (IOException ex) {

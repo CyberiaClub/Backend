@@ -16,24 +16,16 @@ import javax.imageio.ImageIO;
 import pe.edu.pucp.cyberiastore.inventario.bo.MarcaBO;
 import pe.edu.pucp.cyberiastore.inventario.bo.ProductoBO;
 import pe.edu.pucp.cyberiastore.inventario.bo.TipoProductoBO;
-import pe.edu.pucp.cyberiastore.inventario.dao.MarcaDAO;
-import pe.edu.pucp.cyberiastore.inventario.daoImpl.MarcaDAOImpl;
+import pe.edu.pucp.cyberiastore.sede.bo.SedeBO;
 import pe.edu.pucp.cyberiastore.inventario.model.Marca;
-import pe.edu.pucp.cyberiastore.proveedor.dao.ProveedorDAO;
-import pe.edu.pucp.cyberiastore.proveedor.daoImpl.ProveedorDAOImpl;
 import pe.edu.pucp.cyberiastore.proveedor.model.Proveedor;
 import pe.edu.pucp.cyberiastore.inventario.model.TipoProducto;
-import pe.edu.pucp.cyberiastore.inventario.dao.TipoProductoDAO;
-import pe.edu.pucp.cyberiastore.inventario.daoImpl.TipoProductoDAOImpl;
 import pe.edu.pucp.cyberiastore.inventario.model.Producto;
-import pe.edu.pucp.cyberiastore.sede.bo.SedeBO;
-import pe.edu.pucp.cyberiastore.sede.dao.SedeDAO;
-import pe.edu.pucp.cyberiastore.sede.daoImpl.SedeDAOImpl;
 import pe.edu.pucp.cyberiastore.sede.model.Sede;
 
 public class CyberiaStoreInventarioTest {
 
-    public static void main (String[] args) {
+    public static void main(String[] args) {
 
         MarcaBO marcaBO = new MarcaBO();
 
@@ -68,47 +60,54 @@ public class CyberiaStoreInventarioTest {
             }
         }
         // Insercion de producto
-        TipoProductoBO tipoProductoBO = new TipoProductoBO();
-        TipoProducto tipoProducto = new TipoProducto();
-        tipoProducto.setImagen(imagenBytes);
-        tipoProducto.setTipo("TIPO PRODUCTO01");
-        tipoProductoBO.insertar(tipoProducto);
-        tipoProducto.setTipo("TIPO PRODUCTO02");
-        tipoProductoBO.insertar(tipoProducto);
-        tipoProducto.setTipo("TIPO PRODUCTO03");
-        tipoProductoBO.insertar(tipoProducto);
-        tipoProducto.setTipo("TIPO PRODUCTO04");
-        tipoProductoBO.insertar(tipoProducto);
-        tipoProducto.setTipo("TIPO PRODUCTO05");
-        tipoProductoBO.insertar(tipoProducto);
+//        TipoProductoBO tipoProductoBO = new TipoProductoBO();
+//        TipoProducto tipoProducto = new TipoProducto();
+//        tipoProducto.setImagen(imagenBytes);
+//        tipoProducto.setTipo("TIPO PRODUCTO01");
+//        tipoProductoBO.insertar(tipoProducto);
+//        tipoProducto.setTipo("TIPO PRODUCTO02");
+//        tipoProductoBO.insertar(tipoProducto);
+//        tipoProducto.setTipo("TIPO PRODUCTO03");
+//        tipoProductoBO.insertar(tipoProducto);
+//        tipoProducto.setTipo("TIPO PRODUCTO04");
+//        tipoProductoBO.insertar(tipoProducto);
+//        tipoProducto.setTipo("TIPO PRODUCTO05");
+//        tipoProductoBO.insertar(tipoProducto);
         //insercion de marca
         Marca marca = new Marca();
-        marca.setImagen(imagenBytes);
-        marca.setNombre("Marca01");
-        marcaBO.insertar(marca);
-        marca.setNombre("Marca02");
-        marcaBO.insertar(marca);
-        marca.setNombre("Marca03");
-        marcaBO.insertar(marca);
-        marca.setNombre("Marca04");
-        marcaBO.insertar(marca);
-        marca.setNombre("Marca05");
-        marcaBO.insertar(marca);
+//        Proveedor proveedor = new Proveedor();
+//        proveedor.setIdProveedor(1);
+//        marca.setImagen(imagenBytes);
+//        marca.setProveedor(proveedor);
+//        marca.setNombre("Marca01");
+//        marcaBO.insertar(marca);
+//        marca.setNombre("Marca02");
+//        marcaBO.insertar(marca);
+//        marca.setNombre("Marca03");
+//        marcaBO.insertar(marca);
+//        marca.setNombre("Marca04");
+//        marcaBO.insertar(marca);
+//        marca.setNombre("Marca05");
+//        marcaBO.insertar(marca);
         //Insercion de Productos
         ProductoBO productoBO = new ProductoBO();
         Producto producto = new Producto();
-        Date hoy = new Date();
-        producto.setIdProveedor(1); // todos tiene el mismo proveedor
-        producto.setFechaInsercion(hoy);
+        TipoProducto tipoProd = new TipoProducto();
+        marca.setIdMarca(1);
+
+        tipoProd.setIdTipoProducto(1);
+        marca.setIdMarca(1);
+
+        producto.getTipoProducto().setIdTipoProducto(1); // todos tiene el mismo proveedor
         producto.setImagen(imagenBytes);
         Integer v = 1;
-        for (Integer i = 0; i < 50; i++) {
+        for (Integer i = 0; i < 40; i++) {
             if (i % 10 == 0 && i != 0) {
                 v++;
-                producto.setIdSede(v);
-                producto.setIdTipo(v);
-                producto.setIdMarca(v);
             }
+            producto.setIdSede(v);
+            producto.getTipoProducto().setIdTipoProducto(v);
+            producto.getMarca().setIdMarca(v);
             producto.setSku("SKU" + i.toString());
             producto.setNombre("nombre del producto " + i.toString());
             producto.setDescripcion("Esta es la descripcion del producto " + i.toString());

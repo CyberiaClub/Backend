@@ -9,7 +9,6 @@ public class Marca {
     private Proveedor proveedor;
     private Boolean activo;
     private byte[] imagen;
-    private Proveedor proveedor;
 
     public Marca() {
         this.idMarca = null;
@@ -73,13 +72,5 @@ public class Marca {
     
     public void setImagen(byte[] imagen) {
         this.imagen = imagen;
-    }
-
-    public Proveedor getProveedor() {
-        return proveedor;
-    }
-
-    public void setProveedor(Proveedor proveedor) {
-        this.proveedor = proveedor;
     }
 }
