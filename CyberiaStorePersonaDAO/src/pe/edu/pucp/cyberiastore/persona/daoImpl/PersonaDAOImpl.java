@@ -77,12 +77,12 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
      */
     @Override
     protected String obtenerListaDeAtributosParaInsercion() {
-        return "DOCUMENTO, TELEFONO, NOMBRE,PRIMER_APELLIDO, SEGUNDO_APELLIDO,FECHA_NACIMIENTO, SEXO, CORREO, DIRECCION,ACTIVO, CONTRASEÑA,NACIONALIDAD, TIPO_DOCUMENTO,ID_TIPO_PERSONA";
+        return "DOCUMENTO, TELEFONO, NOMBRE,PRIMER_APELLIDO, SEGUNDO_APELLIDO,FECHA_NACIMIENTO, SEXO, CORREO, DIRECCION, CONTRASEÑA,NACIONALIDAD, TIPO_DOCUMENTO,ID_TIPO_PERSONA";
     }
 
     @Override
     protected String incluirListaDeParametrosParaInsercion() {
-        return "?,?,?,?,?,?,?,?,?,?,?,?,?,?";
+        return "?,?,?,?,?,?,?,?,?,?,?,?,?";
     }
 
     @Override
@@ -96,11 +96,10 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
         this.incluirParametroString(7, this.persona.getSexo() + "");
         this.incluirParametroString(8, this.persona.getCorreo());
         this.incluirParametroString(9, this.persona.getDireccion());
-        this.incluirParametroBoolean(10, this.persona.getActivo());
-        this.incluirParametroString(11, this.persona.getContrasena());
-        this.incluirParametroString(12, this.persona.getNacionalidad());
-        this.incluirParametroString(13, this.persona.getTipoDeDocumento().toString());
-        this.incluirParametroInt(14, this.persona.getTipoPersona().getIdTipoPersona());
+        this.incluirParametroString(10, this.persona.getContrasena());
+        this.incluirParametroString(11, this.persona.getNacionalidad());
+        this.incluirParametroString(12, this.persona.getTipoDeDocumento().toString());
+        this.incluirParametroInt(13, this.persona.getIdTipoPersona());
     }
 
     /*

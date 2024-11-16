@@ -19,7 +19,7 @@ public class Persona {
     private String contrasena;
     private String nacionalidad;
     private TipoDocumento tipoDeDocumento;
-    private TipoPersona tipoPersona;
+    private Integer idTipoPersona;
     private Double sueldo;
     private Date fechaIngreso;
     private Date fechaSalida;
@@ -27,6 +27,7 @@ public class Persona {
 
     public Persona() {
         this.activo = true;
+        this.segundoApellido = null;
     }
 
     /**
@@ -226,20 +227,6 @@ public class Persona {
     }
 
     /**
-     * @return the tipoPersona
-     */
-    public TipoPersona getTipoPersona() {
-        return tipoPersona;
-    }
-
-    /**
-     * @param tipoPersona the tipoPersona to set
-     */
-    public void setTipoPersona(TipoPersona tipoPersona) {
-        this.tipoPersona = tipoPersona;
-    }
-
-    /**
      * @return the idSede
      */
     public Integer getIdSede() {
@@ -293,6 +280,20 @@ public class Persona {
      */
     public void setFechaSalida(Date fechaSalida) {
         this.fechaSalida = fechaSalida;
+    }
+
+    /**
+     * @return the idTipoPersona
+     */
+    public Integer getIdTipoPersona() {
+        return idTipoPersona;
+    }
+
+    /**
+     * @param idTipoPersona the idTipoPersona to set
+     */
+    public void setIdTipoPersona(Integer idTipoPersona) {
+        this.idTipoPersona = idTipoPersona;
     }
 
 }
