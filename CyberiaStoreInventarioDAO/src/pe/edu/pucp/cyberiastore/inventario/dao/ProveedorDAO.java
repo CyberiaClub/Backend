@@ -1,4 +1,4 @@
-    package pe.edu.pucp.cyberiastore.proveedor.dao;
+    package pe.edu.pucp.cyberiastore.inventario.dao;
 
 import java.util.ArrayList;
 import pe.edu.pucp.cyberiastore.inventario.model.Proveedor;

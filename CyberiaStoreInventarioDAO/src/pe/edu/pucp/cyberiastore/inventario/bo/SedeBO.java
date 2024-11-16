@@ -1,8 +1,9 @@
-package pe.edu.pucp.cyberiastore.sede.bo;
+package pe.edu.pucp.cyberiastore.inventario.bo;
 
 import java.util.ArrayList;
-import pe.edu.pucp.cyberiastore.sede.daoImpl.SedeDAOImpl;
-import pe.edu.pucp.cyberiastore.sede.dao.SedeDAO;
+import pe.edu.pucp.cyberiastore.inventario.daoImpl.SedeDAOImpl;
+import pe.edu.pucp.cyberiastore.inventario.dao.SedeDAO;
+import pe.edu.pucp.cyberiastore.inventario.model.Producto;
 import pe.edu.pucp.cyberiastore.inventario.model.Sede;
 
 public class SedeBO {
@@ -26,6 +27,11 @@ public class SedeBO {
     public ArrayList<Sede> listarTodos(){
         ArrayList<Sede> sedees = this.sedeDAO.listarTodos();
         return sedees;
+    }
+    
+    public ArrayList<Producto> listarProductosSede(Integer idSede){
+        ArrayList<Producto> stock = this.sedeDAO.listarProductosSede(idSede);
+        return stock;
     }
 
     public Sede obtenerPorId(Integer idSede){

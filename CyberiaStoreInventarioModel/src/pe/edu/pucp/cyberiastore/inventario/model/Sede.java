@@ -1,7 +1,7 @@
 package pe.edu.pucp.cyberiastore.inventario.model;
 
 import java.time.LocalTime;
-import java.util.Map;
+import java.util.ArrayList;
 import pe.edu.pucp.cyberiastore.inventario.model.Producto;
 
 public class Sede {
@@ -12,10 +12,10 @@ public class Sede {
     private String telefono;
     private LocalTime horarioApertura;
     private LocalTime horarioCierre;
-    private Map<Producto, Integer> stock;
+    private Producto producto;
 
     public Sede(){
-        
+        this.producto = new Producto();
     }
     
     public Sede(String nombre, String descripcion, byte[] imagenBytes) {
@@ -71,12 +71,14 @@ public class Sede {
         this.horarioCierre = horarioCierre;
     }
 
-    public Map<Producto, Integer> getStock() {
-        return stock;
+    public Producto getProducto() {
+        return producto;
     }
 
-    public void setStock(Map<Producto, Integer> stock) {
-        this.stock = stock;
+    public void setProducto(Producto productos) {
+        this.producto = productos;
     }
+
+  
 
 }

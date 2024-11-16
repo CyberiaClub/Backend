@@ -18,6 +18,12 @@ public class TipoProductoDAOImpl extends DAOImpl implements TipoProductoDAO {
         this.tipoProducto = null;
         this.retornarLlavePrimaria = true;
     }
+    
+    /*
+     * ************************************************************************
+     * INSERTAR
+     * ************************************************************************
+     */
 
     @Override
     public Integer insertar(TipoProducto tipoProducto) {
@@ -57,20 +63,25 @@ public class TipoProductoDAOImpl extends DAOImpl implements TipoProductoDAO {
 
     @Override
     protected String obtenerListaDeAtributosParaInsercion() {
-        return "TIPO,ACTIVO,IMAGEN";
+        return "TIPO,IMAGEN";
     }
 
     @Override
     protected String incluirListaDeParametrosParaInsercion() {
-        return "?,?,?";
+        return "?,?";
     }
 
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
         this.incluirParametroString(1, this.tipoProducto.getTipo());
-        this.incluirParametroBoolean(2, this.tipoProducto.getActivo());
-        this.incluirParametroByte(3, this.tipoProducto.getImagen());
+        this.incluirParametroByte(2, this.tipoProducto.getImagen());
     }
+    
+    /*
+     * ************************************************************************
+     * MODIFICAR
+     * ************************************************************************
+     */
 
     @Override
     public Integer modificar(TipoProducto tipoProducto) {
@@ -122,6 +133,12 @@ public class TipoProductoDAOImpl extends DAOImpl implements TipoProductoDAO {
         this.incluirParametroByte(2, this.tipoProducto.getImagen());
         this.incluirParametroInt(3, this.tipoProducto.getIdTipoProducto());
     }
+    
+    /*
+     * ************************************************************************
+     * ELIMINAR
+     * ************************************************************************
+     */
 
     @Override
     public Integer eliminar(TipoProducto tipoProducto) {
@@ -155,6 +172,12 @@ public class TipoProductoDAOImpl extends DAOImpl implements TipoProductoDAO {
     protected void incluirValorDeParametrosParaEliminacion() throws SQLException {
         this.incluirParametroInt(1, this.tipoProducto.getIdTipoProducto());
     }
+    
+    /*
+     * ************************************************************************
+     * LISTADOS
+     * ************************************************************************
+     */
 
     @Override
     public ArrayList<TipoProducto> listarTodos() {
@@ -172,11 +195,8 @@ public class TipoProductoDAOImpl extends DAOImpl implements TipoProductoDAO {
         instanciarObjetoDelResultSet();
         lista.add(this.tipoProducto);
     }
-
-    @Override
-    protected void incluirValorDeParametrosParaObtenerPorId() throws SQLException {
-        this.incluirParametroInt(1, this.tipoProducto.getIdTipoProducto());
-    }
+    
+    
 
     @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
@@ -190,7 +210,13 @@ public class TipoProductoDAOImpl extends DAOImpl implements TipoProductoDAO {
     protected void limpiarObjetoDelResultSet() {
         this.tipoProducto = null;
     }
-
+    
+    /*
+     * ************************************************************************
+     * OBTENER POR ID
+     * ************************************************************************
+     */
+    
     @Override
     public TipoProducto obtenerPorId(Integer idTipoProducto) {
         this.tipoProducto = new TipoProducto();
@@ -198,6 +224,18 @@ public class TipoProductoDAOImpl extends DAOImpl implements TipoProductoDAO {
         super.obtenerPorId();
         return this.tipoProducto;
     }
+
+    @Override
+    protected void incluirValorDeParametrosParaObtenerPorId() throws SQLException {
+        this.incluirParametroInt(1, this.tipoProducto.getIdTipoProducto());
+    }
+    
+    /*
+     * *************************************************************************
+     * EXISTE PRODUCTO
+     * Funciones adicionales
+     * *************************************************************************
+     */
 
     @Override
     public Boolean existeTipoProducto(TipoProducto tipoProducto) {

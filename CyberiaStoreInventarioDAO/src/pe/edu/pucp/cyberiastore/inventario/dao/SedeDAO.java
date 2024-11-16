@@ -1,6 +1,7 @@
-package pe.edu.pucp.cyberiastore.sede.dao;
+package pe.edu.pucp.cyberiastore.inventario.dao;
 
 import java.util.ArrayList;
+import pe.edu.pucp.cyberiastore.inventario.model.Producto;
 import pe.edu.pucp.cyberiastore.inventario.model.Sede;
 
 public interface SedeDAO {
@@ -13,7 +14,7 @@ public interface SedeDAO {
 
     public ArrayList<Sede> listarTodos();
     
-    public Sede listarProductosSede(Integer idSede);
+    public ArrayList<Producto> listarProductosSede(Integer idSede);
 
     public Sede obtenerPorId(Integer idSede);
 
