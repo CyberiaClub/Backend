@@ -10,7 +10,7 @@ import pe.edu.pucp.cyberiastore.trabajador.model.Almacenero;
 import pe.edu.pucp.cyberiastore.trabajador.dao.AlmaceneroDAO;
 import pe.edu.pucp.cyberiastore.trabajador.dao.TrabajadorDAO;
 import pe.edu.pucp.cyberiastore.trabajador.model.Trabajador;
-import pe.edu.pucp.cyberiastore.usuario.model.TipoDocumento;
+import pe.edu.pucp.cyberiastore.persona.model.TipoDocumento;
 
 public class AlmaceneroDAOImpl extends DAOImpl implements AlmaceneroDAO {
 
@@ -37,8 +37,8 @@ public class AlmaceneroDAOImpl extends DAOImpl implements AlmaceneroDAO {
         trabajador.setDocumento(almacenero.getDocumento());
         trabajador.setTelefono(almacenero.getTelefono());
         trabajador.setNombre(almacenero.getNombre());
-        trabajador.setApellidoPaterno(almacenero.getApellidoPaterno());
-        trabajador.setApellidoMaterno(almacenero.getApellidoMaterno());
+        trabajador.setPrimerApellido(almacenero.getPrimerApellido());
+        trabajador.setSegundoApellido(almacenero.getSegundoApellido());
         trabajador.setSexo(almacenero.getSexo());
         trabajador.setFechaDeNacimiento(almacenero.getFechaDeNacimiento());
         trabajador.setCorreo(almacenero.getCorreo());
@@ -69,7 +69,7 @@ public class AlmaceneroDAOImpl extends DAOImpl implements AlmaceneroDAO {
                 idAlmacenero = super.insertar();
                 this.almacenero.setIdAlmacenero(idAlmacenero);
                 this.almacenero.setIdTrabajador(trabajador.getIdTrabajador());
-                this.almacenero.setIdUsuario(trabajador.getIdUsuario());
+                this.almacenero.setIdPersona(trabajador.getIdPersona());
                 this.retornarLlavePrimaria = false;
             }
             this.comitarTransaccion();
@@ -120,12 +120,12 @@ public class AlmaceneroDAOImpl extends DAOImpl implements AlmaceneroDAO {
         trabajador.setSueldo(almacenero.getSueldo());
         trabajador.setFechaDeIngreso(almacenero.getFechaDeIngreso());
         trabajador.setIdSede(almacenero.getIdSede());
-        trabajador.setIdUsuario(almacenero.getIdUsuario());
+        trabajador.setIdPersona(almacenero.getIdPersona());
         trabajador.setDocumento(almacenero.getDocumento());
         trabajador.setTelefono(almacenero.getTelefono());
         trabajador.setNombre(almacenero.getNombre());
-        trabajador.setApellidoPaterno(almacenero.getApellidoPaterno());
-        trabajador.setApellidoMaterno(almacenero.getApellidoMaterno());
+        trabajador.setPrimerApellido(almacenero.getPrimerApellido());
+        trabajador.setSegundoApellido(almacenero.getSegundoApellido());
         trabajador.setSexo(almacenero.getSexo());
         trabajador.setFechaDeNacimiento(almacenero.getFechaDeNacimiento());
         trabajador.setCorreo(almacenero.getCorreo());
@@ -280,10 +280,10 @@ public class AlmaceneroDAOImpl extends DAOImpl implements AlmaceneroDAO {
         this.almacenero = new Almacenero();
         this.almacenero.setIdAlmacenero(this.resultSet.getInt("id_almacenero"));
         this.almacenero.setIdTrabajador(this.resultSet.getInt("id_trabajador"));
-        this.almacenero.setIdUsuario(this.resultSet.getInt("id_usuario"));
+        this.almacenero.setIdPersona(this.resultSet.getInt("id_usuario"));
         this.almacenero.setNombre(this.resultSet.getString("nombre"));
-        this.almacenero.setApellidoPaterno(this.resultSet.getString("APELLIDO_PATERNO"));
-        this.almacenero.setApellidoMaterno(this.resultSet.getString("APELLIDO_MATERNO"));
+        this.almacenero.setPrimerApellido(this.resultSet.getString("APELLIDO_PATERNO"));
+        this.almacenero.setSegundoApellido(this.resultSet.getString("APELLIDO_MATERNO"));
         this.almacenero.setSexo(this.resultSet.getString("SEXO").charAt(0));
         this.almacenero.setDocumento(this.resultSet.getString("DOCUMENTO"));
         this.almacenero.setFechaDeNacimiento(this.resultSet.getTimestamp("FECHA_NACIMIENTO"));

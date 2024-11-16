@@ -8,7 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import pe.edu.pucp.cyberiastore.trabajador.bo.AdministradorBO;
 import pe.edu.pucp.cyberiastore.trabajador.model.Administrador;
-import pe.edu.pucp.cyberiastore.usuario.model.TipoDocumento;
+import pe.edu.pucp.cyberiastore.persona.model.TipoDocumento;
 import pe.edu.pucp.cyberiastore.util.MuestraFecha;
 
 public class AdministradorBOTest {
@@ -99,11 +99,11 @@ public class AdministradorBOTest {
             System.out.print(", ");
             System.out.print(administrador.getIdTrabajador().toString());
             System.out.print(", ");
-            System.out.print(administrador.getIdUsuario().toString());
+            System.out.print(administrador.getIdPersona().toString());
             System.out.print(", ");
-            System.out.print(administrador.getApellidoPaterno());
+            System.out.print(administrador.getPrimerApellido());
             System.out.print(", ");
-            System.out.print(administrador.getApellidoMaterno());
+            System.out.print(administrador.getSegundoApellido());
             System.out.print(", ");
             System.out.print(administrador.getNombre());
             System.out.print(", ");
@@ -134,11 +134,11 @@ public class AdministradorBOTest {
         System.out.print(", ");
         System.out.print(administrador.getIdTrabajador().toString());
         System.out.print(", ");
-        System.out.print(administrador.getIdUsuario().toString());
+        System.out.print(administrador.getIdPersona().toString());
         System.out.print(", ");
-        System.out.print(administrador.getApellidoPaterno());
+        System.out.print(administrador.getPrimerApellido());
         System.out.print(", ");
-        System.out.print(administrador.getApellidoMaterno());
+        System.out.print(administrador.getSegundoApellido());
         System.out.print(", ");
         System.out.print(administrador.getNombre());
         System.out.print(", ");

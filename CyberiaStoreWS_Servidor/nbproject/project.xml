@@ -28,14 +28,6 @@
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${reference.CyberiaStoreUsuarioModel.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
-                </library>
-                <library dirs="200">
-                    <file>${reference.CyberiaStoreUsuarioDAO.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
-                </library>
-                <library dirs="200">
                     <file>${reference.CyberiaStoreVentaModel.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
@@ -53,6 +45,14 @@
                 </library>
                 <library dirs="200">
                     <file>${file.reference.mysql-connector-j-9.0.0.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${reference.CyberiaStoreUsuarioModel.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${reference.CyberiaStoreUsuarioDAO.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
             </web-module-libraries>

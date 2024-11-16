@@ -4,8 +4,8 @@ import jakarta.jws.WebService;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
 import java.util.ArrayList;
-import pe.edu.pucp.cyberiastore.usuario.model.Cliente;
-import pe.edu.pucp.cyberiastore.usuario.bo.ClienteBO;
+import pe.edu.pucp.cyberiastore.persona.model.Cliente;
+import pe.edu.pucp.cyberiastore.persona.bo.ClienteBO;
 
 @WebService(serviceName = "ClienteWS",targetNamespace = "CyberiaWS")
 public class ClienteWS {
