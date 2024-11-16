@@ -10,13 +10,14 @@ public class Producto {
     private String descripcion;
     private Double precio;
     private Double precioProveedor;
-    private Double precioDescuento;
-    private Boolean activo;
     private byte[] imagen;
     private ArrayList<Producto> productosMiembros;
     private TipoProducto tipoProducto;
     private Marca marca;
-
+    //Esto es para el insert de las tablas intermedias
+    private Integer idSede;
+    private Integer cantidad;
+    
     public Producto() {
         this.idProducto = null;
         this.sku = null;
@@ -24,12 +25,10 @@ public class Producto {
         this.descripcion = null;
         this.precio = null;
         this.precioProveedor = null;
-        this.precioDescuento = null;
-        this.activo = true;
         this.imagen = null;
         this.productosMiembros = null;
-        this.tipoProducto = null;
-        this.marca = null;
+        this.tipoProducto = new TipoProducto();
+        this.marca = new Marca();
     }
 
     public Producto(Integer idProducto, String sku, String nombre, String descripcion, Double precio, Double precioProveedor, Double precioDescuento, Boolean activo, ArrayList<Producto> productoMiembros, byte[] imagen, TipoProducto tipoProducto, Marca marca) {
@@ -39,8 +38,6 @@ public class Producto {
         this.descripcion = descripcion;
         this.precio = precio;
         this.precioProveedor = precioProveedor;
-        this.precioDescuento = precioDescuento;
-        this.activo = (activo == null) ? true:activo;
         this.imagen = imagen;
         this.productosMiembros = productoMiembros;
         this.tipoProducto = tipoProducto;
@@ -95,22 +92,6 @@ public class Producto {
         this.precioProveedor = precioProveedor;
     }
 
-    public Double getPrecioDescuento() {
-        return precioDescuento;
-    }
-
-    public void setPrecioDescuento(Double precioDescuento) {
-        this.precioDescuento = precioDescuento;
-    }
-
-    public Boolean getActivo() {
-        return activo;
-    }
-
-    public void setActivo(Boolean activo) {
-        this.activo = activo;
-    }
-
     public byte[] getImagen() {
         return imagen;
     }
@@ -118,9 +99,9 @@ public class Producto {
     public void setImagen(byte[] imagen) {
         this.imagen = imagen;
     }
-
+    
     public ArrayList<Producto> getProductosMiembros() {
-        return (ArrayList<Producto>)productosMiembros.clone();
+        return productosMiembros;
     }
 
     public void setProductosMiembros(ArrayList<Producto> productosMiembros) {
@@ -128,10 +109,7 @@ public class Producto {
     }
     
     public TipoProducto getTipoProducto(){
-        return new TipoProducto(this.tipoProducto.getIdTipoProducto(),
-                                this.tipoProducto.getTipo(),
-                                this.tipoProducto.getActivo(),
-                                this.tipoProducto.getImagen());
+        return this.tipoProducto;
     }
     
     public void setTipoProducto(TipoProducto tipoProducto){
@@ -139,14 +117,26 @@ public class Producto {
     }
     
     public Marca getMarca(){
-        return new Marca(this.marca.getIdMarca(),
-                         this.marca.getNombre(),
-                         this.marca.getProveedor(),
-                         this.marca.getActivo(),
-                         this.marca.getImagen());
+        return this.marca;
     }
     
     public void setMarca(Marca marca){
         this.marca = marca;
+    }
+
+    public Integer getIdSede() {
+        return idSede;
+    }
+
+    public void setIdSede(Integer idSede) {
+        this.idSede = idSede;
+    }
+
+    public Integer getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(Integer cantidad) {
+        this.cantidad = cantidad;
     }
 }

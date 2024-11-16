@@ -1,49 +1,55 @@
-package pe.edu.pucp.cyberiastore.inventario.daoImpl;
+package pe.edu.pucp.cyberiastore.sede.daoImpl;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import pe.edu.pucp.cyberiastore.config.DAOImpl;
-import pe.edu.pucp.cyberiastore.inventario.dao.ProductoXTipoDAO;
+import pe.edu.pucp.cyberiastore.inventario.model.Producto;
+import pe.edu.pucp.cyberiastore.sede.model.Sede;
+import pe.edu.pucp.cyberiastore.sede.dao.StockSedeDAO;
 
-public class ProductoXTipoDAOImpl extends DAOImpl implements ProductoXTipoDAO {
+public class StockSedeDAOImpl extends DAOImpl implements StockSedeDAO {
 
     private Integer idProducto;
-    private Integer idTipoProducto;
+    private Integer idSede;
+    private Integer cantidadStock;
 
-    public ProductoXTipoDAOImpl() {
-        super("PRODUCTO_X_TIPO");
+    public StockSedeDAOImpl() {
+        super("PRODUCTO_X_SEDE");
     }
-
+    
     @Override
-    public Integer insertar(Integer idProducto, Integer idTipoProducto) {
+    public Integer insertar(Integer idProducto, Integer idSede, Integer cantidadStock) {
         this.idProducto = idProducto;
-        this.idTipoProducto = idTipoProducto;
+        this.idSede = idSede;
+        this.cantidadStock = cantidadStock;
         return super.insertar();
     }
 
     @Override
-    public Integer insertar(Integer idProducto, Integer idTipoProducto, Boolean usarTransaccion, Connection conexion) {
+    public Integer insertar(Integer idProducto, Integer idSede, Integer cantidadStock, Boolean usarTransaccion, Connection conexion) {
         this.usarTransaccion = usarTransaccion;
         this.conexion = conexion;
-        return this.insertar(idProducto, idTipoProducto);
+        return this.insertar(idProducto, idSede, cantidadStock);
     }
-
+    
     @Override
     protected String obtenerListaDeAtributosParaInsercion() {
-        return "id_producto, id_tipo_producto";
+        return "id_producto, id_sede, stock_sede";
     }
 
     @Override
     protected String incluirListaDeParametrosParaInsercion() {
-        return "?,?";
+        return "?,?,?";
     }
 
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
         this.incluirParametroInt(1, this.idProducto);
-        this.incluirParametroInt(2, this.idTipoProducto);
+        this.incluirParametroInt(2, this.idSede);
+        this.incluirParametroInt(3, this.cantidadStock);
     }
 
     @Override
@@ -90,4 +96,5 @@ public class ProductoXTipoDAOImpl extends DAOImpl implements ProductoXTipoDAO {
     protected void limpiarObjetoDelResultSet() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
 }

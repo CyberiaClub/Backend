@@ -12,6 +12,8 @@ public interface SedeDAO {
     public Integer eliminar(Sede sede);
 
     public ArrayList<Sede> listarTodos();
+    
+    public Sede listarProductosSede(Integer idSede);
 
     public Sede obtenerPorId(Integer idSede);
 

@@ -11,14 +11,17 @@ import pe.edu.pucp.cyberiastore.sede.model.Sede;
 import pe.edu.pucp.cyberiastore.config.DAOImpl;
 import pe.edu.pucp.cyberiastore.config.Tipo_Operacion;
 import pe.edu.pucp.cyberiastore.sede.dao.SedeDAO;
+import pe.edu.pucp.cyberiastore.config.Tipo_Operacion;
 
 public class SedeDAOImpl extends DAOImpl implements SedeDAO {
 
     private Sede sede;
+    private Tipo_Operacion tipoOperacion;
 
     public SedeDAOImpl() {
         super("SEDE");
         this.sede = null;
+        this.tipoOperacion = null;
     }
 
     @Override
@@ -106,16 +109,16 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
 
     @Override
     protected String obtenerListaDeValoresYAtributosParaModificacion() {
-        return "nombre=?, descripcion=?, telefono=?,horario_apertura=?,horario_cierre=?";
+        return "NOMBRE=?, DESCRIPCION=?, TELEFONO=?,HORARIO_APERTURA=?,HORARIO_CIERRE=?";
     }
 
     @Override
     protected String obtenerPredicadoParaLlavePrimaria() {
         String sql = "";
         if (this.tipo_Operacion == Tipo_Operacion.MODIFICAR || this.tipo_Operacion == Tipo_Operacion.ELIMINAR) {
-            sql = "id_sede=?";
+            sql = "ID_SEDE=?";
         } else {
-            sql = "per.id_sede=?";
+            sql = "PER.ID_SEDE=?";
         }
         return sql;
     }
@@ -144,13 +147,45 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
 
     @Override
     public ArrayList<Sede> listarTodos() {
+        this.tipoOperacion = Tipo_Operacion.LISTAR_SEDES;
         return (ArrayList<Sede>) super.listarTodos(null);
     }
 
     @Override
+    public Sede listarProductosSede(Integer idSede) {
+        this.tipoOperacion = Tipo_Operacion.LISTAR_STOCK_SEDE;
+        return null;
+    }
+
+    @Override
     protected String obtenerProyeccionParaSelect() {
-        String sql = "id_sede, nombre, descripcion,telefono,horario_apertura,horario_cierre";
+        String sql = "";
+        if (this.tipoOperacion == Tipo_Operacion.LISTAR_SEDES) {
+            sql = sql.concat("ID_SEDE, NOMBRE, DESCRIPCION, TELEFONO, HORARIO_APERTURA, HORARIO_CIERRE");
+        } else if (this.tipoOperacion == Tipo_Operacion.LISTAR_STOCK_SEDE) {
+            sql = sql.concat("PD.ID_PRODUCTO, PD.SKU, PD.NOMBRE, PD.DESCRIPCION, PD.PRECIO, PD.PRECIO_PROVEEDOR,TP.TIPO, M.NOMBRE");
+        }
         return sql;
+    }
+
+    @Override
+    protected String obtenerPredicadoParaListado() {
+        String sql = "";
+        if (this.tipoOperacion == Tipo_Operacion.LISTAR_STOCK_SEDE) {
+            sql = sql.concat(" S ");
+            sql = sql.concat("JOIN PRODUCTO_X_SEDE PXS ON S.ID_SEDE = PXS.ID_SEDE ");
+            sql = sql.concat("JOIN PRODUCTO PD ON PXS.ID_PRODUCTO = PD.ID_PRODUCTO ");
+            sql = sql.concat("JOIN TIPO_PRODUCTO TP ON PD.ID_TIPO_PRODUCTO = TP.ID_TIPO_PRODUCTO ");
+            sql = sql.concat("JOIN MARCA M ON PD.ID_MARCA = M.ID_MARCA ");
+            sql = sql.concat("WHERE S.ID_SEDE = ?");
+        }
+        
+        return sql;
+    }
+
+    @Override
+    protected void incluirValorDeParametrosParaListado() throws SQLException {
+        this.incluirParametroInt(1, this.sede.getIdSede());
     }
 
     @Override
@@ -160,19 +195,14 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
     }
 
     @Override
-    protected void incluirValorDeParametrosParaObtenerPorId() throws SQLException {
-        this.incluirParametroInt(1, this.sede.getIdSede());
-    }
-
-    @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.sede = new Sede();
-        this.sede.setIdSede(this.resultSet.getInt("id_sede"));
-        this.sede.setNombre(this.resultSet.getString("nombre"));
-        this.sede.setDescripcion(this.resultSet.getString("descripcion"));
-        this.sede.setTelefono(this.resultSet.getString("telefono"));
-        this.sede.setHorarioApertura(this.resultSet.getTime("horario_apertura").toLocalTime());
-        this.sede.setHorarioCierre(this.resultSet.getTime("horario_cierre").toLocalTime());
+        this.sede.setIdSede(this.resultSet.getInt("ID_SEDE"));
+        this.sede.setNombre(this.resultSet.getString("NOMBRE"));
+        this.sede.setDescripcion(this.resultSet.getString("DESCRIPCION"));
+        this.sede.setTelefono(this.resultSet.getString("TELEFONO"));
+        this.sede.setHorarioApertura(this.resultSet.getTime("HORARIO_APERTURA").toLocalTime());
+        this.sede.setHorarioCierre(this.resultSet.getTime("HORARIO_CIERRE").toLocalTime());
     }
 
     @Override
@@ -189,6 +219,11 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
     }
 
     @Override
+    protected void incluirValorDeParametrosParaObtenerPorId() throws SQLException {
+        this.incluirParametroInt(1, this.sede.getIdSede());
+    }
+
+    @Override
     public Boolean existeSede(Sede sede) {
         Boolean abreConexion = true;
         return existeSede(sede, abreConexion);
@@ -202,13 +237,13 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
             if (abreConexion) {
                 this.abrirConexion();
             }
-            String sql = "select id_Sede from sede where ";
-            sql = sql.concat("nombre=? ");
+            String sql = "select ID_SEDE from SEDE where ";
+            sql = sql.concat("NOMBRE=? ");
             this.colocarSQLenStatement(sql);
             this.incluirParametroString(1, this.sede.getNombre());
             this.ejecutarConsultaEnBD(sql);
             if (this.resultSet.next()) {
-                idSede = this.resultSet.getInt("id_Sede");
+                idSede = this.resultSet.getInt("ID_SEDE");
             }
         } catch (SQLException ex) {
             System.err.println("Error al consultar si existe sede - " + ex);

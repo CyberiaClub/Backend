@@ -102,16 +102,16 @@ public class TipoProductoDAOImpl extends DAOImpl implements TipoProductoDAO {
 
     @Override
     protected String obtenerListaDeValoresYAtributosParaModificacion() {
-        return "tipo=?,imagen=?";
+        return "TIPO=?,IMAGEN=?";
     }
 
     @Override
     protected String obtenerPredicadoParaLlavePrimaria() {
         String sql = "";
         if (this.tipo_Operacion == Tipo_Operacion.MODIFICAR || this.tipo_Operacion == Tipo_Operacion.ELIMINAR) {
-            sql = "id_tipo_producto=?";
+            sql = "ID_TIPO_PRODUCTO=?";
         } else {
-            sql = "id_tipo_producto=?";
+            sql = "ID_TIPO_PRODUCTO=?";
         }
         return sql;
     }
@@ -163,7 +163,7 @@ public class TipoProductoDAOImpl extends DAOImpl implements TipoProductoDAO {
 
     @Override
     protected String obtenerProyeccionParaSelect() {
-        String sql = "id_tipo_producto, tipo, imagen";
+        String sql = "ID_TIPO_PRODUCTO, TIPO, IMAGEN";
         return sql;
     }
 
@@ -181,9 +181,9 @@ public class TipoProductoDAOImpl extends DAOImpl implements TipoProductoDAO {
     @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.tipoProducto = new TipoProducto();
-        this.tipoProducto.setIdTipoProducto(this.resultSet.getInt("id_tipo_producto"));
-        this.tipoProducto.setTipo(this.resultSet.getString("tipo"));
-        this.tipoProducto.setImagen(this.resultSet.getBytes("imagen"));
+        this.tipoProducto.setIdTipoProducto(this.resultSet.getInt("ID_TIPO_PRODUCTO"));
+        this.tipoProducto.setTipo(this.resultSet.getString("TIPO"));
+        this.tipoProducto.setImagen(this.resultSet.getBytes("IMAGEN"));
     }
 
     @Override
@@ -213,13 +213,13 @@ public class TipoProductoDAOImpl extends DAOImpl implements TipoProductoDAO {
             if (abreConexion) {
                 this.abrirConexion();
             }
-            String sql = "select id_TipoProducto from tipoProducto where ";
-            sql = sql.concat("tipo=? ");
+            String sql = "select ID_TIPO_PRODUCTO from TIPO_PRODUCTO where ";
+            sql = sql.concat("TIPO=? ");
             this.colocarSQLenStatement(sql);
             this.incluirParametroString(1, this.tipoProducto.getTipo());
             this.ejecutarConsultaEnBD(sql);
             if (this.resultSet.next()) {
-                idTipoProducto = this.resultSet.getInt("id_TipoProducto");
+                idTipoProducto = this.resultSet.getInt("ID_TIPO_PRODUCTO");
             }
         } catch (SQLException ex) {
             System.err.println("Error al consultar si existe tipoProducto - " + ex);
