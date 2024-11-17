@@ -20,7 +20,7 @@ public class CyberiaStoreUsuarioTest {
         p2.setPrimerApellido("Rodriguez");
         p2.setSegundoApellido("Lopez");
         p2.setFechaDeNacimiento(fecha);
-        p2.setSexo('F');
+        p2.setSexo("F");
         p2.setCorreo("ana.rodriguez@example.com");
         p2.setDireccion("Jr. Los Olivos 456, Lima");
         p2.setContrasena("anaSecure456");
@@ -36,7 +36,7 @@ public class CyberiaStoreUsuarioTest {
         p3.setPrimerApellido("Gomez");
         p3.setSegundoApellido("Ramos");
         p3.setFechaDeNacimiento(fecha);
-        p3.setSexo('M');
+        p3.setSexo("M");
         p3.setCorreo("carlos.gomez@example.com");
         p3.setDireccion("Calle Las Flores 789, Arequipa");
         p3.setContrasena("carlos789Pass");
@@ -52,7 +52,7 @@ public class CyberiaStoreUsuarioTest {
         p4.setPrimerApellido("Diaz");
         p4.setSegundoApellido("Torres");
         p4.setFechaDeNacimiento(fecha);
-        p4.setSexo('F');
+        p4.setSexo("F");
         p4.setCorreo("sofia.diaz@example.com");
         p4.setDireccion("Av. Javier Prado 101, Lima");
         p4.setContrasena("sofiaTorres123");
@@ -68,7 +68,7 @@ public class CyberiaStoreUsuarioTest {
         p5.setPrimerApellido("Vargas");
         p5.setSegundoApellido("Sanchez");
         p5.setFechaDeNacimiento(fecha);
-        p5.setSexo('M');
+        p5.setSexo("M");
         p5.setCorreo("jorge.vargas@example.com");
         p5.setDireccion("Jr. Amazonas 202, Cusco");
         p5.setContrasena("jorgeSanchezSecure");

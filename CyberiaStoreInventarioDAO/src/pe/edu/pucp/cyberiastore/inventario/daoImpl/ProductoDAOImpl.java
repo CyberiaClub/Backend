@@ -45,7 +45,7 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
                 ArrayList<Producto> productosMiembros = this.producto.getProductosMiembros();
                 if (productosMiembros != null) {
                     ProductoXProductoDAO productoXProducto = new ProductoXProductoDAOImpl();
-                    for (Producto productoMiembro: productosMiembros) {
+                    for (Producto productoMiembro : productosMiembros) {
                         // idProducto es el padre, productoMiembro del hijo, cantidad
                         productoXProducto.insertar(idProducto, productoMiembro.getIdProducto(), productoMiembro.getCantidad(), this.usarTransaccion, this.conexion);
                     }
@@ -93,7 +93,7 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
         this.incluirParametroDouble(4, this.producto.getPrecio());
         this.incluirParametroDouble(5, this.producto.getPrecioProveedor());
         this.incluirParametroByte(6, this.producto.getImagen());
-        
+
         this.incluirParametroInt(7, this.producto.getTipoProducto().getIdTipoProducto());
         this.incluirParametroInt(8, this.producto.getMarca().getIdMarca());
     }
@@ -225,45 +225,32 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
     @Override
     protected String obtenerProyeccionParaSelect() {
         String sql = "PD.ID_PRODUCTO, PD.SKU, PD.NOMBRE, PD.DESCRIPCION, PD.PRECIO, PD.PRECIO_PROVEEDOR, "
-                   + "PD.IMAGEN, M.ID_MARCA, M.NOMBRE, TP.ID_TIPO_PRODUCTO, TP.TIPO ";
-        return sql;
-    }
-    
-    @Override
-    protected String obtenerPredicadoParaListado(){
-        String sql="";
-        
-        sql = sql.concat(" PD ");
-        sql = sql.concat("join MARCA M on PD.ID_MARCA = M.ID_MARCA ");
-        sql = sql.concat("join TIPO_PRODUCTO TP on PD.ID_TIPO_PRODUCTO = TP.ID_TIPO_PRODUCTO");
-        
+                + "PD.IMAGEN, M.ID_MARCA, M.NOMBRE, TP.ID_TIPO_PRODUCTO, TP.TIPO ";
         return sql;
     }
 
     @Override
     protected String obtenerPredicadoParaListado() {
-        String sql = "PRODUCTO p";
-        sql = sql.concat("LEFT JOIN PRODUCTO_X_MARCA pm ON p.ID_PRODUCTO = pm.ID_PRODUCTO ");
-        sql = sql.concat("LEFT JOIN MARCA m ON pm.ID_MARCA = m.ID_MARCA ");
-        sql = sql.concat("LEFT JOIN PRODUCTO_X_TIPO pt ON p.ID_PRODUCTO = pt.ID_PRODUCTO ");
-        sql = sql.concat("LEFT JOIN TIPO_PRODUCTO tp ON pt.ID_TIPO_PRODUCTO = tp.ID_TIPO_PRODUCTO ");
-        sql = sql.concat("LEFT JOIN PRODUCTO_X_SEDE ps ON p.ID_PRODUCTO = ps.ID_PRODUCTO ");
-        sql = sql.concat("LEFT JOIN SEDE s ON ps.ID_SEDE = s.ID_SEDE ");
-        sql = sql.concat("LEFT JOIN PRODUCTO_X_PROVEEDOR pp ON p.ID_PRODUCTO = pp.ID_PRODUCTO ");
-        sql = sql.concat("LEFT JOIN PROVEEDOR prv ON pp.ID_PROVEEDOR = prv.ID_PROVEEDOR ");
+        String sql = "";
+
+        sql = sql.concat(" PD ");
+        sql = sql.concat("join MARCA M on PD.ID_MARCA = M.ID_MARCA ");
+        sql = sql.concat("join TIPO_PRODUCTO TP on PD.ID_TIPO_PRODUCTO = TP.ID_TIPO_PRODUCTO");
+
         return sql;
     }
 
     @Override
     protected void agregarObjetoALaLista(List lista, ResultSet resultSet) throws SQLException {
         instanciarObjetoDelResultSet();
-        
+
         ProductoXProductoDAO prod_compuestoDAO = new ProductoXProductoDAOImpl();
         ArrayList<Producto> productosMiembro = new ArrayList<Producto>();
         productosMiembro = prod_compuestoDAO.listarPorIdPadre(this.producto.getIdProducto());
-        if(productosMiembro != null)
+        if (productosMiembro != null) {
             this.producto.setProductosMiembros(productosMiembro);
-        
+        }
+
         lista.add(this.producto);
     }
 
@@ -277,15 +264,15 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
         this.producto.setPrecio(this.resultSet.getDouble("PD.PRECIO"));
         this.producto.setPrecioProveedor(this.resultSet.getDouble("PD.PRECIO_PROVEEDOR"));
         this.producto.setImagen(this.resultSet.getBytes("PD.IMAGEN"));
-        
+
         TipoProducto tipoProd = new TipoProducto();
         tipoProd.setIdTipoProducto(this.resultSet.getInt("TP.ID_TIPO_PRODUCTO"));
         tipoProd.setTipo(this.resultSet.getString("TP.TIPO"));
-        
+
         Marca marca = new Marca();
         marca.setIdMarca(this.resultSet.getInt("M.ID_MARCA"));
         marca.setNombre(this.resultSet.getString("M.NOMBRE"));
-        
+
         this.producto.setTipoProducto(tipoProd);
         this.producto.setMarca(marca);
     }
@@ -338,40 +325,44 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
         return idProducto != null;
     }
 
+//    @Override
+//    public ArrayList<Producto> buscar_sku(String sku) {
+//        this.value = 2;
+//        List lista = new ArrayList<>();
+//        try {
+//            this.abrirConexion();
+//            String sql = "SELECT p.NOMBRE,p.DESCRIPCION,p.PRECIO,ps.STOCK_SEDE,s.NOMBRE AS NOMBRE_SEDE ";
+//            sql = sql.concat("FROM PRODUCTO p");
+//            sql = sql.concat("JOIN PRODUCTO_X_SEDE ps ON p.ID_PRODUCTO = ps.ID_PRODUCTO");
+//            sql = sql.concat("JOIN SEDE s ON ps.ID_SEDE = s.ID_SEDE");
+//            sql = sql.concat("WHERE p.SKU = '?'");
+//            this.colocarSQLenStatement(sql);
+//            this.incluirParametroString(1, sku);
+//            this.ejecutarConsultaEnBD(sql);
+//            while (this.resultSet.next()) {
+//                Producto p = new Producto();
+//                p.setNombre(this.resultSet.getString("NOMBRE"));
+//                p.setDescripcion(this.resultSet.getString("DESCRIPCION"));
+//                p.setPrecio(this.resultSet.getDouble("PRECIO"));
+//                p.setCantidad(this.resultSet.getInt("STOCK_SEDE"));
+//                p.setNombreSede(this.resultSet.getString("NOMBRE_SEDE"));
+//                lista.add(this.producto);
+//            }
+//        } catch (SQLException ex) {
+//            System.err.println("Error al intentar listarTodos - " + ex);
+//        } finally {
+//            try {
+//                this.cerrarConexion();
+//            } catch (SQLException ex) {
+//                System.err.println("Error al cerrar la conexión - " + ex);
+//            }
+//        }
+//        this.value = 0;
+//        return (ArrayList<Producto>) lista;
+//    }
+
     @Override
     public ArrayList<Producto> buscar_sku(String sku) {
-        this.value = 2;
-        List lista = new ArrayList<>();
-        try {
-            this.abrirConexion();
-            String sql = "SELECT p.NOMBRE,p.DESCRIPCION,p.PRECIO,ps.STOCK_SEDE,s.NOMBRE AS NOMBRE_SEDE ";
-            sql = sql.concat("FROM PRODUCTO p");
-            sql = sql.concat("JOIN PRODUCTO_X_SEDE ps ON p.ID_PRODUCTO = ps.ID_PRODUCTO");
-            sql = sql.concat("JOIN SEDE s ON ps.ID_SEDE = s.ID_SEDE");
-            sql = sql.concat("WHERE p.SKU = '?'");
-            this.colocarSQLenStatement(sql);
-            this.incluirParametroString(1, sku);
-            this.ejecutarConsultaEnBD(sql);
-            while (this.resultSet.next()) {
-                Producto p = new Producto();
-                p.setNombre(this.resultSet.getString("NOMBRE"));
-                p.setDescripcion(this.resultSet.getString("DESCRIPCION"));
-                p.setPrecio(this.resultSet.getDouble("PRECIO"));
-                p.setCantidad(this.resultSet.getInt("STOCK_SEDE"));
-                p.setNombreSede(this.resultSet.getString("NOMBRE_SEDE"));
-                lista.add(this.producto);
-            }
-        } catch (SQLException ex) {
-            System.err.println("Error al intentar listarTodos - " + ex);
-        } finally {
-            try {
-                this.cerrarConexion();
-            } catch (SQLException ex) {
-                System.err.println("Error al cerrar la conexión - " + ex);
-            }
-        }
-        this.value = 0;
-        return (ArrayList<Producto>) lista;
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
 }

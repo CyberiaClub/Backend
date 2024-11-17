@@ -17,13 +17,12 @@ public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
         super("PROVEEDOR");
         this.proveedor = null;
     }
-    
+
     /*
      * ************************************************************************
      * INSERTAR
      * ************************************************************************
      */
-    
     @Override
     public Integer insertar(Proveedor proveedor) {
         this.proveedor = proveedor;
@@ -37,7 +36,7 @@ public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
                 this.retornarLlavePrimaria = true;
                 idProveedor = super.insertar();
                 this.retornarLlavePrimaria = false;
-                
+
             } else {
                 idProveedor = proveedor.getIdProveedor();
             }
@@ -82,13 +81,12 @@ public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
         this.incluirParametroString(6, this.proveedor.getDireccion());
         this.incluirParametroString(7, this.proveedor.getDescripcion());
     }
-    
+
     /*
      * ************************************************************************
      * MODIFICAR
      * ************************************************************************
      */
-
     @Override
     public Integer modificar(Proveedor proveedor) {
         Integer retorno = 0;
@@ -144,13 +142,12 @@ public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
         this.incluirParametroString(7, this.proveedor.getDescripcion());
         this.incluirParametroInt(8, this.proveedor.getIdProveedor());
     }
-    
+
     /*
      * ************************************************************************
      * ELIMINAR
      * ************************************************************************
      */
-    
     @Override
     public Integer eliminar(Proveedor proveedor) {
         Integer retorno = 0;
@@ -183,13 +180,12 @@ public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
     protected void incluirValorDeParametrosParaEliminacion() throws SQLException {
         this.incluirParametroInt(1, this.proveedor.getIdProveedor());
     }
-    
+
     /*
      * ************************************************************************
      * LISTADOS
      * ************************************************************************
      */
-
     @Override
     public ArrayList<Proveedor> listarTodos() {
         return (ArrayList<Proveedor>) super.listarTodos(null);
@@ -224,13 +220,12 @@ public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
     protected void limpiarObjetoDelResultSet() {
         this.proveedor = null;
     }
-    
+
     /*
      * ************************************************************************
      * OBTENER POR ID
      * ************************************************************************
      */
-
     @Override
     public Proveedor obtenerPorId(Integer idProveedor) {
         this.proveedor = new Proveedor();
@@ -238,7 +233,7 @@ public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
         super.obtenerPorId();
         return this.proveedor;
     }
-    
+
     @Override
     protected void incluirValorDeParametrosParaObtenerPorId() throws SQLException {
         this.incluirParametroInt(1, this.proveedor.getIdProveedor());
@@ -251,14 +246,13 @@ public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
         this.incluirParametroString(8, this.proveedor.getDescripcion());
         this.incluirParametroBoolean(9, this.proveedor.getActivo());
     }
-    
+
     /*
      * *************************************************************************
      * EXISTE PRODUCTO
      * Funciones adicionales
      * *************************************************************************
      */
-
     @Override
     public Boolean existeProveedor(Proveedor proveedor) {
         Boolean abreConexion = true;
@@ -294,7 +288,7 @@ public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
         }
         return idProveedor != null;
     }
-    
+
     @Override
     public Integer buscarIdPorNombre(Proveedor proveedor, Boolean abreConexion) {
         this.proveedor = proveedor;
