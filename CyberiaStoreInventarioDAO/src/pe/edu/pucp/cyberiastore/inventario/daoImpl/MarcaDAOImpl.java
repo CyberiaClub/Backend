@@ -8,6 +8,7 @@ import pe.edu.pucp.cyberiastore.inventario.model.Marca;
 import pe.edu.pucp.cyberiastore.inventario.dao.MarcaDAO;
 import pe.edu.pucp.cyberiastore.config.DAOImpl;
 import pe.edu.pucp.cyberiastore.config.Tipo_Operacion;
+import pe.edu.pucp.cyberiastore.inventario.model.Proveedor;
 
 public class MarcaDAOImpl extends DAOImpl implements MarcaDAO {
     
@@ -18,6 +19,12 @@ public class MarcaDAOImpl extends DAOImpl implements MarcaDAO {
         this.marca = null;
         this.retornarLlavePrimaria = true;
     }
+    
+    /*
+     * ************************************************************************
+     * INSERTAR
+     * ************************************************************************
+     */
     
     @Override
     public Integer insertar(Marca marca) {
@@ -73,7 +80,13 @@ public class MarcaDAOImpl extends DAOImpl implements MarcaDAO {
         this.incluirParametroByte(3, this.marca.getImagen());
         this.incluirParametroInt(4, this.marca.getProveedor().getIdProveedor() );
     }
-
+    
+    /*
+     * ************************************************************************
+     * MODIFICAR
+     * ************************************************************************
+     */
+    
     @Override
     public Integer modificar(Marca marca) {
         Integer retorno = 0;
@@ -124,6 +137,12 @@ public class MarcaDAOImpl extends DAOImpl implements MarcaDAO {
         this.incluirParametroByte(2, this.marca.getImagen());
         this.incluirParametroInt(3, this.marca.getIdMarca());
     }
+    
+    /*
+     * ************************************************************************
+     * ELIMINAR
+     * ************************************************************************
+     */
 
     @Override
     public Integer eliminar(Marca marca) {
@@ -157,7 +176,13 @@ public class MarcaDAOImpl extends DAOImpl implements MarcaDAO {
     protected void incluirValorDeParametrosParaEliminacion() throws SQLException {
         this.incluirParametroInt(1, this.marca.getIdMarca());
     }
-
+    
+    /*
+     * ************************************************************************
+     * LISTADOS
+     * ************************************************************************
+     */
+    
     @Override
     public ArrayList<Marca> listarTodos() {
         return (ArrayList<Marca>) super.listarTodos(null);
@@ -167,11 +192,10 @@ public class MarcaDAOImpl extends DAOImpl implements MarcaDAO {
     public ArrayList<Marca> listarIdNombre() {
         return null;
     }
-    
 
     @Override
     protected String obtenerProyeccionParaSelect() {
-        String sql = "M.ID_MARCA, M.NOMBRE,M.IMAGEN,PR.ID_PROVEEDOR,PR.RAZON_SOCIAL ";
+        String sql = "M.ID_MARCA, M.NOMBRE, M.IMAGEN, PR.ID_PROVEEDOR, PR.RAZON_SOCIAL ";
         return sql;
     }
     
@@ -192,25 +216,29 @@ public class MarcaDAOImpl extends DAOImpl implements MarcaDAO {
     }
 
     @Override
-    protected void incluirValorDeParametrosParaObtenerPorId() throws SQLException {
-        this.incluirParametroInt(1, this.marca.getIdMarca());
-    }
-
-    @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.marca = new Marca();
-        this.marca.setIdMarca(this.resultSet.getInt("ID_MARCA"));
-        this.marca.setNombre(this.resultSet.getString("NOMBRE"));
-        this.marca.setImagen(this.resultSet.getBytes("IMAGEN"));
+        this.marca.setIdMarca(this.resultSet.getInt("M.ID_MARCA"));
+        this.marca.setNombre(this.resultSet.getString("M.NOMBRE"));
+        this.marca.setImagen(this.resultSet.getBytes("M.IMAGEN"));
         
-        this.marca.getProveedor().setIdProveedor(this.resultSet.getInt("ID_PROVEEDOR"));
-        this.marca.getProveedor().setRazonSocial(this.resultSet.getString("RAZON_SOCIAL"));
+        Proveedor proveedor = new Proveedor();
+        proveedor.setIdProveedor(this.resultSet.getInt("PR.ID_PROVEEDOR"));
+        proveedor.setRazonSocial(this.resultSet.getString("PR.RAZON_SOCIAL"));
+        
+        this.marca.setProveedor(proveedor);
     }
 
     @Override
     protected void limpiarObjetoDelResultSet() {
         this.marca = null;
     }
+    
+    /*
+     * ************************************************************************
+     * OBTENER POR ID
+     * ************************************************************************
+     */
 
     @Override
     public Marca obtenerPorId(Integer idMarca) {
@@ -219,6 +247,18 @@ public class MarcaDAOImpl extends DAOImpl implements MarcaDAO {
         super.obtenerPorId();
         return this.marca;
     }
+    
+    @Override
+    protected void incluirValorDeParametrosParaObtenerPorId() throws SQLException {
+        this.incluirParametroInt(1, this.marca.getIdMarca());
+    }
+    
+    /*
+     * *************************************************************************
+     * EXISTE PRODUCTO
+     * Funciones adicionales
+     * *************************************************************************
+     */
 
     @Override
     public Boolean existeMarca(Marca marca) {

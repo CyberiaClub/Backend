@@ -69,16 +69,15 @@ public class DBManager {
     private void leer_archivo_de_propiedades() {
         Properties properties = new Properties();
         try {
-            //el siguiente código ha sido probado en Windows
-            //el archivo de configuración se encuentra en la carpeta resources/jdbc.properties
-            //del proyecto que lo invoca
-            // Colocar su nombre, para saber que ruta le pertence a cada uno, por 
-            // Adrian
-            //            String nmArchivoConf = "C:\\Program Files\\glassfish7\\glassfish\\resources" + "\\" + ARCHIVO_CONFIGURACION;
-            //Nicolas
+//            el archivo de configuración se encuentra en la carpeta resources/jdbc.properties
+//            del proyecto que lo invoca
+//            Colocar su nombre, para saber que ruta le pertence a cada uno, por 
+//            Adrian
+            String nmArchivoConf = "C:\\Program Files\\glassfish7\\glassfish\\resources" + "\\" + ARCHIVO_CONFIGURACION;
+//            Nicolas
 //            String nmArchivoConf = "C:\\Users\\ipana\\Downloads" + "\\" + ARCHIVO_CONFIGURACION;
-// Jesus
-            String nmArchivoConf = "C:\\glassfish-7.0.18\\glassfish7\\glassfish\\resources" + "\\" + ARCHIVO_CONFIGURACION;
+//            Jesus
+//            String nmArchivoConf = "C:\\glassfish-7.0.18\\glassfish7\\glassfish\\resources" + "\\" + ARCHIVO_CONFIGURACION;
             properties.load(new FileInputStream(new File(nmArchivoConf)));
             this.driver = properties.getProperty("driver");
             this.tipo_de_driver = properties.getProperty("tipo_de_driver");

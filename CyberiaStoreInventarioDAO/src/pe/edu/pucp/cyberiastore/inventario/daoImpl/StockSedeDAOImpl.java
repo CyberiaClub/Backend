@@ -1,4 +1,4 @@
-package pe.edu.pucp.cyberiastore.sede.daoImpl;
+package pe.edu.pucp.cyberiastore.inventario.daoImpl;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -8,7 +8,7 @@ import java.util.List;
 import pe.edu.pucp.cyberiastore.config.DAOImpl;
 import pe.edu.pucp.cyberiastore.inventario.model.Producto;
 import pe.edu.pucp.cyberiastore.inventario.model.Sede;
-import pe.edu.pucp.cyberiastore.sede.dao.StockSedeDAO;
+import pe.edu.pucp.cyberiastore.inventario.dao.StockSedeDAO;
 
 public class StockSedeDAOImpl extends DAOImpl implements StockSedeDAO {
 
@@ -19,6 +19,12 @@ public class StockSedeDAOImpl extends DAOImpl implements StockSedeDAO {
     public StockSedeDAOImpl() {
         super("PRODUCTO_X_SEDE");
     }
+    
+    /*
+     * ************************************************************************
+     * INSERTAR
+     * ************************************************************************
+     */
     
     @Override
     public Integer insertar(Integer idProducto, Integer idSede, Integer cantidadStock) {

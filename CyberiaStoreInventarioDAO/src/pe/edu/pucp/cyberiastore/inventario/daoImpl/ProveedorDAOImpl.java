@@ -1,4 +1,4 @@
-package pe.edu.pucp.cyberiastore.proveedor.daoImpl;
+package pe.edu.pucp.cyberiastore.inventario.daoImpl;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 import pe.edu.pucp.cyberiastore.config.DAOImpl;
 import pe.edu.pucp.cyberiastore.config.Tipo_Operacion;
-import pe.edu.pucp.cyberiastore.proveedor.dao.ProveedorDAO;
+import pe.edu.pucp.cyberiastore.inventario.dao.ProveedorDAO;
 import pe.edu.pucp.cyberiastore.inventario.model.Proveedor;
 
 public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
@@ -17,6 +17,12 @@ public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
         super("PROVEEDOR");
         this.proveedor = null;
     }
+    
+    /*
+     * ************************************************************************
+     * INSERTAR
+     * ************************************************************************
+     */
     
     @Override
     public Integer insertar(Proveedor proveedor) {
@@ -56,13 +62,13 @@ public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
 
     @Override
     protected String obtenerListaDeAtributosParaInsercion() {
-        return "RUC,RAZON_SOCIAL, NOMBRE_DEL_CONTACTO, CORREO, TELEFONO, DIRECCION, DESCRIPCION, ACTIVO";
+        return "RUC,RAZON_SOCIAL, NOMBRE_DEL_CONTACTO, CORREO, TELEFONO, DIRECCION, DESCRIPCION";
 
     }
 
     @Override
     protected String incluirListaDeParametrosParaInsercion() {
-        return "?,?,?,?,?,?,?,?";
+        return "?,?,?,?,?,?,?";
     }
 
     @Override
@@ -75,8 +81,13 @@ public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
         this.incluirParametroString(5, this.proveedor.getTelefono());
         this.incluirParametroString(6, this.proveedor.getDireccion());
         this.incluirParametroString(7, this.proveedor.getDescripcion());
-        this.incluirParametroBoolean(8, this.proveedor.getActivo());
     }
+    
+    /*
+     * ************************************************************************
+     * MODIFICAR
+     * ************************************************************************
+     */
 
     @Override
     public Integer modificar(Proveedor proveedor) {
@@ -108,16 +119,16 @@ public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
 
     @Override
     protected String obtenerListaDeValoresYAtributosParaModificacion() {
-        return "ruc=?,razon_social=?, nombre_del_contacto=?, correo=?, telefono=?, direccion=?, descripcion=?";
+        return "RUC=?,RAZON_SOCIAL=?, NOMBRE_DEL_CONTACTO=?, CORREO=?, TELEFONO=?, DIRECCION=?, DESCRIPCION=?";
     }
 
     @Override
     protected String obtenerPredicadoParaLlavePrimaria() {
         String sql = "";
         if (this.tipo_Operacion == Tipo_Operacion.MODIFICAR || this.tipo_Operacion == Tipo_Operacion.ELIMINAR) {
-            sql = "id_proveedor=?";
+            sql = "ID_PROVEEDOR=?";
         } else {
-            sql = "id_proveedor=?";
+            sql = "ID_PROVEEDOR=?";
         }
         return sql;
     }
@@ -133,7 +144,13 @@ public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
         this.incluirParametroString(7, this.proveedor.getDescripcion());
         this.incluirParametroInt(8, this.proveedor.getIdProveedor());
     }
-
+    
+    /*
+     * ************************************************************************
+     * ELIMINAR
+     * ************************************************************************
+     */
+    
     @Override
     public Integer eliminar(Proveedor proveedor) {
         Integer retorno = 0;
@@ -166,6 +183,12 @@ public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
     protected void incluirValorDeParametrosParaEliminacion() throws SQLException {
         this.incluirParametroInt(1, this.proveedor.getIdProveedor());
     }
+    
+    /*
+     * ************************************************************************
+     * LISTADOS
+     * ************************************************************************
+     */
 
     @Override
     public ArrayList<Proveedor> listarTodos() {
@@ -174,7 +197,7 @@ public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
 
     @Override
     protected String obtenerProyeccionParaSelect() {
-        String sql = "id_proveedor, ruc, razon_social, nombre_del_contacto, correo, telefono, direccion, descripcion, activo";
+        String sql = "ID_PROVEEDOR, RUC, RAZON_SOCIAL, NOMBRE_DEL_CONTACTO, CORREO, TELEFONO, DIRECCION, DESCRIPCION";
         return sql;
     }
 
@@ -184,6 +207,38 @@ public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
         lista.add(this.proveedor);
     }
 
+    @Override
+    protected void instanciarObjetoDelResultSet() throws SQLException {
+        this.proveedor = new Proveedor();
+        this.proveedor.setIdProveedor(this.resultSet.getInt("ID_PROVEEDOR"));
+        this.proveedor.setRuc(this.resultSet.getString("RUC"));
+        this.proveedor.setRazonSocial(this.resultSet.getString("RAZON_SOCIAL"));
+        this.proveedor.setNombreContacto(this.resultSet.getString("NOMBRE_DEL_CONTACTO"));
+        this.proveedor.setCorreo(this.resultSet.getString("CORREO"));
+        this.proveedor.setTelefono(this.resultSet.getString("TELEFONO"));
+        this.proveedor.setDireccion(this.resultSet.getString("DIRECCION"));
+        this.proveedor.setDescripcion(this.resultSet.getString("DESCRIPCION"));
+    }
+
+    @Override
+    protected void limpiarObjetoDelResultSet() {
+        this.proveedor = null;
+    }
+    
+    /*
+     * ************************************************************************
+     * OBTENER POR ID
+     * ************************************************************************
+     */
+
+    @Override
+    public Proveedor obtenerPorId(Integer idProveedor) {
+        this.proveedor = new Proveedor();
+        this.proveedor.setIdProveedor(idProveedor);
+        super.obtenerPorId();
+        return this.proveedor;
+    }
+    
     @Override
     protected void incluirValorDeParametrosParaObtenerPorId() throws SQLException {
         this.incluirParametroInt(1, this.proveedor.getIdProveedor());
@@ -196,33 +251,13 @@ public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
         this.incluirParametroString(8, this.proveedor.getDescripcion());
         this.incluirParametroBoolean(9, this.proveedor.getActivo());
     }
-
-    @Override
-    protected void instanciarObjetoDelResultSet() throws SQLException {
-        this.proveedor = new Proveedor();
-        this.proveedor.setIdProveedor(this.resultSet.getInt("id_proveedor"));
-        this.proveedor.setRuc(this.resultSet.getString("ruc"));
-        this.proveedor.setRazonSocial(this.resultSet.getString("razon_social"));
-        this.proveedor.setNombreContacto(this.resultSet.getString("nombre_del_contacto"));
-        this.proveedor.setCorreo(this.resultSet.getString("correo"));
-        this.proveedor.setTelefono(this.resultSet.getString("telefono"));
-        this.proveedor.setDireccion(this.resultSet.getString("direccion"));
-        this.proveedor.setDescripcion(this.resultSet.getString("descripcion"));
-        this.proveedor.setActivo(this.resultSet.getBoolean("activo"));
-    }
-
-    @Override
-    protected void limpiarObjetoDelResultSet() {
-        this.proveedor = null;
-    }
-
-    @Override
-    public Proveedor obtenerPorId(Integer idProveedor) {
-        this.proveedor = new Proveedor();
-        this.proveedor.setIdProveedor(idProveedor);
-        super.obtenerPorId();
-        return this.proveedor;
-    }
+    
+    /*
+     * *************************************************************************
+     * EXISTE PRODUCTO
+     * Funciones adicionales
+     * *************************************************************************
+     */
 
     @Override
     public Boolean existeProveedor(Proveedor proveedor) {

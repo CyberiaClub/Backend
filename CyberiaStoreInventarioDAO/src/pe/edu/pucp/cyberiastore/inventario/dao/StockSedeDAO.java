@@ -1,4 +1,4 @@
-package pe.edu.pucp.cyberiastore.sede.dao;
+package pe.edu.pucp.cyberiastore.inventario.dao;
 
 import java.sql.Connection;
 import java.util.ArrayList;

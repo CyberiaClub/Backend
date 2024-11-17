@@ -27,8 +27,8 @@ public class Producto {
         this.precioProveedor = null;
         this.imagen = null;
         this.productosMiembros = null;
-        this.tipoProducto = new TipoProducto();
-        this.marca = new Marca();
+        this.tipoProducto = null;
+        this.marca = null;
     }
 
     public Producto(Integer idProducto, String sku, String nombre, String descripcion, Double precio, Double precioProveedor, Double precioDescuento, Boolean activo, ArrayList<Producto> productoMiembros, byte[] imagen, TipoProducto tipoProducto, Marca marca) {
