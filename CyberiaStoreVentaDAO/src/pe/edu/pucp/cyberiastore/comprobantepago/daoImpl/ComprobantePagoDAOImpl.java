@@ -1,5 +1,6 @@
 package pe.edu.pucp.cyberiastore.comprobantepago.daoImpl;
 
+import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,8 +9,10 @@ import java.util.List;
 import pe.edu.pucp.cyberiastore.config.DAOImpl;
 import pe.edu.pucp.cyberiastore.comprobantepago.model.ComprobantePago;
 import pe.edu.pucp.cyberiastore.comprobantepago.dao.ComprobantePagoDAO;
+import pe.edu.pucp.cyberiastore.comprobantepago.dao.ComprobantePagoXProductoDAO;
 import pe.edu.pucp.cyberiastore.comprobantepago.model.EstadoPedido;
 import pe.edu.pucp.cyberiastore.comprobantepago.model.TipoComprobante;
+import pe.edu.pucp.cyberiastore.inventario.model.Producto;
 import pe.edu.pucp.cyberiastore.persona.model.Persona;
 
 public class ComprobantePagoDAOImpl extends DAOImpl implements ComprobantePagoDAO {
@@ -27,6 +30,11 @@ public class ComprobantePagoDAOImpl extends DAOImpl implements ComprobantePagoDA
         this.retornarLlavePrimaria = true;
         Integer id = super.insertar();
         this.retornarLlavePrimaria = false;
+        ComprobantePagoXProductoDAO comprobantePagoXProducto = new ComprobantePagoXProductoDAOImpl();
+        Producto[] productos = (Producto[])this.comprobantePago.getLineaPedido().keySet().toArray();
+        for (Producto producto : productos) {
+            comprobantePagoXProducto.insertar(id, producto.getIdProducto(), this.comprobantePago.getLineaPedido().get(producto));
+        }
         return id;
     }
     
