@@ -8,6 +8,7 @@ import pe.edu.pucp.cyberiastore.config.DAOImpl;
 import pe.edu.pucp.cyberiastore.config.Tipo_Operacion;
 import pe.edu.pucp.cyberiastore.oferta.dao.OfertaDAO;
 import pe.edu.pucp.cyberiastore.oferta.model.Oferta;
+import pe.edu.pucp.cyberiastore.inventario.model.Producto;
 import pe.edu.pucp.cyberiastore.oferta.dao.ProductoXOfertaDAO;
 
 public class OfertaDAOImpl extends DAOImpl implements OfertaDAO {
@@ -33,7 +34,9 @@ public class OfertaDAOImpl extends DAOImpl implements OfertaDAO {
                 idOferta = super.insertar();
                 this.retornarLlavePrimaria = false; 
                 ProductoXOfertaDAO productoXOferta = new ProductoXOfertaDAOImpl();
-                productoXOferta.insertar(oferta.getIdProducto(), oferta.getIdProducto() ,this.usarTransaccion, this.conexion);
+                for(Producto producto : oferta.getProductos()){
+                    productoXOferta.insertar(oferta.getIdOferta(), producto.getIdProducto() ,this.usarTransaccion, this.conexion);
+                }
             } else {
                 idOferta = oferta.getIdOferta();
             }

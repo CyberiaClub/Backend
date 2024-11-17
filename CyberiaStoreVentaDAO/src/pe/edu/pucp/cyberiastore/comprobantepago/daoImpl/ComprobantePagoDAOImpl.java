@@ -8,13 +8,16 @@ import java.util.List;
 import pe.edu.pucp.cyberiastore.config.DAOImpl;
 import pe.edu.pucp.cyberiastore.comprobantepago.model.ComprobantePago;
 import pe.edu.pucp.cyberiastore.comprobantepago.dao.ComprobantePagoDAO;
+import pe.edu.pucp.cyberiastore.comprobantepago.model.EstadoPedido;
+import pe.edu.pucp.cyberiastore.comprobantepago.model.TipoComprobante;
+import pe.edu.pucp.cyberiastore.persona.model.Persona;
 
 public class ComprobantePagoDAOImpl extends DAOImpl implements ComprobantePagoDAO {
 
     private ComprobantePago comprobantePago;
 
     public ComprobantePagoDAOImpl() {
-        super("COMPROBANTE_DE_PAGO");
+        super("COMPROBANTE_PAGO");
         this.comprobantePago = null;
     }
 
@@ -26,16 +29,7 @@ public class ComprobantePagoDAOImpl extends DAOImpl implements ComprobantePagoDA
         this.retornarLlavePrimaria = false;
         return id;
     }
-
-    /**
-     * Funcion definida en ComprobantePagoDAO Usada para la insersión de datos
-     * por medio de herencia.
-     *
-     * @param comprobantePago
-     * @param usarTransaccion
-     * @param conexion
-     * @return
-     */
+    
     @Override
     public Integer insertar(ComprobantePago comprobantePago, Boolean usarTransaccion, Connection conexion) {
         this.usarTransaccion = usarTransaccion;
@@ -45,31 +39,30 @@ public class ComprobantePagoDAOImpl extends DAOImpl implements ComprobantePagoDA
 
     @Override
     protected String obtenerListaDeAtributosParaInsercion() {
-        return "FECHA, SUBTOTAL, TOTAL, IGV, DESCUENTO_APLICADO, ACTIVO, ID_PEDIDO, ID_OFERTA";
+        return "FECHA, SUBTOTAL, IGV, TOTAL, ACTIVO, ESTADO_PEDIDO, NUMERO, RUC, RAZON_SOCIAL, DIRECCION, ID_TIPO_COMPROBANTE, ID_PERSONA";
     }
 
     @Override
     protected String incluirListaDeParametrosParaInsercion() {
-        return "?,?,?,?,?,?,?,?";
+        return "?,?,?,?,?,?,?,?,?,?,?,?";
     }
 
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
         this.incluirParametroDate(1, this.comprobantePago.getFecha());
         this.incluirParametroDouble(2, this.comprobantePago.getSubtotal());
-        this.incluirParametroDouble(3, this.comprobantePago.getTotal());
-        this.incluirParametroDouble(4, this.comprobantePago.getIgv());
-        this.incluirParametroDouble(5, this.comprobantePago.getDescuentoAplicado());
-        this.incluirParametroBoolean(6, this.comprobantePago.getActivo());
-        this.incluirParametroInt(7, this.comprobantePago.getIdPedido());
-        this.incluirParametroInt(8, this.comprobantePago.getIdOferta());
+        this.incluirParametroDouble(3, this.comprobantePago.getIgv());
+        this.incluirParametroDouble(4, this.comprobantePago.getTotal());
+        this.incluirParametroBoolean(5, this.comprobantePago.getActivo());
+        this.incluirParametroString(6, this.comprobantePago.getEstadoPedido().toString());
+        this.incluirParametroString(7, this.comprobantePago.getNumero());
+        this.incluirParametroString(8, this.comprobantePago.getRuc());
+        this.incluirParametroString(9, this.comprobantePago.getRazonSocial());
+        this.incluirParametroString(10, this.comprobantePago.getDireccion());
+        this.incluirParametroInt(11, this.comprobantePago.getTipoComprobante().getIdTipoComprobante());
+        this.incluirParametroInt(12, this.comprobantePago.getPersona().getIdPersona());
     }
-
-    /*
-     * **************************************************************************
-     * MODIFICAR
-     * *************************************************************************
-     */
+    
     @Override
     public Integer modificar(ComprobantePago comprobantePago) {
         this.comprobantePago = comprobantePago;
@@ -85,32 +78,31 @@ public class ComprobantePagoDAOImpl extends DAOImpl implements ComprobantePagoDA
 
     @Override
     protected String obtenerPredicadoParaLlavePrimaria() {
-        return "id_comprobantePago=?";
+        return "ID_COMPROBANTE_PAGO=?";
     }
 
+    @Override
     protected String obtenerListaDeValoresYAtributosParaModificacion() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "FECHA=?, SUBTOTAL=?, IGV=?, TOTAL=?, ACTIVO=?, ESTADO_PEDIDO=?, NUMERO=?, RUC=?, RAZON_SOCIAL=?, DIRECCION=?, ID_TIPO_COMPROBANTE=?, ID_PERSONA=?";
     }
-
-//    @Override
-//    protected String obtenerListaDeValoresYAtributosParaModificacion() {
-//        return "FECHA=?, SUBTOTAL=?, TOTAL=?, IGV=?, DESCUENTO_APLICADO=?, ACTIVO=?, ID_PEDIDO=?, ID_OFERTA=?";
-//    }
+    
+    @Override
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.incluirParametroDate(1, this.comprobantePago.getFecha());
+        this.incluirParametroDouble(2, this.comprobantePago.getSubtotal());
+        this.incluirParametroDouble(3, this.comprobantePago.getIgv());
+        this.incluirParametroDouble(4, this.comprobantePago.getTotal());
+        this.incluirParametroBoolean(5, this.comprobantePago.getActivo());
+        this.incluirParametroString(6, this.comprobantePago.getEstadoPedido().toString());
+        this.incluirParametroString(7, this.comprobantePago.getNumero());
+        this.incluirParametroString(8, this.comprobantePago.getRuc());
+        this.incluirParametroString(9, this.comprobantePago.getRazonSocial());
+        this.incluirParametroString(10, this.comprobantePago.getDireccion());
+        this.incluirParametroInt(11, this.comprobantePago.getTipoComprobante().getIdTipoComprobante());
+        this.incluirParametroInt(12, this.comprobantePago.getPersona().getIdPersona());
+        this.incluirParametroInt(12, this.comprobantePago.getIdComprobantePago());
     }
-
-//    @Override
-//    protected void incluirValorDeParametrosParaModificacion() throws SQLException {
-//        this.incluirParametroDate(1, this.comprobantePago.getFecha());
-//        this.incluirParametroDouble(1, this.comprobantePago.getSubtotal());
-//        this.incluirParametroDouble(1, this.comprobantePago.getTotal());
-//        this.incluirParametroDouble(1, this.comprobantePago.getIgv());
-//        this.incluirParametroDouble(1, this.comprobantePago.getDescuentoAplicado());
-//        this.incluirParametroBoolean(1, this.comprobantePago.getActivo());
-//        this.incluirParametroInt(1, this.comprobantePago.getIdPedido());
-//        this.incluirParametroInt(1, this.comprobantePago.getIdOferta());
-//    }
+    
     @Override
     protected void incluirValorDeParametrosParaEliminacion() throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -118,27 +110,41 @@ public class ComprobantePagoDAOImpl extends DAOImpl implements ComprobantePagoDA
 
     @Override
     protected String obtenerProyeccionParaSelect() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "ID_COMPROBANTE_DE_PAGO, FECHA, SUBTOTAL, IGV, TOTAL, ACTIVO, ESTADO_PEDIDO, NUMERO, RUC, RAZON_SOCIAL, DIRECCION, ID_TIPO_COMPROBANTE, ID_PERSONA";
     }
 
     @Override
     protected void agregarObjetoALaLista(List lista, ResultSet resultSet) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        instanciarObjetoDelResultSet();
+        lista.add(this.comprobantePago);
     }
 
     @Override
     protected void incluirValorDeParametrosParaObtenerPorId() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.incluirParametroInt(1, this.comprobantePago.getIdComprobantePago());
     }
 
     @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.comprobantePago = new ComprobantePago();
+        this.comprobantePago.setIdComprobantePago(this.resultSet.getInt("ID_COMPROBANTE_DE_PAGO"));
+        this.comprobantePago.setFecha(this.resultSet.getDate("FECHA"));
+        this.comprobantePago.setSubtotal(this.resultSet.getDouble("SUBTOTAL"));
+        this.comprobantePago.setIgv(this.resultSet.getDouble("IGV"));
+        this.comprobantePago.setTotal(this.resultSet.getDouble("TOTAL"));
+        this.comprobantePago.setActivo(this.resultSet.getBoolean("ACTIVO"));
+        this.comprobantePago.setEstadoPedido(EstadoPedido.valueOf(this.resultSet.getString("ESTADO_PEDIDO")));
+        this.comprobantePago.setNumero(this.resultSet.getString("NUMERO"));
+        this.comprobantePago.setRuc(this.resultSet.getString("RUC"));
+        this.comprobantePago.setRazonSocial(this.resultSet.getString("RAZON_SOCIAL"));
+        this.comprobantePago.setDireccion(this.resultSet.getString("DIRECCION"));
+        this.comprobantePago.setTipoComprobante(new TipoComprobante(this.resultSet.getInt("ID_TIPO_COMPROBANTE"),null,null,null));
+        this.comprobantePago.setPersona(new Persona(this.resultSet.getInt("ID_TIPO_COMPROBANTE"),null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null));
     }
 
     @Override
     protected void limpiarObjetoDelResultSet() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.comprobantePago = null;
     }
 
     @Override
@@ -158,12 +164,14 @@ public class ComprobantePagoDAOImpl extends DAOImpl implements ComprobantePagoDA
 
     @Override
     public ComprobantePago obtenerPorId(Integer idComprobantePago) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.comprobantePago = new ComprobantePago();
+        this.comprobantePago.setIdComprobantePago(idComprobantePago);
+        super.obtenerPorId();
+        return this.comprobantePago;
     }
 
     @Override
     public Boolean existeComprobantePago(ComprobantePago comprobantePago) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-
+        return false;
     }
 }

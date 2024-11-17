@@ -12,7 +12,7 @@ public class Persona {
     private String primerApellido;
     private String segundoApellido;
     private Date fechaDeNacimiento;
-    private char sexo;
+    private String sexo;
     private String correo;
     private String direccion;
     private Boolean activo;
@@ -28,6 +28,28 @@ public class Persona {
     public Persona() {
         this.activo = true;
         this.segundoApellido = null;
+    }
+    
+    public Persona(Integer idPersona, String documento, String telefono, String nombre, String primerApellido, String segundoApellido, Date fechaDeNacimiento, String sexo, String correo, String direccion, Boolean activo, String contrasena, String nacionalidad, TipoDocumento tipoDeDocumento, Integer idTipoPersona, Double sueldo, Date fechaIngreso, Date fechaSalida, Integer idSede) {
+        this.idPersona = idPersona;
+        this.documento = documento;
+        this.telefono = telefono;
+        this.nombre = nombre;
+        this.primerApellido = primerApellido;
+        this.segundoApellido = segundoApellido;
+        this.fechaDeNacimiento = fechaDeNacimiento;
+        this.sexo = sexo;
+        this.correo = correo;
+        this.direccion = direccion;
+        this.activo = (activo == null) ? true:activo;
+        this.contrasena = contrasena;
+        this.nacionalidad = nacionalidad;
+        this.tipoDeDocumento = tipoDeDocumento;
+        this.idTipoPersona = idTipoPersona;
+        this.sueldo = sueldo;
+        this.fechaIngreso = fechaIngreso;
+        this.fechaSalida = fechaSalida;
+        this.idSede = idSede;
     }
 
     /**
@@ -131,14 +153,14 @@ public class Persona {
     /**
      * @return the sexo
      */
-    public char getSexo() {
+    public String getSexo() {
         return sexo;
     }
 
     /**
      * @param sexo the sexo to set
      */
-    public void setSexo(char sexo) {
+    public void setSexo(String sexo) {
         this.sexo = sexo;
     }
 
