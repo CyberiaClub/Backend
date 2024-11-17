@@ -4,17 +4,24 @@ public class Marca {
 
     private Integer idMarca;
     private String nombre;
+    private Proveedor proveedor;
     private Boolean activo;
     private byte[] imagen;
 
     public Marca() {
+        this.idMarca = null;
+        this.nombre = null;
+        this.proveedor = null;
         this.activo = true;
+        this.imagen = null;
     }
 
-    public Marca(String nombre, byte[] imagenBytes) {
+    public Marca(Integer idMarca, String nombre, Proveedor proveedor, Boolean activo, byte[] imagen) {
+        this.idMarca = idMarca;
         this.nombre = nombre;
-        this.imagen = imagenBytes;
-        this.activo = true;
+        this.proveedor = proveedor;
+        this.activo = (activo==null) ? true:activo;
+        this.imagen = imagen;
     }
 
     public void setIdMarca(Integer idMarca) {
@@ -33,6 +40,22 @@ public class Marca {
         this.nombre = nombre;
     }
 
+    public Proveedor getProveedor() {
+        return new Proveedor(this.proveedor.getIdProveedor(),
+                             this.proveedor.getRuc(),
+                             this.proveedor.getRazonSocial(),
+                             this.proveedor.getNombreContacto(),
+                             this.proveedor.getCorreo(),
+                             this.proveedor.getTelefono(),
+                             this.proveedor.getDireccion(),
+                             this.proveedor.getDescripcion(),
+                             this.proveedor.getActivo());
+    }
+
+    public void setProveedor(Proveedor proveedor) {
+        this.proveedor = proveedor;
+    }
+
     public Boolean getActivo() {
         return activo;
     }
@@ -40,19 +63,12 @@ public class Marca {
     public void setActivo(Boolean activo) {
         this.activo = activo;
     }
-
-    /**
-     * @return the imagen
-     */
+    
     public byte[] getImagen() {
-        return imagen;
+        return imagen.clone();
     }
-
-    /**
-     * @param imagen the imagen to set
-     */
+    
     public void setImagen(byte[] imagen) {
         this.imagen = imagen;
     }
-
 }

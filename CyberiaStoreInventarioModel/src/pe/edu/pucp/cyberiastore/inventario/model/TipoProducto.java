@@ -8,13 +8,17 @@ public class TipoProducto {
     private byte[] imagen;
     
     public TipoProducto(){
+        this.idTipoProducto = null;
+        this.tipo = null;
+        this.imagen = null;
         this.activo = true;
     }
 
-    public TipoProducto(String tipo, byte[] imagenBytes) {
+    public TipoProducto(Integer idTipoProducto, String tipo, Boolean activo, byte[] imagen) {
+        this.idTipoProducto = idTipoProducto;
         this.tipo = tipo;
-        this.imagen = imagenBytes;
-        this.activo = true;
+        this.imagen = imagen;
+        this.activo = (activo == null) ? true:activo;
     }
 
     public Integer getIdTipoProducto() {
@@ -40,17 +44,11 @@ public class TipoProducto {
     public void setActivo(Boolean activo) {
         this.activo = activo;
     }
-
-    /**
-     * @return the imagen
-     */
+    
     public byte[] getImagen() {
-        return imagen;
+        return imagen.clone();
     }
-
-    /**
-     * @param imagen the imagen to set
-     */
+    
     public void setImagen(byte[] imagen) {
         this.imagen = imagen;
     }

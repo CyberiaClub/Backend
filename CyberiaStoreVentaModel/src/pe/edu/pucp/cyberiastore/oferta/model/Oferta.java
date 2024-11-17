@@ -2,25 +2,35 @@ package pe.edu.pucp.cyberiastore.oferta.model;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.ArrayList;
+import pe.edu.pucp.cyberiastore.inventario.model.Producto;
 
 
 public class Oferta {
     private Integer idOferta ;
-    private Date fechaDeInicio;
-    private Date fechaDeFin;
+    private Date fechaInicio;
+    private Date fechaFin;
     private Integer porcentaje;
     private byte[] imagen;
-    private Integer idProducto; //Para la tabla intermedia
+    private ArrayList<Producto> productos;
 
     public Oferta(){
-        
+        this.idOferta = null;
+        this.fechaInicio = null;
+        this.fechaFin = null;
+        this.porcentaje = null;
+        this.porcentaje = null;
+        this.imagen = null;
+        this.productos = null;
     }
     
-    public Oferta(Date fechaDeInicio, Date fechaDeFin, Integer porcentaje, byte[] imagenBytes) {
-        this.fechaDeInicio = fechaDeInicio;
-        this.fechaDeFin = fechaDeFin;
+    public Oferta(Integer idOferta, Date fechaInicio, Date fechaFin, Integer porcentaje, byte[] imagen, ArrayList<Producto> productos) {
+        this.idOferta = idOferta;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
         this.porcentaje = porcentaje;
-        this.imagen = imagenBytes;
+        this.imagen = imagen;
+        this.productos = productos;
     }
 
     public Integer getIdOferta() {
@@ -32,19 +42,19 @@ public class Oferta {
     }
     
     public Date getFechaDeInicio() {
-        return fechaDeInicio;
+        return fechaInicio;
     }
 
-    public void setFechaDeInicio(Date fechaDeInicio) {
-        this.fechaDeInicio = fechaDeInicio;
+    public void setFechaDeInicio(Date fechaInicio) {
+        this.fechaInicio = fechaInicio;
     }
 
     public Date getFechaDeFin() {
-        return fechaDeFin;
+        return fechaFin;
     }
 
-    public void setFechaDeFin(Date fechaDeFin) {
-        this.fechaDeFin = fechaDeFin;
+    public void setFechaDeFin(Date fechaFin) {
+        this.fechaFin = fechaFin;
     }
 
     public Integer getPorcentaje() {
@@ -54,40 +64,27 @@ public class Oferta {
     public void setPorcentaje(Integer porcentaje) {
         this.porcentaje = porcentaje;
     }
-    public String getFechaDeInicioAsDDMMYYY(){
+    public String getFechaInicioAsDDMMYYY(){
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        return sdf.format(this.fechaDeInicio);
+        return sdf.format(this.fechaInicio);
     }
     
-    public String getFechaDeFinAsDDMMYYY(){
+    public String getFechaFinAsDDMMYYY(){
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        return sdf.format(this.fechaDeFin);
+        return sdf.format(this.fechaFin);
     }
-
-    /**
-     * @return the idProducto
-     */
-    public Integer getIdProducto() {
-        return idProducto;
+    public ArrayList<Producto> getProductos(){
+        return (ArrayList<Producto>)this.productos.clone();
     }
-
-    /**
-     * @param idProducto the idProducto to set
-     */
-    public void setIdProducto(Integer idProducto) {
-        this.idProducto = idProducto;
+    
+    public void setProductos(ArrayList<Producto> productos) {
+        this.productos = productos;
     }
-
-    /**
-     * @return the imagen
-     */
+    
     public byte[] getImagen() {
         return imagen;
     }
-
-    /**
-     * @param imagen the imagen to set
-     */
+    
     public void setImagen(byte[] imagen) {
         this.imagen = imagen;
     }
