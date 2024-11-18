@@ -147,7 +147,7 @@ public class CyberiaStoreInventarioTest {
 //        prodMiembro.add(productoAux);
 //        
 //        producto.setProductosMiembros(prodMiembro);
-//        productoBO.insertar(producto);
+        productoBO.insertar(producto);
 
         int cont = 1;
 

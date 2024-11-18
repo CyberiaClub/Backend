@@ -5,7 +5,7 @@ import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
 import java.util.ArrayList;
 import pe.edu.pucp.cyberiastore.inventario.model.Proveedor;
-import pe.edu.pucp.cyberiastore.proveedor.bo.ProveedorBO;
+import pe.edu.pucp.cyberiastore.inventario.bo.ProveedorBO;
 
 @WebService(serviceName = "ProveedorWS",targetNamespace = "CyberiaWS")
 public class ProveedorWS {

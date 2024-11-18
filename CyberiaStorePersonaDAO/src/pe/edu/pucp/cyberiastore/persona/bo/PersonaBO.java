@@ -19,8 +19,16 @@ public class PersonaBO {
     public Integer modificar(Persona persona) {
         return this.personaDAO.modificar(persona);
     }
+    
+    public Integer marcarVerificado(String valorToken){
+        return this.personaDAO.marcarVerificado(valorToken);
+    }
 
     public Persona obtenerPorDocumento(String documento) {
         return this.personaDAO.obtenerPorDocumento(documento);
+    }
+    
+    public Boolean enviarCorreoVerificacion(String correo){
+        return this.personaDAO.enviarCorreoVerificacion(correo);
     }
 }

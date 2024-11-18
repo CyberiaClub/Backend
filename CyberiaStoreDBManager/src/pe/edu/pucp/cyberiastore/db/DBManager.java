@@ -45,7 +45,7 @@ public class DBManager {
         try {
             leer_archivo_de_propiedades();
             Class.forName(this.driver);
-            this.conexion = DriverManager.getConnection(getURL(), this.usuario, this.contraseña);
+            this.conexion = DriverManager.getConnection(getURL(), this.usuario, Cifrado.descifrarMD5(this.contraseña));
         } catch (ClassNotFoundException ex) {
             System.err.println("Error al generar la conexión - " + ex);
         } catch (SQLException ex) {
@@ -61,7 +61,7 @@ public class DBManager {
         url = url.concat(this.puerto);
         url = url.concat("/");
         url = url.concat(this.base_de_datos);
-        url = url.concat("?useSSL=false");
+//        url = url.concat("?useSSL=false");
 //        url = url.concat("&allowPublicKeyRetrieval=true");   
         return url;
     }

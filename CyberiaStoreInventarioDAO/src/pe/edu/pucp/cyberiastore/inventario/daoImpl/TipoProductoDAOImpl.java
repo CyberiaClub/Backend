@@ -232,7 +232,7 @@ public class TipoProductoDAOImpl extends DAOImpl implements TipoProductoDAO {
     
     /*
      * *************************************************************************
-     * EXISTE PRODUCTO
+     * EXISTE TIPO DE PRODUCTO
      * Funciones adicionales
      * *************************************************************************
      */

@@ -3,6 +3,7 @@ package pe.edu.pucp.cyberiastore.servicios.persona;
 import jakarta.jws.WebService;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
+import java.util.ArrayList;
 import pe.edu.pucp.cyberiastore.persona.model.Persona;
 import pe.edu.pucp.cyberiastore.persona.bo.PersonaBO;
 
@@ -33,4 +34,13 @@ public class PersonaWS {
         return personaBO.obtenerPorDocumento(documento);
     }
 
+    @WebMethod(operationName = "persona_enviar_correo_verificacion")
+    public Boolean persona_enviar_correo_verificacion(@WebParam(name = "correo") String correo) {
+        return personaBO.enviarCorreoVerificacion(correo);
+    }
+
+    @WebMethod(operationName = "persona_verificar_correo")
+    public void persona_verificar_correo(@WebParam(name = "valorToken") String valorToken) {
+        personaBO.marcarVerificado(valorToken);
+    }
 }

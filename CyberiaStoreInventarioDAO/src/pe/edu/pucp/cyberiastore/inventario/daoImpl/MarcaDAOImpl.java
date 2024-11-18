@@ -255,7 +255,7 @@ public class MarcaDAOImpl extends DAOImpl implements MarcaDAO {
     
     /*
      * *************************************************************************
-     * EXISTE PRODUCTO
+     * EXISTE MARCA
      * Funciones adicionales
      * *************************************************************************
      */

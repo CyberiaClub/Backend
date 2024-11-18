@@ -249,7 +249,7 @@ public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
 
     /*
      * *************************************************************************
-     * EXISTE PRODUCTO
+     * EXISTE PROVEEDOR
      * Funciones adicionales
      * *************************************************************************
      */

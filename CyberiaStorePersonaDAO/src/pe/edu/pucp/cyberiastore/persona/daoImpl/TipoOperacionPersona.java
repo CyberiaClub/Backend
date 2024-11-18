@@ -9,4 +9,5 @@ public enum TipoOperacionPersona {
     LISTAR_CLIENTE,
     LISTAR_TRABAJADOR,
     LISTAR_PERSONA_POR_DOCUMENTO,
+    MARCAR_VERIFICADO,
 }
