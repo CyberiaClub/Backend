@@ -303,7 +303,7 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
 
     /*
      * *************************************************************************
-     * EXISTE PRODUCTO
+     * EXISTE SEDE
      * Funciones adicionales
      * *************************************************************************
      */

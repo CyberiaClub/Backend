@@ -13,6 +13,8 @@ public interface PersonaDAO {
     public Integer modificar(Persona persona);
 
     public Integer modificar(Persona persona, Boolean usarTransaccion, Connection conexion);
+    
+    public Integer marcarVerificado(String valorToken);
 
     public Integer eliminar(Persona persona);
 
@@ -23,4 +25,6 @@ public interface PersonaDAO {
     public Persona obtenerPorDocumento(String documento);
 
     public Boolean existePersona(Persona persona);
+    
+    public Boolean enviarCorreoVerificacion(String correo);
 }

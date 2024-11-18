@@ -8,11 +8,16 @@ import pe.edu.pucp.cyberiastore.config.DAOImpl;
 import pe.edu.pucp.cyberiastore.persona.dao.PersonaDAO;
 import pe.edu.pucp.cyberiastore.persona.model.Persona;
 import java.util.List;
+import pe.edu.pucp.cyberiastore.persona.model.Token;
+import pe.edu.pucp.cyberiastore.persona.dao.TokenDAO;
+import pe.edu.pucp.cyberiastore.persona.daoImpl.TokenDAOImpl;
+import pe.edu.pucp.cyberiastore.util.EnvioDeCorreo;
 
 public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
 
     private Persona persona;
     private TipoOperacionPersona tipoOperacionPersona;
+    private Token token;
 
     public PersonaDAOImpl() {
         super("PERSONA");
@@ -38,11 +43,15 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
         this.tipoOperacionPersona = persona.getIdSede() == null ? TipoOperacionPersona.INSERTAR_CLIENTE : TipoOperacionPersona.INSERTAR_TRABAJADOR;
         this.persona = persona;
         Integer id = null;
+        this.token = new Token();
         switch (this.tipoOperacionPersona) {
             case INSERTAR_CLIENTE -> {
                 this.retornarLlavePrimaria = true;
                 id = super.insertar();
                 this.retornarLlavePrimaria = false;
+                this.token.setIdPersona(id);
+                TokenDAO tokenDAO = new TokenDAOImpl();
+                tokenDAO.insertar(this.token);
             }
             case INSERTAR_TRABAJADOR -> {
                 this.modificar(persona);
@@ -128,12 +137,33 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
     }
 
     @Override
+    public Integer marcarVerificado(String valorToken) {
+        this.tipoOperacionPersona = TipoOperacionPersona.MARCAR_VERIFICADO;
+        this.token = new Token();
+        this.persona = new Persona();
+        
+        this.token.setValor(valorToken);
+        TokenDAO tokenDAO = new TokenDAOImpl();
+        this.token = tokenDAO.buscarTokenPorValor(this.token);
+        tokenDAO.eliminar(token);
+        this.persona.setIdPersona(this.token.getIdPersona());
+        
+        if(this.token.getActivo() == false){
+            return -1;
+        }else{
+            return super.modificar();
+        }
+    }
+
+    @Override
     protected String obtenerPredicadoParaLlavePrimaria() {
         String sql = "";
         switch (tipoOperacionPersona) {
             case LISTAR_PERSONA_POR_DOCUMENTO ->
                 sql = sql.concat("DOCUMENTO='?'");
             case MODIFICAR_PERSONA ->
+                sql = sql.concat("ID_PERSONA=? ");
+            case MARCAR_VERIFICADO ->
                 sql = sql.concat("ID_PERSONA=? ");
             default ->
                 throw new AssertionError();
@@ -149,6 +179,8 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
                 sql = sql.concat("TELEFONO=?,CORREO=?,DIRECCION=?,CONTRASEÑA=?");
             case INSERTAR_TRABAJADOR ->
                 sql = sql.concat("SUELDO=?,FECHA_INGRESO=?,ID_TIPO_PERSONA=?,ID_SEDE=?");
+            case MARCAR_VERIFICADO ->
+                sql = sql.concat("VERIFICADO=?");
             default ->
                 throw new AssertionError();
         }
@@ -171,6 +203,9 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
                 this.incluirParametroInt(3, this.persona.getIdPersona());
                 this.incluirParametroInt(4, this.persona.getIdSede());
                 this.incluirParametroString(5, this.persona.getDocumento());
+            }case MARCAR_VERIFICADO->{
+                this.incluirParametroInt(1, 1);
+                this.incluirParametroInt(2, this.persona.getIdPersona());
             }
             default ->
                 throw new AssertionError();
@@ -301,6 +336,18 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
         }
         this.persona.setIdPersona(idPersona);
         return idPersona != null;
+    }
+
+    /*
+     * **************************************************************************
+     * ENVIO DE CORREOS
+     * *************************************************************************
+     */
+    
+    @Override
+    public Boolean enviarCorreoVerificacion(String correo) {
+        EnvioDeCorreo enviarCorreo = new EnvioDeCorreo();
+        return enviarCorreo.enviarCorreoVerificacion(correo);
     }
 
 }

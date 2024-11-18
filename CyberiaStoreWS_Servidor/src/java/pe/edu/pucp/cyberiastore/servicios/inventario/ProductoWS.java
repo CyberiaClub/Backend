@@ -29,10 +29,6 @@ public class ProductoWS {
                                      @WebParam(name = "precio") Double precio) {
         this.producto = producto;
         this.producto.setPrecio(precio);
-        this.producto.setIdMarca(1);
-        this.producto.setIdProveedor(1);
-        this.producto.setIdSede(1);
-        this.producto.setIdTipo(1);
         this.producto.setCantidad(10);
         this.producto.setPrecioProveedor(11.0);
         System.out.println(this.producto.getPrecio());

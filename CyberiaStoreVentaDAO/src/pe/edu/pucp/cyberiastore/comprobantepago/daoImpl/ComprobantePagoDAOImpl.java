@@ -59,10 +59,10 @@ public class ComprobantePagoDAOImpl extends DAOImpl implements ComprobantePagoDA
         this.incluirParametroDouble(2, this.comprobantePago.getSubtotal());
         this.incluirParametroDouble(3, this.comprobantePago.getTotal());
         this.incluirParametroDouble(4, this.comprobantePago.getIgv());
-        this.incluirParametroDouble(5, this.comprobantePago.getDescuentoAplicado());
+//        this.incluirParametroDouble(5, this.comprobantePago.getDescuentoAplicado());
         this.incluirParametroBoolean(6, this.comprobantePago.getActivo());
-        this.incluirParametroInt(7, this.comprobantePago.getIdPedido());
-        this.incluirParametroInt(8, this.comprobantePago.getIdOferta());
+//        this.incluirParametroInt(7, this.comprobantePago.getIdPedido());
+//        this.incluirParametroInt(8, this.comprobantePago.getIdOferta());
     }
 
     /*
