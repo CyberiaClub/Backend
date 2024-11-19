@@ -51,8 +51,8 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
                     }
                 }
                 //Insertar  producto x sede
-                StockSedeDAO productoxsede = new StockSedeDAOImpl();
-                productoxsede.insertar(idProducto, this.producto.getIdSede(), this.producto.getCantidad(), usarTransaccion, conexion);
+//                StockSedeDAO productoxsede = new StockSedeDAOImpl();
+//                productoxsede.insertar(idProducto, this.producto.getIdSede(), this.producto.getCantidad(), usarTransaccion, conexion);
             } else {
                 idProducto = producto.getIdProducto();
             }

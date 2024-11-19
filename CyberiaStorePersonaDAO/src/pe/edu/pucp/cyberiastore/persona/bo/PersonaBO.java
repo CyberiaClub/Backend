@@ -31,4 +31,11 @@ public class PersonaBO {
     public Boolean enviarCorreoVerificacion(String correo){
         return this.personaDAO.enviarCorreoVerificacion(correo);
     }
+    
+    public String verificarPersona(String correo,String contrasena){
+        Persona persona = new Persona();
+        persona.setCorreo(correo);
+        persona.setContrasena(contrasena);
+        return this.personaDAO.verificarPersona(persona);
+    }
 }
