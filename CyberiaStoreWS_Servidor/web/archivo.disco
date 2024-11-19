@@ -13,4 +13,8 @@ ref="http://localhost:8080/CyberiaStoreWS_Servidor/TipoProductoWS?wsdl"/>
 ref="http://localhost:8080/CyberiaStoreWS_Servidor/OfertaWS?wsdl"/>
 <contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/"
 ref="http://localhost:8080/CyberiaStoreWS_Servidor/PersonaWS?wsdl"/>
+<contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/"
+ref="http://localhost:8080/CyberiaStoreWS_Servidor/ComprobantePagoWS?wsdl"/>
+<contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/"
+ref="http://localhost:8080/CyberiaStoreWS_Servidor/TipoComprobanteWS?wsdl"/>
 </discovery>
