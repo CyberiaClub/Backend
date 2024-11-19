@@ -18,12 +18,12 @@ public class ComprobantePagoWS {
     }
 
     @WebMethod(operationName = "comprobante_pago_listar_")
-    public ArrayList<ComprobantePago> oferta_listar() {
+    public ArrayList<ComprobantePago> comprobante_pago_listar_() {
         return comprobantePagoBO.listarTodos();
     }
 
     @WebMethod(operationName = "comprobante_pago_insertar_oferta")
-    public Integer oferta_insertar(@WebParam(name = "comprobante_pago") ComprobantePago comprobantePago) {
+    public Integer comprobante_pago_insertar_oferta(@WebParam(name = "comprobante_pago") ComprobantePago comprobantePago) {
         this.comprobantePago = comprobantePago;
         return comprobantePagoBO.insertar(this.comprobantePago);
     }
