@@ -73,6 +73,7 @@ public class Oferta {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         return sdf.format(this.fechaFin);
     }
+    
     public ArrayList<Producto> getProductos(){
         return (ArrayList<Producto>)this.productos.clone();
     }

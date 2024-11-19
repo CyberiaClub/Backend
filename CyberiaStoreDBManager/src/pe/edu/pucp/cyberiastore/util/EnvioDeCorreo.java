@@ -31,6 +31,7 @@ public class EnvioDeCorreo {
     private String smtp_host = "";
     private String puerto = "";
     private String socket = "";
+    private String valorToken="";
 
     private String asunto = "";
     private String cuerpo = "";
@@ -42,8 +43,9 @@ public class EnvioDeCorreo {
 
     }
 
-    public Boolean enviarCorreoVerificacion(String destinatario) {
+    public Boolean enviarCorreoVerificacion(String destinatario, String valorToken) {
         this.destinatario = destinatario;
+        this.valorToken = valorToken;
         return this.prepararEnviarCorreo();
     }
 
@@ -95,7 +97,7 @@ public class EnvioDeCorreo {
             while ((val = br.readLine()) != null) {
                 html.append(val);
             }
-            this.cuerpo = html.toString();
+            this.cuerpo = html.toString().replace("{{token}}", valorToken);
             br.close();
 
         } catch (Exception e) {

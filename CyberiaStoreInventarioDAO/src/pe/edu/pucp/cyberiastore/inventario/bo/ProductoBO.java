@@ -38,8 +38,8 @@ public class ProductoBO {
         return producto;
     }
     
-    public ArrayList<Producto> buscar_sku(String sku){
-        ArrayList<Producto> productos_stock_sede = this.productoDAO.buscar_sku(sku);
-        return productos_stock_sede;
+    public Producto buscar_sku(String sku, Integer idSede){
+        Producto producto = this.productoDAO.buscar_sku(sku, idSede);
+        return producto;
     }
 }

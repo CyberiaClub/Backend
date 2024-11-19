@@ -17,5 +17,5 @@ public interface ProductoDAO {
 
     public Boolean existeProducto(Producto producto, Boolean abreConexion);
     
-    public ArrayList<Producto> buscar_sku(String sku);
+    public Producto buscar_sku(String sku, Integer idSede);
 }

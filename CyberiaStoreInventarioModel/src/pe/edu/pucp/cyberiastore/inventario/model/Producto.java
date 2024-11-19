@@ -49,11 +49,11 @@ public class Producto {
     }
 
     public Integer getIdProducto() {
-        return idProducto;
+        return this.idProducto;
     }
 
     public String getSku() {
-        return sku;
+        return this.sku;
     }
 
     public void setSku(String sku) {
@@ -61,7 +61,7 @@ public class Producto {
     }
 
     public String getNombre() {
-        return nombre;
+        return this.nombre;
     }
 
     public void setNombre(String nombre) {
@@ -69,7 +69,7 @@ public class Producto {
     }
 
     public String getDescripcion() {
-        return descripcion;
+        return this.descripcion;
     }
 
     public void setDescripcion(String descripcion) {
@@ -77,7 +77,7 @@ public class Producto {
     }
 
     public Double getPrecio() {
-        return precio;
+        return this.precio;
     }
 
     public void setPrecio(Double precio) {
@@ -85,7 +85,7 @@ public class Producto {
     }
 
     public Double getPrecioProveedor() {
-        return precioProveedor;
+        return this.precioProveedor;
     }
 
     public void setPrecioProveedor(Double precioProveedor) {
@@ -93,7 +93,7 @@ public class Producto {
     }
 
     public byte[] getImagen() {
-        return imagen;
+        return this.imagen;
     }
 
     public void setImagen(byte[] imagen) {
@@ -101,7 +101,7 @@ public class Producto {
     }
     
     public ArrayList<Producto> getProductosMiembros() {
-        return productosMiembros;
+        return this.productosMiembros;
     }
 
     public void setProductosMiembros(ArrayList<Producto> productosMiembros) {
@@ -125,7 +125,7 @@ public class Producto {
     }
 
     public Integer getIdSede() {
-        return idSede;
+        return this.idSede;
     }
 
     public void setIdSede(Integer idSede) {
@@ -133,7 +133,7 @@ public class Producto {
     }
 
     public Integer getCantidad() {
-        return cantidad;
+        return this.cantidad;
     }
 
     public void setCantidad(Integer cantidad) {

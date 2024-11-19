@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import java.util.ArrayList;
 import pe.edu.pucp.cyberiastore.inventario.bo.MarcaBO;
 import pe.edu.pucp.cyberiastore.inventario.bo.ProductoBO;
 import pe.edu.pucp.cyberiastore.inventario.bo.ProveedorBO;
@@ -21,18 +22,54 @@ import pe.edu.pucp.cyberiastore.inventario.model.Sede;
 public class CyberiaStoreInventarioTest {
 
     public static void main(String[] args) {
-
         MarcaBO marcaBO = new MarcaBO();
-        SedeBO sedeBO = new SedeBO();
-        TipoProductoBO tipoProdBO = new TipoProductoBO();
-        ProveedorBO proveedorBO = new ProveedorBO();
-        ProductoBO productoBO = new ProductoBO();
-
         Marca marca = new Marca();
-        Sede sede = new Sede();
-        TipoProducto tipoProd = new TipoProducto();
+        marca.setNombre("Chamex");
         Proveedor proveedor = new Proveedor();
-        Producto producto = new Producto();
+        proveedor.setIdProveedor(1);
+        marca.setProveedor(proveedor);
+        BufferedImage imagen = null;
+        byte[] imagenBytes = null;
+        try {
+            imagen = ImageIO.read(new File("C:\\Users\\usuario\\Documents\\Universidad\\Programación3\\Repositorio\\Img\\chamex.jpeg"  ));
+        } catch (IOException ex) {
+            Logger.getLogger(CyberiaStoreInventarioTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if (imagen != null) {
+            //convertimos la imagen a byte[]
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            try {
+                ImageIO.write(imagen, "jpg", baos);
+            } catch (IOException ex) {
+                Logger.getLogger(CyberiaStoreInventarioTest.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                baos.flush();
+            } catch (IOException ex) {
+                Logger.getLogger(CyberiaStoreInventarioTest.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            imagenBytes = baos.toByteArray();
+            try {
+                baos.close();
+            } catch (IOException ex) {
+                Logger.getLogger(CyberiaStoreInventarioTest.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        marca.setImagen(imagenBytes);
+        marcaBO.insertar(marca);
+//        MarcaBO marcaBO = new MarcaBO();
+        SedeBO sedeBO = new SedeBO();
+//        TipoProductoBO tipoProdBO = new TipoProductoBO();
+//        ProveedorBO proveedorBO = new ProveedorBO();
+        ProductoBO productoBO = new ProductoBO();
+//
+//        Marca marca = new Marca();
+//        Sede sede = new Sede();
+//        TipoProducto tipoProd = new TipoProducto();
+//        Proveedor proveedor = new Proveedor();
+//        Producto producto = new Producto();
 //
 //        String rutaImagen = "../Img/cyberiaproducto.jpg";
 //        BufferedImage imagen = null;
@@ -147,51 +184,51 @@ public class CyberiaStoreInventarioTest {
 //        prodMiembro.add(productoAux);
 //        
 //        producto.setProductosMiembros(prodMiembro);
-        productoBO.insertar(producto);
-
+//        productoBO.insertar(producto);
+//
         int cont = 1;
-
-        ArrayList<TipoProducto> tiposProducto = tipoProdBO.listarTodos();
-        ArrayList<Marca> marcas = marcaBO.listarTodos();
-        ArrayList<Sede> sedes = sedeBO.listarTodos();
-        ArrayList<Proveedor> proveedores = proveedorBO.listarTodos();
+//
+//        ArrayList<TipoProducto> tiposProducto = tipoProdBO.listarTodos();
+//        ArrayList<Marca> marcas = marcaBO.listarTodos();
+//        ArrayList<Sede> sedes = sedeBO.listarTodos();
+//        ArrayList<Proveedor> proveedores = proveedorBO.listarTodos();
         ArrayList<Producto> productos = productoBO.listarTodos();
-        ArrayList<Producto> stock = sedeBO.listarProductosSede(1);
-
-        System.out.println("LISTADO DE TIPOS DE PRODUCTO: ");
-        for (TipoProducto tp : tiposProducto) {
-            System.out.println(cont + ". ID: " + tp.getIdTipoProducto() + " TIPO: " + tp.getTipo());
-            cont++;
-        }
-        cont = 1;
-        System.out.println("================================================================================");
-        System.out.println("LISTADO DE MARCAS: ");
-        for (Marca m : marcas) {
-            System.out.println(cont + ". ID: " + m.getIdMarca() + " NOMBRE: "
-                    + m.getNombre() + " ID_PROVEEDOR: " + m.getProveedor().getIdProveedor()
-                    + " PROVEEDOR: " + m.getProveedor().getRazonSocial());
-            cont++;
-        }
-        cont = 1;
-        System.out.println("================================================================================");
-        System.out.println("LISTADO DE SEDES: ");
-        for (Sede s : sedes) {
-            System.out.println(cont + ". ID: " + s.getIdSede() + " NOMBRE: " + s.getNombre() + " DESCRIPCION: "
-                    + s.getDescripcion() + " TELEFONO: " + s.getTelefono() + " HORARIO DE APERTURA: "
-                    + s.getHorarioApertura() + " HORARIO DE CIERRE: " + s.getHorarioCierre());
-            cont++;
-        }
-        cont = 1;
-        System.out.println("================================================================================");
-        System.out.println("LISTADO DE PROVEEDORES: ");
-        for (Proveedor pv : proveedores) {
-            System.out.println(cont + ". ID: " + pv.getIdProveedor() + " RUC: "
-                    + pv.getRuc() + " RAZON SOCIAL: " + pv.getRazonSocial() + " NOMBRE DE CONTACTO: "
-                    + pv.getNombreContacto() + " CORREO: " + pv.getCorreo() + " TELEFONO: " + pv.getTelefono()
-                    + " DIRECCION: " + pv.getDireccion() + " DESCRIPCION: " + pv.getDescripcion());
-            cont++;
-        }
-        cont = 1;
+//        ArrayList<Producto> stock = sedeBO.listarProductosSede(1);
+//
+//        System.out.println("LISTADO DE TIPOS DE PRODUCTO: ");
+//        for (TipoProducto tp : tiposProducto) {
+//            System.out.println(cont + ". ID: " + tp.getIdTipoProducto() + " TIPO: " + tp.getTipo());
+//            cont++;
+//        }
+//        cont = 1;
+//        System.out.println("================================================================================");
+//        System.out.println("LISTADO DE MARCAS: ");
+//        for (Marca m : marcas) {
+//            System.out.println(cont + ". ID: " + m.getIdMarca() + " NOMBRE: "
+//                    + m.getNombre() + " ID_PROVEEDOR: " + m.getProveedor().getIdProveedor()
+//                    + " PROVEEDOR: " + m.getProveedor().getRazonSocial());
+//            cont++;
+//        }
+//        cont = 1;
+//        System.out.println("================================================================================");
+//        System.out.println("LISTADO DE SEDES: ");
+//        for (Sede s : sedes) {
+//            System.out.println(cont + ". ID: " + s.getIdSede() + " NOMBRE: " + s.getNombre() + " DESCRIPCION: "
+//                    + s.getDescripcion() + " TELEFONO: " + s.getTelefono() + " HORARIO DE APERTURA: "
+//                    + s.getHorarioApertura() + " HORARIO DE CIERRE: " + s.getHorarioCierre());
+//            cont++;
+//        }
+//        cont = 1;
+//        System.out.println("================================================================================");
+//        System.out.println("LISTADO DE PROVEEDORES: ");
+//        for (Proveedor pv : proveedores) {
+//            System.out.println(cont + ". ID: " + pv.getIdProveedor() + " RUC: "
+//                    + pv.getRuc() + " RAZON SOCIAL: " + pv.getRazonSocial() + " NOMBRE DE CONTACTO: "
+//                    + pv.getNombreContacto() + " CORREO: " + pv.getCorreo() + " TELEFONO: " + pv.getTelefono()
+//                    + " DIRECCION: " + pv.getDireccion() + " DESCRIPCION: " + pv.getDescripcion());
+//            cont++;
+//        }
+//        cont = 1;
         System.out.println("================================================================================");
         System.out.println("LISTADO DE PRODUCTOS: ");
         for (Producto p : productos) {
@@ -208,16 +245,16 @@ public class CyberiaStoreInventarioTest {
             }
             cont++;
         }
-        cont = 1;
-        System.out.println("================================================================================");
-        System.out.println("LISTADO DE STOCK POR SEDE: ");        
-        for (Producto stockProducto : stock) {
-            System.out.println(cont + ". SKU: " + stockProducto.getSku() + " NOMBRE: " + stockProducto.getNombre() + 
-                               " DESCRIPCION: " + stockProducto.getDescripcion() + " PRECIO DE VENTA: " + 
-                               stockProducto.getPrecio() + " MARCA: " + stockProducto.getMarca().getNombre() + 
-                               " TIPO: " + stockProducto.getTipoProducto().getTipo() + " STOCK: " + stockProducto.getCantidad());
-            cont++;
-        }
+//        cont = 1;
+//        System.out.println("================================================================================");
+//        System.out.println("LISTADO DE STOCK POR SEDE: ");
+//        for (Producto stockProducto : stock) {
+//            System.out.println(cont + ". SKU: " + stockProducto.getSku() + " NOMBRE: " + stockProducto.getNombre()
+//                    + " DESCRIPCION: " + stockProducto.getDescripcion() + " PRECIO DE VENTA: "
+//                    + stockProducto.getPrecio() + " MARCA: " + stockProducto.getMarca().getNombre()
+//                    + " TIPO: " + stockProducto.getTipoProducto().getTipo() + " STOCK: " + stockProducto.getCantidad());
+//            cont++;
+//        }
 
     }
 

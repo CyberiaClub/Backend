@@ -17,13 +17,14 @@ public class TokenDAOImpl extends DAOImpl implements TokenDAO {
 
     @Override
     public Integer insertar(Token token) {
-        this.token = token;
         Integer idToken = null;
 
         do {
-            this.token.generarToken();
-        } while (this.existeToken(this.token));
-
+            token.generarToken();
+        } while (this.existeToken(token));
+        
+        this.token = token;
+        
         this.usarTransaccion = false;
         try {
             this.iniciarTransaccion();

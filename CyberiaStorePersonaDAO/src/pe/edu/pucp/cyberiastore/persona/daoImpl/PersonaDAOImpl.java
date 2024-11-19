@@ -46,12 +46,17 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
         this.token = new Token();
         switch (this.tipoOperacionPersona) {
             case INSERTAR_CLIENTE -> {
+
                 this.retornarLlavePrimaria = true;
                 id = super.insertar();
                 this.retornarLlavePrimaria = false;
-                this.token.setIdPersona(id);
-                TokenDAO tokenDAO = new TokenDAOImpl();
-                tokenDAO.insertar(this.token);
+                
+                if (id != 0) {
+                    this.token.setIdPersona(id);
+                    TokenDAO tokenDAO = new TokenDAOImpl();
+                    tokenDAO.insertar(this.token);
+                    this.enviarCorreoVerificacion(this.persona.getCorreo(),this.token.getValor());
+                }
             }
             case INSERTAR_TRABAJADOR -> {
                 this.modificar(persona);
@@ -86,7 +91,8 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
      */
     @Override
     protected String obtenerListaDeAtributosParaInsercion() {
-        return "DOCUMENTO, TELEFONO, NOMBRE,PRIMER_APELLIDO, SEGUNDO_APELLIDO,FECHA_NACIMIENTO, SEXO, CORREO, DIRECCION, CONTRASEÑA,NACIONALIDAD, TIPO_DOCUMENTO,ID_TIPO_PERSONA";
+        return "DOCUMENTO, TELEFONO, NOMBRE,PRIMER_APELLIDO, SEGUNDO_APELLIDO,FECHA_NACIMIENTO, SEXO, CORREO, "
+                   + "DIRECCION, CONTRASEÑA,NACIONALIDAD, TIPO_DOCUMENTO,ID_TIPO_PERSONA";
     }
 
     @Override
@@ -141,16 +147,16 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
         this.tipoOperacionPersona = TipoOperacionPersona.MARCAR_VERIFICADO;
         this.token = new Token();
         this.persona = new Persona();
-        
+
         this.token.setValor(valorToken);
         TokenDAO tokenDAO = new TokenDAOImpl();
         this.token = tokenDAO.buscarTokenPorValor(this.token);
-        tokenDAO.eliminar(token);
+        tokenDAO.eliminar(this.token);
         this.persona.setIdPersona(this.token.getIdPersona());
-        
-        if(this.token.getActivo() == false){
+
+        if (this.token.getActivo() == false) {
             return -1;
-        }else{
+        } else {
             return super.modificar();
         }
     }
@@ -176,11 +182,11 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
         String sql = "";
         switch (this.tipoOperacionPersona) {
             case MODIFICAR_PERSONA ->
-                sql = sql.concat("TELEFONO=?,CORREO=?,DIRECCION=?,CONTRASEÑA=?");
+                sql = sql.concat("TELEFONO=?,CORREO=?,DIRECCION=?,CONTRASEÑA=? ");
             case INSERTAR_TRABAJADOR ->
-                sql = sql.concat("SUELDO=?,FECHA_INGRESO=?,ID_TIPO_PERSONA=?,ID_SEDE=?");
+                sql = sql.concat("SUELDO=?,FECHA_INGRESO=?,ID_TIPO_PERSONA=?,ID_SEDE=? ");
             case MARCAR_VERIFICADO ->
-                sql = sql.concat("VERIFICADO=?");
+                sql = sql.concat("VERIFICADO=? ");
             default ->
                 throw new AssertionError();
         }
@@ -203,7 +209,8 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
                 this.incluirParametroInt(3, this.persona.getIdPersona());
                 this.incluirParametroInt(4, this.persona.getIdSede());
                 this.incluirParametroString(5, this.persona.getDocumento());
-            }case MARCAR_VERIFICADO->{
+            }
+            case MARCAR_VERIFICADO -> {
                 this.incluirParametroInt(1, 1);
                 this.incluirParametroInt(2, this.persona.getIdPersona());
             }
@@ -343,11 +350,10 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
      * ENVIO DE CORREOS
      * *************************************************************************
      */
-    
     @Override
-    public Boolean enviarCorreoVerificacion(String correo) {
+    public Boolean enviarCorreoVerificacion(String correo, String valorToken) {
         EnvioDeCorreo enviarCorreo = new EnvioDeCorreo();
-        return enviarCorreo.enviarCorreoVerificacion(correo);
+        return enviarCorreo.enviarCorreoVerificacion(correo,valorToken);
     }
 
 }

@@ -46,7 +46,7 @@ public class TipoProducto {
     }
     
     public byte[] getImagen() {
-        return imagen.clone();
+        return imagen;
     }
     
     public void setImagen(byte[] imagen) {
