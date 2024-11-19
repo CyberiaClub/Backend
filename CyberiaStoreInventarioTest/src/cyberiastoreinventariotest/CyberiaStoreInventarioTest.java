@@ -6,33 +6,79 @@ import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.crypto.AEADBadTagException;
 import javax.imageio.ImageIO;
+import javax.swing.text.html.HTMLDocument;
 import pe.edu.pucp.cyberiastore.inventario.bo.MarcaBO;
 import pe.edu.pucp.cyberiastore.inventario.bo.ProductoBO;
-import pe.edu.pucp.cyberiastore.inventario.bo.ProveedorBO;
 import pe.edu.pucp.cyberiastore.inventario.bo.TipoProductoBO;
-import pe.edu.pucp.cyberiastore.inventario.bo.SedeBO;
 import pe.edu.pucp.cyberiastore.inventario.model.Marca;
+import pe.edu.pucp.cyberiastore.inventario.model.Producto;
 import pe.edu.pucp.cyberiastore.inventario.model.Proveedor;
 import pe.edu.pucp.cyberiastore.inventario.model.TipoProducto;
-import pe.edu.pucp.cyberiastore.inventario.model.Producto;
-import pe.edu.pucp.cyberiastore.inventario.model.Sede;
 
 public class CyberiaStoreInventarioTest {
 
     public static void main(String[] args) {
-
-        MarcaBO marcaBO = new MarcaBO();
-        SedeBO sedeBO = new SedeBO();
-        TipoProductoBO tipoProdBO = new TipoProductoBO();
-        ProveedorBO proveedorBO = new ProveedorBO();
         ProductoBO productoBO = new ProductoBO();
-
-        Marca marca = new Marca();
-        Sede sede = new Sede();
-        TipoProducto tipoProd = new TipoProducto();
-        Proveedor proveedor = new Proveedor();
         Producto producto = new Producto();
+        producto.setSku("7404");
+        producto.setNombre("Papel Fotocopia Oficio 75 G Paquete X 500 Und");
+        producto.setDescripcion("Contiene: Paquete con 500 hojas. Tamaño: Oficio.Gramaje: 75 g cada hoja.Imágenes referenciales.");
+        producto.setPrecio(15.70);
+        producto.setPrecioProveedor(12.50);
+        producto.setProductosMiembros(null);
+        TipoProducto tipoProducto = new TipoProducto();
+        tipoProducto.setIdTipoProducto(1);
+        Marca marca = new Marca();
+        marca.setIdMarca(1);
+        producto.setIdSede(1);
+        producto.setTipoProducto(tipoProducto);
+        producto.setMarca(marca);
+        BufferedImage imagen = null;
+        byte[] imagenBytes = null;
+        try {
+            imagen = ImageIO.read(new File("/home/errant/Documents/CyberiaClub/Img/oficina.jpg"));
+        } catch (IOException ex) {
+            Logger.getLogger(CyberiaStoreInventarioTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if (imagen != null) {
+            //convertimos la imagen a byte[]
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            try {
+                ImageIO.write(imagen, "jpg", baos);
+            } catch (IOException ex) {
+                Logger.getLogger(CyberiaStoreInventarioTest.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                baos.flush();
+            } catch (IOException ex) {
+                Logger.getLogger(CyberiaStoreInventarioTest.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            imagenBytes = baos.toByteArray();
+            try {
+                baos.close();
+            } catch (IOException ex) {
+                Logger.getLogger(CyberiaStoreInventarioTest.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        producto.setImagen(imagenBytes);
+        productoBO.insertar(producto);
+//        marca.setImagen(imagenBytes);
+//        marcaBO.insertar(marca);
+//        MarcaBO marcaBO = new MarcaBO();
+//        SedeBO sedeBO = new SedeBO();
+//        TipoProductoBO tipoProdBO = new TipoProductoBO();
+//        ProveedorBO proveedorBO = new ProveedorBO();
+//        ProductoBO productoBO = new ProductoBO();
+//
+//        Marca marca = new Marca();
+//        Sede sede = new Sede();
+//        TipoProducto tipoProd = new TipoProducto();
+//        Proveedor proveedor = new Proveedor();
+//        Producto producto = new Producto();
 //
 //        String rutaImagen = "../Img/cyberiaproducto.jpg";
 //        BufferedImage imagen = null;
@@ -147,78 +193,77 @@ public class CyberiaStoreInventarioTest {
 //        prodMiembro.add(productoAux);
 //        
 //        producto.setProductosMiembros(prodMiembro);
-        productoBO.insertar(producto);
-
-        int cont = 1;
-
-        ArrayList<TipoProducto> tiposProducto = tipoProdBO.listarTodos();
-        ArrayList<Marca> marcas = marcaBO.listarTodos();
-        ArrayList<Sede> sedes = sedeBO.listarTodos();
-        ArrayList<Proveedor> proveedores = proveedorBO.listarTodos();
-        ArrayList<Producto> productos = productoBO.listarTodos();
-        ArrayList<Producto> stock = sedeBO.listarProductosSede(1);
-
-        System.out.println("LISTADO DE TIPOS DE PRODUCTO: ");
-        for (TipoProducto tp : tiposProducto) {
-            System.out.println(cont + ". ID: " + tp.getIdTipoProducto() + " TIPO: " + tp.getTipo());
-            cont++;
-        }
-        cont = 1;
-        System.out.println("================================================================================");
-        System.out.println("LISTADO DE MARCAS: ");
-        for (Marca m : marcas) {
-            System.out.println(cont + ". ID: " + m.getIdMarca() + " NOMBRE: "
-                    + m.getNombre() + " ID_PROVEEDOR: " + m.getProveedor().getIdProveedor()
-                    + " PROVEEDOR: " + m.getProveedor().getRazonSocial());
-            cont++;
-        }
-        cont = 1;
-        System.out.println("================================================================================");
-        System.out.println("LISTADO DE SEDES: ");
-        for (Sede s : sedes) {
-            System.out.println(cont + ". ID: " + s.getIdSede() + " NOMBRE: " + s.getNombre() + " DESCRIPCION: "
-                    + s.getDescripcion() + " TELEFONO: " + s.getTelefono() + " HORARIO DE APERTURA: "
-                    + s.getHorarioApertura() + " HORARIO DE CIERRE: " + s.getHorarioCierre());
-            cont++;
-        }
-        cont = 1;
-        System.out.println("================================================================================");
-        System.out.println("LISTADO DE PROVEEDORES: ");
-        for (Proveedor pv : proveedores) {
-            System.out.println(cont + ". ID: " + pv.getIdProveedor() + " RUC: "
-                    + pv.getRuc() + " RAZON SOCIAL: " + pv.getRazonSocial() + " NOMBRE DE CONTACTO: "
-                    + pv.getNombreContacto() + " CORREO: " + pv.getCorreo() + " TELEFONO: " + pv.getTelefono()
-                    + " DIRECCION: " + pv.getDireccion() + " DESCRIPCION: " + pv.getDescripcion());
-            cont++;
-        }
-        cont = 1;
-        System.out.println("================================================================================");
-        System.out.println("LISTADO DE PRODUCTOS: ");
-        for (Producto p : productos) {
-            System.out.println(cont + ". ID: " + p.getIdProducto() + " SKU: " + p.getSku()
-                    + " NOMBRE: " + p.getNombre() + " DESCRIPCION: " + p.getDescripcion()
-                    + " PRECIO DE VENTA: " + p.getPrecio() + " PRECIO DE COMPRA: " + p.getPrecioProveedor()
-                    + " ID DE MARCA: " + p.getMarca().getIdMarca() + " MARCA: " + p.getMarca().getNombre()
-                    + " ID DE TIPO DE PRODUCTO: " + p.getTipoProducto().getIdTipoProducto() + " TIPO: " + p.getTipoProducto().getTipo());
-            if (!p.getProductosMiembros().isEmpty()) {
-                System.out.println('\t' + "CONTIENE: ");
-                for (Producto pm : p.getProductosMiembros()) {
-                    System.out.println('\t' + "SKU: " + pm.getSku() + " NOMBRE: " + pm.getNombre() + " DESCRIPCION: " + pm.getDescripcion());
-                }
-            }
-            cont++;
-        }
-        cont = 1;
-        System.out.println("================================================================================");
-        System.out.println("LISTADO DE STOCK POR SEDE: ");        
-        for (Producto stockProducto : stock) {
-            System.out.println(cont + ". SKU: " + stockProducto.getSku() + " NOMBRE: " + stockProducto.getNombre() + 
-                               " DESCRIPCION: " + stockProducto.getDescripcion() + " PRECIO DE VENTA: " + 
-                               stockProducto.getPrecio() + " MARCA: " + stockProducto.getMarca().getNombre() + 
-                               " TIPO: " + stockProducto.getTipoProducto().getTipo() + " STOCK: " + stockProducto.getCantidad());
-            cont++;
-        }
-
+//        productoBO.insertar(producto);
+//
+//        int cont = 1;
+//
+//        ArrayList<TipoProducto> tiposProducto = tipoProdBO.listarTodos();
+//        ArrayList<Marca> marcas = marcaBO.listarTodos();
+//        ArrayList<Sede> sedes = sedeBO.listarTodos();
+//        ArrayList<Proveedor> proveedores = proveedorBO.listarTodos();
+//        ArrayList<Producto> productos = productoBO.listarTodos();
+//        ArrayList<Producto> stock = sedeBO.listarProductosSede(1);
+//
+//        System.out.println("LISTADO DE TIPOS DE PRODUCTO: ");
+//        for (TipoProducto tp : tiposProducto) {
+//            System.out.println(cont + ". ID: " + tp.getIdTipoProducto() + " TIPO: " + tp.getTipo());
+//            cont++;
+//        }
+//        cont = 1;
+//        System.out.println("================================================================================");
+//        System.out.println("LISTADO DE MARCAS: ");
+//        for (Marca m : marcas) {
+//            System.out.println(cont + ". ID: " + m.getIdMarca() + " NOMBRE: "
+//                    + m.getNombre() + " ID_PROVEEDOR: " + m.getProveedor().getIdProveedor()
+//                    + " PROVEEDOR: " + m.getProveedor().getRazonSocial());
+//            cont++;
+//        }
+//        cont = 1;
+//        System.out.println("================================================================================");
+//        System.out.println("LISTADO DE SEDES: ");
+//        for (Sede s : sedes) {
+//            System.out.println(cont + ". ID: " + s.getIdSede() + " NOMBRE: " + s.getNombre() + " DESCRIPCION: "
+//                    + s.getDescripcion() + " TELEFONO: " + s.getTelefono() + " HORARIO DE APERTURA: "
+//                    + s.getHorarioApertura() + " HORARIO DE CIERRE: " + s.getHorarioCierre());
+//            cont++;
+//        }
+//        cont = 1;
+//        System.out.println("================================================================================");
+//        System.out.println("LISTADO DE PROVEEDORES: ");
+//        for (Proveedor pv : proveedores) {
+//            System.out.println(cont + ". ID: " + pv.getIdProveedor() + " RUC: "
+//                    + pv.getRuc() + " RAZON SOCIAL: " + pv.getRazonSocial() + " NOMBRE DE CONTACTO: "
+//                    + pv.getNombreContacto() + " CORREO: " + pv.getCorreo() + " TELEFONO: " + pv.getTelefono()
+//                    + " DIRECCION: " + pv.getDireccion() + " DESCRIPCION: " + pv.getDescripcion());
+//            cont++;
+//        }
+//        cont = 1;
+//        System.out.println("================================================================================");
+//        System.out.println("LISTADO DE PRODUCTOS: ");
+//        for (Producto p : productos) {
+//            System.out.println(cont + ". ID: " + p.getIdProducto() + " SKU: " + p.getSku()
+//                    + " NOMBRE: " + p.getNombre() + " DESCRIPCION: " + p.getDescripcion()
+//                    + " PRECIO DE VENTA: " + p.getPrecio() + " PRECIO DE COMPRA: " + p.getPrecioProveedor()
+//                    + " ID DE MARCA: " + p.getMarca().getIdMarca() + " MARCA: " + p.getMarca().getNombre()
+//                    + " ID DE TIPO DE PRODUCTO: " + p.getTipoProducto().getIdTipoProducto() + " TIPO: " + p.getTipoProducto().getTipo());
+//            if (!p.getProductosMiembros().isEmpty()) {
+//                System.out.println('\t' + "CONTIENE: ");
+//                for (Producto pm : p.getProductosMiembros()) {
+//                    System.out.println('\t' + "SKU: " + pm.getSku() + " NOMBRE: " + pm.getNombre() + " DESCRIPCION: " + pm.getDescripcion());
+//                }
+//            }
+//            cont++;
+//        }
+//        cont = 1;
+//        System.out.println("================================================================================");
+//        System.out.println("LISTADO DE STOCK POR SEDE: ");        
+//        for (Producto stockProducto : stock) {
+//            System.out.println(cont + ". SKU: " + stockProducto.getSku() + " NOMBRE: " + stockProducto.getNombre() + 
+//                               " DESCRIPCION: " + stockProducto.getDescripcion() + " PRECIO DE VENTA: " + 
+//                               stockProducto.getPrecio() + " MARCA: " + stockProducto.getMarca().getNombre() + 
+//                               " TIPO: " + stockProducto.getTipoProducto().getTipo() + " STOCK: " + stockProducto.getCantidad());
+//            cont++;
+//        }
     }
 
 }
