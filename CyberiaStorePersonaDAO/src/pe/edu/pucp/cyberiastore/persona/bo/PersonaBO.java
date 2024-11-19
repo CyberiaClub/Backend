@@ -28,7 +28,14 @@ public class PersonaBO {
         return this.personaDAO.obtenerPorDocumento(documento);
     }
     
-    public Boolean enviarCorreoVerificacion(String correo){
-        return this.personaDAO.enviarCorreoVerificacion(correo);
+    public Boolean enviarCorreoVerificacion(String correo, String valorToken){
+        return this.personaDAO.enviarCorreoVerificacion(correo,valorToken);
+    }
+    
+    public String verificarPersona(String correo,String contrasena){
+        Persona persona = new Persona();
+        persona.setCorreo(correo);
+        persona.setContrasena(contrasena);
+        return this.personaDAO.verificarPersona(persona);
     }
 }

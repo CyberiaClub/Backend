@@ -8,6 +8,7 @@ import pe.edu.pucp.cyberiastore.inventario.model.TipoProducto;
 import pe.edu.pucp.cyberiastore.config.DAOImpl;
 import pe.edu.pucp.cyberiastore.config.Tipo_Operacion;
 import pe.edu.pucp.cyberiastore.inventario.dao.TipoProductoDAO;
+import pe.edu.pucp.cyberiastore.inventario.model.TipoProducto;
 
 public class TipoProductoDAOImpl extends DAOImpl implements TipoProductoDAO {
 

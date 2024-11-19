@@ -26,5 +26,7 @@ public interface PersonaDAO {
 
     public Boolean existePersona(Persona persona);
     
-    public Boolean enviarCorreoVerificacion(String correo);
+    public Boolean enviarCorreoVerificacion(String correo, String valorToken);
+    // Funciones del web service
+    public String verificarPersona(Persona persona);
 }

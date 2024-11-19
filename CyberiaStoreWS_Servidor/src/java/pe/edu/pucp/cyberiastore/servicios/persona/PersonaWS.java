@@ -29,17 +29,22 @@ public class PersonaWS {
     }
 
     @WebMethod(operationName = "persona_buscar_por_documento")
-    public Persona obtenerPorDocumento(@WebParam(name = "documento") String documento) {
+    public Persona persona_buscar_por_documento(@WebParam(name = "documento") String documento) {
         return personaBO.obtenerPorDocumento(documento);
     }
 
     @WebMethod(operationName = "persona_enviar_correo_verificacion")
-    public Boolean persona_enviar_correo_verificacion(@WebParam(name = "correo") String correo) {
-        return personaBO.enviarCorreoVerificacion(correo);
+    public Boolean persona_enviar_correo_verificacion(@WebParam(name = "correo") String correo,@WebParam(name = "valorToken") String valorToken) {
+        return personaBO.enviarCorreoVerificacion(correo,valorToken);
     }
 
     @WebMethod(operationName = "persona_verificar_correo")
-    public void persona_verificar_correo(@WebParam(name = "valorToken") String valorToken) {
-        personaBO.marcarVerificado(valorToken);
+    public Integer persona_verificar_correo(@WebParam(name = "valorToken") String valorToken) {
+        return personaBO.marcarVerificado(valorToken);
     }
+    @WebMethod(operationName = "persona_loguearse")
+    public String persona_loguearse(@WebParam(name = "persona") String correo, @WebParam(name = "contrasena") String contrasena){
+        return personaBO.verificarPersona(correo,contrasena);
+    }
+    
 }
