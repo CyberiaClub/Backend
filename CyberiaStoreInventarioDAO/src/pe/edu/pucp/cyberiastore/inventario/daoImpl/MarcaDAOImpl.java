@@ -65,20 +65,19 @@ public class MarcaDAOImpl extends DAOImpl implements MarcaDAO {
 
     @Override
     protected String obtenerListaDeAtributosParaInsercion() {
-        return "NOMBRE,ACTIVO,IMAGEN,ID_PROVEEDOR";
+        return "NOMBRE,IMAGEN,ID_PROVEEDOR";
     }
 
     @Override
     protected String incluirListaDeParametrosParaInsercion() {
-        return "?,?,?,?";
+        return "?,?,?";
     }
 
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
         this.incluirParametroString(1, this.marca.getNombre());
-        this.incluirParametroBoolean(2, this.marca.getActivo());
-        this.incluirParametroByte(3, this.marca.getImagen());
-        this.incluirParametroInt(4, this.marca.getProveedor().getIdProveedor() );
+        this.incluirParametroByte(2, this.marca.getImagen());
+        this.incluirParametroInt(3, this.marca.getProveedor().getIdProveedor() );
     }
     
     /*

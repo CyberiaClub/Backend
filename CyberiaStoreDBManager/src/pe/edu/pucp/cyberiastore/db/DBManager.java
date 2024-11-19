@@ -61,8 +61,7 @@ public class DBManager {
         url = url.concat(this.puerto);
         url = url.concat("/");
         url = url.concat(this.base_de_datos);
-//        url = url.concat("?useSSL=false");
-//        url = url.concat("&allowPublicKeyRetrieval=true");   
+        url = url.concat("?useSSL=false");
         return url;
     }
 
@@ -73,7 +72,8 @@ public class DBManager {
 //            del proyecto que lo invoca
 //            Colocar su nombre, para saber que ruta le pertence a cada uno, por 
 //            Adrian
-            String nmArchivoConf = "C:\\Program Files\\glassfish7\\glassfish\\resources" + "\\" + ARCHIVO_CONFIGURACION;
+//            String nmArchivoConf = "C:\\Program Files\\glassfish7\\glassfish\\resources" + "\\" + ARCHIVO_CONFIGURACION;
+            String nmArchivoConf = "/home/errant/Documents/CyberiaClub/glassfish7/resources/"  + ARCHIVO_CONFIGURACION;
 //            Nicolas
 //            String nmArchivoConf = "C:\\Users\\ipana\\Downloads" + "\\" + ARCHIVO_CONFIGURACION;
 //            Jesus
