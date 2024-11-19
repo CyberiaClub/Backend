@@ -1,13 +1,13 @@
 package pe.edu.pucp.cyberiastore.servicios.venta;
 
-import jakarta.jws.WebService;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
+import jakarta.jws.WebService;
 import java.util.ArrayList;
-import pe.edu.pucp.cyberiastore.oferta.model.Oferta;
 import pe.edu.pucp.cyberiastore.oferta.bo.OfertaBO;
+import pe.edu.pucp.cyberiastore.oferta.model.Oferta;
 
-@WebService(serviceName = "OfertaWS",targetNamespace = "CyberiaWS")
+@WebService(serviceName = "OfertaWS", targetNamespace = "CyberiaWS")
 public class OfertaWS {
 
     private final OfertaBO ofertaBO;

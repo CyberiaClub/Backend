@@ -72,7 +72,8 @@ public class DBManager {
 //            del proyecto que lo invoca
 //            Colocar su nombre, para saber que ruta le pertence a cada uno, por 
 //            Adrian
-            String nmArchivoConf = "C:\\Program Files\\glassfish7\\glassfish\\resources" + "\\" + ARCHIVO_CONFIGURACION;
+//            String nmArchivoConf = "C:\\Program Files\\glassfish7\\glassfish\\resources" + "\\" + ARCHIVO_CONFIGURACION;
+            String nmArchivoConf = "/home/errant/Documents/CyberiaClub/glassfish7/resources/"  + ARCHIVO_CONFIGURACION;
 //            Nicolas
 //            String nmArchivoConf = "C:\\Users\\ipana\\Downloads" + "\\" + ARCHIVO_CONFIGURACION;
 //            Jesus
