@@ -72,11 +72,12 @@ public class DBManager {
 //            del proyecto que lo invoca
 //            Colocar su nombre, para saber que ruta le pertence a cada uno, por 
 //            Adrian
-//            String nmArchivoConf = "C:\\Program Files\\glassfish7\\glassfish\\resources" + "\\" + ARCHIVO_CONFIGURACION;
-            String nmArchivoConf = "/home/errant/Documents/CyberiaClub/glassfish7/resources/"  + ARCHIVO_CONFIGURACION;
+            String nmArchivoConf = "C:\\Program Files\\glassfish7\\glassfish\\resources" + "\\" + ARCHIVO_CONFIGURACION;
+//            Yngrid
+//            String nmArchivoConf = "/home/errant/Documents/CyberiaClub/glassfish7/resources/"  + ARCHIVO_CONFIGURACION;
 //            Nicolas
 //            String nmArchivoConf = "C:\\Users\\ipana\\Downloads" + "\\" + ARCHIVO_CONFIGURACION;
-//            Jesus
+//            Yngrid
 //            String nmArchivoConf = "C:\\glassfish-7.0.18\\glassfish7\\glassfish\\resources" + "\\" + ARCHIVO_CONFIGURACION;
             properties.load(new FileInputStream(new File(nmArchivoConf)));
             this.driver = properties.getProperty("driver");

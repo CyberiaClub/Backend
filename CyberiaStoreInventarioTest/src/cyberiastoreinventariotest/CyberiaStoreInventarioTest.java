@@ -21,51 +21,52 @@ public class CyberiaStoreInventarioTest {
 
     public static void main(String[] args) {
         ProductoBO productoBO = new ProductoBO();
-        Producto producto = new Producto();
-        producto.setSku("7404");
-        producto.setNombre("Papel Fotocopia Oficio 75 G Paquete X 500 Und");
-        producto.setDescripcion("Contiene: Paquete con 500 hojas. Tamaño: Oficio.Gramaje: 75 g cada hoja.Imágenes referenciales.");
-        producto.setPrecio(15.70);
-        producto.setPrecioProveedor(12.50);
-        producto.setProductosMiembros(null);
-        TipoProducto tipoProducto = new TipoProducto();
-        tipoProducto.setIdTipoProducto(1);
-        Marca marca = new Marca();
-        marca.setIdMarca(1);
-        producto.setIdSede(1);
-        producto.setTipoProducto(tipoProducto);
-        producto.setMarca(marca);
-        BufferedImage imagen = null;
-        byte[] imagenBytes = null;
-        try {
-            imagen = ImageIO.read(new File("/home/errant/Documents/CyberiaClub/Img/oficina.jpg"));
-        } catch (IOException ex) {
-            Logger.getLogger(CyberiaStoreInventarioTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        if (imagen != null) {
-            //convertimos la imagen a byte[]
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            try {
-                ImageIO.write(imagen, "jpg", baos);
-            } catch (IOException ex) {
-                Logger.getLogger(CyberiaStoreInventarioTest.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            try {
-                baos.flush();
-            } catch (IOException ex) {
-                Logger.getLogger(CyberiaStoreInventarioTest.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            imagenBytes = baos.toByteArray();
-            try {
-                baos.close();
-            } catch (IOException ex) {
-                Logger.getLogger(CyberiaStoreInventarioTest.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        producto.setImagen(imagenBytes);
-        productoBO.insertar(producto);
+//        Producto producto = new Producto();
+//        producto.setSku("7404");
+//        producto.setNombre("Papel Fotocopia Oficio 75 G Paquete X 500 Und");
+//        producto.setDescripcion("Contiene: Paquete con 500 hojas. Tamaño: Oficio.Gramaje: 75 g cada hoja.Imágenes referenciales.");
+//        producto.setPrecio(15.70);
+//        producto.setPrecioProveedor(12.50);
+//        producto.setProductosMiembros(null);
+//        TipoProducto tipoProducto = new TipoProducto();
+//        tipoProducto.setIdTipoProducto(1);
+//        Marca marca = new Marca();
+//        marca.setIdMarca(1);
+//        producto.setIdSede(1);
+//        producto.setTipoProducto(tipoProducto);
+//        producto.setMarca(marca);
+//        BufferedImage imagen = null;
+//        byte[] imagenBytes = null;
+//        try {
+//            imagen = ImageIO.read(new File("/home/errant/Documents/CyberiaClub/Img/oficina.jpg"));
+//        } catch (IOException ex) {
+//            Logger.getLogger(CyberiaStoreInventarioTest.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//
+//        if (imagen != null) {
+//            //convertimos la imagen a byte[]
+//            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//            try {
+//                ImageIO.write(imagen, "jpg", baos);
+//            } catch (IOException ex) {
+//                Logger.getLogger(CyberiaStoreInventarioTest.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//            try {
+//                baos.flush();
+//            } catch (IOException ex) {
+//                Logger.getLogger(CyberiaStoreInventarioTest.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//
+//            imagenBytes = baos.toByteArray();
+//            try {
+//                baos.close();
+//            } catch (IOException ex) {
+//                Logger.getLogger(CyberiaStoreInventarioTest.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
+//        producto.setImagen(imagenBytes);
+//        productoBO.insertar(producto);
+        Producto p = productoBO.buscar_sku("7404",1);
 //        marca.setImagen(imagenBytes);
 //        marcaBO.insertar(marca);
 //        MarcaBO marcaBO = new MarcaBO();

@@ -22,8 +22,8 @@ public class ComprobantePagoWS {
         return comprobantePagoBO.listarTodos();
     }
 
-    @WebMethod(operationName = "comprobante_pago_insertar_oferta")
-    public Integer comprobante_pago_insertar_oferta(@WebParam(name = "comprobante_pago") ComprobantePago comprobantePago) {
+    @WebMethod(operationName = "comprobante_pago_insertar")
+    public Integer comprobante_pago_insertar(@WebParam(name = "comprobante_pago") ComprobantePago comprobante_pago) {
         this.comprobantePago = comprobantePago;
         return comprobantePagoBO.insertar(this.comprobantePago);
     }
