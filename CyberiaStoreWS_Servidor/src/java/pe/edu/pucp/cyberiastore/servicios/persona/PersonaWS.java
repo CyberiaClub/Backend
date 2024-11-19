@@ -43,4 +43,9 @@ public class PersonaWS {
     public Integer persona_verificar_correo(@WebParam(name = "valorToken") String valorToken) {
         return personaBO.marcarVerificado(valorToken);
     }
+    @WebMethod(operationName = "persona_loguearse")
+    public String persona_loguearse(@WebParam(name = "persona") String correo, @WebParam(name = "contrasena") String contrasena){
+        return personaBO.verificarPersona(correo,contrasena);
+    }
+    
 }
