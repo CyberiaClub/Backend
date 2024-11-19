@@ -47,8 +47,8 @@ public class ProductoWS {
     }
 
     @WebMethod(operationName = "producto_buscar_cantidad_sedes")
-    public ArrayList<Producto> buscar_sku(String sku) {
-        return productoBO.buscar_sku(sku);
+    public Producto buscar_sku(@WebParam(name = "sku") String sku, @WebParam(name = "idSede") Integer idSede) {
+        return productoBO.buscar_sku(sku,idSede);
     }
 
 }

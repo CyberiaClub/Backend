@@ -4,12 +4,6 @@
     <service name="ComprobantePagoWS">
       <implementation-class>pe.edu.pucp.cyberiastore.servicios.venta.ComprobantePagoWS</implementation-class>
     </service>
-    <service name="OfertaWS">
-      <implementation-class>pe.edu.pucp.cyberiastore.servicios.venta.OfertaWS</implementation-class>
-    </service>
-    <service name="TipoComprobanteWS">
-      <implementation-class>pe.edu.pucp.cyberiastore.servicios.venta.TipoComprobanteWS</implementation-class>
-    </service>
   </services>
   <clients/>
 </jax-ws>

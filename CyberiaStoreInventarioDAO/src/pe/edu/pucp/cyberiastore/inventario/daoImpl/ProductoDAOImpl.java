@@ -254,15 +254,20 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
             case BUSCAR_POR_SKU->{
                 sql = sql.concat(" PD ");
                 sql = sql.concat("join PRODUCTO_X_STOCK PXS on PD.ID_PRODUCTO = PXS.ID_PRODUCTO ");
-                sql = sql.concat("where PD.SKU=?");
+                sql = sql.concat("where PD.SKU=? AND PXS.ID_SEDE=?");
             }
         }
         return sql;
     }
     
     @Override
-    protected void incluirValorDeParametrosParaListado(){
-        
+    protected void incluirValorDeParametrosParaListado() throws SQLException{
+        switch(this.tipoOperacion){
+            case BUSCAR_POR_SKU->{
+                this.incluirParametroString(1, this.producto.getSku());
+                this.incluirParametroInt(2, this.producto.getIdSede());
+            }
+        }
     }
         
         @Override
@@ -380,6 +385,8 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
     @Override
     public Producto buscar_sku(String sku, Integer idSede) {
         this.tipoOperacion = TipoOperacionInventario.BUSCAR_POR_SKU;
+        this.producto.setSku(sku);
+        this.producto.setIdSede(idSede);
         this.listarTodos();
         return null;
     }
