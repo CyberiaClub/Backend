@@ -1,28 +1,28 @@
 package pe.edu.pucp.cyberiastore.servicios.venta;
 
-import jakarta.jws.WebService;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
+import jakarta.jws.WebService;
 import java.util.ArrayList;
-import pe.edu.pucp.cyberiastore.comprobantepago.model.ComprobantePago;
 import pe.edu.pucp.cyberiastore.comprobantepago.bo.ComprobantePagoBO;
+import pe.edu.pucp.cyberiastore.comprobantepago.model.ComprobantePago;
 
-@WebService(serviceName = "ComprobantePago",targetNamespace = "CyberiaWS")
+@WebService(serviceName = "ComprobantePagoWS", targetNamespace = "CyberiaWS")
 public class ComprobantePagoWS {
-    
+
     private final ComprobantePagoBO comprobantePagoBO;
     private ComprobantePago comprobantePago;
-    
+
     public ComprobantePagoWS() {
         this.comprobantePagoBO = new ComprobantePagoBO();
     }
 
-    @WebMethod(operationName = "comprobante_pago_listar")
+    @WebMethod(operationName = "comprobante_pago_listar_")
     public ArrayList<ComprobantePago> oferta_listar() {
         return comprobantePagoBO.listarTodos();
     }
 
-    @WebMethod(operationName = "comprobante_pago_insertar")
+    @WebMethod(operationName = "comprobante_pago_insertar_oferta")
     public Integer oferta_insertar(@WebParam(name = "comprobante_pago") ComprobantePago comprobantePago) {
         this.comprobantePago = comprobantePago;
         return comprobantePagoBO.insertar(this.comprobantePago);
