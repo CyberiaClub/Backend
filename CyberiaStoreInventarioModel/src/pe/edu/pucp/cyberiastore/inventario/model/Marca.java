@@ -41,15 +41,7 @@ public class Marca {
     }
 
     public Proveedor getProveedor() {
-        return new Proveedor(this.proveedor.getIdProveedor(),
-                             this.proveedor.getRuc(),
-                             this.proveedor.getRazonSocial(),
-                             this.proveedor.getNombreContacto(),
-                             this.proveedor.getCorreo(),
-                             this.proveedor.getTelefono(),
-                             this.proveedor.getDireccion(),
-                             this.proveedor.getDescripcion(),
-                             this.proveedor.getActivo());
+        return this.proveedor;
     }
 
     public void setProveedor(Proveedor proveedor) {
@@ -65,7 +57,7 @@ public class Marca {
     }
     
     public byte[] getImagen() {
-        return imagen.clone();
+        return this.imagen;
     }
     
     public void setImagen(byte[] imagen) {

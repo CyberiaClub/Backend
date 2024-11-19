@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import pe.edu.pucp.cyberiastore.comprobantepago.model.ComprobantePago;
 import pe.edu.pucp.cyberiastore.comprobantepago.bo.ComprobantePagoBO;
 
-@WebService(serviceName = "ComprobantePago",targetNamespace = "CyberiaWS")
+@WebService(serviceName = "ComprobantePagoWS",targetNamespace = "CyberiaWS")
 public class ComprobantePagoWS {
     
     private final ComprobantePagoBO comprobantePagoBO;
@@ -18,13 +18,13 @@ public class ComprobantePagoWS {
     }
 
     @WebMethod(operationName = "comprobante_pago_listar")
-    public ArrayList<ComprobantePago> oferta_listar() {
+    public ArrayList<ComprobantePago> comprobante_pago_listar() {
         return comprobantePagoBO.listarTodos();
     }
 
     @WebMethod(operationName = "comprobante_pago_insertar")
-    public Integer oferta_insertar(@WebParam(name = "comprobante_pago") ComprobantePago comprobantePago) {
-        this.comprobantePago = comprobantePago;
+    public Integer comprobante_pago_insertar(@WebParam(name = "comprobante_pago") ComprobantePago comprobante_pago) {
+        this.comprobantePago = comprobante_pago;
         return comprobantePagoBO.insertar(this.comprobantePago);
     }
 }

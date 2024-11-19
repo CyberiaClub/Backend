@@ -3,7 +3,6 @@ package pe.edu.pucp.cyberiastore.servicios.persona;
 import jakarta.jws.WebService;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
-import java.util.ArrayList;
 import pe.edu.pucp.cyberiastore.persona.model.Persona;
 import pe.edu.pucp.cyberiastore.persona.bo.PersonaBO;
 
