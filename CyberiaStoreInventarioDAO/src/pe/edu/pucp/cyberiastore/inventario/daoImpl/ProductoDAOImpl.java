@@ -301,7 +301,7 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
             }
             case BUSCAR_POR_SKU -> {
                 this.producto = new Producto();
-                this.producto.setIdProducto(this.resultSet.getInt("PD.ID_NOMBRE"));
+                this.producto.setIdProducto(this.resultSet.getInt("PD.ID_PRODUCTO"));
                 this.producto.setNombre(this.resultSet.getString("PD.NOMBRE"));
                 this.producto.setDescripcion(this.resultSet.getString("PD.DESCRIPCION"));
                 this.producto.setCantidad(this.resultSet.getInt("PXS.STOCK_SEDE"));
