@@ -235,7 +235,7 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
                 sql = sql.concat("PD.IMAGEN, M.ID_MARCA, M.NOMBRE AS NOMBRE_MARCA, TP.ID_TIPO_PRODUCTO, TP.TIPO ");
             }
             case BUSCAR_POR_SKU -> {
-                sql = sql.concat("PD.ID_PRODUCTO,PD.NOMBRE, PD.DESCRIPCION, PXS.STOCK_SEDE");
+                sql = sql.concat("PD.ID_PRODUCTO,PD.SKU,PD.NOMBRE, PD.DESCRIPCION, PD.PRECIO,PD.IMAGEN,PXS.STOCK_SEDE");
             }
         }
         return sql;
@@ -302,8 +302,11 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
             case BUSCAR_POR_SKU -> {
                 this.producto = new Producto();
                 this.producto.setIdProducto(this.resultSet.getInt("PD.ID_PRODUCTO"));
+                this.producto.setSku(this.resultSet.getString("PD.SKU"));
                 this.producto.setNombre(this.resultSet.getString("PD.NOMBRE"));
                 this.producto.setDescripcion(this.resultSet.getString("PD.DESCRIPCION"));
+                this.producto.setPrecio(this.resultSet.getDouble("PD.PRECIO"));
+                this.producto.setImagen(this.resultSet.getBytes("PD.IMAGEN"));
                 this.producto.setCantidad(this.resultSet.getInt("PXS.STOCK_SEDE"));
             }
         }

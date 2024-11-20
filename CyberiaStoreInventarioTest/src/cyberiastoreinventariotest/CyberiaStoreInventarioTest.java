@@ -67,8 +67,8 @@ public class CyberiaStoreInventarioTest {
 //        }
 //        producto.setImagen(imagenBytes);
 //        productoBO.insertar(producto);
-//        Producto p = productoBO.buscar_sku("7404",1);
-//        System.out.println(p.getNombre() +"  "+p.getDescripcion()+ "  "+p.getCantidad());
+        Producto p = productoBO.buscar_sku("7404",1);
+        System.out.println(p.getSku() + "  "+ p.getNombre() +"  "+p.getDescripcion()+ "  "+p.getCantidad() + "  "+ p.getPrecio());
 //        marca.setImagen(imagenBytes);
 //        marcaBO.insertar(marca);
 //        MarcaBO marcaBO = new MarcaBO();
