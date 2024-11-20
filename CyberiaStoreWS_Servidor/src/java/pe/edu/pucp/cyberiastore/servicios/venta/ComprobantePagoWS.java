@@ -22,9 +22,24 @@ public class ComprobantePagoWS {
         return comprobantePagoBO.listarTodos();
     }
 
+    @WebMethod(operationName = "comprobante_pago_listar_cliente")
+    public ArrayList<ComprobantePago> comprobante_pago_listar_cliente(@WebParam(name = "id_cliente") Integer idCliente) {
+        return comprobantePagoBO.listarTodos();
+    }
+
+    @WebMethod(operationName = "comprobante_pago_obtener_por_id")
+    public ComprobantePago comprobante_pago_obtener_por_id(@WebParam(name = "id_comprobante_pago") Integer idComprobantePago) {
+        return comprobantePagoBO.obtenerPorId(idComprobantePago);
+    }
+
     @WebMethod(operationName = "comprobante_pago_insertar")
+<<<<<<< Updated upstream
     public Integer comprobante_pago_insertar(@WebParam(name = "comprobante_pago") ComprobantePago comprobante_pago) {
         this.comprobantePago = comprobante_pago;
+=======
+    public Integer comprobante_pago_insertar(@WebParam(name = "comprobante_pago") ComprobantePago comprobantePago) {
+        this.comprobantePago = comprobantePago;
+>>>>>>> Stashed changes
         return comprobantePagoBO.insertar(this.comprobantePago);
     }
 }
