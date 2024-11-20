@@ -43,7 +43,7 @@ public class ProductoBO {
         return producto;
     }
     
-    public Integer aumentarStock(Integer idProducto,Integer idSede,Integer cantidad){
+    public Integer aumentarStock(Integer idProducto, Integer idSede, Integer cantidad){
         return this.productoDAO.aumentarStock(idProducto, idSede, cantidad);
     }
 }

@@ -412,6 +412,6 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
     @Override
     public Integer aumentarStock(Integer idProducto, Integer idSede, Integer cantidad) {
         StockSedeDAO stockSedeDAO = new StockSedeDAOImpl();
-        return stockSedeDAO.aumentarStock(idSede, idSede, cantidad);
+        return stockSedeDAO.aumentarStock(idProducto, idSede, cantidad);
     }
 }
