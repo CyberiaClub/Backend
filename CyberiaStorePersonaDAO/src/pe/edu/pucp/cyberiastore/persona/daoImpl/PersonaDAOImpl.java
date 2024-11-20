@@ -91,7 +91,7 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
      */
     @Override
     protected String obtenerListaDeAtributosParaInsercion() {
-        return "DOCUMENTO, TELEFONO, NOMBRE,PRIMER_APELLIDO, APELLIDO_PATERNO,FECHA_NACIMIENTO, SEXO, CORREO, "
+        return "DOCUMENTO, TELEFONO, NOMBRE,PRIMER_APELLIDO, SEGUNDO_APELLIDO,FECHA_NACIMIENTO, SEXO, CORREO, "
                    + "DIRECCION, CONTRASEÑA,NACIONALIDAD, TIPO_DOCUMENTO,ID_TIPO_PERSONA";
     }
 
