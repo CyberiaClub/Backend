@@ -20,7 +20,7 @@ public class ComprobantePagoDAOImpl extends DAOImpl implements ComprobantePagoDA
     private ComprobantePago comprobantePago;
 
     public ComprobantePagoDAOImpl() {
-        super("COMPROBANTE_PAGO");
+        super("COMPROBANTE_DE_PAGO");
         this.comprobantePago = null;
     }
 
@@ -118,7 +118,7 @@ public class ComprobantePagoDAOImpl extends DAOImpl implements ComprobantePagoDA
 
     @Override
     protected String obtenerProyeccionParaSelect() {
-        return "ID_COMPROBANTE_DE_PAGO, FECHA, SUBTOTAL, IGV, TOTAL, ACTIVO, ESTADO_PEDIDO, NUMERO, RUC, RAZON_SOCIAL, DIRECCION, ID_TIPO_COMPROBANTE, ID_PERSONA";
+        return "ID_COMPROBANTE_DE_PAGO, FECHA, SUBTOTAL, IGV, TOTAL, ACTIVO, ESTADO_PEDIDO, NUMERO, RUC, RAZON_SOCIAL, DIRECCION, ID_TIPO_TRANSACCION, ID_PERSONA";
     }
 
     @Override
@@ -146,8 +146,8 @@ public class ComprobantePagoDAOImpl extends DAOImpl implements ComprobantePagoDA
         this.comprobantePago.setRuc(this.resultSet.getString("RUC"));
         this.comprobantePago.setRazonSocial(this.resultSet.getString("RAZON_SOCIAL"));
         this.comprobantePago.setDireccion(this.resultSet.getString("DIRECCION"));
-        this.comprobantePago.setTipoComprobante(new TipoComprobante(this.resultSet.getInt("ID_TIPO_COMPROBANTE"),null,null,null));
-        this.comprobantePago.setPersona(new Persona(this.resultSet.getInt("ID_TIPO_COMPROBANTE"),null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null));
+        this.comprobantePago.setTipoComprobante(new TipoComprobante(this.resultSet.getInt("ID_TIPO_TRANSACCION"),null,null,null));
+        this.comprobantePago.setPersona(new Persona(this.resultSet.getInt("ID_PERSONA"),null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null));
     }
 
     @Override

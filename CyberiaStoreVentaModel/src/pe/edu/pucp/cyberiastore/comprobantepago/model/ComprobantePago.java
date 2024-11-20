@@ -164,6 +164,7 @@ public class ComprobantePago {
     }
     
     public HashMap<Producto,Integer> getLineaPedido() {
+        if (this.lineaPedido == null) return null;
         return (HashMap<Producto,Integer>)lineaPedido.clone();
     }
     
