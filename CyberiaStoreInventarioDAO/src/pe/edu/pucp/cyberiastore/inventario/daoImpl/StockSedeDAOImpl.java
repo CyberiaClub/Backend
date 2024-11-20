@@ -57,20 +57,30 @@ public class StockSedeDAOImpl extends DAOImpl implements StockSedeDAO {
         this.incluirParametroInt(2, this.idSede);
         this.incluirParametroInt(3, this.cantidadStock);
     }
-
+    
+    @Override
+    public Integer aumentarStock(Integer idProducto, Integer idSede, Integer stock){
+        this.idProducto = idProducto;
+        this.idSede = idSede;
+        this.cantidadStock = stock;
+        return super.modificar();
+    }
+    
     @Override
     protected String obtenerListaDeValoresYAtributosParaModificacion() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "STOCK_SEDE=STOCK_SEDE+?";
+    }
+    
+    @Override
+    protected void incluirValorDeParametrosParaModificacion() throws SQLException {
+        this.incluirParametroInt(1, this.cantidadStock);
+        this.incluirParametroInt(2, this.idProducto);
+        this.incluirParametroInt(3, this.idSede);
     }
 
     @Override
     protected String obtenerPredicadoParaLlavePrimaria() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    protected void incluirValorDeParametrosParaModificacion() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "ID_PRODUCTO=? AND ID_SEDE=?";
     }
 
     @Override
