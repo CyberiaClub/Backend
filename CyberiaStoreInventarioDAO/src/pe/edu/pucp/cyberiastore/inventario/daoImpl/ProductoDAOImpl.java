@@ -235,11 +235,10 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
                 sql = sql.concat("PD.IMAGEN, M.ID_MARCA, M.NOMBRE AS NOMBRE_MARCA, TP.ID_TIPO_PRODUCTO, TP.TIPO ");
             }
             case BUSCAR_POR_SKU -> {
-                sql = sql.concat("PD.NOMBRE, PD.DESCRIPCION, PXS.STOCK_SEDE");
+                sql = sql.concat("PD.ID_PRODUCTO,PD.SKU,PD.NOMBRE, PD.DESCRIPCION, PD.PRECIO,PD.IMAGEN,PXS.STOCK_SEDE");
             }
         }
         return sql;
-
     }
 
     @Override
@@ -251,26 +250,26 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
                 sql = sql.concat("join MARCA M on PD.ID_MARCA = M.ID_MARCA ");
                 sql = sql.concat("join TIPO_PRODUCTO TP on PD.ID_TIPO_PRODUCTO = TP.ID_TIPO_PRODUCTO ");
             }
-            case BUSCAR_POR_SKU->{
+            case BUSCAR_POR_SKU -> {
                 sql = sql.concat(" PD ");
-                sql = sql.concat("join PRODUCTO_X_STOCK PXS on PD.ID_PRODUCTO = PXS.ID_PRODUCTO ");
+                sql = sql.concat("join PRODUCTO_X_SEDE PXS on PD.ID_PRODUCTO = PXS.ID_PRODUCTO ");
                 sql = sql.concat("where PD.SKU=? AND PXS.ID_SEDE=?");
             }
         }
         return sql;
     }
-    
+
     @Override
-    protected void incluirValorDeParametrosParaListado() throws SQLException{
-        switch(this.tipoOperacion){
-            case BUSCAR_POR_SKU->{
+    protected void incluirValorDeParametrosParaListado() throws SQLException {
+        switch (this.tipoOperacion) {
+            case BUSCAR_POR_SKU -> {
                 this.incluirParametroString(1, this.producto.getSku());
                 this.incluirParametroInt(2, this.producto.getIdSede());
             }
         }
     }
-        
-        @Override
+
+    @Override
     protected void agregarObjetoALaLista(List lista, ResultSet resultSet) throws SQLException {
         instanciarObjetoDelResultSet();
         lista.add(this.producto);
@@ -278,25 +277,39 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
 
     @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
-        this.producto = new Producto();
-        this.producto.setIdProducto(this.resultSet.getInt("ID_PRODUCTO"));
-        this.producto.setSku(this.resultSet.getString("SKU"));
-        this.producto.setNombre(this.resultSet.getString("NOMBRE"));
-        this.producto.setDescripcion(this.resultSet.getString("DESCRIPCION"));
-        this.producto.setPrecio(this.resultSet.getDouble("PRECIO"));
-        this.producto.setPrecioProveedor(this.resultSet.getDouble("PRECIO_PROVEEDOR"));
-        this.producto.setImagen(this.resultSet.getBytes("IMAGEN"));
+        switch (this.tipoOperacion) {
+            case LISTAR_PRODUCTOS -> {
+                this.producto = new Producto();
+                this.producto.setIdProducto(this.resultSet.getInt("ID_PRODUCTO"));
+                this.producto.setSku(this.resultSet.getString("SKU"));
+                this.producto.setNombre(this.resultSet.getString("NOMBRE"));
+                this.producto.setDescripcion(this.resultSet.getString("DESCRIPCION"));
+                this.producto.setPrecio(this.resultSet.getDouble("PRECIO"));
+                this.producto.setPrecioProveedor(this.resultSet.getDouble("PRECIO_PROVEEDOR"));
+                this.producto.setImagen(this.resultSet.getBytes("IMAGEN"));
 
-        Marca marca = new Marca();
-        marca.setIdMarca(this.resultSet.getInt("ID_MARCA"));
-        marca.setNombre(this.resultSet.getString("NOMBRE_MARCA"));
+                Marca marca = new Marca();
+                marca.setIdMarca(this.resultSet.getInt("ID_MARCA"));
+                marca.setNombre(this.resultSet.getString("NOMBRE_MARCA"));
 
-        TipoProducto tipoProd = new TipoProducto();
-        tipoProd.setIdTipoProducto(this.resultSet.getInt("ID_TIPO_PRODUCTO"));
-        tipoProd.setTipo(this.resultSet.getString("TIPO"));
+                TipoProducto tipoProd = new TipoProducto();
+                tipoProd.setIdTipoProducto(this.resultSet.getInt("ID_TIPO_PRODUCTO"));
+                tipoProd.setTipo(this.resultSet.getString("TIPO"));
 
-        this.producto.setTipoProducto(tipoProd);
-        this.producto.setMarca(marca);
+                this.producto.setTipoProducto(tipoProd);
+                this.producto.setMarca(marca);
+            }
+            case BUSCAR_POR_SKU -> {
+                this.producto = new Producto();
+                this.producto.setIdProducto(this.resultSet.getInt("PD.ID_PRODUCTO"));
+                this.producto.setSku(this.resultSet.getString("PD.SKU"));
+                this.producto.setNombre(this.resultSet.getString("PD.NOMBRE"));
+                this.producto.setDescripcion(this.resultSet.getString("PD.DESCRIPCION"));
+                this.producto.setPrecio(this.resultSet.getDouble("PD.PRECIO"));
+                this.producto.setImagen(this.resultSet.getBytes("PD.IMAGEN"));
+                this.producto.setCantidad(this.resultSet.getInt("PXS.STOCK_SEDE"));
+            }
+        }
     }
 
     @Override
@@ -385,9 +398,20 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
     @Override
     public Producto buscar_sku(String sku, Integer idSede) {
         this.tipoOperacion = TipoOperacionInventario.BUSCAR_POR_SKU;
+        this.producto = new Producto();
         this.producto.setSku(sku);
         this.producto.setIdSede(idSede);
-        this.listarTodos();
-        return null;
+        List prods = super.listarTodos(null);
+        if (prods.isEmpty()) {
+            return null;
+        } else {
+            return (Producto) prods.getFirst();
+        }
+    }
+
+    @Override
+    public Integer aumentarStock(Integer idProducto, Integer idSede, Integer cantidad) {
+        StockSedeDAO stockSedeDAO = new StockSedeDAOImpl();
+        return stockSedeDAO.aumentarStock(idSede, idSede, cantidad);
     }
 }
