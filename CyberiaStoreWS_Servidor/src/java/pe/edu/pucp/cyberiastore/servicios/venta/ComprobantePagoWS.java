@@ -33,13 +33,8 @@ public class ComprobantePagoWS {
     }
 
     @WebMethod(operationName = "comprobante_pago_insertar")
-<<<<<<< Updated upstream
     public Integer comprobante_pago_insertar(@WebParam(name = "comprobante_pago") ComprobantePago comprobante_pago) {
         this.comprobantePago = comprobante_pago;
-=======
-    public Integer comprobante_pago_insertar(@WebParam(name = "comprobante_pago") ComprobantePago comprobantePago) {
-        this.comprobantePago = comprobantePago;
->>>>>>> Stashed changes
         return comprobantePagoBO.insertar(this.comprobantePago);
     }
 }
