@@ -86,29 +86,18 @@ public class ComprobantePagoDAOImpl extends DAOImpl implements ComprobantePagoDA
 
     @Override
     protected String obtenerPredicadoParaLlavePrimaria() {
-        return "ID_COMPROBANTE_PAGO=?";
+        return "ID_COMPROBANTE_DE_PAGO=?";
     }
 
     @Override
     protected String obtenerListaDeValoresYAtributosParaModificacion() {
-        return "FECHA=?, SUBTOTAL=?, IGV=?, TOTAL=?, ACTIVO=?, ESTADO_PEDIDO=?, NUMERO=?, RUC=?, RAZON_SOCIAL=?, DIRECCION=?, ID_TIPO_COMPROBANTE=?, ID_PERSONA=?";
+        return "ESTADO_PEDIDO=?";
     }
     
     @Override
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
-        this.incluirParametroDate(1, this.comprobantePago.getFecha());
-        this.incluirParametroDouble(2, this.comprobantePago.getSubtotal());
-        this.incluirParametroDouble(3, this.comprobantePago.getIgv());
-        this.incluirParametroDouble(4, this.comprobantePago.getTotal());
-        this.incluirParametroBoolean(5, this.comprobantePago.getActivo());
-        this.incluirParametroString(6, this.comprobantePago.getEstadoPedido().toString());
-        this.incluirParametroString(7, this.comprobantePago.getNumero());
-        this.incluirParametroString(8, this.comprobantePago.getRuc());
-        this.incluirParametroString(9, this.comprobantePago.getRazonSocial());
-        this.incluirParametroString(10, this.comprobantePago.getDireccion());
-        this.incluirParametroInt(11, this.comprobantePago.getTipoComprobante().getIdTipoComprobante());
-        this.incluirParametroInt(12, this.comprobantePago.getPersona().getIdPersona());
-        this.incluirParametroInt(12, this.comprobantePago.getIdComprobantePago());
+        this.incluirParametroString(1, this.comprobantePago.getEstadoPedido().toString());
+        this.incluirParametroInt(2, this.comprobantePago.getIdComprobantePago());
     }
     
     @Override

@@ -37,4 +37,10 @@ public class ComprobantePagoWS {
         this.comprobantePago = comprobante_pago;
         return comprobantePagoBO.insertar(this.comprobantePago);
     }
+
+    @WebMethod(operationName = "comprobante_pago_modificar")
+    public Integer comprobante_pago_modificar(@WebParam(name = "comprobante_pago") ComprobantePago comprobante_pago) {
+        this.comprobantePago = comprobante_pago;
+        return comprobantePagoBO.modificar(this.comprobantePago);
+    }
 }
