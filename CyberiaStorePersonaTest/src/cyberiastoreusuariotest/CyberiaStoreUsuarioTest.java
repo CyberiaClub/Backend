@@ -46,7 +46,7 @@ public class CyberiaStoreUsuarioTest {
 //        p3.setTipoDeDocumento(TipoDocumento.DNI);
 //        p3.setIdTipoPersona(1);
 //        personaBO.insertar(p3);
-        personaBO.marcarVerificado("9a6f6773-b8af-466f-ba59-1b2a5ba6d2fb");
+//        personaBO.marcarVerificado("9a6f6773-b8af-466f-ba59-1b2a5ba6d2fb");
 //        // Persona 4
 //        Persona p4 = new Persona();
 //        p4.setDocumento("45678901");

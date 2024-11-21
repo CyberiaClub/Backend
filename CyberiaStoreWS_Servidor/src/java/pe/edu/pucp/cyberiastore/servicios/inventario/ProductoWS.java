@@ -46,9 +46,14 @@ public class ProductoWS {
         return productoBO.listarTodos();
     }
 
-    @WebMethod(operationName = "producto_buscar_cantidad_sedes")
+    @WebMethod(operationName = "producto_buscar_sku")
     public Producto buscar_sku(@WebParam(name = "sku") String sku, @WebParam(name = "idSede") Integer idSede) {
         return productoBO.buscar_sku(sku,idSede);
+    }
+    
+    @WebMethod(operationName = "producto_aumentar_stock")
+    public Integer producto_aumentar_stock(@WebParam(name = "idProducto") Integer idProducto, @WebParam(name = "idSede") Integer idSede, @WebParam(name = "cantidad") Integer cantidad) {
+        return productoBO.aumentarStock(idProducto, idSede, cantidad);
     }
 
 }

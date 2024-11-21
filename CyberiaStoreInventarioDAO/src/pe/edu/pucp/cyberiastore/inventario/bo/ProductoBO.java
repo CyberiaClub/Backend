@@ -42,4 +42,8 @@ public class ProductoBO {
         Producto producto = this.productoDAO.buscar_sku(sku, idSede);
         return producto;
     }
+    
+    public Integer aumentarStock(Integer idProducto, Integer idSede, Integer cantidad){
+        return this.productoDAO.aumentarStock(idProducto, idSede, cantidad);
+    }
 }

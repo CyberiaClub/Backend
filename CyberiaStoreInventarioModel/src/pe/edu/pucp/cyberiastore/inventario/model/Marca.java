@@ -55,9 +55,9 @@ public class Marca {
     public void setActivo(Boolean activo) {
         this.activo = activo;
     }
-
+    
     public byte[] getImagen() {
-        return imagen;
+        return this.imagen;
     }
     
     public void setImagen(byte[] imagen) {
