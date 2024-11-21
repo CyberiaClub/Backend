@@ -1,4 +1,4 @@
-package pe.edu.pucp.cyberiastore.servicios.venta;
+    package pe.edu.pucp.cyberiastore.servicios.venta;
 
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebService;

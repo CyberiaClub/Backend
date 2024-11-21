@@ -155,7 +155,7 @@ public abstract class DAOImpl {
         return this.ejecuta_DML(Tipo_Operacion.MODIFICAR);
     }
 
-    protected String generarSQLParaModificacion() {
+        protected String generarSQLParaModificacion() {
         String sql = "update ";
         sql = sql.concat(this.nombre_tabla);
         sql = sql.concat(" set ");
