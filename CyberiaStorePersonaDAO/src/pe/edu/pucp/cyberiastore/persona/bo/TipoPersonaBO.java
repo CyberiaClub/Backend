@@ -13,7 +13,7 @@ public class TipoPersonaBO {
         tipoPersona = new TipoPersonaDAOImpl();
     }
 
-    public ArrayList<TipoPersona> listarTodos() {
+    public ArrayList<TipoPersona> listarRolesDeTrabajadores() {
         return this.tipoPersona.listarTodos();
     }
 }
