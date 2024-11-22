@@ -79,7 +79,12 @@ public class TipoPersonaDAOImpl extends DAOImpl implements TipoPersonaDAO {
 
     @Override
     protected String obtenerProyeccionParaSelect() {
-        return " D_TIPO_PERSONA, NOMBRE ";
+        return " ID_TIPO_PERSONA, NOMBRE ";
+    }
+
+    @Override
+    protected String obtenerPredicadoParaListado() {
+        return " WHERE NOMBRE NOT IN ('ADMINISTRADOR','CLIENTE') ";
     }
 
     @Override
