@@ -16,7 +16,7 @@ public class TipoPersonaWS {
     }
 
     @WebMethod(operationName = "tipopersona_listar")
-    public ArrayList<TipoPersona> listarTodos() {
+    public ArrayList<TipoPersona> tipopersona_listar() {
         return this.tipoPersonaBO.listarRolesDeTrabajadores();
     }
 }

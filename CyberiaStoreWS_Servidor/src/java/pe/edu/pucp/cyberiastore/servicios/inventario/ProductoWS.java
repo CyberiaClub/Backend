@@ -24,17 +24,6 @@ public class ProductoWS {
         return productoBO.insertar(this.producto);
     }
 
-    @WebMethod(operationName = "producto_insertar2")
-    public Integer producto_insertar2(@WebParam(name = "producto") Producto producto,
-            @WebParam(name = "precio") Double precio) {
-        this.producto = producto;
-        this.producto.setPrecio(precio);
-        this.producto.setCantidad(10);
-        this.producto.setPrecioProveedor(11.0);
-        System.out.println(this.producto.getPrecio());
-        return productoBO.insertar(this.producto);
-    }
-
     @WebMethod(operationName = "producto_modificar")
     public Integer producto_modificar(@WebParam(name = "producto") Producto producto) {
         this.producto = producto;
@@ -47,7 +36,7 @@ public class ProductoWS {
     }
 
     @WebMethod(operationName = "producto_buscar_sku")
-    public Producto buscar_sku(@WebParam(name = "sku") String sku, @WebParam(name = "idSede") Integer idSede) {
+    public Producto producto_buscar_sku(@WebParam(name = "sku") String sku, @WebParam(name = "idSede") Integer idSede) {
         return productoBO.buscar_sku(sku,idSede);
     }
     
