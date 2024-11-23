@@ -35,7 +35,7 @@ public class OfertaDAOImpl extends DAOImpl implements OfertaDAO {
                 this.retornarLlavePrimaria = false; 
                 ProductoXOfertaDAO productoXOferta = new ProductoXOfertaDAOImpl();
                 for(Producto producto : oferta.getProductos()){
-                    productoXOferta.insertar(oferta.getIdOferta(), producto.getIdProducto() ,this.usarTransaccion, this.conexion);
+                    productoXOferta.insertar(oferta.getIdOferta(), producto.getIdProducto() , producto.getOferta(), this.usarTransaccion, this.conexion);
                 }
             } else {
                 idOferta = oferta.getIdOferta();

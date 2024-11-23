@@ -11,39 +11,41 @@ public class ProductoXOfertaDAOImpl extends DAOImpl implements ProductoXOfertaDA
     
     private Integer idProducto;
     private Integer idOferta;
+    private Integer oferta;
     
     public ProductoXOfertaDAOImpl(){
         super("PRODUCTO_X_OFERTA");
     }
     
     @Override
-    public Integer insertar(Integer idProducto, Integer idOferta) {
+    public Integer insertar(Integer idProducto, Integer idOferta, Integer oferta) {
         this.idProducto = idProducto;
         this.idOferta = idOferta;
         return super.insertar();
     }
 
     @Override
-    public Integer insertar(Integer idProducto, Integer idOferta, Boolean usarTransaccion, Connection conexion) {
+    public Integer insertar(Integer idProducto, Integer idOferta, Integer oferta, Boolean usarTransaccion, Connection conexion) {
         this.usarTransaccion = usarTransaccion;
         this.conexion = conexion;
-        return this.insertar(idProducto, idOferta);
+        return this.insertar(idProducto, idOferta, oferta);
     }
     
     @Override
     protected String obtenerListaDeAtributosParaInsercion() {
-        return "ID_PRODUCTO, ID_OFERTA";
+        return "ID_PRODUCTO, ID_OFERTA, PORCENTAJE";
     }
 
     @Override
     protected String incluirListaDeParametrosParaInsercion() {
-        return "?,?";
+        return "?,?,?";
     }
 
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
         this.incluirParametroInt(1,this.idProducto);
         this.incluirParametroInt(2,this.idOferta);
+        this.incluirParametroInt(3,this.oferta);
     }
 
     @Override

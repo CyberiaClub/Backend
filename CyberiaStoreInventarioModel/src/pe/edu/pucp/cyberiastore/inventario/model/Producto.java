@@ -17,6 +17,7 @@ public class Producto {
     //Esto es para el insert de las tablas intermedias
     private Integer idSede;
     private Integer cantidad;
+    private Integer oferta;
     
     public Producto() {
         this.idProducto = null;
@@ -138,5 +139,13 @@ public class Producto {
 
     public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
+    }
+
+    public Integer getOferta() {
+        return oferta;
+    }
+
+    public void setOferta(Integer oferta) {
+        this.oferta = oferta;
     }
 }
