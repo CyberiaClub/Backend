@@ -180,9 +180,6 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
                 sql = sql.concat(" AND CORREO = ? ");
                 sql = sql.concat(" AND CONTRASEÑA = ? ");
             }
-            case INSERTAR_TRABAJADOR -> {
-                sql = sql.concat("DOCUMENTO=? ");
-            }
             default ->
                 throw new AssertionError();
         }
@@ -289,8 +286,8 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
             case VERIFICAR_PERSONA -> {
                 sql = sql.concat("CASE WHEN P.ID_SEDE IS NULL THEN 0 ");
                 sql = sql.concat("ELSE P.ID_SEDE END AS ID_SEDE, ");
-                sql = sql.concat("P.ID_PERSONA, P.DOCUMENTO, P.DIRECCION, P.TELEFONO ");
-                sql = sql.concat("P.NOMBRE, P.PRIMER_APELLIDO, P.SEGUNDO_APELLIDO ");
+                sql = sql.concat("P.ID_PERSONA, P.DOCUMENTO, P.DIRECCION, P.TELEFONO, ");
+                sql = sql.concat("P.NOMBRE, P.PRIMER_APELLIDO, P.SEGUNDO_APELLIDO, ");
                 sql = sql.concat("P.CORREO, TP.NOMBRE AS TIPO_USUARIO ");
             }
             default ->

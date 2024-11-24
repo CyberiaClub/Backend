@@ -240,11 +240,14 @@ public abstract class DAOImpl {
             this.colocarSQLenStatement(sql);
             this.incluirValorDeParametrosParaObtenerPorId();
             this.ejecutarConsultaEnBD(sql);
-            if (this.resultSet.next()) {
-                instanciarObjetoDelResultSet();
+            if (this.resultSet != null && this.resultSet.next()) {
+                do {
+                    instanciarObjetoDelResultSet();
+                } while (this.resultSet.next());
             } else {
                 limpiarObjetoDelResultSet();
             }
+
         } catch (SQLException ex) {
             System.err.println("Error al intentar obtenerPorId - " + ex);
         } finally {

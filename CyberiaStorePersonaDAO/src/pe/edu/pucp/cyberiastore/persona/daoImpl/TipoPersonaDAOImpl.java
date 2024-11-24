@@ -116,7 +116,6 @@ public class TipoPersonaDAOImpl extends DAOImpl implements TipoPersonaDAO {
                 sql = sql.concat(" ON TP.ID_TIPO_PERSONA = TPXP.ID_TIPO_PERSONA ");
                 sql = sql.concat(" JOIN PAGINA P ");
                 sql = sql.concat(" ON TPXP.ID_PAGINA = P.ID_PAGINA ");
-                sql = sql.concat(" WHERE TP.NOMBRE = ? ");
             }
             default ->
                 throw new AssertionError();
@@ -141,7 +140,6 @@ public class TipoPersonaDAOImpl extends DAOImpl implements TipoPersonaDAO {
         if(this.tipoOperacionPersona != TipoOperacionPersona.LISTAR_PAGINAS){
             this.tipoPersona = new TipoPersona();
         }
-        
         switch (this.tipoOperacionPersona) {
             case LISTAR_PERSONA_POR_DOCUMENTO -> {
                 tipoPersona.setIdTipoPersona(this.resultSet.getInt("ID_TIPO_PERSONA"));
@@ -184,8 +182,11 @@ public class TipoPersonaDAOImpl extends DAOImpl implements TipoPersonaDAO {
     @Override
     public TipoPersona listarPaginas(String tipo_persona) {
         this.tipoPersona = new TipoPersona();
+        ArrayList<Pagina> p = new ArrayList<>();
+        this.tipoPersona.setPaginas(p);
         this.tipoPersona.setNombre(tipo_persona);
         this.tipoOperacionPersona = TipoOperacionPersona.LISTAR_PAGINAS;
+        
         super.obtenerPorId();
         return this.tipoPersona;
     }

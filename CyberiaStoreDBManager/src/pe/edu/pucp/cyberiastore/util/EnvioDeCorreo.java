@@ -31,7 +31,7 @@ public class EnvioDeCorreo {
     private String smtp_host = "";
     private String puerto = "";
     private String socket = "";
-    private String valorToken="";
+    private String valorToken = "";
 
     private String asunto = "";
     private String cuerpo = "";
@@ -147,9 +147,9 @@ public class EnvioDeCorreo {
             mensaje.setRecipients(Message.RecipientType.TO, InternetAddress.parse(this.destinatario, false));
 
             Transport.send(mensaje);
-            
+
             return true;
-        
+
         } catch (MessagingException e) {
             System.out.println("Error de Autenticacion");
             e.printStackTrace();
