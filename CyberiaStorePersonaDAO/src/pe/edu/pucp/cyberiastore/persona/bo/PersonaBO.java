@@ -32,7 +32,7 @@ public class PersonaBO {
         return this.personaDAO.enviarCorreoVerificacion(correo,valorToken);
     }
     
-    public String verificarPersona(String correo,String contrasena){
+    public Persona verificarPersona(String correo,String contrasena){
         Persona persona = new Persona();
         persona.setCorreo(correo);
         persona.setContrasena(contrasena);

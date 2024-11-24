@@ -61,8 +61,8 @@ public class EnvioDeCorreo {
 
     private void leerArchConfig() {
         try {
-
-            String rutaArchConfig = "C:\\Program Files\\glassfish7\\glassfish\\resources" + "\\" + CONFIGURACION_ENVIO_DE_CORREOS;
+// Jesus
+            String rutaArchConfig = "C:\\glassfish-7.0.18\\glassfish7\\glassfish\\resources" + "\\" + CONFIGURACION_ENVIO_DE_CORREOS;
 
             Properties prop = new Properties();
             prop.load(new FileInputStream(new File(rutaArchConfig)));
@@ -88,7 +88,9 @@ public class EnvioDeCorreo {
         try {
 
             StringBuilder html = new StringBuilder();
-            FileReader fr = new FileReader("C:\\Program Files\\glassfish7\\glassfish\\resources" + "\\" + HTML);
+            FileReader fr = new FileReader("C:\\glassfish-7.0.18\\glassfish7\\glassfish\\resources" + "\\" + HTML);
+            // Adrian
+            //FileReader fr = new FileReader("C:\\Program Files\\glassfish7\\glassfish\\resources" + "\\" + HTML);
 
             BufferedReader br = new BufferedReader(fr);
 

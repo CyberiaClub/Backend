@@ -24,7 +24,7 @@ public class Persona {
     private Date fechaIngreso;
     private Date fechaSalida;
     private Integer idSede;
-
+    private String tipoUsuario;
     public Persona() {
         this.activo = true;
         this.segundoApellido = null;
@@ -316,6 +316,20 @@ public class Persona {
      */
     public void setIdTipoPersona(Integer idTipoPersona) {
         this.idTipoPersona = idTipoPersona;
+    }
+
+    /**
+     * @return the tipoUsuario
+     */
+    public String getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    /**
+     * @param tipoUsuario the tipoUsuario to set
+     */
+    public void setTipoUsuario(String tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
     }
 
 }

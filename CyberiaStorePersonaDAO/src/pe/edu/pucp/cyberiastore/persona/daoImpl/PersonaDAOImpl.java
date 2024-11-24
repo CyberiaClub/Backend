@@ -50,12 +50,12 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
                 this.retornarLlavePrimaria = true;
                 id = super.insertar();
                 this.retornarLlavePrimaria = false;
-                
+
                 if (id != 0) {
                     this.token.setIdPersona(id);
                     TokenDAO tokenDAO = new TokenDAOImpl();
                     tokenDAO.insertar(this.token);
-                    this.enviarCorreoVerificacion(this.persona.getCorreo(),this.token.getValor());
+                    this.enviarCorreoVerificacion(this.persona.getCorreo(), this.token.getValor());
                 }
             }
             case INSERTAR_TRABAJADOR -> {
@@ -92,7 +92,7 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
     @Override
     protected String obtenerListaDeAtributosParaInsercion() {
         return "DOCUMENTO, TELEFONO, NOMBRE,PRIMER_APELLIDO, SEGUNDO_APELLIDO,FECHA_NACIMIENTO, SEXO, CORREO, "
-                   + "DIRECCION, CONTRASEÑA,NACIONALIDAD, TIPO_DOCUMENTO,ID_TIPO_PERSONA";
+                + "DIRECCION, CONTRASEÑA,NACIONALIDAD, TIPO_DOCUMENTO,ID_TIPO_PERSONA";
     }
 
     @Override
@@ -166,16 +166,35 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
         String sql = "";
         switch (tipoOperacionPersona) {
             case LISTAR_PERSONA_POR_DOCUMENTO ->
-                sql = sql.concat("DOCUMENTO=?");
+                sql = sql.concat("DOCUMENTO=? ");
             case MODIFICAR_PERSONA ->
                 sql = sql.concat("ID_PERSONA=? ");
             case INSERTAR_TRABAJADOR->
                 sql = sql.concat("ID_PERSONA=? ");
             case MARCAR_VERIFICADO ->
                 sql = sql.concat("ID_PERSONA=? ");
-            case VERIFICAR_PERSONA->{
-                sql = sql.concat("CORREO = ? ");
-                sql = sql.concat("AND CONTRASEÑA = ? ");
+            case VERIFICAR_PERSONA -> {
+                sql = sql.concat(" TP.ID_TIPO_PERSONA = P.ID_TIPO_PERSONA ");
+                sql = sql.concat(" AND P.VERIFICADO = 1  ");
+                sql = sql.concat(" AND P.ACTIVO = 1  ");
+                sql = sql.concat(" AND CORREO = ? ");
+                sql = sql.concat(" AND CONTRASEÑA = ? ");
+            }
+            case INSERTAR_TRABAJADOR -> {
+                sql = sql.concat("DOCUMENTO=? ");
+            }
+            default ->
+                throw new AssertionError();
+        }
+        return sql;
+    }
+
+    @Override
+    protected String obtenerPredicadoParaListado() {
+        String sql = "";
+        switch (this.tipoOperacionPersona) {
+            case VERIFICAR_PERSONA -> {
+                sql = sql.concat(" P, TIPO_PERSONA TP ");
             }
             default ->
                 throw new AssertionError();
@@ -211,9 +230,10 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
             }
             case INSERTAR_TRABAJADOR -> {
                 this.incluirParametroDouble(1, this.persona.getSueldo());
-                this.incluirParametroInt(2, this.persona.getIdPersona());
-                this.incluirParametroInt(3, this.persona.getIdSede());
-                this.incluirParametroString(4, this.persona.getDocumento());
+                this.incluirParametroDate(2, this.persona.getFechaIngreso());
+                this.incluirParametroInt(3, this.persona.getIdTipoPersona());
+                this.incluirParametroInt(4, this.persona.getIdSede());
+                this.incluirParametroString(5, this.persona.getDocumento());
             }
             case MARCAR_VERIFICADO -> {
                 this.incluirParametroInt(1, 1);
@@ -265,14 +285,13 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
         String sql = "";
         switch (tipoOperacionPersona) {
             case LISTAR_PERSONA_POR_DOCUMENTO ->
-                sql = sql.concat("ID_PERSONA,NOMBRE, PRIMER_APELLIDO, SEGUNDO_APELLIDO, CORREO,TELEFONO, DIRECCION");
-            case VERIFICAR_PERSONA->{
-                sql = sql.concat("CASE ");
-                sql = sql.concat("WHEN VERIFICADO = 1 AND ID_SEDE IS NULL THEN 'CLIENTE' ");
-                sql = sql.concat("WHEN VERIFICADO = 1 AND ID_SEDE IS NOT NULL THEN 'TRABAJADOR' ");
-                sql = sql.concat("WHEN VERIFICADO = 0 THEN 'NO_VERIFICADO' ");
-                sql = sql.concat("ELSE '' ");
-                sql = sql.concat("END AS RESULTADO ");
+                sql = sql.concat("NOMBRE, PRIMER_APELLIDO, APELLIDO_PATERNO, TELEFONO, DIRECCION");
+            case VERIFICAR_PERSONA -> {
+                sql = sql.concat("CASE WHEN P.ID_SEDE IS NULL THEN 0 ");
+                sql = sql.concat("ELSE P.ID_SEDE END AS ID_SEDE, ");
+                sql = sql.concat("P.ID_PERSONA, P.DOCUMENTO, P.DIRECCION, P.TELEFONO ");
+                sql = sql.concat("P.NOMBRE, P.PRIMER_APELLIDO, P.SEGUNDO_APELLIDO ");
+                sql = sql.concat("P.CORREO, TP.NOMBRE AS TIPO_USUARIO ");
             }
             default ->
                 throw new AssertionError();
@@ -288,8 +307,17 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
     @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
         switch (this.tipoOperacionPersona) {
-            case VERIFICAR_PERSONA->{
-                this.persona.setNombre(this.resultSet.getString("RESULTADO"));
+            case VERIFICAR_PERSONA -> {
+                this.persona.setIdSede(this.resultSet.getInt("ID_SEDE"));
+                this.persona.setIdPersona(this.resultSet.getInt("ID_PERSONA"));
+                this.persona.setDocumento(this.resultSet.getString("DOCUMENTO"));
+                this.persona.setDireccion(this.resultSet.getString("DIRECCION"));
+                this.persona.setTelefono(this.resultSet.getString("TELEFONO"));
+                this.persona.setNombre(this.resultSet.getString("NOMBRE"));
+                this.persona.setPrimerApellido(this.resultSet.getString("PRIMER_APELLIDO"));
+                this.persona.setSegundoApellido(this.resultSet.getString("SEGUNDO_APELLIDO"));
+                this.persona.setCorreo(this.resultSet.getString("CORREO"));
+                this.persona.setTipoUsuario(this.resultSet.getString("TIPO_USUARIO"));
             }
             case LISTAR_PERSONA_POR_DOCUMENTO->{
                 this.persona.setIdPersona(this.resultSet.getInt("ID_PERSONA"));
@@ -327,9 +355,9 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
         switch (tipoOperacionPersona) {
             case LISTAR_PERSONA_POR_DOCUMENTO ->
                 this.incluirParametroString(1, this.persona.getDocumento());
-            case VERIFICAR_PERSONA ->{
-                this.incluirParametroString(1,this.persona.getCorreo());
-                this.incluirParametroString(2,this.persona.getContrasena());
+            case VERIFICAR_PERSONA -> {
+                this.incluirParametroString(1, this.persona.getCorreo());
+                this.incluirParametroString(2, this.persona.getContrasena());
             }
             default ->
                 throw new AssertionError();
@@ -383,7 +411,7 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
     @Override
     public Boolean enviarCorreoVerificacion(String correo, String valorToken) {
         EnvioDeCorreo enviarCorreo = new EnvioDeCorreo();
-        return enviarCorreo.enviarCorreoVerificacion(correo,valorToken);
+        return enviarCorreo.enviarCorreoVerificacion(correo, valorToken);
     }
 
     /*
@@ -392,13 +420,13 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
      * *************************************************************************
      */
     @Override
-    public String verificarPersona(Persona persona) {
+    public Persona verificarPersona(Persona persona) {
         this.persona = persona;
         this.tipoOperacionPersona = TipoOperacionPersona.VERIFICAR_PERSONA;
         super.obtenerPorId();
         if ("".equals(this.persona.getNombre())) {
             return null;
         }
-        return this.persona.getNombre();
+        return this.persona;
     }
 }
