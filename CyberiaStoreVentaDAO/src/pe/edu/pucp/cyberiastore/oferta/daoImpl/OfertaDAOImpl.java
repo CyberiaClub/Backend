@@ -34,8 +34,10 @@ public class OfertaDAOImpl extends DAOImpl implements OfertaDAO {
                 idOferta = super.insertar();
                 this.retornarLlavePrimaria = false; 
                 ProductoXOfertaDAO productoXOferta = new ProductoXOfertaDAOImpl();
-                for(Producto producto : oferta.getProductos()){
-                    productoXOferta.insertar(oferta.getIdOferta(), producto.getIdProducto() , producto.getOferta(), this.usarTransaccion, this.conexion);
+                ArrayList<Producto> productosOferta = oferta.getProductos();
+                for(Producto producto : productosOferta){
+                    System.out.println("Id del producto otra vez: "+producto.getIdProducto());
+                    productoXOferta.insertar(producto.getIdProducto() , idOferta, producto.getOferta(), this.usarTransaccion, this.conexion);
                 }
             } else {
                 idOferta = oferta.getIdOferta();
@@ -61,20 +63,19 @@ public class OfertaDAOImpl extends DAOImpl implements OfertaDAO {
 
     @Override
     protected String obtenerListaDeAtributosParaInsercion() {
-        return "FECHA_INICIO, FECHA_FIN, PORCENTAJE, IMAGEN";
+        return "FECHA_INICIO, FECHA_FIN, IMAGEN";
     }
 
     @Override
     protected String incluirListaDeParametrosParaInsercion() {
-        return "?,?,?,?";
+        return "?,?,?";
     }
 
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
         this.incluirParametroDate(1, this.oferta.getFechaDeInicio());
         this.incluirParametroDate(2, this.oferta.getFechaDeFin());
-        this.incluirParametroInt(3, this.oferta.getPorcentaje());
-        this.incluirParametroByte(4, this.oferta.getImagen());
+        this.incluirParametroByte(3, this.oferta.getImagen());
     }
 
     @Override
@@ -107,7 +108,7 @@ public class OfertaDAOImpl extends DAOImpl implements OfertaDAO {
 
     @Override
     protected String obtenerListaDeValoresYAtributosParaModificacion() {
-        return "FECHA_INICIO=?, FECHA_FIN=?,PORCENTAJE=?,IMAGEN=?";
+        return "FECHA_INICIO=?, FECHA_FIN=?,IMAGEN=?";
     }
 
     @Override
@@ -125,9 +126,8 @@ public class OfertaDAOImpl extends DAOImpl implements OfertaDAO {
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
         this.incluirParametroDate(1, this.oferta.getFechaDeInicio());
         this.incluirParametroDate(2, this.oferta.getFechaDeFin());
-        this.incluirParametroInt(3, this.oferta.getPorcentaje());
-        this.incluirParametroByte(4, this.oferta.getImagen());
-        this.incluirParametroInt(5, this.oferta.getIdOferta());
+        this.incluirParametroByte(3, this.oferta.getImagen());
+        this.incluirParametroInt(4, this.oferta.getIdOferta());
 
     }
 

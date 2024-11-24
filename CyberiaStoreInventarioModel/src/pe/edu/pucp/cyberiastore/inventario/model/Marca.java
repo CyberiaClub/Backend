@@ -8,12 +8,8 @@ public class Marca {
     private Boolean activo;
     private byte[] imagen;
 
+    
     public Marca() {
-        this.idMarca = null;
-        this.nombre = null;
-        this.proveedor = null;
-        this.activo = true;
-        this.imagen = null;
     }
 
     public Marca(Integer idMarca, String nombre, Proveedor proveedor, Boolean activo, byte[] imagen) {

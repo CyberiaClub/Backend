@@ -166,8 +166,10 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
         String sql = "";
         switch (tipoOperacionPersona) {
             case LISTAR_PERSONA_POR_DOCUMENTO ->
-                sql = sql.concat("DOCUMENTO='?'");
+                sql = sql.concat("DOCUMENTO=?");
             case MODIFICAR_PERSONA ->
+                sql = sql.concat("ID_PERSONA=? ");
+            case INSERTAR_TRABAJADOR->
                 sql = sql.concat("ID_PERSONA=? ");
             case MARCAR_VERIFICADO ->
                 sql = sql.concat("ID_PERSONA=? ");
@@ -188,7 +190,7 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
             case MODIFICAR_PERSONA ->
                 sql = sql.concat("TELEFONO=?,CORREO=?,DIRECCION=?,CONTRASEÑA=? ");
             case INSERTAR_TRABAJADOR ->
-                sql = sql.concat("SUELDO=?,FECHA_INGRESO=?,ID_TIPO_PERSONA=?,ID_SEDE=? ");
+                sql = sql.concat("SUELDO=?,FECHA_INGRESO=sysdate() ,ID_TIPO_PERSONA=?,ID_SEDE=? ");
             case MARCAR_VERIFICADO ->
                 sql = sql.concat("VERIFICADO=? ");
             default ->
@@ -209,10 +211,9 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
             }
             case INSERTAR_TRABAJADOR -> {
                 this.incluirParametroDouble(1, this.persona.getSueldo());
-                this.incluirParametroDate(2, this.persona.getFechaIngreso());
-                this.incluirParametroInt(3, this.persona.getIdPersona());
-                this.incluirParametroInt(4, this.persona.getIdSede());
-                this.incluirParametroString(5, this.persona.getDocumento());
+                this.incluirParametroInt(2, this.persona.getIdPersona());
+                this.incluirParametroInt(3, this.persona.getIdSede());
+                this.incluirParametroString(4, this.persona.getDocumento());
             }
             case MARCAR_VERIFICADO -> {
                 this.incluirParametroInt(1, 1);
@@ -264,7 +265,7 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
         String sql = "";
         switch (tipoOperacionPersona) {
             case LISTAR_PERSONA_POR_DOCUMENTO ->
-                sql = sql.concat("NOMBRE, PRIMER_APELLIDO, APELLIDO_PATERNO, TELEFONO, DIRECCION");
+                sql = sql.concat("ID_PERSONA,NOMBRE, PRIMER_APELLIDO, SEGUNDO_APELLIDO, CORREO,TELEFONO, DIRECCION");
             case VERIFICAR_PERSONA->{
                 sql = sql.concat("CASE ");
                 sql = sql.concat("WHEN VERIFICADO = 1 AND ID_SEDE IS NULL THEN 'CLIENTE' ");
@@ -289,6 +290,13 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
         switch (this.tipoOperacionPersona) {
             case VERIFICAR_PERSONA->{
                 this.persona.setNombre(this.resultSet.getString("RESULTADO"));
+            }
+            case LISTAR_PERSONA_POR_DOCUMENTO->{
+                this.persona.setIdPersona(this.resultSet.getInt("ID_PERSONA"));
+                this.persona.setNombre(this.resultSet.getString("NOMBRE"));
+                this.persona.setCorreo(this.resultSet.getString("CORREO"));
+                this.persona.setTelefono(this.resultSet.getString("TELEFONO"));
+                this.persona.setDireccion(this.resultSet.getString("DIRECCION"));
             }
             default->
                 throw new AssertionError();
@@ -340,11 +348,11 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
         Integer idPersona = null;
         try {
             this.abrirConexion();
-            String sql = "select id_persona from persona where ";
-            sql = sql.concat("apellido_paterno=? ");
-            sql = sql.concat("and apellido_materno=? ");
-            sql = sql.concat("and nombre=? ");
-            sql = sql.concat("and documento=? ");
+            String sql = "select ID_PERSONA from PERSONA where ";
+            sql = sql.concat("APELLIDO_PATERNO=? ");
+            sql = sql.concat("and APELLIDO_MATERNO=? ");
+            sql = sql.concat("and NOMBRE=? ");
+            sql = sql.concat("and DOCUMENTO=? ");
             this.colocarSQLenStatement(sql);
             this.incluirParametroString(1, this.persona.getPrimerApellido());
             this.incluirParametroString(2, this.persona.getSegundoApellido());
@@ -352,7 +360,7 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
             this.incluirParametroString(4, this.persona.getDocumento());
             this.ejecutarConsultaEnBD(sql);
             if (this.resultSet.next()) {
-                idPersona = this.resultSet.getInt("id_persona");
+                idPersona = this.resultSet.getInt("ID_PERSONA");
             }
         } catch (SQLException ex) {
             System.err.println("Error al consultar si existe persona - " + ex);
@@ -380,7 +388,7 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
 
     /*
      * **************************************************************************
-     * Verificacion de correo
+     * VERIFICACION DE CORREO
      * *************************************************************************
      */
     @Override

@@ -10,7 +10,22 @@ public class CyberiaStoreUsuarioTest {
     public static void main(String[] args) {
 //         Persona BO Test
         PersonaBO personaBO = new PersonaBO();
+        Persona persona = new Persona();
         Date fecha = new Date();
+        
+        int[] idProductos = new int[5];
+        
+        for (int i = 0; i < 5; i++) {
+            idProductos[i] = i;
+        }
+        
+        for (int j = 0; j < idProductos.length; j++) {
+            System.out.println(idProductos[j]);
+            
+        }
+        
+//        persona=personaBO.obtenerPorDocumento("12345678");
+//        personaBO.insertar(persona);
 //
 //        // Persona 2
 //        Persona p2 = new Persona();

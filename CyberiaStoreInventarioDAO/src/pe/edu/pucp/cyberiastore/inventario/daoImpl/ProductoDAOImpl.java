@@ -45,12 +45,14 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
                 idProducto = super.insertar();
                 this.retornarLlavePrimaria = false;
                 // insertar productos individuales
-                ArrayList<Producto> productosMiembros = this.producto.getProductosMiembros();
-                if (productosMiembros != null) {
-                    ProductoXProductoDAO productoXProducto = new ProductoXProductoDAOImpl();
-                    for (Producto productoMiembro : productosMiembros) {
-                        // idProducto es el padre, productoMiembro del hijo, cantidad
-                        productoXProducto.insertar(idProducto, productoMiembro.getIdProducto(), productoMiembro.getCantidad(), this.usarTransaccion, this.conexion);
+                if(idProducto != 0){
+                    ArrayList<Producto> productosMiembros = this.producto.getProductosMiembros();
+                    if (productosMiembros != null) {
+                        ProductoXProductoDAO productoXProducto = new ProductoXProductoDAOImpl();
+                        for (Producto productoMiembro : productosMiembros) {
+                            // idProducto es el padre, productoMiembro del hijo, cantidad
+                            productoXProducto.insertar(idProducto, productoMiembro.getIdProducto(), productoMiembro.getCantidad(), this.usarTransaccion, this.conexion);
+                        }
                     }
                 }
             } else {

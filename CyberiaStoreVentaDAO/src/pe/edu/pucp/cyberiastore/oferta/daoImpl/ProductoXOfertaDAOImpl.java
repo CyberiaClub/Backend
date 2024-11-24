@@ -21,6 +21,7 @@ public class ProductoXOfertaDAOImpl extends DAOImpl implements ProductoXOfertaDA
     public Integer insertar(Integer idProducto, Integer idOferta, Integer oferta) {
         this.idProducto = idProducto;
         this.idOferta = idOferta;
+        this.oferta = oferta;
         return super.insertar();
     }
 
