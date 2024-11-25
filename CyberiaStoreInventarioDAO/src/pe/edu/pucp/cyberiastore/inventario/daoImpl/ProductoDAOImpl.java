@@ -4,6 +4,7 @@ import pe.edu.pucp.cyberiastore.inventario.model.TipoOperacionInventario;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import pe.edu.pucp.cyberiastore.inventario.model.Producto;
 import pe.edu.pucp.cyberiastore.inventario.dao.ProductoDAO;
@@ -236,6 +237,9 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
             case BUSCAR_POR_SKU -> {
                 sql = sql.concat("PD.ID_PRODUCTO,PD.SKU,PD.NOMBRE, PD.DESCRIPCION, PD.PRECIO,PD.IMAGEN,PXS.STOCK_SEDE");
             }
+            case BUSCAR_POR_PEDIDO -> {
+                sql = sql.concat("P.ID_PRODUCTO,P.NOMBRE,P.PRECIO,CXP.CANTIDAD");
+            }
         }
         return sql;
     }
@@ -254,6 +258,11 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
                 sql = sql.concat("join PRODUCTO_X_SEDE PXS on PD.ID_PRODUCTO = PXS.ID_PRODUCTO ");
                 sql = sql.concat("where PD.SKU=? AND PXS.ID_SEDE=?");
             }
+            case BUSCAR_POR_PEDIDO -> {
+                sql = sql.concat(" P ");
+                sql = sql.concat("join COMPROBANTE_DE_PAGO_X_PRODUCTO CXP on P.ID_PRODUCTO = CXP.ID_PRODUCTO ");
+                sql = sql.concat("where CXP.ID_COMPROBANTE_DE_PAGO=?");
+            }
         }
         return sql;
     }
@@ -264,6 +273,9 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
             case BUSCAR_POR_SKU -> {
                 this.incluirParametroString(1, this.producto.getSku());
                 this.incluirParametroInt(2, this.producto.getIdSede());
+            }
+            case BUSCAR_POR_PEDIDO -> {
+                this.incluirParametroInt(1, this.producto.getIdPedido());
             }
         }
     }
@@ -307,6 +319,13 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
                 this.producto.setPrecio(this.resultSet.getDouble("PD.PRECIO"));
                 this.producto.setImagen(this.resultSet.getBytes("PD.IMAGEN"));
                 this.producto.setCantidad(this.resultSet.getInt("PXS.STOCK_SEDE"));
+            }
+            case BUSCAR_POR_PEDIDO -> {
+                this.producto = new Producto();
+                this.producto.setIdProducto(this.resultSet.getInt("P.ID_PRODUCTO"));
+                this.producto.setNombre(this.resultSet.getString("P.NOMBRE"));
+                this.producto.setPrecio(this.resultSet.getDouble("P.PRECIO"));
+                this.producto.setCantidad(this.resultSet.getInt("CXP.CANTIDAD"));
             }
         }
     }
@@ -412,5 +431,17 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
     public Integer aumentarStock(Integer idProducto, Integer idSede, Integer cantidad) {
         StockSedeDAO stockSedeDAO = new StockSedeDAOImpl();
         return stockSedeDAO.aumentarStock(idProducto, idSede, cantidad);
+    }
+
+    @Override
+    public ArrayList<Producto> lineasPedido(Integer idPedido) {
+        this.tipoOperacion = TipoOperacionInventario.BUSCAR_POR_PEDIDO;
+        this.producto = new Producto();
+        this.producto.setIdPedido(idPedido);
+        List lineas = super.listarTodos(null);
+        if (lineas.isEmpty()) {
+            return null;
+        } else 
+            return (ArrayList<Producto>)lineas;
     }
 }

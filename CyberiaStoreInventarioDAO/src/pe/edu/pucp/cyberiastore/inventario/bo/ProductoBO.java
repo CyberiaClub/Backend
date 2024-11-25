@@ -46,4 +46,8 @@ public class ProductoBO {
     public Integer aumentarStock(Integer idProducto, Integer idSede, Integer cantidad){
         return this.productoDAO.aumentarStock(idProducto, idSede, cantidad);
     }
+    
+    public ArrayList<Producto> lineasPedido(Integer idPedido){
+        return this.productoDAO.lineasPedido(idPedido);
+    }
 }
