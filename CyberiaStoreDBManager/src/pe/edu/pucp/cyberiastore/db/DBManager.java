@@ -61,7 +61,7 @@ public class DBManager {
         url = url.concat("/");
         url = url.concat(this.base_de_datos);
         url = url.concat("?useSSL=false");
- 
+
         return url;
     }
 
@@ -70,15 +70,15 @@ public class DBManager {
         try {
 //            Colocar su nombre, para saber que ruta le pertence a cada uno, por 
 //            Adrian o Danitza
-            String nmArchivoConf = "C:\\Program Files\\glassfish7\\glassfish\\resources" + "\\" + ARCHIVO_CONFIGURACION;
+//            String nmArchivoConf = "C:\\Program Files\\glassfish7\\glassfish\\resources" + "\\" + ARCHIVO_CONFIGURACION;
 //            Nicolas
 //            String nmArchivoConf = "C:\\Users\\ipana\\Downloads" + "\\" + ARCHIVO_CONFIGURACION;
 //            Jesus
-//            String nmArchivoConf = "C:\\glassfish-7.0.18\\glassfish7\\glassfish\\resources" + "\\" + ARCHIVO_CONFIGURACION;
+            String nmArchivoConf = "C:\\glassfish-7.0.18\\glassfish7\\glassfish\\resources" + "\\" + ARCHIVO_CONFIGURACION;
 //            Yngrid
 //            String nmArchivoConf = "C:\\glassfish7\\glassfish\\resources" + "\\" + ARCHIVO_CONFIGURACION;
 
-properties.load(new FileInputStream(new File(nmArchivoConf)));
+            properties.load(new FileInputStream(new File(nmArchivoConf)));
             this.driver = properties.getProperty("driver");
             this.tipo_de_driver = properties.getProperty("tipo_de_driver");
             this.base_de_datos = properties.getProperty("base_de_datos");

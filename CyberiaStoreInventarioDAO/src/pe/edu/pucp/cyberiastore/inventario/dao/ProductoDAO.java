@@ -1,6 +1,7 @@
 package pe.edu.pucp.cyberiastore.inventario.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import pe.edu.pucp.cyberiastore.inventario.model.Producto;
 public interface ProductoDAO {
     public Integer insertar (Producto producto);
@@ -21,4 +22,5 @@ public interface ProductoDAO {
     
     public Integer aumentarStock(Integer idProducto, Integer idSede, Integer cantidad);
 
+    public ArrayList<Producto> lineasPedido(Integer idPedido);
 }

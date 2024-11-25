@@ -155,7 +155,7 @@ public abstract class DAOImpl {
         return this.ejecuta_DML(Tipo_Operacion.MODIFICAR);
     }
 
-        protected String generarSQLParaModificacion() {
+    protected String generarSQLParaModificacion() {
         String sql = "update ";
         sql = sql.concat(this.nombre_tabla);
         sql = sql.concat(" set ");
@@ -238,11 +238,14 @@ public abstract class DAOImpl {
             this.colocarSQLenStatement(sql);
             this.incluirValorDeParametrosParaObtenerPorId();
             this.ejecutarConsultaEnBD(sql);
-            if (this.resultSet.next()) {
-                instanciarObjetoDelResultSet();
+            if (this.resultSet != null && this.resultSet.next()) {
+                do {
+                    instanciarObjetoDelResultSet();
+                } while (this.resultSet.next());
             } else {
                 limpiarObjetoDelResultSet();
             }
+
         } catch (SQLException ex) {
             System.err.println("Error al intentar obtenerPorId - " + ex);
         } finally {
@@ -258,6 +261,7 @@ public abstract class DAOImpl {
         String sql = "select ";
         sql = sql.concat(this.obtenerProyeccionParaSelect());
         sql = sql.concat(" from ").concat(this.nombre_tabla);
+        sql = sql.concat(this.obtenerPredicadoParaListado());
         sql = sql.concat(" where ");
         sql = sql.concat(this.obtenerPredicadoParaLlavePrimaria());
         return sql;
@@ -377,7 +381,6 @@ public abstract class DAOImpl {
     // - Boolean
     // - Byte
     // - localtime
-    
     protected void incluirParametroString(Integer numeroParametro, String valor) throws SQLException {
         if (valor == null) {
             this.statement.setNull(numeroParametro, Types.VARCHAR);
@@ -385,7 +388,7 @@ public abstract class DAOImpl {
             this.statement.setString(numeroParametro, valor);
         }
     }
-    
+
     protected void incluirParametroInt(Integer numeroParametro, Integer valor) throws SQLException {
         if (valor == null) {
             this.statement.setNull(numeroParametro, Types.INTEGER);
@@ -407,7 +410,7 @@ public abstract class DAOImpl {
         if (valor == null) {
             this.statement.setNull(numeroParametro, Types.DATE);
         } else {
-            java.sql.Time sqlTime = new java.sql.Time(valor.getHour(),valor.getMinute(),valor.getSecond());
+            java.sql.Time sqlTime = new java.sql.Time(valor.getHour(), valor.getMinute(), valor.getSecond());
             this.statement.setTime(numeroParametro, sqlTime);
         }
     }

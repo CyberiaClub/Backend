@@ -44,5 +44,9 @@ public class ProductoWS {
     public Integer producto_aumentar_stock(@WebParam(name = "idProducto") Integer idProducto, @WebParam(name = "idSede") Integer idSede, @WebParam(name = "cantidad") Integer cantidad) {
         return productoBO.aumentarStock(idProducto, idSede, cantidad);
     }
-
+    
+    @WebMethod(operationName = "producto_lineas_pedido")
+    public ArrayList<Producto> producto_lineas_pedido(@WebParam(name = "idPedido") Integer idPedido) {
+        return productoBO.lineasPedido(idPedido);
+    }
 }

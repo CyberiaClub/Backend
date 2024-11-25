@@ -18,6 +18,7 @@ public class Producto {
     private Integer idSede;
     private Integer cantidad;
     private Integer oferta;
+    private Integer idPedido;
     
     public Producto() {
         this.idProducto = null;
@@ -147,5 +148,13 @@ public class Producto {
 
     public void setOferta(Integer oferta) {
         this.oferta = oferta;
+    }
+
+    public Integer getIdPedido() {
+        return idPedido;
+    }
+
+    public void setIdPedido(Integer idPedido) {
+        this.idPedido = idPedido;
     }
 }
