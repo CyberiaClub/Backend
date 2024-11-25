@@ -1,9 +1,10 @@
 package pe.edu.pucp.cyberiastore.persona.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import pe.edu.pucp.cyberiastore.cifrado.Cifrado;
 
-public class Persona {
+public class Persona implements Serializable {
 
     private Integer idPersona;
     private String documento;

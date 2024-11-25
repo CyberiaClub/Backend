@@ -2,9 +2,10 @@ package pe.edu.pucp.cyberiastore.inventario.model;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.io.Serializable;
 import pe.edu.pucp.cyberiastore.inventario.model.Producto;
 
-public class Sede {
+public class Sede implements Serializable {
 
     private Integer idSede;
     private String nombre;

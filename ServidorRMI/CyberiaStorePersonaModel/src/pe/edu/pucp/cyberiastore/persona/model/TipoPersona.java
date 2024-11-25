@@ -1,9 +1,10 @@
 package pe.edu.pucp.cyberiastore.persona.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import pe.edu.pucp.cyberiastore.persona.pagina.Pagina;
 
-public class TipoPersona {
+public class TipoPersona implements Serializable {
 
     private Integer idTipoPersona;
     private String nombre;

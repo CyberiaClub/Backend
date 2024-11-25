@@ -1,9 +1,10 @@
 package pe.edu.pucp.cyberiastore.inventario.model;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Proveedor {
+public class Proveedor implements Serializable {
     private Integer idProveedor;
     private String ruc;
     private String razonSocial;

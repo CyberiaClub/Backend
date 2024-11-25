@@ -1,22 +1,6 @@
 <discovery xmlns="http://schemas.xmlsoap.org/disco/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" >
 <contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/"
-ref="http://localhost:8080/CyberiaStoreWS_Servidor/MarcaWS?wsdl"/>
+ref="http://localhost:8080/CyberiaStoreWS_Servidor/Reportes?wsdl"/>
 <contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/"
-ref="http://localhost:8080/CyberiaStoreWS_Servidor/ProductoWS?wsdl"/>
-<contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/"
-ref="http://localhost:8080/CyberiaStoreWS_Servidor/ProveedorWS?wsdl"/>
-<contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/"
-ref="http://localhost:8080/CyberiaStoreWS_Servidor/SedeWS?wsdl"/>
-<contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/"
-ref="http://localhost:8080/CyberiaStoreWS_Servidor/TipoProductoWS?wsdl"/>
-<contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/"
-ref="http://localhost:8080/CyberiaStoreWS_Servidor/OfertaWS?wsdl"/>
-<contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/"
-ref="http://localhost:8080/CyberiaStoreWS_Servidor/PersonaWS?wsdl"/>
-<contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/"
-ref="http://localhost:8080/CyberiaStoreWS_Servidor/TipoPersonaWS?wsdl"/>
-<contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/"
-ref="http://localhost:8080/CyberiaStoreWS_Servidor/ComprobantePagoWS?wsdl"/>
-<contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/"
-ref="http://localhost:8080/CyberiaStoreWS_Servidor/TipoComprobanteWS?wsdl"/>
+ref="http://localhost:8080/CyberiaStoreWS_Servidor/ServicioWeb?wsdl"/>
 </discovery>

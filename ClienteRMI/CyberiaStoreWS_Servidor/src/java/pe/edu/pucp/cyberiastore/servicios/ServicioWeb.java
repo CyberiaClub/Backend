@@ -12,7 +12,6 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,8 +35,8 @@ import pe.edu.pucp.cyberiastore.rmi.interfaces.SedeBO;
 import pe.edu.pucp.cyberiastore.rmi.interfaces.TipoComprobanteBO;
 import pe.edu.pucp.cyberiastore.rmi.interfaces.TipoPersonaBO;
 import pe.edu.pucp.cyberiastore.rmi.interfaces.TipoProductoBO;
-import pe.edu.pucp.cyberiastore.rmi.servidor.CyberiaStore_RMI_Servidor;
 
+@WebService(serviceName = "ServicioWeb")
 public class ServicioWeb {
     private static final String ARCHIVO_CONFIGURACION = "rmi.properties";
     private String IP;
@@ -57,35 +56,38 @@ public class ServicioWeb {
     public ServicioWeb() {
         try {
             this.leer_archivo_de_propiedades();
+            System.out.println("IP" + IP);
+            System.out.println("puerto" + puerto);
             
-            String nombreServicio = CyberiaStore_RMI_Servidor.retornaNombreDelServicio("comprobantePagoBO");
+            String nombreServicio = this.retornaNombreDelServicio("comprobantePagoBO");
+            System.out.println("retornaNombreDelServicio " + nombreServicio);
             this.comprobantePagoBO = (ComprobantePagoBO) Naming.lookup(nombreServicio);
 
-            nombreServicio = CyberiaStore_RMI_Servidor.retornaNombreDelServicio("marcaBO");
+            nombreServicio = this.retornaNombreDelServicio("marcaBO");
             this.marcaBO = (MarcaBO) Naming.lookup(nombreServicio);
 
-            nombreServicio = CyberiaStore_RMI_Servidor.retornaNombreDelServicio("ofertaBO");
+            nombreServicio = this.retornaNombreDelServicio("ofertaBO");
             this.ofertaBO = (OfertaBO) Naming.lookup(nombreServicio);
 
-            nombreServicio = CyberiaStore_RMI_Servidor.retornaNombreDelServicio("personaBO");
+            nombreServicio = this.retornaNombreDelServicio("personaBO");
             this.personaBO = (PersonaBO) Naming.lookup(nombreServicio);
 
-            nombreServicio = CyberiaStore_RMI_Servidor.retornaNombreDelServicio("productoBO");
+            nombreServicio = this.retornaNombreDelServicio("productoBO");
             this.productoBO = (ProductoBO) Naming.lookup(nombreServicio);
 
-            nombreServicio = CyberiaStore_RMI_Servidor.retornaNombreDelServicio("proveedorBO");
+            nombreServicio = this.retornaNombreDelServicio("proveedorBO");
             this.proveedorBO = (ProveedorBO) Naming.lookup(nombreServicio);
 
-            nombreServicio = CyberiaStore_RMI_Servidor.retornaNombreDelServicio("sedeBO");
+            nombreServicio = this.retornaNombreDelServicio("sedeBO");
             this.sedeBO = (SedeBO) Naming.lookup(nombreServicio);
 
-            nombreServicio = CyberiaStore_RMI_Servidor.retornaNombreDelServicio("tipoComprobanteBO");
+            nombreServicio = this.retornaNombreDelServicio("tipoComprobanteBO");
             this.tipoComprobanteBO = (TipoComprobanteBO) Naming.lookup(nombreServicio);
 
-            nombreServicio = CyberiaStore_RMI_Servidor.retornaNombreDelServicio("tipoPersonaBO");
+            nombreServicio = this.retornaNombreDelServicio("tipoPersonaBO");
             this.tipoPersonaBO = (TipoPersonaBO) Naming.lookup(nombreServicio);
 
-            nombreServicio = CyberiaStore_RMI_Servidor.retornaNombreDelServicio("tipoProductoBO");
+            nombreServicio = this.retornaNombreDelServicio("tipoProductoBO");
             this.tipoProductoBO = (TipoProductoBO) Naming.lookup(nombreServicio);
             
         } catch (NotBoundException | MalformedURLException | RemoteException ex) {
@@ -99,13 +101,17 @@ public class ServicioWeb {
             String nmArchivoConf = "C:\\glassfish-7.0.18\\glassfish7\\glassfish\\resources" + "\\" + ARCHIVO_CONFIGURACION;
             
             properties.load(new FileInputStream(new File(nmArchivoConf)));
-            IP = "localhost";
+            IP = properties.getProperty("ip");
             puerto = Integer.valueOf(properties.getProperty("puerto"));
         } catch (FileNotFoundException ex) {
             System.err.println("Error al leer el archivo de propiedades - " + ex);
         } catch (IOException ex) {
             System.err.println("Error al leer el archivo de propiedades - " + ex);
         }
+    }
+
+    public String retornaNombreDelServicio(String nombreObjetoRemoto) {
+        return "//" + IP + ":" + puerto + "/" + nombreObjetoRemoto;
     }
 
     @WebMethod(operationName = "marca_insertar")

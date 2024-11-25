@@ -25,8 +25,7 @@ public class SedeBO {
     }
 
     public ArrayList<Sede> listarTodos(){
-        ArrayList<Sede> sedees = this.sedeDAO.listarTodos();
-        return sedees;
+        return this.sedeDAO.listarTodos();
     }
     
     public ArrayList<Producto> listarProductosSede(Integer idSede){

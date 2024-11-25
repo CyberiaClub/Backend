@@ -1,12 +1,13 @@
 package pe.edu.pucp.cyberiastore.oferta.model;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ArrayList;
 import pe.edu.pucp.cyberiastore.inventario.model.Producto;
 
 
-public class Oferta {
+public class Oferta implements Serializable {
     private Integer idOferta ;
     private Date fechaInicio;
     private Date fechaFin;

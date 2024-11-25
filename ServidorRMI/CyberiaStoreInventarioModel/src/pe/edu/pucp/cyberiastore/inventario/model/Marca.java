@@ -1,6 +1,8 @@
 package pe.edu.pucp.cyberiastore.inventario.model;
 
-public class Marca {
+import java.io.Serializable;
+
+public class Marca implements Serializable {
 
     private Integer idMarca;
     private String nombre;

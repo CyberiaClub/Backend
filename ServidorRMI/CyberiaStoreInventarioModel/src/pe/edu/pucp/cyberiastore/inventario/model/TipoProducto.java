@@ -1,6 +1,8 @@
 package pe.edu.pucp.cyberiastore.inventario.model;
 
-public class TipoProducto {
+import java.io.Serializable;
+
+public class TipoProducto implements Serializable {
 
     private Integer idTipoProducto;
     private String tipo;

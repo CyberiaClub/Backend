@@ -1,6 +1,8 @@
 package pe.edu.pucp.cyberiastore.comprobantepago.model;
 
-public class TipoComprobante {
+import java.io.Serializable;
+
+public class TipoComprobante implements Serializable {
     private Integer idTipoComprobante;
     private String secuencial;
     private String tipoComprobante;

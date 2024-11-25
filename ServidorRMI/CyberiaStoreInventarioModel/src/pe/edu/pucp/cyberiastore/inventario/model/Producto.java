@@ -1,8 +1,9 @@
 package pe.edu.pucp.cyberiastore.inventario.model;
 
 import java.util.ArrayList;
+import java.io.Serializable;
 
-public class Producto {
+public class Producto implements Serializable {
 
     private Integer idProducto;
     private String sku;

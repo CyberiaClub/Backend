@@ -1,12 +1,13 @@
 package pe.edu.pucp.cyberiastore.comprobantepago.model;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import pe.edu.pucp.cyberiastore.inventario.model.Producto;
 import java.util.Date;
 import pe.edu.pucp.cyberiastore.persona.model.Persona;
 
-public class ComprobantePago {
+public class ComprobantePago implements Serializable {
     private Integer idComprobantePago;
     private Date fecha;
     private Double subtotal;
