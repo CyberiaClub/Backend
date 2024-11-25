@@ -12,3 +12,4 @@ dist/
 nbdist/
 .nb-gradle/
 jdbc.properties
+/CyberiaStoreVentaDAO/build

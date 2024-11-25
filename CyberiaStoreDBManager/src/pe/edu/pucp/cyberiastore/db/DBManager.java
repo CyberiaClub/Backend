@@ -70,11 +70,11 @@ public class DBManager {
         try {
 //            Colocar su nombre, para saber que ruta le pertence a cada uno, por 
 //            Adrian o Danitza
-//            String nmArchivoConf = "C:\\Program Files\\glassfish7\\glassfish\\resources" + "\\" + ARCHIVO_CONFIGURACION;
+            String nmArchivoConf = "C:\\Program Files\\glassfish7\\glassfish\\resources" + "\\" + ARCHIVO_CONFIGURACION;
 //            Nicolas
 //            String nmArchivoConf = "C:\\Users\\ipana\\Downloads" + "\\" + ARCHIVO_CONFIGURACION;
 //            Jesus
-            String nmArchivoConf = "C:\\glassfish-7.0.18\\glassfish7\\glassfish\\resources" + "\\" + ARCHIVO_CONFIGURACION;
+//            String nmArchivoConf = "C:\\glassfish-7.0.18\\glassfish7\\glassfish\\resources" + "\\" + ARCHIVO_CONFIGURACION;
 //            Yngrid
 //            String nmArchivoConf = "C:\\glassfish7\\glassfish\\resources" + "\\" + ARCHIVO_CONFIGURACION;
 

@@ -141,6 +141,11 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
         this.conexion = conexion;
         return this.modificar(persona);
     }
+    /*
+     * **************************************************************************
+     * VERIFICACION DE CORREO
+     * *************************************************************************
+     */
 
     @Override
     public Integer marcarVerificado(String valorToken) {
@@ -166,7 +171,7 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
         String sql = "";
         switch (tipoOperacionPersona) {
             case LISTAR_PERSONA_POR_DOCUMENTO ->
-                sql = sql.concat("DOCUMENTO=? ");
+                sql = sql.concat(" DOCUMENTO=? ");
             case MODIFICAR_PERSONA ->
                 sql = sql.concat("ID_PERSONA=? ");
             case INSERTAR_TRABAJADOR->
@@ -190,6 +195,9 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
     protected String obtenerPredicadoParaListado() {
         String sql = "";
         switch (this.tipoOperacionPersona) {
+            case LISTAR_PERSONA_POR_DOCUMENTO->{
+                 sql ="";
+            }
             case VERIFICAR_PERSONA -> {
                 sql = sql.concat(" P, TIPO_PERSONA TP ");
             }
@@ -227,10 +235,9 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
             }
             case INSERTAR_TRABAJADOR -> {
                 this.incluirParametroDouble(1, this.persona.getSueldo());
-                this.incluirParametroDate(2, this.persona.getFechaIngreso());
-                this.incluirParametroInt(3, this.persona.getIdTipoPersona());
-                this.incluirParametroInt(4, this.persona.getIdSede());
-                this.incluirParametroString(5, this.persona.getDocumento());
+                this.incluirParametroInt(2, this.persona.getIdTipoPersona());
+                this.incluirParametroInt(3, this.persona.getIdSede());
+                this.incluirParametroString(4, this.persona.getDocumento());
             }
             case MARCAR_VERIFICADO -> {
                 this.incluirParametroInt(1, 1);
@@ -280,8 +287,10 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
     protected String obtenerProyeccionParaSelect() {
         String sql = "";
         switch (tipoOperacionPersona) {
-            case LISTAR_PERSONA_POR_DOCUMENTO ->
-                sql = sql.concat("NOMBRE, PRIMER_APELLIDO, APELLIDO_PATERNO, TELEFONO, DIRECCION");
+            case LISTAR_PERSONA_POR_DOCUMENTO ->{
+                sql = sql.concat("CONCAT(PRIMER_APELLIDO, ' ', COALESCE(SEGUNDO_APELLIDO, ''), ',',NOMBRE) AS NOMBRE_COMPLETO, ");
+                sql = sql.concat("CORREO, TELEFONO, DIRECCION ");
+            }
             case VERIFICAR_PERSONA -> {
                 sql = sql.concat("CASE WHEN P.ID_SEDE IS NULL THEN 0 ");
                 sql = sql.concat("ELSE P.ID_SEDE END AS ID_SEDE, ");
@@ -316,8 +325,7 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
                 this.persona.setTipoUsuario(this.resultSet.getString("TIPO_USUARIO"));
             }
             case LISTAR_PERSONA_POR_DOCUMENTO->{
-                this.persona.setIdPersona(this.resultSet.getInt("ID_PERSONA"));
-                this.persona.setNombre(this.resultSet.getString("NOMBRE"));
+                this.persona.setNombre(this.resultSet.getString("NOMBRE_COMPLETO"));
                 this.persona.setCorreo(this.resultSet.getString("CORREO"));
                 this.persona.setTelefono(this.resultSet.getString("TELEFONO"));
                 this.persona.setDireccion(this.resultSet.getString("DIRECCION"));
@@ -412,7 +420,7 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
 
     /*
      * **************************************************************************
-     * VERIFICACION DE CORREO
+     * VERIFICACION AL INGRESAR
      * *************************************************************************
      */
     @Override
