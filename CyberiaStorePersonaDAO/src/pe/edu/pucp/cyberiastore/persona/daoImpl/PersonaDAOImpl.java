@@ -257,7 +257,6 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
     @Override
     public ArrayList<Persona> listarTodos() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//        return (ArrayList<Persona>) super.listarTodos(null);
     }
 
     @Override

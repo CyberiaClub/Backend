@@ -358,42 +358,7 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
         }
         return idProducto != null;
     }
-
-//    @Override
-//    public ArrayList<Producto> buscar_sku(String sku) {
-//        this.value = 2;
-//        List lista = new ArrayList<>();
-//        try {
-//            this.abrirConexion();
-//            String sql = "SELECT p.NOMBRE,p.DESCRIPCION,p.PRECIO,ps.STOCK_SEDE,s.NOMBRE AS NOMBRE_SEDE ";
-//            sql = sql.concat("FROM PRODUCTO p");
-//            sql = sql.concat("JOIN PRODUCTO_X_SEDE ps ON p.ID_PRODUCTO = ps.ID_PRODUCTO");
-//            sql = sql.concat("JOIN SEDE s ON ps.ID_SEDE = s.ID_SEDE");
-//            sql = sql.concat("WHERE p.SKU = '?'");
-//            this.colocarSQLenStatement(sql);
-//            this.incluirParametroString(1, sku);
-//            this.ejecutarConsultaEnBD(sql);
-//            while (this.resultSet.next()) {
-//                Producto p = new Producto();
-//                p.setNombre(this.resultSet.getString("NOMBRE"));
-//                p.setDescripcion(this.resultSet.getString("DESCRIPCION"));
-//                p.setPrecio(this.resultSet.getDouble("PRECIO"));
-//                p.setCantidad(this.resultSet.getInt("STOCK_SEDE"));
-//                p.setNombreSede(this.resultSet.getString("NOMBRE_SEDE"));
-//                lista.add(this.producto);
-//            }
-//        } catch (SQLException ex) {
-//            System.err.println("Error al intentar listarTodos - " + ex);
-//        } finally {
-//            try {
-//                this.cerrarConexion();
-//            } catch (SQLException ex) {
-//                System.err.println("Error al cerrar la conexión - " + ex);
-//            }
-//        }
-//        this.value = 0;
-//        return (ArrayList<Producto>) lista;
-//    }
+    
     @Override
     public Producto buscar_sku(String sku, Integer idSede) {
         this.tipoOperacion = TipoOperacionInventario.BUSCAR_POR_SKU;

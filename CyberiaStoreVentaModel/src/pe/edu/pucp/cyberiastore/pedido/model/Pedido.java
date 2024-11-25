@@ -35,44 +35,26 @@ public class Pedido {
         this.estadoPedido = estadoPedido;
     }
 
-    /**
-     * @return the productos
-     */
     public ArrayList<Producto> getProductos() {
         return productos;
     }
 
-    /**
-     * @param productos the productos to set
-     */
     public void setProductos(ArrayList<Producto> productos) {
         this.productos = productos;
     }
 
-    /**
-     * @return the cantidades
-     */
     public ArrayList<Integer> getCantidades() {
         return cantidades;
     }
 
-    /**
-     * @param cantidades the cantidades to set
-     */
     public void setCantidades(ArrayList<Integer> cantidades) {
         this.cantidades = cantidades;
     }
 
-    /**
-     * @return the precios
-     */
     public ArrayList<Double> getPrecios() {
         return precios;
     }
 
-    /**
-     * @param precios the precios to set
-     */
     public void setPrecios(ArrayList<Double> precios) {
         this.precios = precios;
     }

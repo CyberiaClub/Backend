@@ -25,7 +25,6 @@ public class DBManager {
     private static DBManager dbManager;
 
     private DBManager() {
-        //se hace el constructor privado para que no pueda ser invocado
     }
 
     public static DBManager getInstance() {
@@ -69,8 +68,6 @@ public class DBManager {
     private void leer_archivo_de_propiedades() {
         Properties properties = new Properties();
         try {
-//            el archivo de configuración se encuentra en la carpeta resources/jdbc.properties
-//            del proyecto que lo invoca
 //            Colocar su nombre, para saber que ruta le pertence a cada uno, por 
 //            Adrian o Danitza
             String nmArchivoConf = "C:\\Program Files\\glassfish7\\glassfish\\resources" + "\\" + ARCHIVO_CONFIGURACION;

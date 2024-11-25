@@ -34,16 +34,6 @@ public class ProductoXProductoDAOImpl extends DAOImpl implements ProductoXProduc
         return super.insertar();
     }
 
-    /**
-     * Esta funcion es utilizada cuando es llamada del propio producto
-     *
-     * @param idPadre
-     * @param idHijo
-     * @param cantidad
-     * @param usarTransaccion
-     * @param conexion
-     * @return
-     */
     @Override
     public Integer insertar(Integer idPadre, Integer idHijo, Integer cantidad, Boolean usarTransaccion, Connection conexion) {
         this.usarTransaccion = usarTransaccion;

@@ -9,7 +9,7 @@ import java.sql.Time;
 import java.util.List;
 import pe.edu.pucp.cyberiastore.inventario.model.Sede;
 import pe.edu.pucp.cyberiastore.config.DAOImpl;
-import pe.edu.pucp.cyberiastore.config.Tipo_Operacion;
+import pe.edu.pucp.cyberiastore.inventario.daoImpl.TipoOperacionInventario;
 import pe.edu.pucp.cyberiastore.inventario.dao.SedeDAO;
 import pe.edu.pucp.cyberiastore.config.Tipo_Operacion;
 import pe.edu.pucp.cyberiastore.inventario.model.Marca;
@@ -20,6 +20,7 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
 
     private Sede sede;
     private Tipo_Operacion tipoOperacion;
+    private TipoOperacionInventario tipoOperacionInventario;
 
     public SedeDAOImpl() {
         super("SEDE");
@@ -170,13 +171,13 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
      */
     @Override
     public ArrayList<Sede> listarTodos() {
-        this.tipoOperacion = Tipo_Operacion.LISTAR_SEDES;
+        this.tipoOperacionInventario = TipoOperacionInventario.LISTAR_SEDES;
         return (ArrayList<Sede>) super.listarTodos(null);
     }
 
     @Override
     public ArrayList<Producto> listarProductosSede(Integer idSede) {
-        this.tipoOperacion = Tipo_Operacion.LISTAR_STOCK_SEDE;
+        this.tipoOperacionInventario = TipoOperacionInventario.LISTAR_STOCK_SEDE;
         this.sede = new Sede();
         this.sede.setIdSede(idSede);
         return (ArrayList<Producto>) super.listarTodos(null);
@@ -185,10 +186,10 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
     @Override
     protected String obtenerProyeccionParaSelect() {
         String sql = "";
-        switch (this.tipoOperacion) {
-            case Tipo_Operacion.LISTAR_SEDES ->
+        switch (this.tipoOperacionInventario) {
+            case TipoOperacionInventario.LISTAR_SEDES ->
                 sql = sql.concat("ID_SEDE, NOMBRE, DESCRIPCION, TELEFONO, HORARIO_APERTURA, HORARIO_CIERRE");
-            case Tipo_Operacion.LISTAR_STOCK_SEDE ->
+            case TipoOperacionInventario.LISTAR_STOCK_SEDE ->
                 sql = sql.concat("PD.SKU, PD.NOMBRE, PD.DESCRIPCION, PD.PRECIO,TP.TIPO, M.NOMBRE, PXS.STOCK_SEDE");
             default ->
                 throw new AssertionError();
@@ -199,10 +200,10 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
     @Override
     protected String obtenerPredicadoParaListado() {
         String sql = "";
-        switch (this.tipoOperacion) {
-            case Tipo_Operacion.LISTAR_SEDES -> {
+        switch (this.tipoOperacionInventario) {
+            case TipoOperacionInventario.LISTAR_SEDES -> {
             }
-            case Tipo_Operacion.LISTAR_STOCK_SEDE -> {
+            case TipoOperacionInventario.LISTAR_STOCK_SEDE -> {
                 sql = sql.concat(" S ");
                 sql = sql.concat("JOIN PRODUCTO_X_SEDE PXS ON S.ID_SEDE = PXS.ID_SEDE ");
                 sql = sql.concat("JOIN PRODUCTO PD ON PXS.ID_PRODUCTO = PD.ID_PRODUCTO ");
@@ -218,10 +219,10 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
 
     @Override
     protected void incluirValorDeParametrosParaListado() throws SQLException {
-        switch (this.tipoOperacion) {
-            case Tipo_Operacion.LISTAR_SEDES -> {
+        switch (this.tipoOperacionInventario) {
+            case TipoOperacionInventario.LISTAR_SEDES -> {
             }
-            case Tipo_Operacion.LISTAR_STOCK_SEDE -> {
+            case TipoOperacionInventario.LISTAR_STOCK_SEDE -> {
                 this.incluirParametroInt(1, this.sede.getIdSede());
             }
             default ->
@@ -232,10 +233,10 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
     @Override
     protected void agregarObjetoALaLista(List lista, ResultSet resultSet) throws SQLException {
         instanciarObjetoDelResultSet();
-        switch (this.tipoOperacion) {
-            case Tipo_Operacion.LISTAR_SEDES ->
+        switch (this.tipoOperacionInventario) {
+            case TipoOperacionInventario.LISTAR_SEDES ->
                 lista.add(this.sede);
-            case Tipo_Operacion.LISTAR_STOCK_SEDE ->
+            case TipoOperacionInventario.LISTAR_STOCK_SEDE ->
                 lista.add(this.sede.getProducto());
             default ->
                 throw new AssertionError();
@@ -244,8 +245,8 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
 
     @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
-        switch (this.tipoOperacion) {
-            case Tipo_Operacion.LISTAR_SEDES -> {
+        switch (this.tipoOperacionInventario) {
+            case TipoOperacionInventario.LISTAR_SEDES -> {
                 this.sede = new Sede();
                 this.sede.setIdSede(this.resultSet.getInt("ID_SEDE"));
                 this.sede.setNombre(this.resultSet.getString("NOMBRE"));
@@ -254,7 +255,7 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
                 this.sede.setHorarioApertura(this.resultSet.getTime("HORARIO_APERTURA").toLocalTime());
                 this.sede.setHorarioCierre(this.resultSet.getTime("HORARIO_CIERRE").toLocalTime());
             }
-            case Tipo_Operacion.LISTAR_STOCK_SEDE -> {
+            case TipoOperacionInventario.LISTAR_STOCK_SEDE -> {
                 Producto producto = new Producto();
                 producto.setSku(this.resultSet.getString("PD.SKU"));
                 producto.setNombre(this.resultSet.getString("PD.NOMBRE"));

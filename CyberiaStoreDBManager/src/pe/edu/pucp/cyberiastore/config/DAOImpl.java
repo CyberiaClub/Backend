@@ -227,8 +227,6 @@ public abstract class DAOImpl {
     }
 
     protected void incluirValorDeParametrosParaListado() throws SQLException {
-        //por defecto no se incluye ningún parametro para el listado
-        //de esta forma se mantiente el comportamiento de los listarTodos()
     }
 
     protected abstract void agregarObjetoALaLista(List lista, ResultSet resultSet) throws SQLException;
@@ -285,6 +283,7 @@ public abstract class DAOImpl {
         - incluirParametroDate
         - incluirParametroBoolean
      */
+    
     protected String ObtenerFechaParaSQL(Date fecha) {
         String sql = "NULL";
         if (fecha != null) {

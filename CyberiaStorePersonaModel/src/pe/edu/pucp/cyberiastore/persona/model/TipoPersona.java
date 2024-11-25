@@ -15,30 +15,18 @@ public class TipoPersona {
         this.nombre = nombre;
     }
 
-    /**
-     * @return the idTipoPersona
-     */
     public Integer getIdTipoPersona() {
         return idTipoPersona;
     }
 
-    /**
-     * @param idTipoPersona the idTipoPersona to set
-     */
     public void setIdTipoPersona(Integer idTipoPersona) {
         this.idTipoPersona = idTipoPersona;
     }
 
-    /**
-     * @return the nombre
-     */
     public String getNombre() {
         return nombre;
     }
 
-    /**
-     * @param nombre the nombre to set
-     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
