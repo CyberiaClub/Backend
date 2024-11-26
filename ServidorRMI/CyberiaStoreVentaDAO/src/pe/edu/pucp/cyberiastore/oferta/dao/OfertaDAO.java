@@ -18,7 +18,5 @@ public interface OfertaDAO {
     public Oferta obtenerPorId(Integer idOferta);
 
     public Boolean existeOferta(Oferta oferta);
-
-    public Boolean existeOferta(Oferta oferta, Boolean abreConexion);
     
 }
