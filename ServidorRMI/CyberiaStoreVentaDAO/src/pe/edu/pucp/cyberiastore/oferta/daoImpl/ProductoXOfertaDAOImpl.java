@@ -80,7 +80,7 @@ public class ProductoXOfertaDAOImpl extends DAOImpl implements ProductoXOfertaDA
     }
 
     @Override
-    protected void incluirValorDeParametrosParaObtenerPorId() throws SQLException {
+    protected void incluirValorDeParametrosParaBuscar() throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

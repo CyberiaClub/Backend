@@ -36,7 +36,7 @@ public class TipoProductoBOImpl extends UnicastRemoteObject implements TipoProdu
     }
 
     @Override
-    public TipoProducto buscarPorId(Integer idTipoProducto) throws RemoteException {
-        return this.tipoProductoBO.buscarPorId(idTipoProducto);
+    public TipoProducto obtenerPorIdPorId(Integer idTipoProducto) throws RemoteException {
+        return this.tipoProductoBO.obtenerPorId(idTipoProducto);
     }
 }

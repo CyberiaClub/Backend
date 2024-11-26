@@ -16,8 +16,6 @@ public interface ProductoDAO {
 
     public Boolean existeProducto(Producto producto);
 
-    public Boolean existeProducto(Producto producto, Boolean abreConexion);
-    
     public Producto buscar_sku(String sku, Integer idSede);
     
     public Integer aumentarStock(Integer idProducto, Integer idSede, Integer cantidad);

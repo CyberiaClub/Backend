@@ -31,7 +31,7 @@ public class MarcaBOImpl extends UnicastRemoteObject implements MarcaBO {
     }
 
     @Override
-    public Marca buscarPorId(Integer idMarca) throws RemoteException {
-        return this.marcaBO.buscarPorId(idMarca);
+    public Marca obtenerPorIdPorId(Integer idMarca) throws RemoteException {
+        return this.marcaBO.obtenerPorId(idMarca);
     }
 }

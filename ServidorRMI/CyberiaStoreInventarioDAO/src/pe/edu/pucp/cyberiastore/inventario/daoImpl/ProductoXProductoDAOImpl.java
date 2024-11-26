@@ -131,7 +131,7 @@ public class ProductoXProductoDAOImpl extends DAOImpl implements ProductoXProduc
     }
 
     @Override
-    protected void incluirValorDeParametrosParaObtenerPorId() throws SQLException {
+    protected void incluirValorDeParametrosParaBuscar() throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

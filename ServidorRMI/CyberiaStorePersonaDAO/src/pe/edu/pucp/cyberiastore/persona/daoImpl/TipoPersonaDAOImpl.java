@@ -168,7 +168,7 @@ public class TipoPersonaDAOImpl extends DAOImpl implements TipoPersonaDAO {
      * *************************************************************************
      */
     @Override
-    protected void incluirValorDeParametrosParaObtenerPorId() throws SQLException {
+    protected void incluirValorDeParametrosParaBuscar() throws SQLException {
         switch (this.tipoOperacionPersona) {
             case LISTAR_PAGINAS -> {
                 incluirParametroString(1, this.tipoPersona.getNombre());
@@ -187,7 +187,7 @@ public class TipoPersonaDAOImpl extends DAOImpl implements TipoPersonaDAO {
         this.tipoPersona.setNombre(tipo_persona);
         this.tipoOperacionPersona = TipoOperacionPersona.LISTAR_PAGINAS;
         
-        super.obtenerPorId();
+        super.buscar();
         return this.tipoPersona;
     }
 }

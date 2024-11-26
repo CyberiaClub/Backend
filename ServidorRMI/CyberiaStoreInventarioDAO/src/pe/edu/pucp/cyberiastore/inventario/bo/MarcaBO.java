@@ -25,7 +25,7 @@ public class MarcaBO {
         return marcas;
     }
     
-    public Marca buscarPorId(Integer idMarca){
+    public Marca obtenerPorId(Integer idMarca){
         Marca marca = this.marcaDAO.obtenerPorId(idMarca);
         return marca;
     }

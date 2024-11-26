@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 import javax.crypto.AEADBadTagException;
 import javax.imageio.ImageIO;
 import java.util.ArrayList;
+import jdk.dynalink.linker.support.Guards;
 import pe.edu.pucp.cyberiastore.inventario.bo.MarcaBO;
 import pe.edu.pucp.cyberiastore.inventario.bo.ProductoBO;
 import pe.edu.pucp.cyberiastore.inventario.bo.TipoProductoBO;
@@ -21,6 +22,10 @@ import pe.edu.pucp.cyberiastore.inventario.model.TipoProducto;
 public class CyberiaStoreInventarioTest {
 
     public static void main(String[] args) {
+        MarcaBO marcaBO = new MarcaBO();
+        Marca marca = new Marca();
+        marca.setIdMarca(6);
+        marcaBO.insertar(marca);
 //        ProductoBO productoBO = new ProductoBO();
 //        Producto producto = new Producto();
 //        producto.setSku("801801");

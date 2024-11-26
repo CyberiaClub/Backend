@@ -17,7 +17,4 @@ public interface MarcaDAO {
 
     public Boolean existeMarca(Marca marca);
 
-    public Boolean existeMarca(Marca marca, Boolean abreConexion);
-    
-    public Integer buscarIdPorNombre(Marca marca, Boolean abreConexion);
 }

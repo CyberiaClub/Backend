@@ -12,5 +12,5 @@ public interface MarcaBO extends Remote {
     
     public ArrayList<Marca> listarTodos() throws RemoteException;
     
-    public Marca buscarPorId(Integer idMarca) throws RemoteException;
+    public Marca obtenerPorIdPorId(Integer idMarca) throws RemoteException;
 }

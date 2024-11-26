@@ -14,5 +14,5 @@ public interface TipoProductoBO extends Remote {
     
     public ArrayList<TipoProducto> listarTodos() throws RemoteException;
     
-    public TipoProducto buscarPorId(Integer idTipoProducto) throws RemoteException;
+    public TipoProducto obtenerPorIdPorId(Integer idTipoProducto) throws RemoteException;
 }

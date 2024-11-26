@@ -9,20 +9,35 @@ public class CyberiaStoreUsuarioTest {
 
     public static void main(String[] args) {
 //         Persona BO Test
-        PersonaBO personaBO = new PersonaBO();
-        Persona persona = new Persona();
-        Date fecha = new Date();
-        
-        int[] idProductos = new int[5];
-        
-        for (int i = 0; i < 5; i++) {
-            idProductos[i] = i;
-        }
-        
-        for (int j = 0; j < idProductos.length; j++) {
-            System.out.println(idProductos[j]);
-            
-        }
+//        PersonaBO personaBO = new PersonaBO();
+//        Persona persona = new Persona();
+//        Date date = new Date();
+//        persona.setDocumento("71406755");
+//        persona.setTelefono("987468742");
+//        persona.setNombre("Adrian");
+//        persona.setPrimerApellido("Arista");
+//        persona.setSegundoApellido("Vargas");
+//        persona.setFechaDeNacimiento(date);
+//        persona.setSexo("1");
+//        persona.setCorreo("adrian.arista22@gmail.com");
+//        persona.setDireccion("av. La Marina 201");
+//        persona.setContrasena("0ChHbZZ/nLOqeCLyf84AQw==");
+//        persona.setNacionalidad("Perú");
+//        persona.setTipoDeDocumento(TipoDocumento.DNI);
+//        persona.setIdTipoPersona(1);
+//        personaBO.insertar(persona);
+//        Date fecha = new Date();
+//        
+//        int[] idProductos = new int[5];
+//        
+//        for (int i = 0; i < 5; i++) {
+//            idProductos[i] = i;
+//        }
+//        
+//        for (int j = 0; j < idProductos.length; j++) {
+//            System.out.println(idProductos[j]);
+//            
+//        }
         
 //        persona=personaBO.obtenerPorDocumento("12345678");
 //        personaBO.insertar(persona);

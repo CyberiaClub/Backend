@@ -231,12 +231,12 @@ public abstract class DAOImpl {
 
     protected abstract void agregarObjetoALaLista(List lista, ResultSet resultSet) throws SQLException;
 
-    public void obtenerPorId() {
+    public void buscar() {
         try {
             this.abrirConexion();
-            String sql = this.generarSQLParaListarPorId();
+            String sql = this.generarSQLParaBuscar();
             this.colocarSQLenStatement(sql);
-            this.incluirValorDeParametrosParaObtenerPorId();
+            this.incluirValorDeParametrosParaBuscar();
             this.ejecutarConsultaEnBD(sql);
             if (this.resultSet != null && this.resultSet.next()) {
                 do {
@@ -247,7 +247,7 @@ public abstract class DAOImpl {
             }
 
         } catch (SQLException ex) {
-            System.err.println("Error al intentar obtenerPorId - " + ex);
+            System.err.println("Error al intentar buscar - " + ex);
         } finally {
             try {
                 this.cerrarConexion();
@@ -257,7 +257,7 @@ public abstract class DAOImpl {
         }
     }
 
-    protected String generarSQLParaListarPorId() {
+    protected String generarSQLParaBuscar() {
         String sql = "select ";
         sql = sql.concat(this.obtenerProyeccionParaSelect());
         sql = sql.concat(" from ").concat(this.nombre_tabla);
@@ -267,7 +267,7 @@ public abstract class DAOImpl {
         return sql;
     }
 
-    protected abstract void incluirValorDeParametrosParaObtenerPorId() throws SQLException;
+    protected abstract void incluirValorDeParametrosParaBuscar() throws SQLException;
 
     protected abstract void instanciarObjetoDelResultSet() throws SQLException;
 

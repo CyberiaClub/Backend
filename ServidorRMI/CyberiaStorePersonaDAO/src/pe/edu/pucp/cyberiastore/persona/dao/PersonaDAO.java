@@ -24,8 +24,6 @@ public interface PersonaDAO {
 
     public Persona obtenerPorDocumento(String documento);
 
-    public Boolean existePersona(Persona persona);
-    
     public Boolean enviarCorreoVerificacion(String correo, String valorToken);
     
     public Persona verificarPersona(Persona persona);

@@ -39,6 +39,7 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
         Integer idSede = null;
 
         Boolean existeSede = this.existeSede(sede);
+        this.sede = sede;
         this.usarTransaccion = false;
         try {
             this.iniciarTransaccion();
@@ -129,7 +130,9 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
     @Override
     protected String obtenerPredicadoParaLlavePrimaria() {
         String sql = "";
-        if (this.tipoOperacion == Tipo_Operacion.MODIFICAR || this.tipoOperacion == Tipo_Operacion.ELIMINAR) {
+        if (this.tipoOperacion == Tipo_Operacion.MODIFICAR ||
+            this.tipoOperacion == Tipo_Operacion.ELIMINAR ||
+            this.tipoOperacion == Tipo_Operacion.EXISTE) {
             sql = "ID_SEDE=?";
         } else {
             sql = "PER.ID_SEDE=?";
@@ -191,8 +194,12 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
                 sql = sql.concat("ID_SEDE, NOMBRE, DESCRIPCION, TELEFONO, HORARIO_APERTURA, HORARIO_CIERRE");
             case TipoOperacionInventario.LISTAR_STOCK_SEDE ->
                 sql = sql.concat("PD.SKU, PD.NOMBRE, PD.DESCRIPCION, PD.PRECIO,TP.TIPO, M.NOMBRE, PXS.STOCK_SEDE");
-            default ->
-                throw new AssertionError();
+        }
+        
+        switch(this.tipo_Operacion){
+            case EXISTE->{
+                sql = sql.concat("ID_SEDE");
+            }
         }
         return sql;
     }
@@ -274,8 +281,12 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
                 this.sede = new Sede();
                 this.sede.setProducto(producto);
             }
-            default ->
-                throw new AssertionError();
+        }
+        
+        switch(this.tipo_Operacion){
+            case EXISTE->{
+                this.sede.setIdSede(this.resultSet.getInt("ID_SEDE"));
+            }
         }
     }
 
@@ -293,12 +304,12 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
     public Sede obtenerPorId(Integer idSede) {
         this.sede = new Sede();
         this.sede.setIdSede(idSede);
-        super.obtenerPorId();
+        super.buscar();
         return this.sede;
     }
 
     @Override
-    protected void incluirValorDeParametrosParaObtenerPorId() throws SQLException {
+    protected void incluirValorDeParametrosParaBuscar() throws SQLException {
         this.incluirParametroInt(1, this.sede.getIdSede());
     }
 
@@ -311,67 +322,9 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
     @Override
     public Boolean existeSede(Sede sede) {
         Boolean abreConexion = true;
-        return existeSede(sede, abreConexion);
-    }
-
-    @Override
-    public Boolean existeSede(Sede sede, Boolean abreConexion) {
         this.sede = sede;
-        Integer idSede = null;
-        try {
-            if (abreConexion) {
-                this.abrirConexion();
-            }
-            String sql = "select ID_SEDE from SEDE where ";
-            sql = sql.concat("NOMBRE=? ");
-            this.colocarSQLenStatement(sql);
-            this.incluirParametroString(1, this.sede.getNombre());
-            this.ejecutarConsultaEnBD(sql);
-            if (this.resultSet.next()) {
-                idSede = this.resultSet.getInt("ID_SEDE");
-            }
-        } catch (SQLException ex) {
-            System.err.println("Error al consultar si existe sede - " + ex);
-        } finally {
-            try {
-                if (abreConexion) {
-                    this.cerrarConexion();
-                }
-            } catch (SQLException ex) {
-                System.err.println("Error al cerrar la conexión - " + ex);
-            }
-        }
-        return idSede != null;
-    }
-
-    @Override
-    public Integer buscarIdPorNombre(Sede sede, Boolean abreConexion) {
-        this.sede = sede;
-        Integer idSede = null;
-        try {
-            if (abreConexion) {
-                this.abrirConexion();
-            }
-            String sql = "select ID_SEDE from SEDE where ";
-            sql = sql.concat("NOMBRE=? ");
-            this.colocarSQLenStatement(sql);
-            this.incluirParametroString(1, this.sede.getNombre());
-            this.ejecutarConsultaEnBD(sql);
-            if (this.resultSet.next()) {
-                idSede = this.resultSet.getInt("ID_SEDE");
-            }
-        } catch (SQLException ex) {
-            System.err.println("Error al consultar si existe sede - " + ex);
-        } finally {
-            try {
-                if (abreConexion) {
-                    this.cerrarConexion();
-                }
-            } catch (SQLException ex) {
-                System.err.println("Error al cerrar la conexión - " + ex);
-            }
-        }
-        return idSede;
+        super.buscar();
+        return this.sede != null;
     }
 
 }

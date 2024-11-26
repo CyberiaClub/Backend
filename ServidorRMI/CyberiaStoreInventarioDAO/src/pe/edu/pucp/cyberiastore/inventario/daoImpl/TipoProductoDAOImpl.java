@@ -32,6 +32,7 @@ public class TipoProductoDAOImpl extends DAOImpl implements TipoProductoDAO {
         Integer idTipoProducto = null;
 
         Boolean existeTipoProducto = this.existeTipoProducto(tipoProducto);
+        this.tipoProducto = tipoProducto;
         this.usarTransaccion = false;
         try {
             this.iniciarTransaccion();
@@ -222,12 +223,12 @@ public class TipoProductoDAOImpl extends DAOImpl implements TipoProductoDAO {
     public TipoProducto obtenerPorId(Integer idTipoProducto) {
         this.tipoProducto = new TipoProducto();
         this.tipoProducto.setIdTipoProducto(idTipoProducto);
-        super.obtenerPorId();
+        super.buscar();
         return this.tipoProducto;
     }
 
     @Override
-    protected void incluirValorDeParametrosParaObtenerPorId() throws SQLException {
+    protected void incluirValorDeParametrosParaBuscar() throws SQLException {
         this.incluirParametroInt(1, this.tipoProducto.getIdTipoProducto());
     }
     

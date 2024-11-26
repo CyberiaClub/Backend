@@ -19,6 +19,12 @@ public class OfertaDAOImpl extends DAOImpl implements OfertaDAO {
         super("OFERTA");
         this.oferta = null;
     }
+    
+    /*
+     * ************************************************************************
+     * Insertar
+     * ************************************************************************
+     */
 
     @Override
     public Integer insertar(Oferta oferta) {
@@ -77,6 +83,12 @@ public class OfertaDAOImpl extends DAOImpl implements OfertaDAO {
         this.incluirParametroDate(2, this.oferta.getFechaDeFin());
         this.incluirParametroByte(3, this.oferta.getImagen());
     }
+    
+    /*
+     * **************************************************************************
+     * MODIFICAR
+     * *************************************************************************
+     */
 
     @Override
     public Integer modificar(Oferta oferta) {
@@ -130,6 +142,12 @@ public class OfertaDAOImpl extends DAOImpl implements OfertaDAO {
         this.incluirParametroInt(4, this.oferta.getIdOferta());
 
     }
+    
+    /*
+     * **************************************************************************
+     * ELIMINIAR
+     * *************************************************************************
+     */
 
     @Override
     public Integer eliminar(Oferta oferta) {
@@ -141,6 +159,12 @@ public class OfertaDAOImpl extends DAOImpl implements OfertaDAO {
     protected void incluirValorDeParametrosParaEliminacion() throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+    
+    /*
+     * **************************************************************************
+     * LISTAR TODOS
+     * *************************************************************************
+     */
 
     @Override
     public ArrayList<Oferta> listarTodos() {
@@ -160,7 +184,7 @@ public class OfertaDAOImpl extends DAOImpl implements OfertaDAO {
     }
 
     @Override
-    protected void incluirValorDeParametrosParaObtenerPorId() throws SQLException {
+    protected void incluirValorDeParametrosParaBuscar() throws SQLException {
         this.incluirParametroInt(1, this.oferta.getIdOferta());
     }
 
@@ -178,22 +202,34 @@ public class OfertaDAOImpl extends DAOImpl implements OfertaDAO {
     protected void limpiarObjetoDelResultSet() {
         this.oferta = null;
     }
+    
+    /*
+     * *************************************************************************
+     * OBTENER POR ID
+     * Funciones adicionales
+     * *************************************************************************
+     */
 
     @Override
     public Oferta obtenerPorId(Integer idOferta) {
         this.oferta = new Oferta();
         this.oferta.setIdOferta(idOferta);
-        super.obtenerPorId();
+        super.buscar();
         return this.oferta;
     }
+    
+    /*
+     * *************************************************************************
+     * EXISTE
+     * Funciones adicionales
+     * *************************************************************************
+     */
 
     @Override
     public Boolean existeOferta(Oferta oferta) {
-        return false;
-    }
-
-    @Override
-    public Boolean existeOferta(Oferta oferta, Boolean abreConexion) {
-        return false;
+        this.tipo_Operacion = Tipo_Operacion.EXISTE;
+        this.oferta = oferta;
+        super.buscar();
+        return this.oferta != null;
     }
 }

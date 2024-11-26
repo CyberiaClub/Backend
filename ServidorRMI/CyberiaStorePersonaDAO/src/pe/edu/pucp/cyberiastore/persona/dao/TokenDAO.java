@@ -10,8 +10,6 @@ public interface TokenDAO {
     
     public Boolean existeToken(Token token);
     
-    public Boolean existeToken(Token token, Boolean abreConexion);
-    
     public Token buscarTokenPorValor(Token token);
     
 }

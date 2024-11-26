@@ -13,4 +13,5 @@ public enum TipoOperacionPersona {
     VERIFICAR_PERSONA,
     LISTAR_PAGINAS,
     LISTAR_TIPO_TRABAJADORES,
+    BUSCAR_TOKEN_POR_VALOR,
 }

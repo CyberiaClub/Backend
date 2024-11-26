@@ -8,6 +8,7 @@ import pe.edu.pucp.cyberiastore.config.DAOImpl;
 import pe.edu.pucp.cyberiastore.persona.dao.PersonaDAO;
 import pe.edu.pucp.cyberiastore.persona.model.Persona;
 import java.util.List;
+import pe.edu.pucp.cyberiastore.config.Tipo_Operacion;
 import pe.edu.pucp.cyberiastore.persona.model.Token;
 import pe.edu.pucp.cyberiastore.persona.dao.TokenDAO;
 import pe.edu.pucp.cyberiastore.persona.daoImpl.TokenDAOImpl;
@@ -185,8 +186,12 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
                 sql = sql.concat(" AND CORREO = ? ");
                 sql = sql.concat(" AND CONTRASEÑA = ? ");
             }
-            default ->
-                throw new AssertionError();
+        }
+        
+        switch(this.tipo_Operacion){
+            case EXISTE->{
+                sql = sql.concat("ID_PERSONA");
+            }
         }
         return sql;
     }
@@ -350,12 +355,12 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
         this.persona = new Persona();
         this.persona.setDocumento(documento);
         this.tipoOperacionPersona = TipoOperacionPersona.LISTAR_PERSONA_POR_DOCUMENTO;
-        super.obtenerPorId();
+        super.buscar();
         return this.persona;
     }
 
     @Override
-    protected void incluirValorDeParametrosParaObtenerPorId() throws SQLException {
+    protected void incluirValorDeParametrosParaBuscar() throws SQLException {
         switch (tipoOperacionPersona) {
             case LISTAR_PERSONA_POR_DOCUMENTO ->
                 this.incluirParametroString(1, this.persona.getDocumento());
@@ -366,45 +371,6 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
             default ->
                 throw new AssertionError();
         }
-    }
-
-    /*
-     * **************************************************************************
-     * EXISTE USUARIO
-     * y funciones adicionales
-     * *************************************************************************
-     */
-    @Override
-    public Boolean existePersona(Persona persona) {
-        this.persona = persona;
-        Integer idPersona = null;
-        try {
-            this.abrirConexion();
-            String sql = "select ID_PERSONA from PERSONA where ";
-            sql = sql.concat("APELLIDO_PATERNO=? ");
-            sql = sql.concat("and APELLIDO_MATERNO=? ");
-            sql = sql.concat("and NOMBRE=? ");
-            sql = sql.concat("and DOCUMENTO=? ");
-            this.colocarSQLenStatement(sql);
-            this.incluirParametroString(1, this.persona.getPrimerApellido());
-            this.incluirParametroString(2, this.persona.getSegundoApellido());
-            this.incluirParametroString(3, this.persona.getNombre());
-            this.incluirParametroString(4, this.persona.getDocumento());
-            this.ejecutarConsultaEnBD(sql);
-            if (this.resultSet.next()) {
-                idPersona = this.resultSet.getInt("ID_PERSONA");
-            }
-        } catch (SQLException ex) {
-            System.err.println("Error al consultar si existe persona - " + ex);
-        } finally {
-            try {
-                this.cerrarConexion();
-            } catch (SQLException ex) {
-                System.err.println("Error al cerrar la conexión - " + ex);
-            }
-        }
-        this.persona.setIdPersona(idPersona);
-        return idPersona != null;
     }
 
     /*
@@ -427,7 +393,7 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
     public Persona verificarPersona(Persona persona) {
         this.persona = persona;
         this.tipoOperacionPersona = TipoOperacionPersona.VERIFICAR_PERSONA;
-        super.obtenerPorId();
+        super.buscar();
         
         System.out.println(this.persona.getNombre());        
         
