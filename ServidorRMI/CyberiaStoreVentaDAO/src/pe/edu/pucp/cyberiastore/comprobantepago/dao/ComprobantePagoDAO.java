@@ -23,4 +23,8 @@ public interface ComprobantePagoDAO {
     public ComprobantePago obtenerPorId(Integer idComprobantePago);
 
     public Boolean existeComprobantePago(ComprobantePago comprobantePago);
+    
+    public ArrayList<ComprobantePago> buscarPorSede(Integer idSede);
+    
+    public ArrayList<ComprobantePago> buscarPorUsuario(Integer idUsuario);
 }

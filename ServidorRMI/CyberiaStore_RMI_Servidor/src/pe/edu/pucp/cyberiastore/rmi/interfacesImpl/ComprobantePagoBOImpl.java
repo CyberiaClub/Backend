@@ -39,4 +39,14 @@ public class ComprobantePagoBOImpl extends UnicastRemoteObject implements Compro
     public ComprobantePago obtenerPorId(Integer idComprobantePago) throws RemoteException {
         return this.comprobantePagoBO.obtenerPorId(idComprobantePago);
     }
+
+    @Override
+    public ArrayList<ComprobantePago> buscarPersona(Integer idPersona) throws RemoteException {
+        return this.comprobantePagoBO.buscarPersona(idPersona);
+    }
+
+    @Override
+    public ArrayList<ComprobantePago> buscarSede(Integer idSede) throws RemoteException {
+        return this.comprobantePagoBO.buscarSede(idSede);
+    }
 }

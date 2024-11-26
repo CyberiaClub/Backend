@@ -15,4 +15,8 @@ public interface ComprobantePagoBO extends Remote {
     public ArrayList<ComprobantePago> listarTodos() throws RemoteException;
 
     public ComprobantePago obtenerPorId(Integer idComprobantePago) throws RemoteException;
+    
+    public ArrayList<ComprobantePago> buscarPersona(Integer idPersona) throws RemoteException;
+    
+    public ArrayList<ComprobantePago> buscarSede(Integer idSede) throws RemoteException;
 }

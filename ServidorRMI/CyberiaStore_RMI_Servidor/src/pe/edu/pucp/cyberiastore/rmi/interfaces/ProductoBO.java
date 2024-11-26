@@ -16,7 +16,7 @@ public interface ProductoBO extends Remote {
 
     public Producto obtenerPorIdPorId(String idProducto) throws RemoteException;
     
-    public Producto obtenerPorId_sku(String sku, Integer idSede) throws RemoteException;
+    public Producto buscar_sku(String sku, Integer idSede) throws RemoteException;
     
     public Integer aumentarStock(Integer idProducto, Integer idSede, Integer cantidad) throws RemoteException;
     
