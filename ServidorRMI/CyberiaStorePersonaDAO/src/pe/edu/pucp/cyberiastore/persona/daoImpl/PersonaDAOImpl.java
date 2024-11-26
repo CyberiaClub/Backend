@@ -317,9 +317,9 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
                     sql = sql.concat("P.NOMBRE, P.PRIMER_APELLIDO, P.SEGUNDO_APELLIDO, ");
                     sql = sql.concat("P.CORREO, TP.NOMBRE AS TIPO_USUARIO ");
                 }
-
             }
         }
+        
         return sql;
     }
 

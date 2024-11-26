@@ -105,13 +105,15 @@ public class ComprobantePagoDAOImpl extends DAOImpl implements ComprobantePagoDA
     @Override
     protected String obtenerPredicadoParaListado() {
         String sql = " WHERE ";
-        switch (tipoOperacionComprobante) {
-            case BUSCAR_SEDE ->
-                sql = sql.concat("ID_SEDE=? ");
-            case BUSCAR_USUARIO ->
-                sql = sql.concat("ID_PERSONA=? ");
-            default ->
-                sql = sql.concat("ID_COMPROBANTE_DE_PAGO=? ");
+        if (this.tipoOperacionComprobante != null) {
+            switch (tipoOperacionComprobante) {
+                case BUSCAR_SEDE ->
+                    sql = sql.concat("ID_SEDE=? ");
+                case BUSCAR_USUARIO ->
+                    sql = sql.concat("ID_PERSONA=? ");
+                default ->
+                    sql = sql.concat("ID_COMPROBANTE_DE_PAGO=? ");
+            }
         }
         return sql;
     }
@@ -217,6 +219,7 @@ public class ComprobantePagoDAOImpl extends DAOImpl implements ComprobantePagoDA
      */
     @Override
     public ComprobantePago obtenerPorId(Integer idComprobantePago) {
+        this.tipo_Operacion = Tipo_Operacion.BUSCAR_POR_ID;
         this.comprobantePago = new ComprobantePago();
         this.comprobantePago.setIdComprobantePago(idComprobantePago);
         super.buscar();
@@ -231,7 +234,7 @@ public class ComprobantePagoDAOImpl extends DAOImpl implements ComprobantePagoDA
      */
     @Override
     public Boolean existeComprobantePago(ComprobantePago comprobantePago) {
-        return false;
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override

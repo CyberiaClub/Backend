@@ -123,6 +123,13 @@ public class OfertaDAOImpl extends DAOImpl implements OfertaDAO {
     @Override
     protected String obtenerPredicadoParaLlavePrimaria() {
         String sql = "";
+        if(this.tipo_Operacion != null){
+            switch(this.tipo_Operacion){
+                case LISTAR->{
+                    
+                }
+            }
+        }
         if (this.tipo_Operacion == Tipo_Operacion.MODIFICAR || this.tipo_Operacion == Tipo_Operacion.ELIMINAR) {
             sql = "ID_OFERTA=?";
         } else {
@@ -169,7 +176,7 @@ public class OfertaDAOImpl extends DAOImpl implements OfertaDAO {
 
     @Override
     protected String obtenerProyeccionParaSelect() {
-        String sql = "id_oferta, fecha_inicio, fecha_fin, porcentaje,imagen";
+        String sql = "ID_OFERTA, FECHA_INICIO, FECHA_FIN, PORCENTAJE,IMAGEN";
         return sql;
     }
 
@@ -207,6 +214,7 @@ public class OfertaDAOImpl extends DAOImpl implements OfertaDAO {
      */
     @Override
     public Oferta obtenerPorId(Integer idOferta) {
+        this.tipo_Operacion = Tipo_Operacion.BUSCAR_POR_ID;
         this.oferta = new Oferta();
         this.oferta.setIdOferta(idOferta);
         super.buscar();
