@@ -124,14 +124,20 @@ public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
     @Override
     protected String obtenerPredicadoParaLlavePrimaria() {
         String sql = "";
-        if (this.tipo_Operacion == Tipo_Operacion.MODIFICAR
-                || this.tipo_Operacion == Tipo_Operacion.ELIMINAR) {
-            sql = "ID_PROVEEDOR=?";
-        } else if (this.tipo_Operacion == Tipo_Operacion.EXISTE) {
-            sql = "RUC=?";
-        } else {
-            sql = "ID_PROVEEDOR=?";
+        if (this.tipo_Operacion != null) {
+            switch (this.tipo_Operacion) {
+                case EXISTE -> {
+                    sql = "RUC=?";
+                }
+                case LISTAR -> {
+                    sql = "";
+                }
+                default -> {
+                    sql = "ID_PROVEEDOR=?";
+                }
+            }
         }
+
         return sql;
     }
 
@@ -199,12 +205,14 @@ public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
     @Override
     protected String obtenerProyeccionParaSelect() {
         String sql = "";
-        switch (this.tipo_Operacion) {
-            case LISTAR -> {
-                sql = "ID_PROVEEDOR, RUC, RAZON_SOCIAL, NOMBRE_DEL_CONTACTO, CORREO, TELEFONO, DIRECCION, DESCRIPCION";
-            }
-            case EXISTE -> {
-                sql = "ID_PROVEEDOR";
+        if (this.tipo_Operacion != null) {
+            switch (this.tipo_Operacion) {
+                case EXISTE -> {
+                    sql = "ID_PROVEEDOR";
+                }
+                default -> {
+                    sql = "ID_PROVEEDOR, RUC, RAZON_SOCIAL, NOMBRE_DEL_CONTACTO, CORREO, TELEFONO, DIRECCION, DESCRIPCION";
+                }
             }
         }
         return sql;
@@ -219,19 +227,21 @@ public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
     @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.proveedor = new Proveedor();
-        switch (this.tipo_Operacion) {
-            case LISTAR -> {
-                this.proveedor.setIdProveedor(this.resultSet.getInt("ID_PROVEEDOR"));
-                this.proveedor.setRuc(this.resultSet.getString("RUC"));
-                this.proveedor.setRazonSocial(this.resultSet.getString("RAZON_SOCIAL"));
-                this.proveedor.setNombreContacto(this.resultSet.getString("NOMBRE_DEL_CONTACTO"));
-                this.proveedor.setCorreo(this.resultSet.getString("CORREO"));
-                this.proveedor.setTelefono(this.resultSet.getString("TELEFONO"));
-                this.proveedor.setDireccion(this.resultSet.getString("DIRECCION"));
-                this.proveedor.setDescripcion(this.resultSet.getString("DESCRIPCION"));
-            }
-            case EXISTE -> {
-                this.proveedor.setIdProveedor(this.resultSet.getInt("ID_PROVEEDOR"));
+        if (this.tipo_Operacion != null) {
+            switch (this.tipo_Operacion) {
+                case EXISTE -> {
+                    this.proveedor.setIdProveedor(this.resultSet.getInt("ID_PROVEEDOR"));
+                }
+                default -> {
+                    this.proveedor.setIdProveedor(this.resultSet.getInt("ID_PROVEEDOR"));
+                    this.proveedor.setRuc(this.resultSet.getString("RUC"));
+                    this.proveedor.setRazonSocial(this.resultSet.getString("RAZON_SOCIAL"));
+                    this.proveedor.setNombreContacto(this.resultSet.getString("NOMBRE_DEL_CONTACTO"));
+                    this.proveedor.setCorreo(this.resultSet.getString("CORREO"));
+                    this.proveedor.setTelefono(this.resultSet.getString("TELEFONO"));
+                    this.proveedor.setDireccion(this.resultSet.getString("DIRECCION"));
+                    this.proveedor.setDescripcion(this.resultSet.getString("DESCRIPCION"));
+                }
             }
         }
 
@@ -249,6 +259,7 @@ public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
      */
     @Override
     public Proveedor obtenerPorId(Integer idProveedor) {
+        this.tipo_Operacion = Tipo_Operacion.BUSCAR_POR_ID;
         this.proveedor = new Proveedor();
         this.proveedor.setIdProveedor(idProveedor);
         super.buscar();
@@ -257,7 +268,16 @@ public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
 
     @Override
     protected void incluirValorDeParametrosParaBuscar() throws SQLException {
-        this.incluirParametroString(1, this.proveedor.getRuc());
+        if (this.tipo_Operacion != null) {
+            switch (this.tipo_Operacion) {
+                case EXISTE -> {
+                    this.incluirParametroString(1, this.proveedor.getRuc());
+                }
+                case BUSCAR_POR_ID -> {
+                    this.incluirParametroInt(1, this.proveedor.getIdProveedor());
+                }
+            }
+        }
     }
 
     /*
@@ -268,6 +288,7 @@ public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
      */
     @Override
     public Boolean existeProveedor(Proveedor proveedor) {
+        this.tipo_Operacion = Tipo_Operacion.EXISTE;
         Boolean abreConexion = true;
         this.proveedor = proveedor;
         super.buscar();

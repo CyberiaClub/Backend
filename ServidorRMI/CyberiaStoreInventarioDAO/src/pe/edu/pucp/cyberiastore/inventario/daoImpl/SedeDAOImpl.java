@@ -19,13 +19,12 @@ import pe.edu.pucp.cyberiastore.inventario.model.TipoProducto;
 public class SedeDAOImpl extends DAOImpl implements SedeDAO {
 
     private Sede sede;
-    private Tipo_Operacion tipoOperacion;
     private TipoOperacionInventario tipoOperacionInventario;
 
     public SedeDAOImpl() {
         super("SEDE");
         this.sede = null;
-        this.tipoOperacion = null;
+        this.tipo_Operacion = null;
     }
 
     /*
@@ -130,14 +129,29 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
     @Override
     protected String obtenerPredicadoParaLlavePrimaria() {
         String sql = "";
-        if (this.tipoOperacion == Tipo_Operacion.MODIFICAR
-                || this.tipoOperacion == Tipo_Operacion.ELIMINAR) {
-            sql = "ID_SEDE=?";
-        } else if (this.tipoOperacion == Tipo_Operacion.EXISTE) {
-            sql = "NOMBRE=?";
-        } else {
-            sql = "PER.ID_SEDE=?";
+        if (this.tipoOperacionInventario != null) {
+            switch (this.tipoOperacionInventario) {
+                case LISTAR_STOCK_SEDE -> {
+                    sql = "PER.ID_SEDE=?";
+                }
+                default ->
+                    sql = "";
+            }
         }
+        if (this.tipo_Operacion != null) {
+            switch (this.tipo_Operacion) {
+                case EXISTE -> {
+                    sql = "NOMBRE=?";
+                }
+                case LISTAR -> {
+                    sql = "";
+                }
+                default -> {
+                    sql = "ID_SEDE=?";
+                }
+            }
+        }
+
         return sql;
     }
 
@@ -175,7 +189,7 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
      */
     @Override
     public ArrayList<Sede> listarTodos() {
-        this.tipoOperacionInventario = TipoOperacionInventario.LISTAR_SEDES;
+        this.tipo_Operacion = Tipo_Operacion.LISTAR;
         return (ArrayList<Sede>) super.listarTodos(null);
     }
 
@@ -192,10 +206,10 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
         String sql = "";
         if (this.tipoOperacionInventario != null) {
             switch (this.tipoOperacionInventario) {
-                case TipoOperacionInventario.LISTAR_SEDES ->
-                    sql = sql.concat("ID_SEDE, NOMBRE, DESCRIPCION, TELEFONO, HORARIO_APERTURA, HORARIO_CIERRE");
                 case TipoOperacionInventario.LISTAR_STOCK_SEDE ->
                     sql = sql.concat("PD.SKU, PD.NOMBRE, PD.DESCRIPCION, PD.PRECIO,TP.TIPO, M.NOMBRE, PXS.STOCK_SEDE");
+                default ->
+                    sql = "";
             }
         }
 
@@ -204,6 +218,8 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
                 case EXISTE -> {
                     sql = sql.concat("ID_SEDE");
                 }
+                default ->
+                    sql = sql.concat("ID_SEDE, NOMBRE, DESCRIPCION, TELEFONO, HORARIO_APERTURA, HORARIO_CIERRE");
             }
         }
         return sql;
@@ -214,8 +230,6 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
         String sql = "";
         if (this.tipoOperacionInventario != null) {
             switch (this.tipoOperacionInventario) {
-                case TipoOperacionInventario.LISTAR_SEDES -> {
-                }
                 case TipoOperacionInventario.LISTAR_STOCK_SEDE -> {
                     sql = sql.concat(" S ");
                     sql = sql.concat("JOIN PRODUCTO_X_SEDE PXS ON S.ID_SEDE = PXS.ID_SEDE ");
@@ -224,8 +238,9 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
                     sql = sql.concat("JOIN MARCA M ON PD.ID_MARCA = M.ID_MARCA ");
                     sql = sql.concat("WHERE S.ID_SEDE = ?");
                 }
-                default ->
-                    throw new AssertionError();
+                default -> {
+                    sql = "";
+                }
             }
         }
         return sql;
@@ -235,13 +250,9 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
     protected void incluirValorDeParametrosParaListado() throws SQLException {
         if (this.tipoOperacionInventario != null) {
             switch (this.tipoOperacionInventario) {
-                case TipoOperacionInventario.LISTAR_SEDES -> {
-                }
                 case TipoOperacionInventario.LISTAR_STOCK_SEDE -> {
                     this.incluirParametroInt(1, this.sede.getIdSede());
                 }
-                default ->
-                    throw new AssertionError();
             }
         }
     }
@@ -251,29 +262,27 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
         instanciarObjetoDelResultSet();
         if (this.tipoOperacionInventario != null) {
             switch (this.tipoOperacionInventario) {
-                case TipoOperacionInventario.LISTAR_SEDES ->
-                    lista.add(this.sede);
                 case TipoOperacionInventario.LISTAR_STOCK_SEDE ->
                     lista.add(this.sede.getProducto());
                 default ->
                     throw new AssertionError();
             }
         }
+
+        if (this.tipo_Operacion != null) {
+            switch (this.tipo_Operacion) {
+                case LISTAR -> {
+                    lista.add(this.sede);
+                }
+            }
+        }
     }
 
     @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
+        this.sede = new Sede();
         if (this.tipoOperacionInventario != null) {
             switch (this.tipoOperacionInventario) {
-                case TipoOperacionInventario.LISTAR_SEDES -> {
-                    this.sede = new Sede();
-                    this.sede.setIdSede(this.resultSet.getInt("ID_SEDE"));
-                    this.sede.setNombre(this.resultSet.getString("NOMBRE"));
-                    this.sede.setDescripcion(this.resultSet.getString("DESCRIPCION"));
-                    this.sede.setTelefono(this.resultSet.getString("TELEFONO"));
-                    this.sede.setHorarioApertura(this.resultSet.getTime("HORARIO_APERTURA").toLocalTime());
-                    this.sede.setHorarioCierre(this.resultSet.getTime("HORARIO_CIERRE").toLocalTime());
-                }
                 case TipoOperacionInventario.LISTAR_STOCK_SEDE -> {
                     Producto producto = new Producto();
                     producto.setSku(this.resultSet.getString("PD.SKU"));
@@ -290,7 +299,6 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
                     producto.setTipoProducto(tipoProd);
                     producto.setMarca(marca);
 
-                    this.sede = new Sede();
                     this.sede.setProducto(producto);
                 }
             }
@@ -300,6 +308,15 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
             switch (this.tipo_Operacion) {
                 case EXISTE -> {
                     this.sede.setIdSede(this.resultSet.getInt("ID_SEDE"));
+                }
+                default -> {
+
+                    this.sede.setIdSede(this.resultSet.getInt("ID_SEDE"));
+                    this.sede.setNombre(this.resultSet.getString("NOMBRE"));
+                    this.sede.setDescripcion(this.resultSet.getString("DESCRIPCION"));
+                    this.sede.setTelefono(this.resultSet.getString("TELEFONO"));
+                    this.sede.setHorarioApertura(this.resultSet.getTime("HORARIO_APERTURA").toLocalTime());
+                    this.sede.setHorarioCierre(this.resultSet.getTime("HORARIO_CIERRE").toLocalTime());
                 }
             }
         }
@@ -317,6 +334,7 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
      */
     @Override
     public Sede obtenerPorId(Integer idSede) {
+        this.tipo_Operacion = Tipo_Operacion.BUSCAR_POR_ID;
         this.sede = new Sede();
         this.sede.setIdSede(idSede);
         super.buscar();
@@ -325,7 +343,17 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
 
     @Override
     protected void incluirValorDeParametrosParaBuscar() throws SQLException {
-        this.incluirParametroString(1, this.sede.getNombre());
+        if (this.tipo_Operacion != null) {
+            switch (this.tipo_Operacion) {
+                case EXISTE -> {
+                    this.incluirParametroString(1, this.sede.getNombre());
+                }
+                case BUSCAR_POR_ID -> {
+                    this.incluirParametroInt(1, this.sede.getIdSede());
+                }
+            }
+        }
+
     }
 
     /*
@@ -336,6 +364,7 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
      */
     @Override
     public Boolean existeSede(Sede sede) {
+        this.tipo_Operacion = Tipo_Operacion.EXISTE;
         Boolean abreConexion = true;
         this.sede = sede;
         super.buscar();
