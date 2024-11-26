@@ -14,7 +14,7 @@ import pe.edu.pucp.cyberiastore.oferta.model.Oferta;
 public class CyberiaStoreVentaTest {
 
     public static void main(String[] args) {
-
+        
     }
 
 }

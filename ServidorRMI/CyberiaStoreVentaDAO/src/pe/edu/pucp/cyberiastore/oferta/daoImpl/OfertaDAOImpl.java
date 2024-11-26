@@ -126,7 +126,10 @@ public class OfertaDAOImpl extends DAOImpl implements OfertaDAO {
         if(this.tipo_Operacion != null){
             switch(this.tipo_Operacion){
                 case LISTAR->{
-                    
+                    sql = "";
+                }
+                default->{
+                    sql = "ID_OFERTA=?";
                 }
             }
         }
