@@ -104,15 +104,15 @@ public class ComprobantePagoDAOImpl extends DAOImpl implements ComprobantePagoDA
 
     @Override
     protected String obtenerPredicadoParaListado() {
-        String sql = " WHERE ";
+        String sql = "";
         if (this.tipoOperacionComprobante != null) {
             switch (tipoOperacionComprobante) {
                 case BUSCAR_SEDE ->
-                    sql = sql.concat("ID_SEDE=? ");
+                    sql = sql.concat(" WHERE ID_SEDE=? ");
                 case BUSCAR_USUARIO ->
-                    sql = sql.concat("ID_PERSONA=? ");
+                    sql = sql.concat(" WHERE ID_PERSONA=? ");
                 default ->
-                    sql = sql.concat("ID_COMPROBANTE_DE_PAGO=? ");
+                    sql = sql.concat(" WHERE ID_COMPROBANTE_DE_PAGO=? ");
             }
         }
         return sql;
@@ -166,19 +166,23 @@ public class ComprobantePagoDAOImpl extends DAOImpl implements ComprobantePagoDA
     }
 
     @Override
-    protected void incluirValorDeParametrosParaBuscar() throws SQLException {
-        this.incluirParametroInt(1, this.comprobantePago.getIdComprobantePago());
-    }
-
-    @Override
     protected void incluirValorDeParametrosParaListado() throws SQLException {
-        switch (tipoOperacionComprobante) {
-            case BUSCAR_SEDE ->
-                this.incluirParametroInt(1, this.comprobantePago.getIdSede());
-            case BUSCAR_USUARIO ->
-                this.incluirParametroInt(1, this.comprobantePago.getPersona().getIdPersona());
-            default ->
-                this.incluirParametroInt(1, this.comprobantePago.getIdComprobantePago());
+        if (this.tipoOperacionComprobante != null) {
+            switch (tipoOperacionComprobante) {
+                case BUSCAR_SEDE ->
+                    this.incluirParametroInt(1, this.comprobantePago.getIdSede());
+                case BUSCAR_USUARIO ->
+                    this.incluirParametroInt(1, this.comprobantePago.getPersona().getIdPersona());
+                default ->
+                    this.incluirParametroInt(1, this.comprobantePago.getIdComprobantePago());
+            }
+        }
+        if (this.tipo_Operacion != null) {
+            switch (tipo_Operacion) {
+                case BUSCAR_POR_ID -> {
+                    this.incluirParametroInt(1, this.comprobantePago.getIdComprobantePago());
+                }
+            }
         }
     }
 
@@ -224,6 +228,11 @@ public class ComprobantePagoDAOImpl extends DAOImpl implements ComprobantePagoDA
         this.comprobantePago.setIdComprobantePago(idComprobantePago);
         super.buscar();
         return this.comprobantePago;
+    }
+
+    @Override
+    protected void incluirValorDeParametrosParaBuscar() throws SQLException {
+        this.incluirParametroInt(1, this.comprobantePago.getIdComprobantePago());
     }
 
     /*

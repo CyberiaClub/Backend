@@ -25,9 +25,6 @@ import pe.edu.pucp.cyberiastore.inventario.model.TipoProducto;
 public class CyberiaStoreInventarioTest {
 
     public static void main(String[] args) {
-        ProductoBO pBO = new ProductoBO();
-        
-        ArrayList<Producto> pds = pBO.listarTodos();
     }
 
 }

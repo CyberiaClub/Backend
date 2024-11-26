@@ -123,20 +123,15 @@ public class OfertaDAOImpl extends DAOImpl implements OfertaDAO {
     @Override
     protected String obtenerPredicadoParaLlavePrimaria() {
         String sql = "";
-        if(this.tipo_Operacion != null){
-            switch(this.tipo_Operacion){
-                case LISTAR->{
+        if (this.tipo_Operacion != null) {
+            switch (this.tipo_Operacion) {
+                case LISTAR -> {
                     sql = "";
                 }
-                default->{
+                default -> {
                     sql = "ID_OFERTA=?";
                 }
             }
-        }
-        if (this.tipo_Operacion == Tipo_Operacion.MODIFICAR || this.tipo_Operacion == Tipo_Operacion.ELIMINAR) {
-            sql = "ID_OFERTA=?";
-        } else {
-            sql = "PER.ID_OFERTA=?";
         }
         return sql;
     }
@@ -179,7 +174,7 @@ public class OfertaDAOImpl extends DAOImpl implements OfertaDAO {
 
     @Override
     protected String obtenerProyeccionParaSelect() {
-        String sql = "ID_OFERTA, FECHA_INICIO, FECHA_FIN, PORCENTAJE,IMAGEN";
+        String sql = "ID_OFERTA, FECHA_INICIO, FECHA_FIN,IMAGEN";
         return sql;
     }
 
@@ -200,7 +195,6 @@ public class OfertaDAOImpl extends DAOImpl implements OfertaDAO {
         this.oferta.setIdOferta(this.resultSet.getInt("ID_OFERTA"));
         this.oferta.setFechaDeInicio(this.resultSet.getDate("FECHA_INICIO"));
         this.oferta.setFechaDeFin(this.resultSet.getDate("FECHA_FIN"));
-        this.oferta.setPorcentaje(this.resultSet.getInt("PORCENTAJE"));
         this.oferta.setImagen(this.resultSet.getBytes("IMAGEN"));
     }
 
