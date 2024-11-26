@@ -39,7 +39,6 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
      * @param persona: este tiene que contener todos sus atributos ya cargados
      * @return
      */
-    
     @Override
     public Integer insertar(Persona persona) {
         this.tipoOperacionPersona = persona.getIdSede() == null ? TipoOperacionPersona.INSERTAR_CLIENTE : TipoOperacionPersona.INSERTAR_TRABAJADOR;
@@ -173,7 +172,7 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
                     sql = sql.concat(" TP.ID_TIPO_PERSONA = P.ID_TIPO_PERSONA ");
                     sql = sql.concat(" AND P.VERIFICADO = 1  ");
                     sql = sql.concat(" AND P.ACTIVO = 1  ");
-                        sql = sql.concat(" AND CORREO = ? ");
+                    sql = sql.concat(" AND CORREO = ? ");
                     sql = sql.concat(" AND CONTRASEÑA = ? ");
                 }
             }
@@ -319,7 +318,7 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
                 }
             }
         }
-        
+
         return sql;
     }
 

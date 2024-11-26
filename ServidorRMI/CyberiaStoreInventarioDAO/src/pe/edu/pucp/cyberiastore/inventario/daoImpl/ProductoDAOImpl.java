@@ -237,7 +237,8 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
                 }
                 default -> {
                     sql = sql.concat(" PD.ID_PRODUCTO, PD.SKU, PD.NOMBRE, PD.DESCRIPCION, PD.PRECIO, PD.PRECIO_PROVEEDOR, ");
-                    sql = sql.concat("PD.IMAGEN, M.ID_MARCA, M.NOMBRE AS NOMBRE_MARCA, TP.ID_TIPO_PRODUCTO, TP.TIPO ");
+                    sql = sql.concat("PD.IMAGEN, M.ID_MARCA, M.NOMBRE AS NOMBRE_MARCA, TP.ID_TIPO_PRODUCTO, TP.TIPO, ");
+                    sql = sql.concat("PXS.ID_SEDE, PXS.STOCK_SEDE");
                 }
             }
         }
@@ -268,6 +269,7 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
                 }
                 default -> {
                     sql = sql.concat(" PD ");
+                    sql = sql.concat("join PRODUCTO_X_SEDE PXS on PD.ID_PRODUCTO = PXS.ID_PRODUCTO ");
                     sql = sql.concat("join MARCA M on PD.ID_MARCA = M.ID_MARCA ");
                     sql = sql.concat("join TIPO_PRODUCTO TP on PD.ID_TIPO_PRODUCTO = TP.ID_TIPO_PRODUCTO ");
                 }
@@ -334,6 +336,8 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
                     this.producto.setPrecio(this.resultSet.getDouble("PRECIO"));
                     this.producto.setPrecioProveedor(this.resultSet.getDouble("PRECIO_PROVEEDOR"));
                     this.producto.setImagen(this.resultSet.getBytes("IMAGEN"));
+                    this.producto.setIdSede(this.resultSet.getInt("PXS.ID_SEDE"));
+                    this.producto.setCantidad(this.resultSet.getInt("PXS.STOCK_SEDE"));
 
                     Marca marca = new Marca();
                     marca.setIdMarca(this.resultSet.getInt("ID_MARCA"));

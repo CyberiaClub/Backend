@@ -93,7 +93,7 @@ public class TipoPersonaDAOImpl extends DAOImpl implements TipoPersonaDAO {
     protected String obtenerProyeccionParaSelect() {
         String sql = "";
         switch (this.tipoOperacionPersona) {
-            case LISTAR_TIPO_TRABAJADORES->{
+            case LISTAR_TIPO_TRABAJADORES -> {
                 sql = sql.concat(" ID_TIPO_PERSONA, NOMBRE ");
             }
             case LISTAR_PERSONA_POR_DOCUMENTO ->
@@ -140,7 +140,7 @@ public class TipoPersonaDAOImpl extends DAOImpl implements TipoPersonaDAO {
 
     @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
-        if(this.tipoOperacionPersona != TipoOperacionPersona.LISTAR_PAGINAS){
+        if (this.tipoOperacionPersona != TipoOperacionPersona.LISTAR_PAGINAS) {
             this.tipoPersona = new TipoPersona();
         }
         switch (this.tipoOperacionPersona) {
@@ -189,7 +189,7 @@ public class TipoPersonaDAOImpl extends DAOImpl implements TipoPersonaDAO {
         this.tipoPersona.setPaginas(p);
         this.tipoPersona.setNombre(tipo_persona);
         this.tipoOperacionPersona = TipoOperacionPersona.LISTAR_PAGINAS;
-        
+
         super.buscar();
         return this.tipoPersona;
     }

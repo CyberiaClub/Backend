@@ -5,16 +5,17 @@ import java.util.ArrayList;
 import pe.edu.pucp.cyberiastore.inventario.model.Producto;
 
 public class Pedido {
+
     private Integer idPedido;
     private EstadoPedido estadoPedido;
     private ArrayList<Producto> productos;
     private ArrayList<Integer> cantidades;
     private ArrayList<Double> precios;
-    
-    public Pedido(){
+
+    public Pedido() {
         this.estadoPedido = EstadoPedido.EN_PREPARACION;
     }
-    
+
     public Pedido(EstadoPedido estadoPedido) {
         this.estadoPedido = EstadoPedido.EN_PREPARACION;
     }
@@ -22,11 +23,11 @@ public class Pedido {
     public Integer getIdPedido() {
         return idPedido;
     }
-    
+
     public void setIdPedido(Integer idPedido) {
         this.idPedido = idPedido;
     }
-    
+
     public EstadoPedido getEstadoPedido() {
         return estadoPedido;
     }
@@ -59,6 +60,4 @@ public class Pedido {
         this.precios = precios;
     }
 
-
-    
 }

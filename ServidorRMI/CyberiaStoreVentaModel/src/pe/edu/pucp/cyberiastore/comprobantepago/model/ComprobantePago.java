@@ -22,7 +22,7 @@ public class ComprobantePago implements Serializable {
     private String direccion;
     private TipoComprobante tipoComprobante;
     private Persona persona;
-    private HashMap<Producto,Integer> lineaPedido;
+    private HashMap<Producto, Integer> lineaPedido;
     private Integer idSede;
 
     public ComprobantePago() {
@@ -173,11 +173,11 @@ public class ComprobantePago implements Serializable {
     public void setLineaPedido(HashMap<Producto, Integer> lineaPedido) {
         this.lineaPedido = lineaPedido;
     }
-    
+
     public Integer getIdSede() {
         return idSede;
     }
-    
+
     public void setIdSede(Integer idSede) {
         this.idSede = idSede;
     }

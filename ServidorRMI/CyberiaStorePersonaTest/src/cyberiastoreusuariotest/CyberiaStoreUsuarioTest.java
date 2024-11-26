@@ -11,7 +11,7 @@ import pe.edu.pucp.cyberiastore.persona.model.Token;
 public class CyberiaStoreUsuarioTest {
 
     public static void main(String[] args) {
-    
+
     }
 
 }
