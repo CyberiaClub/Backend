@@ -36,7 +36,7 @@ public class ProductoBOImpl extends UnicastRemoteObject implements ProductoBO {
     }
 
     @Override
-    public Producto obtenerPorIdPorId(String idProducto) throws RemoteException {
+    public Producto obtenerPorIdPorId(Integer idProducto) throws RemoteException {
         return this.productoBO.obtenerPorId(idProducto);
     }
 

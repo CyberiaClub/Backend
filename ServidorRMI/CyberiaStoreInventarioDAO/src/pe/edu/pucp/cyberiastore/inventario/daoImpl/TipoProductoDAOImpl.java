@@ -119,13 +119,21 @@ public class TipoProductoDAOImpl extends DAOImpl implements TipoProductoDAO {
     @Override
     protected String obtenerPredicadoParaLlavePrimaria() {
         String sql = "";
-        if (this.tipo_Operacion == Tipo_Operacion.MODIFICAR || this.tipo_Operacion == Tipo_Operacion.ELIMINAR) {
-            sql = "ID_TIPO_PRODUCTO=?";
-        } else if (this.tipo_Operacion == Tipo_Operacion.EXISTE) {
-            sql = "TIPO=?";
-        } else {
-            sql = "ID_TIPO_PRODUCTO=?";
+
+        if (this.tipo_Operacion != null) {
+            switch (this.tipo_Operacion) {
+                case EXISTE -> {
+                    sql = "TIPO=?";
+                }
+                case LISTAR -> {
+                    sql = "";
+                }
+                default -> {
+                    sql = "ID_TIPO_PRODUCTO=?";
+                }
+            }
         }
+
         return sql;
     }
 
@@ -190,12 +198,11 @@ public class TipoProductoDAOImpl extends DAOImpl implements TipoProductoDAO {
         String sql = "";
         if (this.tipo_Operacion != null) {
             switch (this.tipo_Operacion) {
-                case LISTAR -> {
-                    sql = "ID_TIPO_PRODUCTO, TIPO, IMAGEN";
-                }
                 case EXISTE -> {
                     sql = "ID_TIPO_PRODUCTO";
                 }
+                default ->
+                    sql = "ID_TIPO_PRODUCTO, TIPO, IMAGEN";
             }
         }
         return sql;
@@ -212,13 +219,13 @@ public class TipoProductoDAOImpl extends DAOImpl implements TipoProductoDAO {
         this.tipoProducto = new TipoProducto();
         if (this.tipo_Operacion != null) {
             switch (this.tipo_Operacion) {
-                case LISTAR -> {
+                case EXISTE -> {
+                    this.tipoProducto.setIdTipoProducto(this.resultSet.getInt("ID_TIPO_PRODUCTO"));
+                }
+                default -> {
                     this.tipoProducto.setIdTipoProducto(this.resultSet.getInt("ID_TIPO_PRODUCTO"));
                     this.tipoProducto.setTipo(this.resultSet.getString("TIPO"));
                     this.tipoProducto.setImagen(this.resultSet.getBytes("IMAGEN"));
-                }
-                case EXISTE -> {
-                    this.tipoProducto.setIdTipoProducto(this.resultSet.getInt("ID_TIPO_PRODUCTO"));
                 }
             }
         }
@@ -237,6 +244,7 @@ public class TipoProductoDAOImpl extends DAOImpl implements TipoProductoDAO {
      */
     @Override
     public TipoProducto obtenerPorId(Integer idTipoProducto) {
+        this.tipo_Operacion = Tipo_Operacion.BUSCAR_POR_ID;
         this.tipoProducto = new TipoProducto();
         this.tipoProducto.setIdTipoProducto(idTipoProducto);
         super.buscar();
@@ -245,7 +253,17 @@ public class TipoProductoDAOImpl extends DAOImpl implements TipoProductoDAO {
 
     @Override
     protected void incluirValorDeParametrosParaBuscar() throws SQLException {
-        this.incluirParametroString(1, this.tipoProducto.getTipo());
+        if (this.tipo_Operacion != null) {
+            switch (this.tipo_Operacion) {
+                case EXISTE -> {
+                    this.incluirParametroString(1, this.tipoProducto.getTipo());
+                }
+                case BUSCAR_POR_ID -> {
+                    this.incluirParametroInt(1, this.tipoProducto.getIdTipoProducto());
+                }
+            }
+        }
+
     }
 
     /*
@@ -256,6 +274,7 @@ public class TipoProductoDAOImpl extends DAOImpl implements TipoProductoDAO {
      */
     @Override
     public Boolean existeTipoProducto(TipoProducto tipoProducto) {
+        this.tipo_Operacion = Tipo_Operacion.EXISTE;
         Boolean abreConexion = true;
         this.tipoProducto = tipoProducto;
         super.buscar();

@@ -11,16 +11,13 @@ import pe.edu.pucp.cyberiastore.persona.model.Token;
 public class CyberiaStoreUsuarioTest {
 
     public static void main(String[] args) {
-        TokenDAO tokenDao = new TokenDAOImpl();
-        Token token = new Token();
-        
-        token.setValor("82bb266f-ca17-4c12-8d2d-0123bde0e71b");
-        token = tokenDao.buscarTokenPorValor(token);
         
 //         Persona BO Test
-//        PersonaBO personaBO = new PersonaBO();
-//        Persona persona = new Persona();
-//        Date date = new Date();
+        PersonaBO personaBO = new PersonaBO();
+        Persona persona = new Persona();
+        Date date = new Date();
+        
+        persona = personaBO.verificarPersona("adrian.arista22@gmail.com", "0ChHbZZ/nLOqeCLyf84AQw==");
 //        persona.setDocumento("71406755");
 //        persona.setTelefono("987468742");
 //        persona.setNombre("Adrian");

@@ -122,15 +122,18 @@ public class MarcaDAOImpl extends DAOImpl implements MarcaDAO {
     @Override
     protected String obtenerPredicadoParaLlavePrimaria() {
         String sql = "";
-
-        if (this.tipo_Operacion == Tipo_Operacion.MODIFICAR
-                || this.tipo_Operacion == Tipo_Operacion.ELIMINAR
-                || this.tipo_Operacion == Tipo_Operacion.EXISTE) {
-            sql = "ID_MARCA=? ";
-        } else if (this.tipo_Operacion == Tipo_Operacion.EXISTE) {
-            sql = "NOMBRE=? ";
-        } else {
-            sql = "ID_MARCA=? ";
+        if (this.tipo_Operacion != null) {
+            switch (this.tipo_Operacion) {
+                case EXISTE -> {
+                    sql = "NOMBRE=?";
+                }
+                case LISTAR -> {
+                    sql = "";
+                }
+                default -> {
+                    sql = "ID_MARCA=?";
+                }
+            }
         }
 
         return sql;
@@ -202,11 +205,11 @@ public class MarcaDAOImpl extends DAOImpl implements MarcaDAO {
         String sql = "";
         if (this.tipo_Operacion != null) {
             switch (this.tipo_Operacion) {
-                case LISTAR -> {
-                    sql = "M.ID_MARCA, M.NOMBRE, M.IMAGEN, PR.ID_PROVEEDOR, PR.RAZON_SOCIAL ";
-                }
                 case EXISTE -> {
                     sql = "ID_MARCA";
+                }
+                default -> {
+                    sql = "M.ID_MARCA, M.NOMBRE, M.IMAGEN, PR.ID_PROVEEDOR, PR.RAZON_SOCIAL ";
                 }
             }
         }
@@ -233,7 +236,10 @@ public class MarcaDAOImpl extends DAOImpl implements MarcaDAO {
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.marca = new Marca();
         switch (this.tipo_Operacion) {
-            case LISTAR -> {
+            case EXISTE -> {
+                this.marca.setIdMarca(this.resultSet.getInt("ID_MARCA"));
+            }
+            default -> {
                 this.marca.setIdMarca(this.resultSet.getInt("M.ID_MARCA"));
                 this.marca.setNombre(this.resultSet.getString("M.NOMBRE"));
                 this.marca.setImagen(this.resultSet.getBytes("M.IMAGEN"));
@@ -243,9 +249,6 @@ public class MarcaDAOImpl extends DAOImpl implements MarcaDAO {
                 proveedor.setRazonSocial(this.resultSet.getString("PR.RAZON_SOCIAL"));
 
                 this.marca.setProveedor(proveedor);
-            }
-            case EXISTE -> {
-                this.marca.setIdMarca(this.resultSet.getInt("ID_MARCA"));
             }
         }
 
@@ -272,8 +275,16 @@ public class MarcaDAOImpl extends DAOImpl implements MarcaDAO {
 
     @Override
     protected void incluirValorDeParametrosParaBuscar() throws SQLException {
-        this.incluirParametroInt(1, this.marca.getIdMarca());
+        switch (this.tipo_Operacion) {
+            case BUSCAR_POR_ID -> {
+                this.incluirParametroInt(1, this.marca.getIdMarca());
+            }
+            case EXISTE -> {
+                this.incluirParametroString(1, this.marca.getNombre());
+            }
+        }
     }
+
 
     /*
      * *************************************************************************

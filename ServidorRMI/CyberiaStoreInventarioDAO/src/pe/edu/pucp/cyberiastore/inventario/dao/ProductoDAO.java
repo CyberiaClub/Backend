@@ -14,7 +14,7 @@ public interface ProductoDAO {
 
     public ArrayList<Producto> listarTodos();
 
-    public Producto obtenerPorId(String idProducto);
+    public Producto obtenerPorId(Integer idProducto);
 
     public Boolean existeProducto(Producto producto);
 

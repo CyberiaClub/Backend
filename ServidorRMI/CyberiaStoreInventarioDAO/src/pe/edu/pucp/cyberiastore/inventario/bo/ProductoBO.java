@@ -33,7 +33,7 @@ public class ProductoBO {
         return productos;
     }
 
-    public Producto obtenerPorId(String idProducto) {
+    public Producto obtenerPorId(Integer idProducto) {
         Producto producto = this.productoDAO.obtenerPorId(idProducto);
         return producto;
     }
