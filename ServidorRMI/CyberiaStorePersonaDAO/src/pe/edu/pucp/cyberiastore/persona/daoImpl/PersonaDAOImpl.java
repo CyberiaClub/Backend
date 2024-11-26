@@ -223,7 +223,7 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
                 this.incluirParametroString(1, this.persona.getTelefono());
                 this.incluirParametroString(2, this.persona.getCorreo());
                 this.incluirParametroString(3, this.persona.getDireccion());
-                this.incluirParametroInt(4, this.persona.getIdSede());
+                this.incluirParametroInt(4, this.persona.getIdPersona());
             }
             case INSERTAR_TRABAJADOR -> {
                 this.incluirParametroDouble(1, this.persona.getSueldo());
@@ -407,7 +407,6 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
         this.persona = persona;
         this.tipoOperacionPersona = TipoOperacionPersona.VERIFICAR_PERSONA;
         super.buscar();
-
         return this.persona;
     }
 }
