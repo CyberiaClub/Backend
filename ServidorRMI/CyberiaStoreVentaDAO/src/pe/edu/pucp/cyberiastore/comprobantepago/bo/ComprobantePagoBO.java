@@ -34,13 +34,13 @@ public class ComprobantePagoBO {
         ComprobantePago comprobantePago = this.comprobantePagoDAO.obtenerPorId(idComprobantePago);
         return comprobantePago;
     }
-    
-    public ArrayList<ComprobantePago> buscarPersona(Integer idPersona){
+
+    public ArrayList<ComprobantePago> buscarPersona(Integer idPersona) {
         ArrayList<ComprobantePago> comprobantesPago = this.comprobantePagoDAO.buscarPorUsuario(idPersona);
         return comprobantesPago;
     }
-    
-    public ArrayList<ComprobantePago> buscarSede(Integer idSede){
+
+    public ArrayList<ComprobantePago> buscarSede(Integer idSede) {
         ArrayList<ComprobantePago> comprobantesPago = this.comprobantePagoDAO.buscarPorSede(idSede);
         return comprobantesPago;
     }

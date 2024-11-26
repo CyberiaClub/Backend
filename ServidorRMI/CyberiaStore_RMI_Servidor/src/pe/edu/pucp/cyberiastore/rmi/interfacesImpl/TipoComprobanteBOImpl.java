@@ -9,7 +9,7 @@ import pe.edu.pucp.cyberiastore.rmi.interfaces.TipoComprobanteBO;
 public class TipoComprobanteBOImpl extends UnicastRemoteObject implements TipoComprobanteBO {
 
     private pe.edu.pucp.cyberiastore.comprobantepago.bo.TipoComprobanteBO tipoComprobanteBO;
-    
+
     public TipoComprobanteBOImpl(Integer puerto) throws RemoteException {
         super(puerto);
         this.tipoComprobanteBO = new pe.edu.pucp.cyberiastore.comprobantepago.bo.TipoComprobanteBO();

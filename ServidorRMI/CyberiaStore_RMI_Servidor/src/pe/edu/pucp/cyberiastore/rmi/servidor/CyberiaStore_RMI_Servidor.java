@@ -37,13 +37,13 @@ public class CyberiaStore_RMI_Servidor {
     private static final String ARCHIVO_CONFIGURACION = "rmi.properties";
     private static String IP;
     private static Integer puerto;
-    
+
     public static void main(String[] args) {
         try {
             leer_archivo_de_propiedades();
-            
+
             LocateRegistry.createRegistry(puerto);
-            
+
             ComprobantePagoBO comprobantePagoBO = new ComprobantePagoBOImpl(puerto);
             MarcaBO marcaBO = new MarcaBOImpl(puerto);
             OfertaBO ofertaBO = new OfertaBOImpl(puerto);
@@ -54,48 +54,48 @@ public class CyberiaStore_RMI_Servidor {
             TipoComprobanteBO tipoComprobanteBO = new TipoComprobanteBOImpl(puerto);
             TipoPersonaBO tipoPersonaBO = new TipoPersonaBOImpl(puerto);
             TipoProductoBO tipoProductoBO = new TipoProductoBOImpl(puerto);
-            
+
             String nombreServicio = retornaNombreDelServicio("comprobantePagoBO");
             Naming.rebind(nombreServicio, comprobantePagoBO);
-            
+
             nombreServicio = retornaNombreDelServicio("marcaBO");
             Naming.rebind(nombreServicio, marcaBO);
-            
+
             nombreServicio = retornaNombreDelServicio("ofertaBO");
             Naming.rebind(nombreServicio, ofertaBO);
-            
+
             nombreServicio = retornaNombreDelServicio("personaBO");
             Naming.rebind(nombreServicio, personaBO);
             System.out.println(nombreServicio);
             nombreServicio = retornaNombreDelServicio("productoBO");
             Naming.rebind(nombreServicio, productoBO);
-            
+
             nombreServicio = retornaNombreDelServicio("proveedorBO");
             Naming.rebind(nombreServicio, proveedorBO);
-            
+
             nombreServicio = retornaNombreDelServicio("sedeBO");
             Naming.rebind(nombreServicio, sedeBO);
-            
+
             nombreServicio = retornaNombreDelServicio("tipoComprobanteBO");
             Naming.rebind(nombreServicio, tipoComprobanteBO);
-            
+
             nombreServicio = retornaNombreDelServicio("tipoPersonaBO");
             Naming.rebind(nombreServicio, tipoPersonaBO);
-            
+
             nombreServicio = retornaNombreDelServicio("tipoProductoBO");
             Naming.rebind(nombreServicio, tipoProductoBO);
-            
+
             System.out.println("Servidor RMI registrado correctamente...");
         } catch (RemoteException | MalformedURLException ex) {
             Logger.getLogger(CyberiaStore_RMI_Servidor.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     private static void leer_archivo_de_propiedades() {
         Properties properties = new Properties();
-        try {            
+        try {
             String nmArchivoConf = "C:\\Properties" + "\\" + ARCHIVO_CONFIGURACION;
-            
+
             properties.load(new FileInputStream(new File(nmArchivoConf)));
             IP = properties.getProperty("ip");
             puerto = Integer.valueOf(properties.getProperty("puerto"));

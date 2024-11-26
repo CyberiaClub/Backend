@@ -104,7 +104,7 @@ public class ComprobantePagoDAOImpl extends DAOImpl implements ComprobantePagoDA
     @Override
     protected String obtenerPredicadoParaListado() {
         String sql = " WHERE ";
-        switch (tipoOperacionComprobante)  {
+        switch (tipoOperacionComprobante) {
             case BUSCAR_SEDE ->
                 sql = sql.concat("ID_SEDE=? ");
             case BUSCAR_USUARIO ->
@@ -169,7 +169,7 @@ public class ComprobantePagoDAOImpl extends DAOImpl implements ComprobantePagoDA
 
     @Override
     protected void incluirValorDeParametrosParaListado() throws SQLException {
-        switch (tipoOperacionComprobante)  {
+        switch (tipoOperacionComprobante) {
             case BUSCAR_SEDE ->
                 this.incluirParametroInt(1, this.comprobantePago.getIdSede());
             case BUSCAR_USUARIO ->
@@ -240,8 +240,9 @@ public class ComprobantePagoDAOImpl extends DAOImpl implements ComprobantePagoDA
         List pedidos = super.listarTodos(null);
         if (pedidos.isEmpty()) {
             return null;
-        } else 
-            return (ArrayList<ComprobantePago>)pedidos;
+        } else {
+            return (ArrayList<ComprobantePago>) pedidos;
+        }
     }
 
     @Override
@@ -254,7 +255,8 @@ public class ComprobantePagoDAOImpl extends DAOImpl implements ComprobantePagoDA
         List pedidos = super.listarTodos(null);
         if (pedidos.isEmpty()) {
             return null;
-        } else 
-            return (ArrayList<ComprobantePago>)pedidos;
+        } else {
+            return (ArrayList<ComprobantePago>) pedidos;
+        }
     }
 }

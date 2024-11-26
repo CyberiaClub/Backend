@@ -10,7 +10,7 @@ import pe.edu.pucp.cyberiastore.rmi.interfaces.SedeBO;
 public class SedeBOImpl extends UnicastRemoteObject implements SedeBO {
 
     private pe.edu.pucp.cyberiastore.inventario.bo.SedeBO sedeBO;
-    
+
     public SedeBOImpl(Integer puerto) throws RemoteException {
         super(puerto);
         this.sedeBO = new pe.edu.pucp.cyberiastore.inventario.bo.SedeBO();

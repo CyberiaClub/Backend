@@ -18,26 +18,26 @@ import pe.edu.pucp.cyberiastore.reportes.ReporteUtil;
 import pe.edu.pucp.cyberiastore.servlet.boletaServlet;
 import pe.edu.pucp.cyberiastore.servlet.facturaServlet;
 
-@WebService(serviceName="Reportes")
+@WebService(serviceName = "Reportes")
 public class Reportes {
-    
-    @WebMethod(operationName="boleta")
+
+    @WebMethod(operationName = "boleta")
     public byte[] boleta(@WebParam(name = "id_comprobante") Integer id_comprobante) {
-        return ReporteUtil.boleta(null,id_comprobante);        
+        return ReporteUtil.boleta(null, id_comprobante);
     }
-    
-    @WebMethod(operationName="factura")
+
+    @WebMethod(operationName = "factura")
     public byte[] factura(@WebParam(name = "id_comprobante") Integer id_comprobante) {
-        return ReporteUtil.factura(null,id_comprobante);        
+        return ReporteUtil.factura(null, id_comprobante);
     }
-    
-    @WebMethod(operationName="reporteClientes")
+
+    @WebMethod(operationName = "reporteClientes")
     public byte[] reporteClientes(@WebParam(name = "id_sede") Integer id_sede) {
-        return ReporteUtil.reporteClientes(null,id_sede);        
+        return ReporteUtil.reporteClientes(null, id_sede);
     }
-    
-    @WebMethod(operationName="reporteStock")
+
+    @WebMethod(operationName = "reporteStock")
     public byte[] reporteStock(@WebParam(name = "id_sede") Integer id_sede) {
-        return ReporteUtil.reporteStock(null,id_sede);        
+        return ReporteUtil.reporteStock(null, id_sede);
     }
 }

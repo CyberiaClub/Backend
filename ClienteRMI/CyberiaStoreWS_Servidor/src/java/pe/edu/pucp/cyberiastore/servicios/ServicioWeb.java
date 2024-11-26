@@ -38,10 +38,11 @@ import pe.edu.pucp.cyberiastore.rmi.interfaces.TipoProductoBO;
 
 @WebService(serviceName = "ServicioWeb")
 public class ServicioWeb {
+
     private static final String ARCHIVO_CONFIGURACION = "rmi.properties";
     private String IP;
     private Integer puerto;
-    
+
     private ComprobantePagoBO comprobantePagoBO;
     private MarcaBO marcaBO;
     private OfertaBO ofertaBO;
@@ -58,7 +59,7 @@ public class ServicioWeb {
             this.leer_archivo_de_propiedades();
             System.out.println("IP" + IP);
             System.out.println("puerto" + puerto);
-            
+
             String nombreServicio = this.retornaNombreDelServicio("comprobantePagoBO");
             this.comprobantePagoBO = (ComprobantePagoBO) Naming.lookup(nombreServicio);
 
@@ -70,7 +71,7 @@ public class ServicioWeb {
 
             nombreServicio = this.retornaNombreDelServicio("personaBO");
             this.personaBO = (PersonaBO) Naming.lookup(nombreServicio);
-            
+
             nombreServicio = this.retornaNombreDelServicio("productoBO");
             this.productoBO = (ProductoBO) Naming.lookup(nombreServicio);
 
@@ -88,17 +89,17 @@ public class ServicioWeb {
 
             nombreServicio = this.retornaNombreDelServicio("tipoProductoBO");
             this.tipoProductoBO = (TipoProductoBO) Naming.lookup(nombreServicio);
-            
+
         } catch (NotBoundException | MalformedURLException | RemoteException ex) {
             Logger.getLogger(ServicioWeb.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     private void leer_archivo_de_propiedades() {
         Properties properties = new Properties();
-        try {            
+        try {
             String nmArchivoConf = "C:\\Properties" + "\\" + ARCHIVO_CONFIGURACION;
-            
+
             properties.load(new FileInputStream(new File(nmArchivoConf)));
             IP = properties.getProperty("ip");
             puerto = Integer.valueOf(properties.getProperty("puerto"));
@@ -112,9 +113,12 @@ public class ServicioWeb {
     public String retornaNombreDelServicio(String nombreObjetoRemoto) {
         return "//" + IP + ":" + puerto + "/" + nombreObjetoRemoto;
     }
-    /***************************************************************************
-    WEB SERVICE MARCA
-    ****************************************************************************/
+
+    /**
+     * *************************************************************************
+     * WEB SERVICE MARCA
+    ***************************************************************************
+     */
     @WebMethod(operationName = "marca_insertar")
     public Integer marca_insertar(@WebParam(name = "marca") Marca marca) {
         Integer retorno = null;
@@ -147,9 +151,12 @@ public class ServicioWeb {
         }
         return retorno;
     }
-    /***************************************************************************
-    WEB SERVICE PRODUCTO
-    ****************************************************************************/
+
+    /**
+     * *************************************************************************
+     * WEB SERVICE PRODUCTO
+    ***************************************************************************
+     */
     @WebMethod(operationName = "producto_insertar")
     public Integer producto_insertar(@WebParam(name = "producto") Producto producto) {
         Integer retorno = null;
@@ -187,13 +194,13 @@ public class ServicioWeb {
     public Producto producto_buscar_sku(@WebParam(name = "sku") String sku, @WebParam(name = "idSede") Integer idSede) {
         Producto retorno = null;
         try {
-            retorno = productoBO.buscar_sku(sku,idSede);
+            retorno = productoBO.buscar_sku(sku, idSede);
         } catch (RemoteException ex) {
             Logger.getLogger(ServicioWeb.class.getName()).log(Level.SEVERE, null, ex);
         }
         return retorno;
     }
-    
+
     @WebMethod(operationName = "producto_aumentar_stock")
     public Integer producto_aumentar_stock(@WebParam(name = "idProducto") Integer idProducto, @WebParam(name = "idSede") Integer idSede, @WebParam(name = "cantidad") Integer cantidad) {
         Integer retorno = null;
@@ -204,7 +211,7 @@ public class ServicioWeb {
         }
         return retorno;
     }
-    
+
     @WebMethod(operationName = "producto_lineas_pedido")
     public ArrayList<Producto> producto_lineas_pedido(@WebParam(name = "idPedido") Integer idPedido) {
         ArrayList retorno = null;
@@ -215,9 +222,12 @@ public class ServicioWeb {
         }
         return retorno;
     }
-    /***************************************************************************
-    WEB SERVICE PROVEEDOR
-    ****************************************************************************/
+
+    /**
+     * *************************************************************************
+     * WEB SERVICE PROVEEDOR
+    ***************************************************************************
+     */
     @WebMethod(operationName = "proveedor_insertar")
     public Integer proveedor_insertar(@WebParam(name = "proveedor") Proveedor proveedor) {
         Integer retorno = null;
@@ -228,7 +238,7 @@ public class ServicioWeb {
         }
         return retorno;
     }
-    
+
     @WebMethod(operationName = "proveedor_modificar")
     public Integer proveedor_modificar(@WebParam(name = "proveedor") Proveedor proveedor) {
         Integer retorno = null;
@@ -239,7 +249,7 @@ public class ServicioWeb {
         }
         return retorno;
     }
-    
+
     @WebMethod(operationName = "proveedor_listar")
     public ArrayList<Proveedor> proveedor_listar() {
         ArrayList retorno = null;
@@ -250,7 +260,7 @@ public class ServicioWeb {
         }
         return retorno;
     }
-    
+
     @WebMethod(operationName = "proveedor_eliminar")
     public Integer proveedor_eliminar(@WebParam(name = "proveedor") Proveedor proveedor) {
         Integer retorno = null;
@@ -261,9 +271,12 @@ public class ServicioWeb {
         }
         return retorno;
     }
-    /***************************************************************************
-    WEB SERVICE SEDE
-    ****************************************************************************/
+
+    /**
+     * *************************************************************************
+     * WEB SERVICE SEDE
+    ***************************************************************************
+     */
     @WebMethod(operationName = "sede_insertar")
     public Integer sede_insertar(@WebParam(name = "sede") Sede sede) {
         Integer retorno = null;
@@ -274,7 +287,7 @@ public class ServicioWeb {
         }
         return retorno;
     }
-    
+
     @WebMethod(operationName = "sede_modificar")
     public Integer sede_modificar(@WebParam(name = "sede") Sede sede) {
         Integer retorno = null;
@@ -285,7 +298,7 @@ public class ServicioWeb {
         }
         return retorno;
     }
-    
+
     @WebMethod(operationName = "sede_listar")
     public ArrayList<Sede> sede_listar() {
         ArrayList retorno = null;
@@ -296,9 +309,12 @@ public class ServicioWeb {
         }
         return retorno;
     }
-    /***************************************************************************
-    WEB SERVICE TIPO PRODUCTO
-    ****************************************************************************/
+
+    /**
+     * *************************************************************************
+     * WEB SERVICE TIPO PRODUCTO
+    ***************************************************************************
+     */
     @WebMethod(operationName = "tipoProducto_insertar")
     public Integer tipoProducto_insertar(@WebParam(name = "TipoProducto") TipoProducto tipoProducto) {
         Integer retorno = null;
@@ -342,9 +358,12 @@ public class ServicioWeb {
         }
         return retorno;
     }
-    /***************************************************************************
-    WEB SERVICE PERSONA
-    ****************************************************************************/
+
+    /**
+     * *************************************************************************
+     * WEB SERVICE PERSONA
+    ***************************************************************************
+     */
     @WebMethod(operationName = "persona_insertar")
     public Integer persona_insertar(@WebParam(name = "persona") Persona persona) {
         Integer retorno = null;
@@ -379,10 +398,10 @@ public class ServicioWeb {
     }
 
     @WebMethod(operationName = "persona_enviar_correo_verificacion")
-    public Boolean persona_enviar_correo_verificacion(@WebParam(name = "correo") String correo,@WebParam(name = "valorToken") String valorToken) {
+    public Boolean persona_enviar_correo_verificacion(@WebParam(name = "correo") String correo, @WebParam(name = "valorToken") String valorToken) {
         Boolean retorno = null;
         try {
-            retorno = personaBO.enviarCorreoVerificacion(correo,valorToken);
+            retorno = personaBO.enviarCorreoVerificacion(correo, valorToken);
         } catch (RemoteException ex) {
             Logger.getLogger(ServicioWeb.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -399,21 +418,23 @@ public class ServicioWeb {
         }
         return retorno;
     }
-    
+
     @WebMethod(operationName = "persona_loguearse")
-    public Persona persona_loguearse(@WebParam(name = "correo") String correo, @WebParam(name = "contrasena") String contrasena){
+    public Persona persona_loguearse(@WebParam(name = "correo") String correo, @WebParam(name = "contrasena") String contrasena) {
         Persona retorno = null;
         try {
-            retorno = personaBO.verificarPersona(correo,contrasena);
-        }
-        catch (RemoteException ex) {
+            retorno = personaBO.verificarPersona(correo, contrasena);
+        } catch (RemoteException ex) {
             Logger.getLogger(ServicioWeb.class.getName()).log(Level.SEVERE, null, ex);
         }
         return retorno;
     }
-    /***************************************************************************
-    WEB SERVICE TIPO PERSONA
-    ****************************************************************************/
+
+    /**
+     * *************************************************************************
+     * WEB SERVICE TIPO PERSONA
+    ***************************************************************************
+     */
     @WebMethod(operationName = "tipopersona_listar_roles_trabajadores")
     public ArrayList<TipoPersona> tipopersona_listar_roles_trabajadores() {
         ArrayList retorno = null;
@@ -424,9 +445,9 @@ public class ServicioWeb {
         }
         return retorno;
     }
-    
+
     @WebMethod(operationName = "tipopersona_listar_paginas")
-    public TipoPersona tipopersona_listar_paginas(@WebParam(name = "tipo_persona")String tipo_persona) {
+    public TipoPersona tipopersona_listar_paginas(@WebParam(name = "tipo_persona") String tipo_persona) {
         TipoPersona retorno = null;
         try {
             retorno = this.tipoPersonaBO.listarPaginas(tipo_persona);
@@ -435,9 +456,12 @@ public class ServicioWeb {
         }
         return retorno;
     }
-    /***************************************************************************
-    WEB SERVICE COMPROBANTE DE PAGO
-    ****************************************************************************/
+
+    /**
+     * *************************************************************************
+     * WEB SERVICE COMPROBANTE DE PAGO
+    ***************************************************************************
+     */
     @WebMethod(operationName = "comprobante_pago_listar")
     public ArrayList<ComprobantePago> comprobante_pago_listar() {
         ArrayList retorno = null;
@@ -514,9 +538,12 @@ public class ServicioWeb {
         }
         return retorno;
     }
-    /***************************************************************************
-    WEB SERVICE OFERTA
-    ****************************************************************************/
+
+    /**
+     * *************************************************************************
+     * WEB SERVICE OFERTA
+    ***************************************************************************
+     */
     @WebMethod(operationName = "oferta_insertar")
     public Integer oferta_insertar(@WebParam(name = "oferta") Oferta oferta, @WebParam(name = "productosOferta") ArrayList<Producto> productosOferta) {
         oferta.setProductos(productosOferta);
@@ -550,9 +577,12 @@ public class ServicioWeb {
         }
         return retorno;
     }
-    /***************************************************************************
-    WEB SERVICE TIPO COMPROBANTE
-    ****************************************************************************/
+
+    /**
+     * *************************************************************************
+     * WEB SERVICE TIPO COMPROBANTE
+    ***************************************************************************
+     */
     @WebMethod(operationName = "tipo_comprobante_listar")
     public ArrayList<TipoComprobante> tipo_comprobante_listar() {
         ArrayList retorno = null;

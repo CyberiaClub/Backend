@@ -7,9 +7,9 @@ import pe.edu.pucp.cyberiastore.inventario.model.Marca;
 import pe.edu.pucp.cyberiastore.rmi.interfaces.MarcaBO;
 
 public class MarcaBOImpl extends UnicastRemoteObject implements MarcaBO {
-    
+
     private pe.edu.pucp.cyberiastore.inventario.bo.MarcaBO marcaBO;
-    
+
     public MarcaBOImpl(Integer puerto) throws RemoteException {
         super(puerto);
         this.marcaBO = new pe.edu.pucp.cyberiastore.inventario.bo.MarcaBO();

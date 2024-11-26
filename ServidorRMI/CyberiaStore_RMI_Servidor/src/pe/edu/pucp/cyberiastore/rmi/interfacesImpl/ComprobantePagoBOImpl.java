@@ -9,7 +9,7 @@ import pe.edu.pucp.cyberiastore.rmi.interfaces.ComprobantePagoBO;
 public class ComprobantePagoBOImpl extends UnicastRemoteObject implements ComprobantePagoBO {
 
     private pe.edu.pucp.cyberiastore.comprobantepago.bo.ComprobantePagoBO comprobantePagoBO;
-    
+
     public ComprobantePagoBOImpl(Integer puerto) throws RemoteException {
         super(puerto);
         this.comprobantePagoBO = new pe.edu.pucp.cyberiastore.comprobantepago.bo.ComprobantePagoBO();

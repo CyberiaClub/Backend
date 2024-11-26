@@ -9,7 +9,7 @@ import pe.edu.pucp.cyberiastore.rmi.interfaces.ProveedorBO;
 public class ProveedorBOImpl extends UnicastRemoteObject implements ProveedorBO {
 
     private pe.edu.pucp.cyberiastore.inventario.bo.ProveedorBO proveedorBO;
-    
+
     public ProveedorBOImpl(Integer puerto) throws RemoteException {
         super(puerto);
         this.proveedorBO = new pe.edu.pucp.cyberiastore.inventario.bo.ProveedorBO();

@@ -21,8 +21,8 @@ import pe.edu.pucp.cyberiastore.servlet.reporteClientesServlet;
 import pe.edu.pucp.cyberiastore.servlet.reporteStockServlet;
 
 public class ReporteUtil {
-    
-     public static byte[] boleta(HttpServletResponse response, Integer idComprobante) {
+
+    public static byte[] boleta(HttpServletResponse response, Integer idComprobante) {
         byte[] reporte = null;
         Connection conexion = DBManager.getInstance().getConnection();
         try {
@@ -47,8 +47,8 @@ public class ReporteUtil {
         }
         return reporte;
     }
-    
-     public static byte[] factura(HttpServletResponse response, Integer idComprobante) {
+
+    public static byte[] factura(HttpServletResponse response, Integer idComprobante) {
         byte[] reporte = null;
         Connection conexion = DBManager.getInstance().getConnection();
         try {
@@ -73,8 +73,8 @@ public class ReporteUtil {
         }
         return reporte;
     }
-    
-     public static byte[] reporteClientes(HttpServletResponse response, Integer idSede) {
+
+    public static byte[] reporteClientes(HttpServletResponse response, Integer idSede) {
         byte[] reporte = null;
         Connection conexion = DBManager.getInstance().getConnection();
         try {
@@ -99,8 +99,8 @@ public class ReporteUtil {
         }
         return reporte;
     }
-    
-     public static byte[] reporteStock(HttpServletResponse response, Integer idSede) {
+
+    public static byte[] reporteStock(HttpServletResponse response, Integer idSede) {
         byte[] reporte = null;
         Connection conexion = DBManager.getInstance().getConnection();
         try {

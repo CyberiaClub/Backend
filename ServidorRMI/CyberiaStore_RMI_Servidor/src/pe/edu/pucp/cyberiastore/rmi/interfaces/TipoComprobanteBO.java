@@ -6,5 +6,6 @@ import java.util.ArrayList;
 import pe.edu.pucp.cyberiastore.comprobantepago.model.TipoComprobante;
 
 public interface TipoComprobanteBO extends Remote {
+
     public ArrayList<TipoComprobante> listarTodos() throws RemoteException;
 }

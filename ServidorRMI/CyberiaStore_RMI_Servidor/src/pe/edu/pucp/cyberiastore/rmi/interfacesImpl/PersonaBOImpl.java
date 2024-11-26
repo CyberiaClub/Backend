@@ -8,7 +8,7 @@ import pe.edu.pucp.cyberiastore.rmi.interfaces.PersonaBO;
 public class PersonaBOImpl extends UnicastRemoteObject implements PersonaBO {
 
     private pe.edu.pucp.cyberiastore.persona.bo.PersonaBO personaBO;
-    
+
     public PersonaBOImpl(Integer puerto) throws RemoteException {
         super(puerto);
         this.personaBO = new pe.edu.pucp.cyberiastore.persona.bo.PersonaBO();
@@ -36,11 +36,11 @@ public class PersonaBOImpl extends UnicastRemoteObject implements PersonaBO {
 
     @Override
     public Boolean enviarCorreoVerificacion(String correo, String valorToken) throws RemoteException {
-        return this.personaBO.enviarCorreoVerificacion(correo,valorToken);
+        return this.personaBO.enviarCorreoVerificacion(correo, valorToken);
     }
 
     @Override
     public Persona verificarPersona(String correo, String contrasena) throws RemoteException {
-        return this.personaBO.verificarPersona(correo,contrasena);
+        return this.personaBO.verificarPersona(correo, contrasena);
     }
 }

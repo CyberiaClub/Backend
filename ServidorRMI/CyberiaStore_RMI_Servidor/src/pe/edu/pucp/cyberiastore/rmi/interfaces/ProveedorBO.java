@@ -6,8 +6,9 @@ import java.util.ArrayList;
 import pe.edu.pucp.cyberiastore.inventario.model.Proveedor;
 
 public interface ProveedorBO extends Remote {
+
     public Integer insertar(Proveedor proveedor) throws RemoteException;
-    
+
     public Integer modificar(Proveedor proveedor) throws RemoteException;
 
     public Integer eliminar(Proveedor proveedor) throws RemoteException;
