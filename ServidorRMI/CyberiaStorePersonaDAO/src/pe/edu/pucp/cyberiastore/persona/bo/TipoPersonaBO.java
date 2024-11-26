@@ -16,6 +16,7 @@ public class TipoPersonaBO {
     public ArrayList<TipoPersona> listarRolesDeTrabajadores() {
         return this.tipoPersona.listarTipoTrabajadores();
     }
+
     public TipoPersona listarPaginas(String tipo_persona) {
         return this.tipoPersona.listarPaginas(tipo_persona);
     }

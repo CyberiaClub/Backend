@@ -8,7 +8,7 @@ public class Pagina implements Serializable {
     private String nombre;
     private String referencia;
 
-    public Pagina(){
+    public Pagina() {
     }
 
     public Integer getIdPagina() {

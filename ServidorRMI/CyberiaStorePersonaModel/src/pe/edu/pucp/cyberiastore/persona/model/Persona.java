@@ -26,11 +26,12 @@ public class Persona implements Serializable {
     private Date fechaSalida;
     private Integer idSede;
     private String tipoUsuario;
+
     public Persona() {
         this.activo = true;
         this.segundoApellido = null;
     }
-    
+
     public Persona(Integer idPersona, String documento, String telefono, String nombre, String primerApellido, String segundoApellido, Date fechaDeNacimiento, String sexo, String correo, String direccion, Boolean activo, String contrasena, String nacionalidad, TipoDocumento tipoDeDocumento, Integer idTipoPersona, Double sueldo, Date fechaIngreso, Date fechaSalida, Integer idSede) {
         this.idPersona = idPersona;
         this.documento = documento;
@@ -42,7 +43,7 @@ public class Persona implements Serializable {
         this.sexo = sexo;
         this.correo = correo;
         this.direccion = direccion;
-        this.activo = (activo == null) ? true:activo;
+        this.activo = (activo == null) ? true : activo;
         this.contrasena = contrasena;
         this.nacionalidad = nacionalidad;
         this.tipoDeDocumento = tipoDeDocumento;
@@ -157,22 +158,18 @@ public class Persona implements Serializable {
         this.nacionalidad = nacionalidad;
     }
 
-    
     public TipoDocumento getTipoDeDocumento() {
         return tipoDeDocumento;
     }
 
-    
     public void setTipoDeDocumento(TipoDocumento tipoDeDocumento) {
         this.tipoDeDocumento = tipoDeDocumento;
     }
 
-  
     public Integer getIdSede() {
         return idSede;
     }
 
-    
     public void setIdSede(Integer idSede) {
         this.idSede = idSede;
     }
@@ -181,32 +178,26 @@ public class Persona implements Serializable {
         return sueldo;
     }
 
-    
     public void setSueldo(Double sueldo) {
         this.sueldo = sueldo;
     }
 
-  
     public Date getFechaIngreso() {
         return fechaIngreso;
     }
 
-   
     public void setFechaIngreso(Date fechaIngreso) {
         this.fechaIngreso = fechaIngreso;
     }
 
-    
     public Date getFechaSalida() {
         return fechaSalida;
     }
 
-   
     public void setFechaSalida(Date fechaSalida) {
         this.fechaSalida = fechaSalida;
     }
 
-   
     public Integer getIdTipoPersona() {
         return idTipoPersona;
     }
@@ -215,16 +206,10 @@ public class Persona implements Serializable {
         this.idTipoPersona = idTipoPersona;
     }
 
-    /**
-     * @return the tipoUsuario
-     */
     public String getTipoUsuario() {
         return tipoUsuario;
     }
 
-    /**
-     * @param tipoUsuario the tipoUsuario to set
-     */
     public void setTipoUsuario(String tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
     }

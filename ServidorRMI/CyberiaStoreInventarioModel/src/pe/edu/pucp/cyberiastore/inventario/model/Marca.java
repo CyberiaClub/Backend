@@ -10,7 +10,6 @@ public class Marca implements Serializable {
     private Boolean activo;
     private byte[] imagen;
 
-    
     public Marca() {
     }
 
@@ -18,7 +17,7 @@ public class Marca implements Serializable {
         this.idMarca = idMarca;
         this.nombre = nombre;
         this.proveedor = proveedor;
-        this.activo = (activo==null) ? true:activo;
+        this.activo = (activo == null) ? true : activo;
         this.imagen = imagen;
     }
 
@@ -53,11 +52,11 @@ public class Marca implements Serializable {
     public void setActivo(Boolean activo) {
         this.activo = activo;
     }
-    
+
     public byte[] getImagen() {
         return this.imagen;
     }
-    
+
     public void setImagen(byte[] imagen) {
         this.imagen = imagen;
     }

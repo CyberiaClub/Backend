@@ -19,13 +19,12 @@ public class TipoProductoDAOImpl extends DAOImpl implements TipoProductoDAO {
         this.tipoProducto = null;
         this.retornarLlavePrimaria = true;
     }
-    
+
     /*
      * ************************************************************************
      * INSERTAR
      * ************************************************************************
      */
-
     @Override
     public Integer insertar(TipoProducto tipoProducto) {
         this.tipoProducto = tipoProducto;
@@ -78,13 +77,12 @@ public class TipoProductoDAOImpl extends DAOImpl implements TipoProductoDAO {
         this.incluirParametroString(1, this.tipoProducto.getTipo());
         this.incluirParametroByte(2, this.tipoProducto.getImagen());
     }
-    
+
     /*
      * ************************************************************************
      * MODIFICAR
      * ************************************************************************
      */
-
     @Override
     public Integer modificar(TipoProducto tipoProducto) {
         Integer retorno = 0;
@@ -123,6 +121,8 @@ public class TipoProductoDAOImpl extends DAOImpl implements TipoProductoDAO {
         String sql = "";
         if (this.tipo_Operacion == Tipo_Operacion.MODIFICAR || this.tipo_Operacion == Tipo_Operacion.ELIMINAR) {
             sql = "ID_TIPO_PRODUCTO=?";
+        } else if (this.tipo_Operacion == Tipo_Operacion.EXISTE) {
+            sql = "TIPO=?";
         } else {
             sql = "ID_TIPO_PRODUCTO=?";
         }
@@ -135,13 +135,12 @@ public class TipoProductoDAOImpl extends DAOImpl implements TipoProductoDAO {
         this.incluirParametroByte(2, this.tipoProducto.getImagen());
         this.incluirParametroInt(3, this.tipoProducto.getIdTipoProducto());
     }
-    
+
     /*
      * ************************************************************************
      * ELIMINAR
      * ************************************************************************
      */
-
     @Override
     public Integer eliminar(TipoProducto tipoProducto) {
         Integer retorno = 0;
@@ -174,13 +173,12 @@ public class TipoProductoDAOImpl extends DAOImpl implements TipoProductoDAO {
     protected void incluirValorDeParametrosParaEliminacion() throws SQLException {
         this.incluirParametroInt(1, this.tipoProducto.getIdTipoProducto());
     }
-    
+
     /*
      * ************************************************************************
      * LISTADOS
      * ************************************************************************
      */
-
     @Override
     public ArrayList<TipoProducto> listarTodos() {
         return (ArrayList<TipoProducto>) super.listarTodos(null);
@@ -188,7 +186,17 @@ public class TipoProductoDAOImpl extends DAOImpl implements TipoProductoDAO {
 
     @Override
     protected String obtenerProyeccionParaSelect() {
-        String sql = "ID_TIPO_PRODUCTO, TIPO, IMAGEN";
+        String sql = "";
+        if (this.tipo_Operacion != null) {
+            switch (this.tipo_Operacion) {
+                case LISTAR -> {
+                    sql = "ID_TIPO_PRODUCTO, TIPO, IMAGEN";
+                }
+                case EXISTE -> {
+                    sql = "ID_TIPO_PRODUCTO";
+                }
+            }
+        }
         return sql;
     }
 
@@ -197,28 +205,35 @@ public class TipoProductoDAOImpl extends DAOImpl implements TipoProductoDAO {
         instanciarObjetoDelResultSet();
         lista.add(this.tipoProducto);
     }
-    
-    
 
     @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.tipoProducto = new TipoProducto();
-        this.tipoProducto.setIdTipoProducto(this.resultSet.getInt("ID_TIPO_PRODUCTO"));
-        this.tipoProducto.setTipo(this.resultSet.getString("TIPO"));
-        this.tipoProducto.setImagen(this.resultSet.getBytes("IMAGEN"));
+        if (this.tipo_Operacion != null) {
+            switch (this.tipo_Operacion) {
+                case LISTAR -> {
+                    this.tipoProducto.setIdTipoProducto(this.resultSet.getInt("ID_TIPO_PRODUCTO"));
+                    this.tipoProducto.setTipo(this.resultSet.getString("TIPO"));
+                    this.tipoProducto.setImagen(this.resultSet.getBytes("IMAGEN"));
+                }
+                case EXISTE -> {
+                    this.tipoProducto.setIdTipoProducto(this.resultSet.getInt("ID_TIPO_PRODUCTO"));
+                }
+            }
+        }
+
     }
 
     @Override
     protected void limpiarObjetoDelResultSet() {
         this.tipoProducto = null;
     }
-    
+
     /*
      * ************************************************************************
      * OBTENER POR ID
      * ************************************************************************
      */
-    
     @Override
     public TipoProducto obtenerPorId(Integer idTipoProducto) {
         this.tipoProducto = new TipoProducto();
@@ -229,79 +244,21 @@ public class TipoProductoDAOImpl extends DAOImpl implements TipoProductoDAO {
 
     @Override
     protected void incluirValorDeParametrosParaBuscar() throws SQLException {
-        this.incluirParametroInt(1, this.tipoProducto.getIdTipoProducto());
+        this.incluirParametroString(1, this.tipoProducto.getTipo());
     }
-    
+
     /*
      * *************************************************************************
      * EXISTE TIPO DE PRODUCTO
      * Funciones adicionales
      * *************************************************************************
      */
-
     @Override
     public Boolean existeTipoProducto(TipoProducto tipoProducto) {
         Boolean abreConexion = true;
-        return existeTipoProducto(tipoProducto, abreConexion);
+        this.tipoProducto = tipoProducto;
+        super.buscar();
+        return this.tipoProducto != null;
     }
 
-    @Override
-    public Boolean existeTipoProducto(TipoProducto tipoProducto, Boolean abreConexion) {
-        this.tipoProducto = tipoProducto;
-        Integer idTipoProducto = null;
-        try {
-            if (abreConexion) {
-                this.abrirConexion();
-            }
-            String sql = "select ID_TIPO_PRODUCTO from TIPO_PRODUCTO where ";
-            sql = sql.concat("TIPO=? ");
-            this.colocarSQLenStatement(sql);
-            this.incluirParametroString(1, this.tipoProducto.getTipo());
-            this.ejecutarConsultaEnBD(sql);
-            if (this.resultSet.next()) {
-                idTipoProducto = this.resultSet.getInt("ID_TIPO_PRODUCTO");
-            }
-        } catch (SQLException ex) {
-            System.err.println("Error al consultar si existe tipoProducto - " + ex);
-        } finally {
-            try {
-                if (abreConexion) {
-                    this.cerrarConexion();
-                }
-            } catch (SQLException ex) {
-                System.err.println("Error al cerrar la conexión - " + ex);
-            }
-        }
-        return idTipoProducto != null;
-    }
-    
-    @Override
-    public Integer buscarIdPorTipo(TipoProducto tipoProducto, Boolean abreConexion) {
-        this.tipoProducto = tipoProducto;
-        Integer idTipoProducto = null;
-        try {
-            if (abreConexion) {
-                this.abrirConexion();
-            }
-            String sql = "select ID_TIPO_PRODUCTO from TIPO_PRODUCTO where ";
-            sql = sql.concat("TIPO=? ");
-            this.colocarSQLenStatement(sql);
-            this.incluirParametroString(1, this.tipoProducto.getTipo());
-            this.ejecutarConsultaEnBD(sql);
-            if (this.resultSet.next()) {
-                idTipoProducto = this.resultSet.getInt("ID_TIPO_PRODUCTO");
-            }
-        } catch (SQLException ex) {
-            System.err.println("Error al consultar si existe tipoProducto - " + ex);
-        } finally {
-            try {
-                if (abreConexion) {
-                    this.cerrarConexion();
-                }
-            } catch (SQLException ex) {
-                System.err.println("Error al cerrar la conexión - " + ex);
-            }
-        }
-        return idTipoProducto;
-    }
 }

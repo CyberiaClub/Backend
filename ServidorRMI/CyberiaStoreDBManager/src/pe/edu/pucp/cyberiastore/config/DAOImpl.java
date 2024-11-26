@@ -287,7 +287,6 @@ public abstract class DAOImpl {
         - incluirParametroDate
         - incluirParametroBoolean
      */
-    
     protected String ObtenerFechaParaSQL(Date fecha) {
         String sql = "NULL";
         if (fecha != null) {

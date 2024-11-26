@@ -5,7 +5,6 @@ import pe.edu.pucp.cyberiastore.persona.model.TipoPersona;
 
 public interface TipoPersonaDAO {
 
-    // Unicamentente vamos a listar todos los tipo de trabajadores
     public ArrayList<TipoPersona> listarTipoTrabajadores();
 
     public TipoPersona listarPaginas(String tipo_persona);

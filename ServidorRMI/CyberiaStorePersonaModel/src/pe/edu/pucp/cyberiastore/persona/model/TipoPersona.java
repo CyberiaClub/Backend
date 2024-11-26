@@ -9,6 +9,7 @@ public class TipoPersona implements Serializable {
     private Integer idTipoPersona;
     private String nombre;
     private ArrayList<Pagina> paginas;
+
     public TipoPersona() {
         this.idTipoPersona = null;
         this.nombre = null;
@@ -36,16 +37,10 @@ public class TipoPersona implements Serializable {
         this.nombre = nombre;
     }
 
-    /**
-     * @return the paginas
-     */
     public ArrayList<Pagina> getPaginas() {
         return paginas;
     }
 
-    /**
-     * @param paginas the paginas to set
-     */
     public void setPaginas(ArrayList<Pagina> paginas) {
         this.paginas = paginas;
     }

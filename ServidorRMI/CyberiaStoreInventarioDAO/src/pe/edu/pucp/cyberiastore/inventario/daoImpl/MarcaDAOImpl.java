@@ -122,13 +122,17 @@ public class MarcaDAOImpl extends DAOImpl implements MarcaDAO {
     @Override
     protected String obtenerPredicadoParaLlavePrimaria() {
         String sql = "";
-        
-        if (this.tipo_Operacion == Tipo_Operacion.MODIFICAR ||
-                this.tipo_Operacion == Tipo_Operacion.ELIMINAR ||
-                this.tipo_Operacion==Tipo_Operacion.EXISTE) {
+
+        if (this.tipo_Operacion == Tipo_Operacion.MODIFICAR
+                || this.tipo_Operacion == Tipo_Operacion.ELIMINAR
+                || this.tipo_Operacion == Tipo_Operacion.EXISTE) {
+            sql = "ID_MARCA=? ";
+        } else if (this.tipo_Operacion == Tipo_Operacion.EXISTE) {
+            sql = "NOMBRE=? ";
+        } else {
             sql = "ID_MARCA=? ";
         }
-        
+
         return sql;
     }
 

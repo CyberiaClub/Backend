@@ -20,7 +20,7 @@ public class Producto implements Serializable {
     private Integer cantidad;
     private Integer oferta;
     private Integer idPedido;
-    
+
     public Producto() {
         this.idProducto = null;
         this.sku = null;
@@ -102,7 +102,7 @@ public class Producto implements Serializable {
     public void setImagen(byte[] imagen) {
         this.imagen = imagen;
     }
-    
+
     public ArrayList<Producto> getProductosMiembros() {
         return this.productosMiembros;
     }
@@ -110,20 +110,20 @@ public class Producto implements Serializable {
     public void setProductosMiembros(ArrayList<Producto> productosMiembros) {
         this.productosMiembros = productosMiembros;
     }
-    
-    public TipoProducto getTipoProducto(){
+
+    public TipoProducto getTipoProducto() {
         return this.tipoProducto;
     }
-    
-    public void setTipoProducto(TipoProducto tipoProducto){
+
+    public void setTipoProducto(TipoProducto tipoProducto) {
         this.tipoProducto = tipoProducto;
     }
-    
-    public Marca getMarca(){
+
+    public Marca getMarca() {
         return this.marca;
     }
-    
-    public void setMarca(Marca marca){
+
+    public void setMarca(Marca marca) {
         this.marca = marca;
     }
 

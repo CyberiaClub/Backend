@@ -9,9 +9,10 @@ import pe.edu.pucp.cyberiastore.persona.dao.TokenDAO;
 import pe.edu.pucp.cyberiastore.persona.model.Token;
 
 public class TokenDAOImpl extends DAOImpl implements TokenDAO {
-    
+
     private Token token;
     private TipoOperacionPersona tipoOperacionPersona;
+
     public TokenDAOImpl() {
         super("TOKEN");
     }
@@ -97,73 +98,59 @@ public class TokenDAOImpl extends DAOImpl implements TokenDAO {
 
     @Override
     protected String obtenerProyeccionParaSelect() {
-        String sql="";
-        switch(this.tipo_Operacion){
-            case EXISTE->{
-                sql = sql.concat("ID_TOKEN");
+        String sql = "";
+        if (this.tipo_Operacion != null) {
+            switch (this.tipo_Operacion) {
+                case EXISTE -> {
+                    sql = sql.concat("ID_TOKEN");
+                }
             }
         }
-        
-        switch(this.tipoOperacionPersona){
-            case BUSCAR_TOKEN_POR_VALOR->{
-                sql = sql.concat("ACTIVO,ID_PERSONA ");
+        if (this.tipoOperacionPersona != null) {
+            switch (this.tipoOperacionPersona) {
+                case BUSCAR_TOKEN_POR_VALOR -> {
+                    sql = sql.concat("ACTIVO,ID_PERSONA ");
+                }
             }
         }
         return sql;
     }
-    
-        @Override
+
+    @Override
     protected String obtenerPredicadoParaLlavePrimaria() {
-        String sql="";
-        switch(this.tipo_Operacion){
-            case EXISTE->{
-                sql = sql.concat("ID_TOKEN=?");
-            }
-        }
-        
-        switch(this.tipoOperacionPersona){
-            case BUSCAR_TOKEN_POR_VALOR->{
-                sql = sql.concat("VALOR=?");
-            }
-        }
+        String sql = "";
+        sql = sql.concat("VALOR=?");
         return sql;
     }
-    
-    
-        @Override
+
+    @Override
     protected void incluirValorDeParametrosParaBuscar() throws SQLException {
-        switch(this.tipo_Operacion){
-            case EXISTE->{
-                this.incluirParametroInt(1, this.token.getIdToken());
-            }
-        }
-        
-        switch(this.tipoOperacionPersona){
-            case BUSCAR_TOKEN_POR_VALOR->{
-                this.incluirParametroString(1, this.token.getValor());
-            }
-        }
+        this.incluirParametroString(1, this.token.getValor());
     }
 
     @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.token = new Token();
-        switch(this.tipo_Operacion){
-            case EXISTE->{
-                this.token.setIdToken(this.resultSet.getInt("ID_TOKEN"));
+        if (this.tipo_Operacion != null) {
+            switch (this.tipo_Operacion) {
+                case EXISTE -> {
+                    this.token.setIdToken(this.resultSet.getInt("ID_TOKEN"));
+                }
             }
         }
-        switch(this.tipoOperacionPersona){
-            case BUSCAR_TOKEN_POR_VALOR->{
-                this.token.setActivo(this.resultSet.getInt("ACTIVO")==1);
-                this.token.setIdPersona(this.resultSet.getInt("ID_PERSONA"));
+        if (this.tipoOperacionPersona != null) {
+            switch (this.tipoOperacionPersona) {
+                case BUSCAR_TOKEN_POR_VALOR -> {
+                    this.token.setActivo(this.resultSet.getInt("ACTIVO") == 1);
+                    this.token.setIdPersona(this.resultSet.getInt("ID_PERSONA"));
+                }
             }
         }
     }
 
     @Override
     protected void limpiarObjetoDelResultSet() {
-        this.token=null;
+        this.token = null;
     }
 
     @Override

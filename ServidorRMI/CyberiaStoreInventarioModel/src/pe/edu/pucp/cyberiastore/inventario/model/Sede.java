@@ -15,23 +15,23 @@ public class Sede implements Serializable {
     private LocalTime horarioCierre;
     private Producto producto;
 
-    public Sede(){
+    public Sede() {
         this.producto = new Producto();
     }
-    
+
     public Sede(String nombre, String descripcion, byte[] imagenBytes) {
         this.nombre = nombre;
         this.descripcion = descripcion;
     }
-    
-    public Integer getIdSede(){
+
+    public Integer getIdSede() {
         return this.idSede;
     }
 
     public void setIdSede(Integer idSede) {
         this.idSede = idSede;
     }
-    
+
     public String getDescripcion() {
         return descripcion;
     }
@@ -55,7 +55,7 @@ public class Sede implements Serializable {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-    
+
     public LocalTime getHorarioApertura() {
         return horarioApertura;
     }
@@ -79,7 +79,5 @@ public class Sede implements Serializable {
     public void setProducto(Producto productos) {
         this.producto = productos;
     }
-
-  
 
 }

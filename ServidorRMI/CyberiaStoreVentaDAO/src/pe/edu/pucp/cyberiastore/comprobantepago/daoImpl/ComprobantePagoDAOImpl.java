@@ -23,13 +23,12 @@ public class ComprobantePagoDAOImpl extends DAOImpl implements ComprobantePagoDA
         super("COMPROBANTE_DE_PAGO");
         this.comprobantePago = null;
     }
-    
+
     /*
      * ************************************************************************
      * Insertar
      * ************************************************************************
      */
-
     @Override
     public Integer insertar(ComprobantePago comprobantePago) {
         this.comprobantePago = comprobantePago;
@@ -38,13 +37,13 @@ public class ComprobantePagoDAOImpl extends DAOImpl implements ComprobantePagoDA
         this.retornarLlavePrimaria = false;
         //Se insertan las lineas del comprobante de pago
         ComprobantePagoXProductoDAO comprobantePagoXProducto = new ComprobantePagoXProductoDAOImpl();
-        Producto[] productos = (Producto[])this.comprobantePago.getLineaPedido().keySet().toArray();
+        Producto[] productos = (Producto[]) this.comprobantePago.getLineaPedido().keySet().toArray();
         for (Producto producto : productos) {
             comprobantePagoXProducto.insertar(id, producto.getIdProducto(), this.comprobantePago.getLineaPedido().get(producto));
         }
         return id;
     }
-    
+
     @Override
     public Integer insertar(ComprobantePago comprobantePago, Boolean usarTransaccion, Connection conexion) {
         this.usarTransaccion = usarTransaccion;
@@ -77,13 +76,12 @@ public class ComprobantePagoDAOImpl extends DAOImpl implements ComprobantePagoDA
         this.incluirParametroInt(11, this.comprobantePago.getTipoComprobante().getIdTipoComprobante());
         this.incluirParametroInt(12, this.comprobantePago.getPersona().getIdPersona());
     }
-    
+
     /*
      * **************************************************************************
      * MODIFICAR
      * *************************************************************************
      */
-    
     @Override
     public Integer modificar(ComprobantePago comprobantePago) {
         this.comprobantePago = comprobantePago;
@@ -106,19 +104,18 @@ public class ComprobantePagoDAOImpl extends DAOImpl implements ComprobantePagoDA
     protected String obtenerListaDeValoresYAtributosParaModificacion() {
         return "ESTADO_PEDIDO=?";
     }
-    
+
     @Override
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
         this.incluirParametroString(1, this.comprobantePago.getEstadoPedido().toString());
         this.incluirParametroInt(2, this.comprobantePago.getIdComprobantePago());
     }
-    
+
     /*
      * **************************************************************************
      * ELIMINIAR
      * *************************************************************************
      */
-    
     @Override
     public Integer eliminar(ComprobantePago comprobantePago) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -128,18 +125,17 @@ public class ComprobantePagoDAOImpl extends DAOImpl implements ComprobantePagoDA
     public Integer eliminar(ComprobantePago comprobantePago, Boolean usarTransaccion, Connection conexion) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     @Override
     protected void incluirValorDeParametrosParaEliminacion() throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     /*
      * **************************************************************************
      * LISTAR TODOS
      * *************************************************************************
      */
-
     @Override
     protected String obtenerProyeccionParaSelect() {
         return "ID_COMPROBANTE_DE_PAGO, FECHA, SUBTOTAL, IGV, TOTAL, ACTIVO, ESTADO_PEDIDO, NUMERO, RUC, RAZON_SOCIAL, DIRECCION, ID_TIPO_TRANSACCION, ID_PERSONA";
@@ -170,8 +166,8 @@ public class ComprobantePagoDAOImpl extends DAOImpl implements ComprobantePagoDA
         this.comprobantePago.setRuc(this.resultSet.getString("RUC"));
         this.comprobantePago.setRazonSocial(this.resultSet.getString("RAZON_SOCIAL"));
         this.comprobantePago.setDireccion(this.resultSet.getString("DIRECCION"));
-        this.comprobantePago.setTipoComprobante(new TipoComprobante(this.resultSet.getInt("ID_TIPO_TRANSACCION"),null,null,null));
-        this.comprobantePago.setPersona(new Persona(this.resultSet.getInt("ID_PERSONA"),null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null));
+        this.comprobantePago.setTipoComprobante(new TipoComprobante(this.resultSet.getInt("ID_TIPO_TRANSACCION"), null, null, null));
+        this.comprobantePago.setPersona(new Persona(this.resultSet.getInt("ID_PERSONA"), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null));
     }
 
     @Override
@@ -183,14 +179,13 @@ public class ComprobantePagoDAOImpl extends DAOImpl implements ComprobantePagoDA
     public ArrayList<ComprobantePago> listarTodos() {
         return (ArrayList<ComprobantePago>) super.listarTodos(null);
     }
-    
+
     /*
      * *************************************************************************
      * OBTENER POR ID
      * Funciones adicionales
      * *************************************************************************
      */
-
     @Override
     public ComprobantePago obtenerPorId(Integer idComprobantePago) {
         this.comprobantePago = new ComprobantePago();
@@ -198,14 +193,13 @@ public class ComprobantePagoDAOImpl extends DAOImpl implements ComprobantePagoDA
         super.buscar();
         return this.comprobantePago;
     }
-    
+
     /*
      * *************************************************************************
      * EXISTE COMPROBANTE DE PAGO
      * Funciones adicionales
      * *************************************************************************
      */
-    
     @Override
     public Boolean existeComprobantePago(ComprobantePago comprobantePago) {
         return false;

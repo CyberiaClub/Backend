@@ -125,9 +125,10 @@ public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
     protected String obtenerPredicadoParaLlavePrimaria() {
         String sql = "";
         if (this.tipo_Operacion == Tipo_Operacion.MODIFICAR
-                || this.tipo_Operacion == Tipo_Operacion.ELIMINAR
-                || this.tipo_Operacion == Tipo_Operacion.EXISTE) {
+                || this.tipo_Operacion == Tipo_Operacion.ELIMINAR) {
             sql = "ID_PROVEEDOR=?";
+        } else if (this.tipo_Operacion == Tipo_Operacion.EXISTE) {
+            sql = "RUC=?";
         } else {
             sql = "ID_PROVEEDOR=?";
         }
@@ -255,7 +256,7 @@ public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
 
     @Override
     protected void incluirValorDeParametrosParaBuscar() throws SQLException {
-        this.incluirParametroInt(1, this.proveedor.getIdProveedor());
+        this.incluirParametroString(1, this.proveedor.getRuc());
     }
 
     /*

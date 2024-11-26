@@ -130,10 +130,11 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
     @Override
     protected String obtenerPredicadoParaLlavePrimaria() {
         String sql = "";
-        if (this.tipoOperacion == Tipo_Operacion.MODIFICAR ||
-            this.tipoOperacion == Tipo_Operacion.ELIMINAR ||
-            this.tipoOperacion == Tipo_Operacion.EXISTE) {
+        if (this.tipoOperacion == Tipo_Operacion.MODIFICAR
+                || this.tipoOperacion == Tipo_Operacion.ELIMINAR) {
             sql = "ID_SEDE=?";
+        } else if (this.tipoOperacion == Tipo_Operacion.EXISTE) {
+            sql = "NOMBRE=?";
         } else {
             sql = "PER.ID_SEDE=?";
         }
@@ -189,16 +190,20 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
     @Override
     protected String obtenerProyeccionParaSelect() {
         String sql = "";
-        switch (this.tipoOperacionInventario) {
-            case TipoOperacionInventario.LISTAR_SEDES ->
-                sql = sql.concat("ID_SEDE, NOMBRE, DESCRIPCION, TELEFONO, HORARIO_APERTURA, HORARIO_CIERRE");
-            case TipoOperacionInventario.LISTAR_STOCK_SEDE ->
-                sql = sql.concat("PD.SKU, PD.NOMBRE, PD.DESCRIPCION, PD.PRECIO,TP.TIPO, M.NOMBRE, PXS.STOCK_SEDE");
+        if (this.tipoOperacionInventario != null) {
+            switch (this.tipoOperacionInventario) {
+                case TipoOperacionInventario.LISTAR_SEDES ->
+                    sql = sql.concat("ID_SEDE, NOMBRE, DESCRIPCION, TELEFONO, HORARIO_APERTURA, HORARIO_CIERRE");
+                case TipoOperacionInventario.LISTAR_STOCK_SEDE ->
+                    sql = sql.concat("PD.SKU, PD.NOMBRE, PD.DESCRIPCION, PD.PRECIO,TP.TIPO, M.NOMBRE, PXS.STOCK_SEDE");
+            }
         }
-        
-        switch(this.tipo_Operacion){
-            case EXISTE->{
-                sql = sql.concat("ID_SEDE");
+
+        if (this.tipo_Operacion != null) {
+            switch (this.tipo_Operacion) {
+                case EXISTE -> {
+                    sql = sql.concat("ID_SEDE");
+                }
             }
         }
         return sql;
@@ -207,85 +212,95 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
     @Override
     protected String obtenerPredicadoParaListado() {
         String sql = "";
-        switch (this.tipoOperacionInventario) {
-            case TipoOperacionInventario.LISTAR_SEDES -> {
+        if (this.tipoOperacionInventario != null) {
+            switch (this.tipoOperacionInventario) {
+                case TipoOperacionInventario.LISTAR_SEDES -> {
+                }
+                case TipoOperacionInventario.LISTAR_STOCK_SEDE -> {
+                    sql = sql.concat(" S ");
+                    sql = sql.concat("JOIN PRODUCTO_X_SEDE PXS ON S.ID_SEDE = PXS.ID_SEDE ");
+                    sql = sql.concat("JOIN PRODUCTO PD ON PXS.ID_PRODUCTO = PD.ID_PRODUCTO ");
+                    sql = sql.concat("JOIN TIPO_PRODUCTO TP ON PD.ID_TIPO_PRODUCTO = TP.ID_TIPO_PRODUCTO ");
+                    sql = sql.concat("JOIN MARCA M ON PD.ID_MARCA = M.ID_MARCA ");
+                    sql = sql.concat("WHERE S.ID_SEDE = ?");
+                }
+                default ->
+                    throw new AssertionError();
             }
-            case TipoOperacionInventario.LISTAR_STOCK_SEDE -> {
-                sql = sql.concat(" S ");
-                sql = sql.concat("JOIN PRODUCTO_X_SEDE PXS ON S.ID_SEDE = PXS.ID_SEDE ");
-                sql = sql.concat("JOIN PRODUCTO PD ON PXS.ID_PRODUCTO = PD.ID_PRODUCTO ");
-                sql = sql.concat("JOIN TIPO_PRODUCTO TP ON PD.ID_TIPO_PRODUCTO = TP.ID_TIPO_PRODUCTO ");
-                sql = sql.concat("JOIN MARCA M ON PD.ID_MARCA = M.ID_MARCA ");
-                sql = sql.concat("WHERE S.ID_SEDE = ?");
-            }
-            default ->
-                throw new AssertionError();
         }
         return sql;
     }
 
     @Override
     protected void incluirValorDeParametrosParaListado() throws SQLException {
-        switch (this.tipoOperacionInventario) {
-            case TipoOperacionInventario.LISTAR_SEDES -> {
+        if (this.tipoOperacionInventario != null) {
+            switch (this.tipoOperacionInventario) {
+                case TipoOperacionInventario.LISTAR_SEDES -> {
+                }
+                case TipoOperacionInventario.LISTAR_STOCK_SEDE -> {
+                    this.incluirParametroInt(1, this.sede.getIdSede());
+                }
+                default ->
+                    throw new AssertionError();
             }
-            case TipoOperacionInventario.LISTAR_STOCK_SEDE -> {
-                this.incluirParametroInt(1, this.sede.getIdSede());
-            }
-            default ->
-                throw new AssertionError();
         }
     }
 
     @Override
     protected void agregarObjetoALaLista(List lista, ResultSet resultSet) throws SQLException {
         instanciarObjetoDelResultSet();
-        switch (this.tipoOperacionInventario) {
-            case TipoOperacionInventario.LISTAR_SEDES ->
-                lista.add(this.sede);
-            case TipoOperacionInventario.LISTAR_STOCK_SEDE ->
-                lista.add(this.sede.getProducto());
-            default ->
-                throw new AssertionError();
+        if (this.tipoOperacionInventario != null) {
+            switch (this.tipoOperacionInventario) {
+                case TipoOperacionInventario.LISTAR_SEDES ->
+                    lista.add(this.sede);
+                case TipoOperacionInventario.LISTAR_STOCK_SEDE ->
+                    lista.add(this.sede.getProducto());
+                default ->
+                    throw new AssertionError();
+            }
         }
     }
 
     @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
-        switch (this.tipoOperacionInventario) {
-            case TipoOperacionInventario.LISTAR_SEDES -> {
-                this.sede = new Sede();
-                this.sede.setIdSede(this.resultSet.getInt("ID_SEDE"));
-                this.sede.setNombre(this.resultSet.getString("NOMBRE"));
-                this.sede.setDescripcion(this.resultSet.getString("DESCRIPCION"));
-                this.sede.setTelefono(this.resultSet.getString("TELEFONO"));
-                this.sede.setHorarioApertura(this.resultSet.getTime("HORARIO_APERTURA").toLocalTime());
-                this.sede.setHorarioCierre(this.resultSet.getTime("HORARIO_CIERRE").toLocalTime());
-            }
-            case TipoOperacionInventario.LISTAR_STOCK_SEDE -> {
-                Producto producto = new Producto();
-                producto.setSku(this.resultSet.getString("PD.SKU"));
-                producto.setNombre(this.resultSet.getString("PD.NOMBRE"));
-                producto.setDescripcion(this.resultSet.getString("PD.DESCRIPCION"));
-                producto.setPrecio(this.resultSet.getDouble("PD.PRECIO"));
-                producto.setCantidad(this.resultSet.getInt("PXS.STOCK_SEDE"));
+        if (this.tipoOperacionInventario != null) {
+            switch (this.tipoOperacionInventario) {
+                case TipoOperacionInventario.LISTAR_SEDES -> {
+                    this.sede = new Sede();
+                    this.sede.setIdSede(this.resultSet.getInt("ID_SEDE"));
+                    this.sede.setNombre(this.resultSet.getString("NOMBRE"));
+                    this.sede.setDescripcion(this.resultSet.getString("DESCRIPCION"));
+                    this.sede.setTelefono(this.resultSet.getString("TELEFONO"));
+                    this.sede.setHorarioApertura(this.resultSet.getTime("HORARIO_APERTURA").toLocalTime());
+                    this.sede.setHorarioCierre(this.resultSet.getTime("HORARIO_CIERRE").toLocalTime());
+                }
+                case TipoOperacionInventario.LISTAR_STOCK_SEDE -> {
+                    Producto producto = new Producto();
+                    producto.setSku(this.resultSet.getString("PD.SKU"));
+                    producto.setNombre(this.resultSet.getString("PD.NOMBRE"));
+                    producto.setDescripcion(this.resultSet.getString("PD.DESCRIPCION"));
+                    producto.setPrecio(this.resultSet.getDouble("PD.PRECIO"));
+                    producto.setCantidad(this.resultSet.getInt("PXS.STOCK_SEDE"));
 
-                TipoProducto tipoProd = new TipoProducto();
-                tipoProd.setTipo(this.resultSet.getString("TP.TIPO"));
-                Marca marca = new Marca();
-                marca.setNombre(this.resultSet.getString("M.NOMBRE"));
-                 
-                producto.setTipoProducto(tipoProd);
-                producto.setMarca(marca);
-                
-                this.sede = new Sede();
-                this.sede.setProducto(producto);
+                    TipoProducto tipoProd = new TipoProducto();
+                    tipoProd.setTipo(this.resultSet.getString("TP.TIPO"));
+                    Marca marca = new Marca();
+                    marca.setNombre(this.resultSet.getString("M.NOMBRE"));
+
+                    producto.setTipoProducto(tipoProd);
+                    producto.setMarca(marca);
+
+                    this.sede = new Sede();
+                    this.sede.setProducto(producto);
+                }
             }
         }
-        
-        switch(this.tipo_Operacion){
-            case EXISTE->{
-                this.sede.setIdSede(this.resultSet.getInt("ID_SEDE"));
+
+        if (this.tipo_Operacion != null) {
+            switch (this.tipo_Operacion) {
+                case EXISTE -> {
+                    this.sede.setIdSede(this.resultSet.getInt("ID_SEDE"));
+                }
             }
         }
     }
@@ -310,7 +325,7 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
 
     @Override
     protected void incluirValorDeParametrosParaBuscar() throws SQLException {
-        this.incluirParametroInt(1, this.sede.getIdSede());
+        this.incluirParametroString(1, this.sede.getNombre());
     }
 
     /*

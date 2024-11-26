@@ -8,8 +8,8 @@ public class TipoProducto implements Serializable {
     private String tipo;
     private Boolean activo;
     private byte[] imagen;
-    
-    public TipoProducto(){
+
+    public TipoProducto() {
         this.idTipoProducto = null;
         this.tipo = null;
         this.imagen = null;
@@ -20,7 +20,7 @@ public class TipoProducto implements Serializable {
         this.idTipoProducto = idTipoProducto;
         this.tipo = tipo;
         this.imagen = imagen;
-        this.activo = (activo == null) ? true:activo;
+        this.activo = (activo == null) ? true : activo;
     }
 
     public Integer getIdTipoProducto() {
@@ -46,11 +46,11 @@ public class TipoProducto implements Serializable {
     public void setActivo(Boolean activo) {
         this.activo = activo;
     }
-    
+
     public byte[] getImagen() {
         return this.imagen;
     }
-    
+
     public void setImagen(byte[] imagen) {
         this.imagen = imagen;
     }

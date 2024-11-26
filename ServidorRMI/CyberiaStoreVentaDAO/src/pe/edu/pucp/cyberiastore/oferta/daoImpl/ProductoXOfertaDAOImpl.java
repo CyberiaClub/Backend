@@ -7,16 +7,16 @@ import java.util.List;
 import pe.edu.pucp.cyberiastore.config.DAOImpl;
 import pe.edu.pucp.cyberiastore.oferta.dao.ProductoXOfertaDAO;
 
-public class ProductoXOfertaDAOImpl extends DAOImpl implements ProductoXOfertaDAO{
-    
+public class ProductoXOfertaDAOImpl extends DAOImpl implements ProductoXOfertaDAO {
+
     private Integer idProducto;
     private Integer idOferta;
     private Integer oferta;
-    
-    public ProductoXOfertaDAOImpl(){
+
+    public ProductoXOfertaDAOImpl() {
         super("PRODUCTO_X_OFERTA");
     }
-    
+
     @Override
     public Integer insertar(Integer idProducto, Integer idOferta, Integer oferta) {
         this.idProducto = idProducto;
@@ -31,7 +31,7 @@ public class ProductoXOfertaDAOImpl extends DAOImpl implements ProductoXOfertaDA
         this.conexion = conexion;
         return this.insertar(idProducto, idOferta, oferta);
     }
-    
+
     @Override
     protected String obtenerListaDeAtributosParaInsercion() {
         return "ID_PRODUCTO, ID_OFERTA, PORCENTAJE";
@@ -44,9 +44,9 @@ public class ProductoXOfertaDAOImpl extends DAOImpl implements ProductoXOfertaDA
 
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
-        this.incluirParametroInt(1,this.idProducto);
-        this.incluirParametroInt(2,this.idOferta);
-        this.incluirParametroInt(3,this.oferta);
+        this.incluirParametroInt(1, this.idProducto);
+        this.incluirParametroInt(2, this.idOferta);
+        this.incluirParametroInt(3, this.oferta);
     }
 
     @Override

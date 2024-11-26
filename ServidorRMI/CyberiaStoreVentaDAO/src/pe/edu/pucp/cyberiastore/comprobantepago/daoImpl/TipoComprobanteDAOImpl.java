@@ -1,6 +1,5 @@
 package pe.edu.pucp.cyberiastore.comprobantepago.daoImpl;
 
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -12,7 +11,7 @@ import pe.edu.pucp.cyberiastore.comprobantepago.dao.TipoComprobanteDAO;
 public class TipoComprobanteDAOImpl extends DAOImpl implements TipoComprobanteDAO {
 
     private TipoComprobante tipoComprobante;
-    
+
     public TipoComprobanteDAOImpl() {
         super("TIPO_COMPROBANTE");
         tipoComprobante = null;
@@ -92,5 +91,5 @@ public class TipoComprobanteDAOImpl extends DAOImpl implements TipoComprobanteDA
     public Boolean existeComprobantePago(TipoComprobante tipoComprobante) {
         return false;
     }
-    
+
 }

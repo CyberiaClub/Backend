@@ -19,35 +19,33 @@ public class OfertaDAOImpl extends DAOImpl implements OfertaDAO {
         super("OFERTA");
         this.oferta = null;
     }
-    
+
     /*
      * ************************************************************************
      * Insertar
      * ************************************************************************
      */
-
     @Override
     public Integer insertar(Oferta oferta) {
         this.oferta = oferta;
         Integer idOferta = null;
 
-        Boolean existeOferta = this.existeOferta(oferta);
         this.usarTransaccion = false;
         try {
             this.iniciarTransaccion();
-            if (!existeOferta) {
-                this.retornarLlavePrimaria = true;
-                idOferta = super.insertar();
-                this.retornarLlavePrimaria = false; 
-                ProductoXOfertaDAO productoXOferta = new ProductoXOfertaDAOImpl();
-                ArrayList<Producto> productosOferta = oferta.getProductos();
-                for(Producto producto : productosOferta){
-                    System.out.println("Id del producto otra vez: "+producto.getIdProducto());
-                    productoXOferta.insertar(producto.getIdProducto() , idOferta, producto.getOferta(), this.usarTransaccion, this.conexion);
-                }
-            } else {
-                idOferta = oferta.getIdOferta();
+
+            this.retornarLlavePrimaria = true;
+            idOferta = super.insertar();
+            this.retornarLlavePrimaria = false;
+
+            ProductoXOfertaDAO productoXOferta = new ProductoXOfertaDAOImpl();
+            ArrayList<Producto> productosOferta = oferta.getProductos();
+
+            for (Producto producto : productosOferta) {
+                System.out.println("Id del producto otra vez: " + producto.getIdProducto());
+                productoXOferta.insertar(producto.getIdProducto(), idOferta, producto.getOferta(), this.usarTransaccion, this.conexion);
             }
+
             this.comitarTransaccion();
         } catch (SQLException ex) {
             System.err.println("Error al intentar insertar - " + ex);
@@ -83,13 +81,12 @@ public class OfertaDAOImpl extends DAOImpl implements OfertaDAO {
         this.incluirParametroDate(2, this.oferta.getFechaDeFin());
         this.incluirParametroByte(3, this.oferta.getImagen());
     }
-    
+
     /*
      * **************************************************************************
      * MODIFICAR
      * *************************************************************************
      */
-
     @Override
     public Integer modificar(Oferta oferta) {
         Integer retorno = 0;
@@ -142,13 +139,12 @@ public class OfertaDAOImpl extends DAOImpl implements OfertaDAO {
         this.incluirParametroInt(4, this.oferta.getIdOferta());
 
     }
-    
+
     /*
      * **************************************************************************
      * ELIMINIAR
      * *************************************************************************
      */
-
     @Override
     public Integer eliminar(Oferta oferta) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -159,13 +155,12 @@ public class OfertaDAOImpl extends DAOImpl implements OfertaDAO {
     protected void incluirValorDeParametrosParaEliminacion() throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     /*
      * **************************************************************************
      * LISTAR TODOS
      * *************************************************************************
      */
-
     @Override
     public ArrayList<Oferta> listarTodos() {
         return (ArrayList<Oferta>) super.listarTodos(null);
@@ -202,14 +197,13 @@ public class OfertaDAOImpl extends DAOImpl implements OfertaDAO {
     protected void limpiarObjetoDelResultSet() {
         this.oferta = null;
     }
-    
+
     /*
      * *************************************************************************
      * OBTENER POR ID
      * Funciones adicionales
      * *************************************************************************
      */
-
     @Override
     public Oferta obtenerPorId(Integer idOferta) {
         this.oferta = new Oferta();
@@ -217,19 +211,5 @@ public class OfertaDAOImpl extends DAOImpl implements OfertaDAO {
         super.buscar();
         return this.oferta;
     }
-    
-    /*
-     * *************************************************************************
-     * EXISTE
-     * Funciones adicionales
-     * *************************************************************************
-     */
 
-    @Override
-    public Boolean existeOferta(Oferta oferta) {
-        this.tipo_Operacion = Tipo_Operacion.EXISTE;
-        this.oferta = oferta;
-        super.buscar();
-        return this.oferta != null;
-    }
 }

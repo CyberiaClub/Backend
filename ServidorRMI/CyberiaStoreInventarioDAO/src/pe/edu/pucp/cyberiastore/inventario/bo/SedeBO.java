@@ -7,33 +7,35 @@ import pe.edu.pucp.cyberiastore.inventario.model.Producto;
 import pe.edu.pucp.cyberiastore.inventario.model.Sede;
 
 public class SedeBO {
+
     SedeDAO sedeDAO;
-    
-    public SedeBO(){
+
+    public SedeBO() {
         this.sedeDAO = new SedeDAOImpl();
     }
-     public Integer insertar(Sede sede){
+
+    public Integer insertar(Sede sede) {
         return this.sedeDAO.insertar(sede);
     }
-    
-    public Integer modificar(Sede sede){
+
+    public Integer modificar(Sede sede) {
         return this.sedeDAO.modificar(sede);
     }
 
-    public Integer eliminar(Sede sede){
+    public Integer eliminar(Sede sede) {
         return this.sedeDAO.eliminar(sede);
     }
 
-    public ArrayList<Sede> listarTodos(){
+    public ArrayList<Sede> listarTodos() {
         return this.sedeDAO.listarTodos();
     }
-    
-    public ArrayList<Producto> listarProductosSede(Integer idSede){
+
+    public ArrayList<Producto> listarProductosSede(Integer idSede) {
         ArrayList<Producto> stock = this.sedeDAO.listarProductosSede(idSede);
         return stock;
     }
 
-    public Sede obtenerPorId(Integer idSede){
+    public Sede obtenerPorId(Integer idSede) {
         Sede sede = this.sedeDAO.obtenerPorId(idSede);
         return sede;
     }

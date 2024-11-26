@@ -12,7 +12,7 @@ public class ComprobantePagoXProductoDAOImpl extends DAOImpl implements Comproba
     private Integer idComprobantePago;
     private Integer idProducto;
     private Integer cantidad;
-    
+
     public ComprobantePagoXProductoDAOImpl() {
         super("COMPROBANTE_PAGO_X_PRODUCTO");
         this.idComprobantePago = null;
@@ -99,5 +99,5 @@ public class ComprobantePagoXProductoDAOImpl extends DAOImpl implements Comproba
         this.conexion = conexion;
         return this.insertar(idComprobantePago, idProducto, cantidad);
     }
-    
+
 }

@@ -142,12 +142,98 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
         this.conexion = conexion;
         return this.modificar(persona);
     }
+
+    @Override
+    protected String obtenerPredicadoParaLlavePrimaria() {
+        String sql = "";
+
+        if (this.tipo_Operacion != null) {
+            switch (tipoOperacionPersona) {
+                case LISTAR_PERSONA_POR_DOCUMENTO ->
+                    sql = sql.concat(" DOCUMENTO=? ");
+                case MODIFICAR_PERSONA ->
+                    sql = sql.concat("ID_PERSONA=? ");
+                case INSERTAR_TRABAJADOR ->
+                    sql = sql.concat(" DOCUMENTO=? ");
+                case MARCAR_VERIFICADO ->
+                    sql = sql.concat("ID_PERSONA=? ");
+                case VERIFICAR_PERSONA -> {
+                    sql = sql.concat(" TP.ID_TIPO_PERSONA = P.ID_TIPO_PERSONA ");
+                    sql = sql.concat(" AND P.VERIFICADO = 1  ");
+                    sql = sql.concat(" AND P.ACTIVO = 1  ");
+                    sql = sql.concat(" AND CORREO = ? ");
+                    sql = sql.concat(" AND CONTRASEÑA = ? ");
+                }
+            }
+        }
+        return sql;
+    }
+
+    @Override
+    protected String obtenerPredicadoParaListado() {
+        String sql = "";
+        if (this.tipoOperacionPersona != null) {
+            switch (this.tipoOperacionPersona) {
+                case LISTAR_PERSONA_POR_DOCUMENTO -> {
+                    sql = "";
+                }
+                case VERIFICAR_PERSONA -> {
+                    sql = sql.concat(" P, TIPO_PERSONA TP ");
+                }
+                default ->
+                    throw new AssertionError();
+            }
+        }
+        return sql;
+    }
+
+    @Override
+    protected String obtenerListaDeValoresYAtributosParaModificacion() {
+        String sql = "";
+        if (this.tipoOperacionPersona != null) {
+            switch (this.tipoOperacionPersona) {
+                case MODIFICAR_PERSONA ->
+                    sql = sql.concat("TELEFONO=?,CORREO=?,DIRECCION=? ");
+                case INSERTAR_TRABAJADOR ->
+                    sql = sql.concat(" SUELDO=?,FECHA_INGRESO=sysdate() ,ID_TIPO_PERSONA=?,ID_SEDE=? ");
+                case MARCAR_VERIFICADO ->
+                    sql = sql.concat("VERIFICADO=? ");
+                default ->
+                    throw new AssertionError();
+            }
+        }
+        return sql;
+    }
+
+    @Override
+    protected void incluirValorDeParametrosParaModificacion() throws SQLException {
+        switch (this.tipoOperacionPersona) {
+            case MODIFICAR_PERSONA -> {
+                this.incluirParametroString(1, this.persona.getTelefono());
+                this.incluirParametroString(2, this.persona.getCorreo());
+                this.incluirParametroString(3, this.persona.getDireccion());
+                this.incluirParametroInt(4, this.persona.getIdSede());
+            }
+            case INSERTAR_TRABAJADOR -> {
+                this.incluirParametroDouble(1, this.persona.getSueldo());
+                this.incluirParametroInt(2, this.persona.getIdTipoPersona());
+                this.incluirParametroInt(3, this.persona.getIdSede());
+                this.incluirParametroString(4, this.persona.getDocumento());
+            }
+            case MARCAR_VERIFICADO -> {
+                this.incluirParametroInt(1, 1);
+                this.incluirParametroInt(2, this.persona.getIdPersona());
+            }
+            default ->
+                throw new AssertionError();
+        }
+    }
+
     /*
      * **************************************************************************
      * VERIFICACION DE CORREO
      * *************************************************************************
      */
-
     @Override
     public Integer marcarVerificado(String valorToken) {
         this.tipoOperacionPersona = TipoOperacionPersona.MARCAR_VERIFICADO;
@@ -164,92 +250,6 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
             return -1;
         } else {
             return super.modificar();
-        }
-    }
-
-    @Override
-    protected String obtenerPredicadoParaLlavePrimaria() {
-        String sql = "";
-        switch (tipoOperacionPersona) {
-            case LISTAR_PERSONA_POR_DOCUMENTO ->
-                sql = sql.concat(" DOCUMENTO=? ");
-            case MODIFICAR_PERSONA ->
-                sql = sql.concat("ID_PERSONA=? ");
-            case INSERTAR_TRABAJADOR->
-                sql = sql.concat(" DOCUMENTO=? ");
-            case MARCAR_VERIFICADO ->
-                sql = sql.concat("ID_PERSONA=? ");
-            case VERIFICAR_PERSONA -> {
-                sql = sql.concat(" TP.ID_TIPO_PERSONA = P.ID_TIPO_PERSONA ");
-                sql = sql.concat(" AND P.VERIFICADO = 1  ");
-                sql = sql.concat(" AND P.ACTIVO = 1  ");
-                sql = sql.concat(" AND CORREO = ? ");
-                sql = sql.concat(" AND CONTRASEÑA = ? ");
-            }
-        }
-        
-        switch(this.tipo_Operacion){
-            case EXISTE->{
-                sql = sql.concat("ID_PERSONA");
-            }
-        }
-        return sql;
-    }
-
-    @Override
-    protected String obtenerPredicadoParaListado() {
-        String sql = "";
-        switch (this.tipoOperacionPersona) {
-            case LISTAR_PERSONA_POR_DOCUMENTO->{
-                 sql ="";
-            }
-            case VERIFICAR_PERSONA -> {
-                sql = sql.concat(" P, TIPO_PERSONA TP ");
-            }
-            default ->
-                throw new AssertionError();
-        }
-        return sql;
-    }
-
-    @Override
-    protected String obtenerListaDeValoresYAtributosParaModificacion() {
-        String sql = "";
-        switch (this.tipoOperacionPersona) {
-            case MODIFICAR_PERSONA ->
-                sql = sql.concat("TELEFONO=?,CORREO=?,DIRECCION=?,CONTRASEÑA=? ");
-            case INSERTAR_TRABAJADOR ->
-                sql = sql.concat(" SUELDO=?,FECHA_INGRESO=sysdate() ,ID_TIPO_PERSONA=?,ID_SEDE=? ");
-            case MARCAR_VERIFICADO ->
-                sql = sql.concat("VERIFICADO=? ");
-            default ->
-                throw new AssertionError();
-        }
-        return sql;
-    }
-
-    @Override
-    protected void incluirValorDeParametrosParaModificacion() throws SQLException {
-        switch (this.tipoOperacionPersona) {
-            case MODIFICAR_PERSONA -> {
-                this.incluirParametroString(1, this.persona.getTelefono());
-                this.incluirParametroString(2, this.persona.getCorreo());
-                this.incluirParametroString(3, this.persona.getDireccion());
-                this.incluirParametroString(4, this.persona.getContrasena());
-                this.incluirParametroInt(5, this.persona.getIdSede());
-            }
-            case INSERTAR_TRABAJADOR -> {
-                this.incluirParametroDouble(1, this.persona.getSueldo());
-                this.incluirParametroInt(2, this.persona.getIdTipoPersona());
-                this.incluirParametroInt(3, this.persona.getIdSede());
-                this.incluirParametroString(4, this.persona.getDocumento());
-            }
-            case MARCAR_VERIFICADO -> {
-                this.incluirParametroInt(1, 1);
-                this.incluirParametroInt(2, this.persona.getIdPersona());
-            }
-            default ->
-                throw new AssertionError();
         }
     }
 
@@ -292,7 +292,7 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
     protected String obtenerProyeccionParaSelect() {
         String sql = "";
         switch (tipoOperacionPersona) {
-            case LISTAR_PERSONA_POR_DOCUMENTO ->{
+            case LISTAR_PERSONA_POR_DOCUMENTO -> {
                 sql = sql.concat("CONCAT(PRIMER_APELLIDO, ' ', COALESCE(SEGUNDO_APELLIDO, ''), ',',NOMBRE) AS NOMBRE_COMPLETO, ");
                 sql = sql.concat("CORREO, TELEFONO, DIRECCION ");
             }
@@ -329,13 +329,13 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
                 this.persona.setCorreo(this.resultSet.getString("CORREO"));
                 this.persona.setTipoUsuario(this.resultSet.getString("TIPO_USUARIO"));
             }
-            case LISTAR_PERSONA_POR_DOCUMENTO->{
+            case LISTAR_PERSONA_POR_DOCUMENTO -> {
                 this.persona.setNombre(this.resultSet.getString("NOMBRE_COMPLETO"));
                 this.persona.setCorreo(this.resultSet.getString("CORREO"));
                 this.persona.setTelefono(this.resultSet.getString("TELEFONO"));
                 this.persona.setDireccion(this.resultSet.getString("DIRECCION"));
             }
-            default->
+            default ->
                 throw new AssertionError();
         }
     }
@@ -394,9 +394,7 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
         this.persona = persona;
         this.tipoOperacionPersona = TipoOperacionPersona.VERIFICAR_PERSONA;
         super.buscar();
-        
-        System.out.println(this.persona.getNombre());        
-        
+
         if ("".equals(this.persona.getNombre())) {
             return null;
         }

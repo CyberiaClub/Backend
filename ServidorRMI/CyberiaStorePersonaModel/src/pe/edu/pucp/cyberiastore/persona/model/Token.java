@@ -3,13 +3,14 @@ package pe.edu.pucp.cyberiastore.persona.model;
 import java.util.UUID;
 
 public class Token {
+
     private Integer idToken;
     private String valor;
     private Boolean activo;
     private Integer idPersona;
-    
-    public Token(){
-        
+
+    public Token() {
+
     }
 
     public Integer getIdToken() {
@@ -27,11 +28,11 @@ public class Token {
     public void setValor(String valor) {
         this.valor = valor;
     }
-    
+
     public Boolean getActivo() {
         return activo;
     }
-    
+
     public void setActivo(Boolean activo) {
         this.activo = activo;
     }
@@ -43,10 +44,9 @@ public class Token {
     public void setIdPersona(Integer idPersona) {
         this.idPersona = idPersona;
     }
-    
-    public void generarToken(){
+
+    public void generarToken() {
         this.valor = UUID.randomUUID().toString();
     }
 
-    
 }

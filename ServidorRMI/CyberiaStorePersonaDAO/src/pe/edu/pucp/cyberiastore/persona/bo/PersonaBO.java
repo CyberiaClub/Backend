@@ -19,20 +19,20 @@ public class PersonaBO {
     public Integer modificar(Persona persona) {
         return this.personaDAO.modificar(persona);
     }
-    
-    public Integer marcarVerificado(String valorToken){
+
+    public Integer marcarVerificado(String valorToken) {
         return this.personaDAO.marcarVerificado(valorToken);
     }
 
     public Persona obtenerPorDocumento(String documento) {
         return this.personaDAO.obtenerPorDocumento(documento);
     }
-    
-    public Boolean enviarCorreoVerificacion(String correo, String valorToken){
-        return this.personaDAO.enviarCorreoVerificacion(correo,valorToken);
+
+    public Boolean enviarCorreoVerificacion(String correo, String valorToken) {
+        return this.personaDAO.enviarCorreoVerificacion(correo, valorToken);
     }
-    
-    public Persona verificarPersona(String correo,String contrasena){
+
+    public Persona verificarPersona(String correo, String contrasena) {
         Persona persona = new Persona();
         persona.setCorreo(correo);
         persona.setContrasena(contrasena);

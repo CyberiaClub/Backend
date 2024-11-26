@@ -37,17 +37,17 @@ public class ProductoBO {
         Producto producto = this.productoDAO.obtenerPorId(idProducto);
         return producto;
     }
-    
-    public Producto buscar_sku(String sku, Integer idSede){
+
+    public Producto buscar_sku(String sku, Integer idSede) {
         Producto producto = this.productoDAO.buscar_sku(sku, idSede);
         return producto;
     }
-    
-    public Integer aumentarStock(Integer idProducto, Integer idSede, Integer cantidad){
+
+    public Integer aumentarStock(Integer idProducto, Integer idSede, Integer cantidad) {
         return this.productoDAO.aumentarStock(idProducto, idSede, cantidad);
     }
-    
-    public ArrayList<Producto> lineasPedido(Integer idPedido){
+
+    public ArrayList<Producto> lineasPedido(Integer idPedido) {
         return this.productoDAO.lineasPedido(idPedido);
     }
 }

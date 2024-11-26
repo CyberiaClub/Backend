@@ -10,6 +10,6 @@ public interface StockSedeDAO {
     public Integer insertar(Integer idProducto, Integer idSede, Integer cantidadStock);
 
     public Integer insertar(Integer idProducto, Integer idSede, Integer cantidadStock, Boolean usarTransaccion, Connection conexion);
-    
+
     public Integer aumentarStock(Integer idProducto, Integer idSede, Integer stock);
 }

@@ -22,12 +22,12 @@ import pe.edu.pucp.cyberiastore.inventario.model.TipoProducto;
 public class CyberiaStoreInventarioTest {
 
     public static void main(String[] args) {
-        MarcaBO marcaBO = new MarcaBO();
-        Marca marca = new Marca();
-        marca.setIdMarca(6);
-        marcaBO.insertar(marca);
-//        ProductoBO productoBO = new ProductoBO();
-//        Producto producto = new Producto();
+        
+        ProductoBO productoBO = new ProductoBO();
+        Producto producto = new Producto();
+        producto.setIdProducto(1);
+        System.out.println(productoBO.insertar(producto));
+        
 //        producto.setSku("801801");
 //        producto.setNombre("Set Pitt Faber Castell Monochrome X 21 Piezas");
 //        producto.setDescripcion("El Set incluye: 2 Castell 9000: 2B, 6B;1 Grafito Puro 6B;2 Pitt Oil Base;4 Pitt Pastel libre de aceite;1 Pitt Charcoal prensado;1 Pitt natural Charcoal;1 Pitt Charcol;");

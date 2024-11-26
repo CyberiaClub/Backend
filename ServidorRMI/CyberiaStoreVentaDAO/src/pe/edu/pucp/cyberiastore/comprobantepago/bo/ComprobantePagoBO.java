@@ -6,29 +6,31 @@ import pe.edu.pucp.cyberiastore.comprobantepago.dao.ComprobantePagoDAO;
 import pe.edu.pucp.cyberiastore.comprobantepago.daoImpl.ComprobantePagoDAOImpl;
 
 public class ComprobantePagoBO {
+
     private ComprobantePagoDAO comprobantePagoDAO;
-    
-    public ComprobantePagoBO(){
+
+    public ComprobantePagoBO() {
         this.comprobantePagoDAO = new ComprobantePagoDAOImpl();
     }
-     public Integer insertar(ComprobantePago oferta){
+
+    public Integer insertar(ComprobantePago oferta) {
         return this.comprobantePagoDAO.insertar(oferta);
     }
-    
-    public Integer modificar(ComprobantePago oferta){
+
+    public Integer modificar(ComprobantePago oferta) {
         return this.comprobantePagoDAO.modificar(oferta);
     }
 
-    public Integer eliminar(ComprobantePago oferta){
+    public Integer eliminar(ComprobantePago oferta) {
         return this.comprobantePagoDAO.eliminar(oferta);
     }
 
-    public ArrayList<ComprobantePago> listarTodos(){
+    public ArrayList<ComprobantePago> listarTodos() {
         ArrayList<ComprobantePago> comprobantesPago = this.comprobantePagoDAO.listarTodos();
         return comprobantesPago;
     }
 
-    public ComprobantePago obtenerPorId(Integer idComprobantePago){
+    public ComprobantePago obtenerPorId(Integer idComprobantePago) {
         ComprobantePago comprobantePago = this.comprobantePagoDAO.obtenerPorId(idComprobantePago);
         return comprobantePago;
     }

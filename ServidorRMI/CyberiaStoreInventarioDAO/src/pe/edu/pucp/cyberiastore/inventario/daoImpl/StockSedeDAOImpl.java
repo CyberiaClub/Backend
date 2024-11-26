@@ -19,13 +19,12 @@ public class StockSedeDAOImpl extends DAOImpl implements StockSedeDAO {
     public StockSedeDAOImpl() {
         super("PRODUCTO_X_SEDE");
     }
-    
+
     /*
      * ************************************************************************
      * INSERTAR
      * ************************************************************************
      */
-    
     @Override
     public Integer insertar(Integer idProducto, Integer idSede, Integer cantidadStock) {
         this.idProducto = idProducto;
@@ -40,7 +39,7 @@ public class StockSedeDAOImpl extends DAOImpl implements StockSedeDAO {
         this.conexion = conexion;
         return this.insertar(idProducto, idSede, cantidadStock);
     }
-    
+
     @Override
     protected String obtenerListaDeAtributosParaInsercion() {
         return "ID_PRODUCTO, ID_SEDE, STOCK_SEDE";
@@ -57,20 +56,20 @@ public class StockSedeDAOImpl extends DAOImpl implements StockSedeDAO {
         this.incluirParametroInt(2, this.idSede);
         this.incluirParametroInt(3, this.cantidadStock);
     }
-    
+
     @Override
-    public Integer aumentarStock(Integer idProducto, Integer idSede, Integer stock){
+    public Integer aumentarStock(Integer idProducto, Integer idSede, Integer stock) {
         this.idProducto = idProducto;
         this.idSede = idSede;
         this.cantidadStock = stock;
         return super.modificar();
     }
-    
+
     @Override
     protected String obtenerListaDeValoresYAtributosParaModificacion() {
         return "STOCK_SEDE=STOCK_SEDE+?";
     }
-    
+
     @Override
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
         this.incluirParametroInt(1, this.cantidadStock);
