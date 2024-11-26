@@ -74,7 +74,6 @@ public class CyberiaStore_RMI_Servidor {
             Naming.rebind(nombreServicio, proveedorBO);
             
             nombreServicio = retornaNombreDelServicio("sedeBO");
-            System.out.println("nombreServicio " + nombreServicio);
             Naming.rebind(nombreServicio, sedeBO);
             
             nombreServicio = retornaNombreDelServicio("tipoComprobanteBO");

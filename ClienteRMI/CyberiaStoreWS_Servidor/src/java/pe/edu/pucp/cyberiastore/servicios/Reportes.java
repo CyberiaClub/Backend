@@ -22,12 +22,22 @@ import pe.edu.pucp.cyberiastore.servlet.facturaServlet;
 public class Reportes {
     
     @WebMethod(operationName="boleta")
-    public byte[] boleta() {
-        return ReporteUtil.boleta(null);        
+    public byte[] boleta(@WebParam(name = "id_comprobante") Integer id_comprobante) {
+        return ReporteUtil.boleta(null,id_comprobante);        
     }
     
     @WebMethod(operationName="factura")
-    public byte[] factura() {
-        return ReporteUtil.factura(null);        
+    public byte[] factura(@WebParam(name = "id_comprobante") Integer id_comprobante) {
+        return ReporteUtil.factura(null,id_comprobante);        
+    }
+    
+    @WebMethod(operationName="reporteClientes")
+    public byte[] reporteClientes(@WebParam(name = "id_sede") Integer id_sede) {
+        return ReporteUtil.reporteClientes(null,id_sede);        
+    }
+    
+    @WebMethod(operationName="reporteStock")
+    public byte[] reporteStock(@WebParam(name = "id_sede") Integer id_sede) {
+        return ReporteUtil.reporteStock(null,id_sede);        
     }
 }

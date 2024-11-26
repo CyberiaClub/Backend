@@ -60,7 +60,6 @@ public class ServicioWeb {
             System.out.println("puerto" + puerto);
             
             String nombreServicio = this.retornaNombreDelServicio("comprobantePagoBO");
-            System.out.println("retornaNombreDelServicio " + nombreServicio);
             this.comprobantePagoBO = (ComprobantePagoBO) Naming.lookup(nombreServicio);
 
             nombreServicio = this.retornaNombreDelServicio("marcaBO");

@@ -8,9 +8,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import pe.edu.pucp.cyberiastore.reportes.ReporteUtil;
 
 public class boletaServlet extends HttpServlet {
+    private static Integer idComprobante;
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        ReporteUtil.boleta(response);        
+        ReporteUtil.boleta(response, getIdComprobante());        
     }
     
     @Override
@@ -28,5 +30,13 @@ public class boletaServlet extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
+    }
+    
+    public static Integer getIdComprobante() {
+        return idComprobante;
+    }
+    
+    public static void setIdComprobante(Integer idComprobante) {
+        boletaServlet.idComprobante = idComprobante;
     }
 }

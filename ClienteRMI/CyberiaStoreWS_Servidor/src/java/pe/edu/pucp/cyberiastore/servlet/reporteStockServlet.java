@@ -7,12 +7,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import pe.edu.pucp.cyberiastore.reportes.ReporteUtil;
 
-public class facturaServlet extends HttpServlet {
-    private static Integer idComprobante;
+public class reporteStockServlet extends HttpServlet {
+    private static Integer idSede;
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        ReporteUtil.factura(response, getIdComprobante());        
+        ReporteUtil.reporteStock(response, getIdSede());        
     }
     
     @Override
@@ -32,11 +32,11 @@ public class facturaServlet extends HttpServlet {
         return "Short description";
     }
     
-    public static Integer getIdComprobante() {
-        return idComprobante;
+    public static Integer getIdSede() {
+        return idSede;
     }
     
-    public static void setIdComprobante(Integer idComprobante) {
-        facturaServlet.idComprobante = idComprobante;
+    public static void setIdSede(Integer idSede) {
+        reporteStockServlet.idSede = idSede;
     }
 }

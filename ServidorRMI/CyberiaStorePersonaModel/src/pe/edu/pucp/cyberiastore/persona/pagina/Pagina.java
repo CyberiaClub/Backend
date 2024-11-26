@@ -1,12 +1,14 @@
 package pe.edu.pucp.cyberiastore.persona.pagina;
 
-public class Pagina {
+import java.io.Serializable;
+
+public class Pagina implements Serializable {
 
     private Integer idPagina;
     private String nombre;
     private String referencia;
 
-    public Pagina() {
+    public Pagina(){
     }
 
     public Integer getIdPagina() {
