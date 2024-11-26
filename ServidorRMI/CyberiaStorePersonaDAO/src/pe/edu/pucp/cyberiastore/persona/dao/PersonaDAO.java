@@ -27,4 +27,6 @@ public interface PersonaDAO {
     public Boolean enviarCorreoVerificacion(String correo, String valorToken);
 
     public Persona verificarPersona(Persona persona);
+
+    public Integer modificarUsuario(Persona persona);
 }

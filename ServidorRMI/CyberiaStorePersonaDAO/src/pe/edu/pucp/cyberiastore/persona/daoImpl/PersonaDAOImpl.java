@@ -60,7 +60,7 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
                 }
             }
             case INSERTAR_TRABAJADOR -> {
-                this.modificar(persona);
+                this.modificarTrabajador(persona);
                 id = persona.getIdPersona();
             }
             default ->
@@ -127,11 +127,22 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
      * @param persona
      * @return
      */
+    
+    @Override
+    public Integer modificarUsuario(Persona persona){
+        this.tipoOperacionPersona = TipoOperacionPersona.MODIFICAR_PERSONA;
+        this.persona = persona;
+        return super.modificar();
+    }
+    
+    public Integer modificarTrabajador(Persona persona){
+        this.tipoOperacionPersona = TipoOperacionPersona.INSERTAR_TRABAJADOR;
+        this.persona = persona;
+        return super.modificar();
+    }
+    
     @Override
     public Integer modificar(Persona persona) {
-        this.tipoOperacionPersona = (persona.getIdSede() == null)
-                ? TipoOperacionPersona.MODIFICAR_PERSONA
-                : TipoOperacionPersona.INSERTAR_TRABAJADOR;
         this.persona = persona;
         return super.modificar();
     }

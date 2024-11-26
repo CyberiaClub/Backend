@@ -11,6 +11,8 @@ public interface PersonaBO extends Remote {
 
     public Integer modificar(Persona persona) throws RemoteException;
 
+    public Integer modificarUsuario(Persona persona)throws RemoteException;
+
     public Integer marcarVerificado(String valorToken) throws RemoteException;
 
     public Persona obtenerPorDocumento(String documento) throws RemoteException;
