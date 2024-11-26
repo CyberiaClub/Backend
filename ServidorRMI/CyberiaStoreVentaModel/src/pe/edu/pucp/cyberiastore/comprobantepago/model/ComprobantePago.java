@@ -22,6 +22,7 @@ public class ComprobantePago implements Serializable {
     private TipoComprobante tipoComprobante;
     private Persona persona;
     private HashMap<Producto,Integer> lineaPedido;
+    private Integer idSede;
 
     public ComprobantePago(){
         this.idComprobantePago = null;
@@ -171,5 +172,13 @@ public class ComprobantePago implements Serializable {
     
     public void setLineaPedido(HashMap<Producto,Integer> lineaPedido) {
         this.lineaPedido = lineaPedido;
+    }
+    
+    public Integer getIdSede() {
+        return idSede;
+    }
+    
+    public void setIdSede(Integer idSede) {
+        this.idSede = idSede;
     }
 }

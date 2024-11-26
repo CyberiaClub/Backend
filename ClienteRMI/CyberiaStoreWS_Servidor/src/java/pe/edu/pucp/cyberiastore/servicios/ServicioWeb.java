@@ -492,6 +492,28 @@ public class ServicioWeb {
         }
         return retorno;
     }
+
+    @WebMethod(operationName = "comprobante_buscar_usuario")
+    public ArrayList<ComprobantePago> comprobante_buscar_usuario(@WebParam(name = "id_persona") Integer idPersona) {
+        ArrayList retorno = null;
+        try {
+            retorno = comprobantePagoBO.buscarPersona(idPersona);
+        } catch (RemoteException ex) {
+            Logger.getLogger(ServicioWeb.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return retorno;
+    }
+
+    @WebMethod(operationName = "comprobante_buscar_sede")
+    public ArrayList<ComprobantePago> comprobante_buscar_sede(@WebParam(name = "id_sede") Integer idSede) {
+        ArrayList retorno = null;
+        try {
+            retorno = comprobantePagoBO.buscarSede(idSede);
+        } catch (RemoteException ex) {
+            Logger.getLogger(ServicioWeb.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return retorno;
+    }
     /***************************************************************************
     WEB SERVICE OFERTA
     ****************************************************************************/

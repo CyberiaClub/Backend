@@ -18,6 +18,7 @@ import pe.edu.pucp.cyberiastore.persona.model.Persona;
 public class ComprobantePagoDAOImpl extends DAOImpl implements ComprobantePagoDAO {
 
     private ComprobantePago comprobantePago;
+    private TipoOperacionComprobante tipoOperacionComprobante;
 
     public ComprobantePagoDAOImpl() {
         super("COMPROBANTE_DE_PAGO");
@@ -99,7 +100,21 @@ public class ComprobantePagoDAOImpl extends DAOImpl implements ComprobantePagoDA
 
     @Override
     protected String obtenerPredicadoParaLlavePrimaria() {
-        return "ID_COMPROBANTE_DE_PAGO=?";
+        return "ID_COMPROBANTE_DE_PAGO=? ";
+    }
+
+    @Override
+    protected String obtenerPredicadoParaListado() {
+        String sql = " WHERE ";
+        switch (tipoOperacionComprobante)  {
+            case BUSCAR_SEDE ->
+                sql = sql.concat("ID_SEDE=? ");
+            case BUSCAR_USUARIO ->
+                sql = sql.concat("ID_PERSONA=? ");
+            default ->
+                sql = sql.concat("ID_COMPROBANTE_DE_PAGO=? ");
+        }
+        return sql;
     }
 
     @Override
@@ -157,6 +172,18 @@ public class ComprobantePagoDAOImpl extends DAOImpl implements ComprobantePagoDA
     }
 
     @Override
+    protected void incluirValorDeParametrosParaListado() throws SQLException {
+        switch (tipoOperacionComprobante)  {
+            case BUSCAR_SEDE ->
+                this.incluirParametroInt(1, this.comprobantePago.getIdSede());
+            case BUSCAR_USUARIO ->
+                this.incluirParametroInt(1, this.comprobantePago.getPersona().getIdPersona());
+            default ->
+                this.incluirParametroInt(1, this.comprobantePago.getIdComprobantePago());
+        }
+    }
+
+    @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.comprobantePago = new ComprobantePago();
         this.comprobantePago.setIdComprobantePago(this.resultSet.getInt("ID_COMPROBANTE_DE_PAGO"));
@@ -209,5 +236,31 @@ public class ComprobantePagoDAOImpl extends DAOImpl implements ComprobantePagoDA
     @Override
     public Boolean existeComprobantePago(ComprobantePago comprobantePago) {
         return false;
+    }
+
+    @Override
+    public ArrayList<ComprobantePago> buscarPorSede(Integer idSede) {
+        this.comprobantePago = new ComprobantePago();
+        this.comprobantePago.setIdSede(idSede);
+        this.tipoOperacionComprobante = TipoOperacionComprobante.BUSCAR_SEDE;
+        List pedidos = super.listarTodos(null);
+        if (pedidos.isEmpty()) {
+            return null;
+        } else 
+            return (ArrayList<ComprobantePago>)pedidos;
+    }
+
+    @Override
+    public ArrayList<ComprobantePago> buscarPorUsuario(Integer idUsuario) {
+        this.comprobantePago = new ComprobantePago();
+        Persona persona = new Persona();
+        persona.setIdPersona(idUsuario);
+        this.comprobantePago.setPersona(persona);
+        this.tipoOperacionComprobante = TipoOperacionComprobante.BUSCAR_USUARIO;
+        List pedidos = super.listarTodos(null);
+        if (pedidos.isEmpty()) {
+            return null;
+        } else 
+            return (ArrayList<ComprobantePago>)pedidos;
     }
 }
