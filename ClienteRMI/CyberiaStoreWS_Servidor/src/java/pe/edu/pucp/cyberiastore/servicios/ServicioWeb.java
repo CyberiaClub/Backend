@@ -70,7 +70,7 @@ public class ServicioWeb {
 
             nombreServicio = this.retornaNombreDelServicio("personaBO");
             this.personaBO = (PersonaBO) Naming.lookup(nombreServicio);
-
+            
             nombreServicio = this.retornaNombreDelServicio("productoBO");
             this.productoBO = (ProductoBO) Naming.lookup(nombreServicio);
 
@@ -97,7 +97,7 @@ public class ServicioWeb {
     private void leer_archivo_de_propiedades() {
         Properties properties = new Properties();
         try {            
-            String nmArchivoConf = "C:\\glassfish-7.0.18\\glassfish7\\glassfish\\resources" + "\\" + ARCHIVO_CONFIGURACION;
+            String nmArchivoConf = "C:\\Properties" + "\\" + ARCHIVO_CONFIGURACION;
             
             properties.load(new FileInputStream(new File(nmArchivoConf)));
             IP = properties.getProperty("ip");
@@ -401,11 +401,12 @@ public class ServicioWeb {
     }
     
     @WebMethod(operationName = "persona_loguearse")
-    public Persona persona_loguearse(@WebParam(name = "persona") String correo, @WebParam(name = "contrasena") String contrasena){
+    public Persona persona_loguearse(@WebParam(name = "correo") String correo, @WebParam(name = "contrasena") String contrasena){
         Persona retorno = null;
         try {
             retorno = personaBO.verificarPersona(correo,contrasena);
-        } catch (RemoteException ex) {
+        }
+        catch (RemoteException ex) {
             Logger.getLogger(ServicioWeb.class.getName()).log(Level.SEVERE, null, ex);
         }
         return retorno;

@@ -66,7 +66,7 @@ public class CyberiaStore_RMI_Servidor {
             
             nombreServicio = retornaNombreDelServicio("personaBO");
             Naming.rebind(nombreServicio, personaBO);
-            
+            System.out.println(nombreServicio);
             nombreServicio = retornaNombreDelServicio("productoBO");
             Naming.rebind(nombreServicio, productoBO);
             

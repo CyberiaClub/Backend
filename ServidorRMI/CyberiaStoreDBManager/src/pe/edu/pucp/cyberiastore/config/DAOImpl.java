@@ -156,12 +156,12 @@ public abstract class DAOImpl {
     }
 
     protected String generarSQLParaModificacion() {
-        String sql = "update ";
+        String sql = "UPDATE ";
         sql = sql.concat(this.nombre_tabla);
-        sql = sql.concat(" set ");
+        sql = sql.concat(" SET ");
         sql = sql.concat(this.obtenerListaDeValoresYAtributosParaModificacion());
         sql = sql.concat(" ");
-        sql = sql.concat("where ");
+        sql = sql.concat("WHERE ");
         sql = sql.concat(this.obtenerPredicadoParaLlavePrimaria());
         return sql;
     }

@@ -175,7 +175,7 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
             case MODIFICAR_PERSONA ->
                 sql = sql.concat("ID_PERSONA=? ");
             case INSERTAR_TRABAJADOR->
-                sql = sql.concat("ID_PERSONA=? ");
+                sql = sql.concat(" DOCUMENTO=? ");
             case MARCAR_VERIFICADO ->
                 sql = sql.concat("ID_PERSONA=? ");
             case VERIFICAR_PERSONA -> {
@@ -214,7 +214,7 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
             case MODIFICAR_PERSONA ->
                 sql = sql.concat("TELEFONO=?,CORREO=?,DIRECCION=?,CONTRASEÑA=? ");
             case INSERTAR_TRABAJADOR ->
-                sql = sql.concat("SUELDO=?,FECHA_INGRESO=sysdate() ,ID_TIPO_PERSONA=?,ID_SEDE=? ");
+                sql = sql.concat(" SUELDO=?,FECHA_INGRESO=sysdate() ,ID_TIPO_PERSONA=?,ID_SEDE=? ");
             case MARCAR_VERIFICADO ->
                 sql = sql.concat("VERIFICADO=? ");
             default ->
@@ -428,6 +428,9 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
         this.persona = persona;
         this.tipoOperacionPersona = TipoOperacionPersona.VERIFICAR_PERSONA;
         super.obtenerPorId();
+        
+        System.out.println(this.persona.getNombre());        
+        
         if ("".equals(this.persona.getNombre())) {
             return null;
         }
