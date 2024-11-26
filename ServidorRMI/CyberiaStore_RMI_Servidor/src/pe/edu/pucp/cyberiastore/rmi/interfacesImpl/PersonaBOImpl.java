@@ -43,4 +43,9 @@ public class PersonaBOImpl extends UnicastRemoteObject implements PersonaBO {
     public Persona verificarPersona(String correo, String contrasena) throws RemoteException {
         return this.personaBO.verificarPersona(correo,contrasena);
     }
+
+    @Override
+    public Integer modificarUsuario(Persona persona) throws RemoteException {
+        return this.personaBO.modificarUsuario(persona);
+    }
 }

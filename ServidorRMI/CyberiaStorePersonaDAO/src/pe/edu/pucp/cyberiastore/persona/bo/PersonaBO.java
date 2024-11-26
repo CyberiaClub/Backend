@@ -38,4 +38,7 @@ public class PersonaBO {
         persona.setContrasena(contrasena);
         return this.personaDAO.verificarPersona(persona);
     }
+    public Integer modificarUsuario(Persona persona){
+        return this.personaDAO.modificarUsuario(persona);
+    }
 }

@@ -366,6 +366,17 @@ public class ServicioWeb {
         }
         return retorno;
     }
+    
+    @WebMethod(operationName = "persona_modificar_usuario")
+    public Integer modificarUsuario(Persona persona) throws RemoteException {
+        Integer retorno = null;
+        try {
+            retorno = personaBO.modificarUsuario(persona);
+        } catch (RemoteException ex) {
+            Logger.getLogger(ServicioWeb.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return retorno;
+    }
 
     @WebMethod(operationName = "persona_buscar_por_documento")
     public Persona persona_buscar_por_documento(@WebParam(name = "documento") String documento) {
