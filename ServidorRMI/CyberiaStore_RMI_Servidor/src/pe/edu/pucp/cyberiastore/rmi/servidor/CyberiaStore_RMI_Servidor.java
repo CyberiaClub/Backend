@@ -94,7 +94,7 @@ public class CyberiaStore_RMI_Servidor {
     private static void leer_archivo_de_propiedades() {
         Properties properties = new Properties();
         try {            
-            String nmArchivoConf = "C:\\glassfish-7.0.18\\glassfish7\\glassfish\\resources" + "\\" + ARCHIVO_CONFIGURACION;
+            String nmArchivoConf = "C:\\Properties" + "\\" + ARCHIVO_CONFIGURACION;
             
             properties.load(new FileInputStream(new File(nmArchivoConf)));
             IP = properties.getProperty("ip");
