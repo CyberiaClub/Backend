@@ -285,6 +285,7 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
      */
     @Override
     public ArrayList<Persona> listarTodos() {
+        this.tipo_Operacion = Tipo_Operacion.LISTAR;
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -387,7 +388,7 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
     /*
      * **************************************************************************
      * VERIFICACION AL INGRESAR
-     * *************************************************************************
+     * **************************************************************************
      */
     @Override
     public Persona verificarPersona(Persona persona) {

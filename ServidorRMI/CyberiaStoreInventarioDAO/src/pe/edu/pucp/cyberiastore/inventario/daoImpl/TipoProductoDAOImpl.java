@@ -181,6 +181,7 @@ public class TipoProductoDAOImpl extends DAOImpl implements TipoProductoDAO {
      */
     @Override
     public ArrayList<TipoProducto> listarTodos() {
+        this.tipo_Operacion = Tipo_Operacion.LISTAR;
         return (ArrayList<TipoProducto>) super.listarTodos(null);
     }
 

@@ -192,6 +192,7 @@ public class ProveedorDAOImpl extends DAOImpl implements ProveedorDAO {
      */
     @Override
     public ArrayList<Proveedor> listarTodos() {
+        this.tipo_Operacion = Tipo_Operacion.LISTAR;
         return (ArrayList<Proveedor>) super.listarTodos(null);
     }
 

@@ -12,6 +12,7 @@ import pe.edu.pucp.cyberiastore.comprobantepago.dao.ComprobantePagoDAO;
 import pe.edu.pucp.cyberiastore.comprobantepago.dao.ComprobantePagoXProductoDAO;
 import pe.edu.pucp.cyberiastore.comprobantepago.model.EstadoPedido;
 import pe.edu.pucp.cyberiastore.comprobantepago.model.TipoComprobante;
+import pe.edu.pucp.cyberiastore.config.Tipo_Operacion;
 import pe.edu.pucp.cyberiastore.inventario.model.Producto;
 import pe.edu.pucp.cyberiastore.persona.model.Persona;
 
@@ -204,6 +205,7 @@ public class ComprobantePagoDAOImpl extends DAOImpl implements ComprobantePagoDA
 
     @Override
     public ArrayList<ComprobantePago> listarTodos() {
+        this.tipo_Operacion = Tipo_Operacion.LISTAR;
         return (ArrayList<ComprobantePago>) super.listarTodos(null);
     }
 

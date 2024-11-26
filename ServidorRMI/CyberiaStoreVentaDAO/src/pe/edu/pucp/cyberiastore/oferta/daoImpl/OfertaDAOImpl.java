@@ -163,6 +163,7 @@ public class OfertaDAOImpl extends DAOImpl implements OfertaDAO {
      */
     @Override
     public ArrayList<Oferta> listarTodos() {
+        this.tipo_Operacion = Tipo_Operacion.LISTAR;
         return (ArrayList<Oferta>) super.listarTodos(null);
     }
 

@@ -188,6 +188,7 @@ public class MarcaDAOImpl extends DAOImpl implements MarcaDAO {
      */
     @Override
     public ArrayList<Marca> listarTodos() {
+        this.tipo_Operacion = Tipo_Operacion.LISTAR;
         return (ArrayList<Marca>) super.listarTodos(null);
     }
 
@@ -199,12 +200,14 @@ public class MarcaDAOImpl extends DAOImpl implements MarcaDAO {
     @Override
     protected String obtenerProyeccionParaSelect() {
         String sql = "";
-        switch (this.tipo_Operacion) {
-            case LISTAR -> {
-                sql = "M.ID_MARCA, M.NOMBRE, M.IMAGEN, PR.ID_PROVEEDOR, PR.RAZON_SOCIAL ";
-            }
-            case EXISTE -> {
-                sql = "ID_MARCA";
+        if (this.tipo_Operacion != null) {
+            switch (this.tipo_Operacion) {
+                case LISTAR -> {
+                    sql = "M.ID_MARCA, M.NOMBRE, M.IMAGEN, PR.ID_PROVEEDOR, PR.RAZON_SOCIAL ";
+                }
+                case EXISTE -> {
+                    sql = "ID_MARCA";
+                }
             }
         }
         return sql;

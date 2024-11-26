@@ -93,6 +93,9 @@ public class TipoPersonaDAOImpl extends DAOImpl implements TipoPersonaDAO {
     protected String obtenerProyeccionParaSelect() {
         String sql = "";
         switch (this.tipoOperacionPersona) {
+            case LISTAR_TIPO_TRABAJADORES->{
+                sql = sql.concat(" ID_TIPO_PERSONA, NOMBRE ");
+            }
             case LISTAR_PERSONA_POR_DOCUMENTO ->
                 sql = sql.concat(" ID_TIPO_PERSONA, NOMBRE ");
             case LISTAR_PAGINAS ->
