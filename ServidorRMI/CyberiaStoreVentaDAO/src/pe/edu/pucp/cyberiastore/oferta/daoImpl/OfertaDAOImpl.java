@@ -42,7 +42,6 @@ public class OfertaDAOImpl extends DAOImpl implements OfertaDAO {
             ArrayList<Producto> productosOferta = oferta.getProductos();
 
             for (Producto producto : productosOferta) {
-                System.out.println("Id del producto otra vez: " + producto.getIdProducto());
                 productoXOferta.insertar(producto.getIdProducto(), idOferta, producto.getOferta(), this.usarTransaccion, this.conexion);
             }
 
