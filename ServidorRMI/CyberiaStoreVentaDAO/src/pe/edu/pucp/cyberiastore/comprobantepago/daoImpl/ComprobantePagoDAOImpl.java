@@ -43,6 +43,7 @@ public class ComprobantePagoDAOImpl extends DAOImpl implements ComprobantePagoDA
         for (Producto producto : productos) {
             comprobantePagoXProducto.insertar(id, producto.getIdProducto(), this.comprobantePago.getLineaPedido().get(producto));
         }
+        this.tipo_Operacion = null;
         return id;
     }
 
@@ -87,7 +88,9 @@ public class ComprobantePagoDAOImpl extends DAOImpl implements ComprobantePagoDA
     @Override
     public Integer modificar(ComprobantePago comprobantePago) {
         this.comprobantePago = comprobantePago;
-        return super.modificar();
+        Integer resultado =super.modificar();
+        this.tipo_Operacion = null;
+        return resultado;
     }
 
     @Override
@@ -212,7 +215,9 @@ public class ComprobantePagoDAOImpl extends DAOImpl implements ComprobantePagoDA
     @Override
     public ArrayList<ComprobantePago> listarTodos() {
         this.tipo_Operacion = Tipo_Operacion.LISTAR;
-        return (ArrayList<ComprobantePago>) super.listarTodos(null);
+        ArrayList<ComprobantePago> comprobantesDePago = (ArrayList<ComprobantePago>) super.listarTodos(null);
+        this.tipo_Operacion = null;
+        return comprobantesDePago;
     }
 
     /*
@@ -227,6 +232,7 @@ public class ComprobantePagoDAOImpl extends DAOImpl implements ComprobantePagoDA
         this.comprobantePago = new ComprobantePago();
         this.comprobantePago.setIdComprobantePago(idComprobantePago);
         super.buscar();
+        this.tipo_Operacion = null;
         return this.comprobantePago;
     }
 
@@ -252,6 +258,7 @@ public class ComprobantePagoDAOImpl extends DAOImpl implements ComprobantePagoDA
         this.comprobantePago.setIdSede(idSede);
         this.tipoOperacionComprobante = TipoOperacionComprobante.BUSCAR_SEDE;
         List pedidos = super.listarTodos(null);
+        this.tipo_Operacion = null;
         if (pedidos.isEmpty()) {
             return null;
         } else {
@@ -267,6 +274,7 @@ public class ComprobantePagoDAOImpl extends DAOImpl implements ComprobantePagoDA
         this.comprobantePago.setPersona(persona);
         this.tipoOperacionComprobante = TipoOperacionComprobante.BUSCAR_USUARIO;
         List pedidos = super.listarTodos(null);
+        this.tipo_Operacion = null;
         if (pedidos.isEmpty()) {
             return null;
         } else {

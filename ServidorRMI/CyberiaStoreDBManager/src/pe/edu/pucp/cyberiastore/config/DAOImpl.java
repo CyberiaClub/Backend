@@ -118,6 +118,7 @@ public abstract class DAOImpl {
             }
         } finally {
             try {
+                this.tipo_Operacion = null;
                 if (this.usarTransaccion) {
                     this.cerrarConexion();
                 }

@@ -58,14 +58,17 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
                     tokenDAO.insertar(this.token);
                     this.enviarCorreoVerificacion(this.persona.getCorreo(), this.token.getValor());
                 }
+                this.tipo_Operacion = null;
             }
             case INSERTAR_TRABAJADOR -> {
                 this.modificarTrabajador(persona);
                 id = persona.getIdPersona();
+                this.tipoOperacionPersona = null;
             }
             default ->
                 throw new AssertionError();
         }
+
         return id;
     }
 
@@ -127,20 +130,23 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
      * @param persona
      * @return
      */
-    
     @Override
-    public Integer modificarUsuario(Persona persona){
+    public Integer modificarUsuario(Persona persona) {
         this.tipoOperacionPersona = TipoOperacionPersona.MODIFICAR_PERSONA;
         this.persona = persona;
-        return super.modificar();
+        Integer resultado = super.modificar();
+        this.tipoOperacionPersona = null;
+        return resultado;
     }
-    
-    public Integer modificarTrabajador(Persona persona){
+
+    public Integer modificarTrabajador(Persona persona) {
         this.tipoOperacionPersona = TipoOperacionPersona.INSERTAR_TRABAJADOR;
         this.persona = persona;
-        return super.modificar();
+        Integer resultado = super.modificar();
+        this.tipoOperacionPersona = null;
+        return resultado;
     }
-    
+
     @Override
     public Integer modificar(Persona persona) {
         this.persona = persona;
@@ -151,7 +157,9 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
     public Integer modificar(Persona persona, Boolean usarTransaccion, Connection conexion) {
         this.usarTransaccion = usarTransaccion;
         this.conexion = conexion;
-        return this.modificar(persona);
+        Integer resultado = super.modificar();
+        this.tipo_Operacion = null;
+        return resultado;
     }
 
     @Override
@@ -256,7 +264,7 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
         this.token = tokenDAO.buscarTokenPorValor(this.token);
         tokenDAO.eliminar(this.token);
         this.persona.setIdPersona(this.token.getIdPersona());
-
+        this.tipoOperacionPersona = null;
         if (this.token.getActivo() == false) {
             return -1;
         } else {
@@ -369,6 +377,7 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
         this.persona.setDocumento(documento);
         this.tipoOperacionPersona = TipoOperacionPersona.LISTAR_PERSONA_POR_DOCUMENTO;
         super.buscar();
+        this.tipoOperacionPersona = null;
         return this.persona;
     }
 
@@ -407,6 +416,7 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
         this.persona = persona;
         this.tipoOperacionPersona = TipoOperacionPersona.VERIFICAR_PERSONA;
         super.buscar();
+        this.tipoOperacionPersona = null;
         return this.persona;
     }
 }

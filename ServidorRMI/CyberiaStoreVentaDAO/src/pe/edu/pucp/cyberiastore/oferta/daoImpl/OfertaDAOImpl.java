@@ -56,6 +56,7 @@ public class OfertaDAOImpl extends DAOImpl implements OfertaDAO {
             }
         } finally {
             try {
+                this.tipo_Operacion= null;
                 this.cerrarConexion();
             } catch (SQLException ex) {
                 System.err.println("Error al intentar cerrar la conexion - " + ex);
@@ -106,6 +107,7 @@ public class OfertaDAOImpl extends DAOImpl implements OfertaDAO {
             }
         } finally {
             try {
+                this.tipo_Operacion = null;
                 this.cerrarConexion();
             } catch (SQLException ex) {
                 System.err.println("Error al intentar cerrar la conexion - " + ex);
@@ -169,7 +171,9 @@ public class OfertaDAOImpl extends DAOImpl implements OfertaDAO {
     @Override
     public ArrayList<Oferta> listarTodos() {
         this.tipo_Operacion = Tipo_Operacion.LISTAR;
-        return (ArrayList<Oferta>) super.listarTodos(null);
+        ArrayList<Oferta> ofertas = (ArrayList<Oferta>) super.listarTodos(null);
+        this.tipo_Operacion = null;
+        return ofertas;
     }
 
     @Override
@@ -215,6 +219,7 @@ public class OfertaDAOImpl extends DAOImpl implements OfertaDAO {
         this.oferta = new Oferta();
         this.oferta.setIdOferta(idOferta);
         super.buscar();
+        this.tipo_Operacion = null;
         return this.oferta;
     }
 

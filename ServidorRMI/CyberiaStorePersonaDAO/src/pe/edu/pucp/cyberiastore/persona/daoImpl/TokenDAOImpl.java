@@ -45,6 +45,7 @@ public class TokenDAOImpl extends DAOImpl implements TokenDAO {
             }
         } finally {
             try {
+                this.tipo_Operacion = null;
                 this.cerrarConexion();
             } catch (SQLException ex) {
                 System.err.println("Error al intentar cerrar la conexion - " + ex);
@@ -72,7 +73,9 @@ public class TokenDAOImpl extends DAOImpl implements TokenDAO {
 
     @Override
     public Integer eliminar(Token token) {
-        return super.eliminar();
+        Integer resultado = super.eliminar();
+        this.tipo_Operacion = null;
+        return resultado;
     }
 
     @Override
@@ -85,6 +88,7 @@ public class TokenDAOImpl extends DAOImpl implements TokenDAO {
         this.tipo_Operacion = Tipo_Operacion.EXISTE;
         this.token = token;
         super.buscar();
+        this.tipoOperacionPersona = null;
         return this.token != null;
     }
 
@@ -93,6 +97,7 @@ public class TokenDAOImpl extends DAOImpl implements TokenDAO {
         this.tipoOperacionPersona = TipoOperacionPersona.BUSCAR_TOKEN_POR_VALOR;
         this.token = token;
         super.buscar();
+        this.tipoOperacionPersona = null;
         return this.token;
     }
 

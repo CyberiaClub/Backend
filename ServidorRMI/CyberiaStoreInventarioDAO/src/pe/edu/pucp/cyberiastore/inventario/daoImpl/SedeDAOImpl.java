@@ -60,6 +60,7 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
             }
         } finally {
             try {
+                this.tipo_Operacion = null;
                 this.cerrarConexion();
             } catch (SQLException ex) {
                 System.err.println("Error al intentar cerrar la conexion - " + ex);
@@ -112,6 +113,7 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
             }
         } finally {
             try {
+                this.tipo_Operacion = null;
                 this.cerrarConexion();
             } catch (SQLException ex) {
                 System.err.println("Error al intentar cerrar la conexion - " + ex);
@@ -190,7 +192,9 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
     @Override
     public ArrayList<Sede> listarTodos() {
         this.tipo_Operacion = Tipo_Operacion.LISTAR;
-        return (ArrayList<Sede>) super.listarTodos(null);
+        ArrayList<Sede> sedes = (ArrayList<Sede>) super.listarTodos(null);
+        this.tipo_Operacion = null;
+        return sedes;
     }
 
     @Override
@@ -198,7 +202,9 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
         this.tipoOperacionInventario = TipoOperacionInventario.LISTAR_STOCK_SEDE;
         this.sede = new Sede();
         this.sede.setIdSede(idSede);
-        return (ArrayList<Producto>) super.listarTodos(null);
+        ArrayList<Producto> productos =  (ArrayList<Producto>) super.listarTodos(null);
+        this.tipoOperacionInventario = null;
+        return productos;
     }
 
     @Override
@@ -338,6 +344,7 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
         this.sede = new Sede();
         this.sede.setIdSede(idSede);
         super.buscar();
+        this.tipo_Operacion = null;
         return this.sede;
     }
 
@@ -368,6 +375,7 @@ public class SedeDAOImpl extends DAOImpl implements SedeDAO {
         Boolean abreConexion = true;
         this.sede = sede;
         super.buscar();
+        this.tipo_Operacion = null;
         return this.sede != null;
     }
 

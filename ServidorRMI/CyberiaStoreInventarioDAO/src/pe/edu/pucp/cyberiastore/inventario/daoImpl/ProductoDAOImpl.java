@@ -70,6 +70,7 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
             }
         } finally {
             try {
+                this.tipo_Operacion = null;
                 this.cerrarConexion();
             } catch (SQLException ex) {
                 System.err.println("Error al intentar cerrar la conexion - " + ex);
@@ -125,6 +126,7 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
             }
         } finally {
             try {
+                this.tipo_Operacion = null;
                 this.cerrarConexion();
             } catch (SQLException ex) {
                 System.err.println("Error al intentar cerrar la conexion - " + ex);
@@ -191,6 +193,7 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
             }
         } finally {
             try {
+                this.tipo_Operacion = null;
                 this.cerrarConexion();
             } catch (SQLException ex) {
                 System.err.println("Error al intentar cerrar la conexion - " + ex);
