@@ -226,25 +226,27 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
 
     @Override
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
-        switch (this.tipoOperacionPersona) {
-            case MODIFICAR_PERSONA -> {
-                this.incluirParametroString(1, this.persona.getTelefono());
-                this.incluirParametroString(2, this.persona.getCorreo());
-                this.incluirParametroString(3, this.persona.getDireccion());
-                this.incluirParametroInt(4, this.persona.getIdPersona());
+        if (this.tipoOperacionPersona != null) {
+            switch (this.tipoOperacionPersona) {
+                case MODIFICAR_PERSONA -> {
+                    this.incluirParametroString(1, this.persona.getTelefono());
+                    this.incluirParametroString(2, this.persona.getCorreo());
+                    this.incluirParametroString(3, this.persona.getDireccion());
+                    this.incluirParametroInt(4, this.persona.getIdPersona());
+                }
+                case INSERTAR_TRABAJADOR -> {
+                    this.incluirParametroDouble(1, this.persona.getSueldo());
+                    this.incluirParametroInt(2, this.persona.getIdTipoPersona());
+                    this.incluirParametroInt(3, this.persona.getIdSede());
+                    this.incluirParametroString(4, this.persona.getDocumento());
+                }
+                case MARCAR_VERIFICADO -> {
+                    this.incluirParametroInt(1, 1);
+                    this.incluirParametroInt(2, this.persona.getIdPersona());
+                }
+                default ->
+                    throw new AssertionError();
             }
-            case INSERTAR_TRABAJADOR -> {
-                this.incluirParametroDouble(1, this.persona.getSueldo());
-                this.incluirParametroInt(2, this.persona.getIdTipoPersona());
-                this.incluirParametroInt(3, this.persona.getIdSede());
-                this.incluirParametroString(4, this.persona.getDocumento());
-            }
-            case MARCAR_VERIFICADO -> {
-                this.incluirParametroInt(1, 1);
-                this.incluirParametroInt(2, this.persona.getIdPersona());
-            }
-            default ->
-                throw new AssertionError();
         }
     }
 
@@ -255,7 +257,6 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
      */
     @Override
     public Integer marcarVerificado(String valorToken) {
-        this.tipoOperacionPersona = TipoOperacionPersona.MARCAR_VERIFICADO;
         this.token = new Token();
         this.persona = new Persona();
 
@@ -264,11 +265,13 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
         this.token = tokenDAO.buscarTokenPorValor(this.token);
         tokenDAO.eliminar(this.token);
         this.persona.setIdPersona(this.token.getIdPersona());
-        this.tipoOperacionPersona = null;
+        this.tipoOperacionPersona = TipoOperacionPersona.MARCAR_VERIFICADO;
         if (this.token.getActivo() == false) {
             return -1;
         } else {
-            return super.modificar();
+            Integer resultado = super.modificar();
+            this.tipoOperacionPersona = null;
+            return resultado;
         }
     }
 
