@@ -214,7 +214,11 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
     public ArrayList<Producto> listarTodos() {
         this.tipo_Operacion = Tipo_Operacion.LISTAR;
         this.value = 1;
-        return (ArrayList<Producto>) super.listarTodos(null);
+        ArrayList<Producto> productos = (ArrayList<Producto>) super.listarTodos(null);
+        this.tipo_Operacion = null;
+        return productos;
+        
+        
     }
 
     @Override
@@ -370,6 +374,7 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
         this.producto = new Producto();
         this.producto.setIdProducto(idProducto);
         super.buscar();
+        this.tipo_Operacion = null;
         return this.producto;
     }
 
@@ -400,6 +405,7 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
         Boolean abreConexion = true;
         this.producto = producto;
         super.buscar();
+        this.tipo_Operacion =null;
         return this.producto != null;
     }
 
@@ -409,6 +415,7 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
      * Funciones adicionales
      * *************************************************************************
      */
+    
     @Override
     public Producto buscar_sku(String sku, Integer idSede) {
         this.tipoOperacionInv = TipoOperacionInventario.BUSCAR_POR_SKU;
@@ -416,6 +423,7 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
         this.producto.setSku(sku);
         this.producto.setIdSede(idSede);
         List prods = super.listarTodos(null);
+        this.tipoOperacionInv = null;
         if (prods.isEmpty()) {
             return null;
         } else {
@@ -447,6 +455,7 @@ public class ProductoDAOImpl extends DAOImpl implements ProductoDAO {
         this.producto = new Producto();
         this.producto.setIdPedido(idPedido);
         List lineas = super.listarTodos(null);
+         this.tipoOperacionInv = null;
         if (lineas.isEmpty()) {
             return null;
         } else {
