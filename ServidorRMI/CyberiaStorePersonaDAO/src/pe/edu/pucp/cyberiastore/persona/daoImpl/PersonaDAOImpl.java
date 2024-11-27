@@ -60,7 +60,7 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
                 }
             }
             case INSERTAR_TRABAJADOR -> {
-                this.modificar(persona);
+                this.modificarTrabajador(persona);
                 id = persona.getIdPersona();
             }
             default ->
@@ -127,11 +127,22 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
      * @param persona
      * @return
      */
+    
+    @Override
+    public Integer modificarUsuario(Persona persona){
+        this.tipoOperacionPersona = TipoOperacionPersona.MODIFICAR_PERSONA;
+        this.persona = persona;
+        return super.modificar();
+    }
+    
+    public Integer modificarTrabajador(Persona persona){
+        this.tipoOperacionPersona = TipoOperacionPersona.INSERTAR_TRABAJADOR;
+        this.persona = persona;
+        return super.modificar();
+    }
+    
     @Override
     public Integer modificar(Persona persona) {
-        this.tipoOperacionPersona = (persona.getIdSede() == null)
-                ? TipoOperacionPersona.MODIFICAR_PERSONA
-                : TipoOperacionPersona.INSERTAR_TRABAJADOR;
         this.persona = persona;
         return super.modificar();
     }
@@ -212,7 +223,7 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
                 this.incluirParametroString(1, this.persona.getTelefono());
                 this.incluirParametroString(2, this.persona.getCorreo());
                 this.incluirParametroString(3, this.persona.getDireccion());
-                this.incluirParametroInt(4, this.persona.getIdSede());
+                this.incluirParametroInt(4, this.persona.getIdPersona());
             }
             case INSERTAR_TRABAJADOR -> {
                 this.incluirParametroDouble(1, this.persona.getSueldo());
@@ -396,7 +407,6 @@ public class PersonaDAOImpl extends DAOImpl implements PersonaDAO {
         this.persona = persona;
         this.tipoOperacionPersona = TipoOperacionPersona.VERIFICAR_PERSONA;
         super.buscar();
-
         return this.persona;
     }
 }
